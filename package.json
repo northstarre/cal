@@ -35,8 +35,8 @@
   },
   "engines": {
     "yarn": ">=1.19.0",
-    "node": ">=14.19.0",
-    "npm": ">=6.14.16"
+    "node": "16.x",
+    "npm": "7.x"
   },
   "dependencies": {
     "@boxyhq/saml-jackson": "0.3.6",
