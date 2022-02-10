@@ -6,6 +6,7 @@
     "analyze": "ANALYZE=true next build",
     "analyze:server": "BUNDLE_ANALYZE=server next build",
     "analyze:browser": "BUNDLE_ANALYZE=browser next build",
+    "config": "yarn config set network-timeout 300000",
     "dev": "next dev",
     "db-up": "docker-compose up -d",
     "db-migrate": "yarn prisma migrate dev && yarn format-schemas",
@@ -33,8 +34,9 @@
     "check-changed-files": "ts-node scripts/ts-check-changed-files.ts"
   },
   "engines": {
-    "node": ">=14.x",
-    "yarn": ">=1.19.0 < 2.0.0"
+    "yarn": ">=1.19.0 < 2.0.0",
+    "node": "16.x",
+    "npm": "7.x"
   },
   "dependencies": {
     "@boxyhq/saml-jackson": "0.3.6",

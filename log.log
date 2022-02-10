@@ -1,0 +1,57 @@
+2022-02-09T15:27:48.0296565Z,Updating branch 'master'.,6793edd0-736b-4dfa-b15a-024b2f7887f6,0
+2022-02-09T15:27:50.7519448Z,Updating submodules.,4d0c6982-8162-4d67-9c56-4267781e510a,0
+2022-02-09T15:27:50.8540063Z,Preparing deployment for commit id '51d553559f'.,eaf7f370-30d6-464f-9165-ff51e344a814,0
+2022-02-09T15:27:51.0742292Z,Repository path is /home/site/repository,cc859cdb-a4e0-4ad1-9b23-32698e62c2bd,0
+2022-02-09T15:27:51.1945116Z,Running oryx build...,7b33ca15-6acc-48f3-adb2-a028f8e3eb46,0
+	2022-02-09T15:27:51.2081121Z,Command: oryx build /home/site/repository -o /home/site/wwwroot --platform nodejs --platform-version 14 -i /tmp/8d9ebe0bc0a7c32 -p compress_node_modules=tar-gz --log-file /tmp/build-debug.log ,,0
+	2022-02-09T15:27:53.9571203Z,Operation performed by Microsoft Oryx&comma; https://github.com/Microsoft/Oryx,,0
+	2022-02-09T15:27:54.0187444Z,You can report issues at https://github.com/Microsoft/Oryx/issues,,0
+	2022-02-09T15:27:54.0579989Z,,,0
+	2022-02-09T15:27:54.1099608Z,Oryx Version: 0.2.20210826.1&comma; Commit: f8651349d0c78259bb199593b526450568c2f94a&comma; ReleaseTagName: 20210826.1,,0
+	2022-02-09T15:27:54.2070582Z,,,0
+	2022-02-09T15:27:54.3074288Z,Build Operation ID: |byehiiAE9T4=.27d817ba_,,0
+	2022-02-09T15:27:54.3775510Z,Repository Commit : 51d553559f634d98d7cba2f2ac98c221ba74584c,,0
+	2022-02-09T15:27:54.5284131Z,,,0
+	2022-02-09T15:27:54.5605852Z,Detecting platforms...,,0
+	2022-02-09T15:28:09.8454942Z,Detected following platforms:,,0
+	2022-02-09T15:28:09.8900159Z,  nodejs: 14.18.3,,0
+	2022-02-09T15:28:10.7907101Z,,,0
+	2022-02-09T15:28:10.9338392Z,Using intermediate directory '/tmp/8d9ebe0bc0a7c32'.,,0
+	2022-02-09T15:28:10.9844521Z,,,0
+	2022-02-09T15:28:11.0005926Z,Copying files to the intermediate directory...,,0
+	2022-02-09T15:28:18.2943321Z,Done in 8 sec(s).,,0
+	2022-02-09T15:28:18.3934632Z,,,0
+	2022-02-09T15:28:18.4521669Z,Source directory     : /tmp/8d9ebe0bc0a7c32,,0
+	2022-02-09T15:28:18.5039945Z,Destination directory: /home/site/wwwroot,,0
+	2022-02-09T15:28:18.5635239Z,,,0
+	2022-02-09T15:28:18.7842178Z,Removing existing manifest file,,0
+	2022-02-09T15:28:18.8239875Z,Creating directory for command manifest file if it doesnot exist,,0
+	2022-02-09T15:28:18.8573001Z,Creating a manifest file...,,0
+	2022-02-09T15:28:18.8945493Z,Node Build Command Manifest file created.,,0
+	2022-02-09T15:28:18.9255574Z,,,0
+	2022-02-09T15:28:18.9547963Z,Using Node version:,,0
+	2022-02-09T15:28:19.2357573Z,v14.18.3,,0
+	2022-02-09T15:28:19.3670172Z,,,0
+	2022-02-09T15:28:19.4956601Z,Using Yarn version:,,0
+	2022-02-09T15:28:20.4728510Z,1.22.10,,0
+	2022-02-09T15:28:20.5377245Z,,,0
+	2022-02-09T15:28:20.5645309Z,Running 'yarn install --prefer-offline'...,,0
+	2022-02-09T15:28:20.6140858Z,,,0
+	2022-02-09T15:28:21.2260039Z,yarn install v1.22.10,,0
+	2022-02-09T15:28:21.8891286Z,[1/5] Validating package.json...,,0
+	2022-02-09T15:28:21.9803799Z,[2/5] Resolving packages...,,0
+	2022-02-09T15:28:26.1297065Z,[3/5] Fetching packages...,,0
+	2022-02-09T15:29:02.8242302Z,info There appears to be trouble with your network connection. Retrying...,,0
+	2022-02-09T15:29:36.2876659Z,info There appears to be trouble with your network connection. Retrying...,,0
+	2022-02-09T15:30:01.2208695Z,info There appears to be trouble with your network connection. Retrying...,,0
+	2022-02-09T15:30:09.9016477Z,info There appears to be trouble with your network connection. Retrying...,,0
+	2022-02-09T15:30:30.4900725Z,info There appears to be trouble with your network connection. Retrying...,,0
+	2022-02-09T15:30:34.6248805Z,info There appears to be trouble with your network connection. Retrying...,,0
+	2022-02-09T15:30:45.3699016Z,info There appears to be trouble with your network connection. Retrying...,,0
+	2022-02-09T15:31:08.5651785Z,info There appears to be trouble with your network connection. Retrying...,,0
+	2022-02-09T15:31:22.9855269Z,info There appears to be trouble with your network connection. Retrying...,,0
+	2022-02-09T15:31:31.4659972Z,info If you think this is a bug&comma; please open a bug report with the information provided in "/tmp/8d9ebe0bc0a7c32/yarn-error.log".,,0
+	2022-02-09T15:31:31.5386411Z,error An unexpected error occurred: "https://registry.yarnpkg.com/country-flag-icons/-/country-flag-icons-1.4.11.tgz: ESOCKETTIMEDOUT".,,1
+	2022-02-09T15:31:31.5656361Z,info Visit https://yarnpkg.com/en/docs/cli/install for documentation about this command.,,0
+	2022-02-09T15:31:42.2258940Z,info There appears to be trouble with your network connection. Retrying...,,0
+	2022-02-09T15:37:13.5161234Z,error An unexpected error occurred: "https://registry.yarnpkg.com/country-flag-icons/-/country-flag-icons-1.4.11.tgz: ESOCKETTIMEDOUT".\n/opt/Kudu/KuduConsole/Scripts/starter.sh oryx build /home/site/repository -o /home/site/wwwroot --platform nodejs --platform-version 14 -i /tmp/8d9ebe0bc0a7c32 -p compress_node_modules=tar-gz --log-file /tmp/build-debug.log ,,2
