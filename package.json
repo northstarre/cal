@@ -34,9 +34,9 @@
     "check-changed-files": "ts-node scripts/ts-check-changed-files.ts"
   },
   "engines": {
-    "yarn": ">=1.19.0 < 2.0.0",
-    "node": "16.x",
-    "npm": "7.x"
+    "yarn": ">=1.19.0",
+    "node": ">=14.19.0",
+    "npm": ">=6.14.16"
   },
   "dependencies": {
     "@boxyhq/saml-jackson": "0.3.6",
