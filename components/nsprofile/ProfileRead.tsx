@@ -12,7 +12,7 @@ export default function ProfileRead() {
   }, [id]);
 
   return profileToDisplay ? (
-    <Profile profile={profileToDisplay[0]} setShouldRefetch={() => {}} isReadOnly={true} />
+    <Profile profile={profileToDisplay[0]} setShouldRefetch={() => {}} isReadOnly={false} />
   ) : (
     <></>
   );
