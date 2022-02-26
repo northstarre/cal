@@ -1,8 +1,6 @@
 import { ArrowLeftIcon } from "@heroicons/react/solid";
-import classNames from "classnames";
 import { GetServerSidePropsContext } from "next";
 import { getCsrfToken, signIn } from "next-auth/react";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -16,9 +14,7 @@ import { inferSSRProps } from "@lib/types/inferSSRProps";
 
 import AddToHomescreen from "@components/AddToHomescreen";
 import SAMLLogin from "@components/auth/SAMLLogin";
-import TwoFactor from "@components/auth/TwoFactor";
-import { EmailField, PasswordField, Form } from "@components/form/fields";
-import { Alert } from "@components/ui/Alert";
+import { Form } from "@components/form/fields";
 import AuthContainer from "@components/ui/AuthContainer";
 import Button from "@components/ui/Button";
 
@@ -94,8 +90,11 @@ export default function Login({
           form={form}
           className="space-y-6"
           handleSubmit={(values) => {
-            signIn<"credentials">("credentials", { ...values, callbackUrl, redirect: false })
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            signIn<"b2c">("b2c", { ...values, callbackUrl, redirect: false })
               .then((res) => {
+                console.log(res)
                 if (!res) setErrorMessage(errorMessages[ErrorCode.InternalServerError]);
                 // we're logged in! let's do a hard refresh to the desired url
                 else if (!res.error) window.location.replace(callbackUrl);
@@ -108,35 +107,6 @@ export default function Login({
           }}>
           <input defaultValue={csrfToken || undefined} type="hidden" hidden {...form.register("csrfToken")} />
 
-          <div className={classNames("space-y-6", { hidden: twoFactorRequired })}>
-            <EmailField
-              id="email"
-              label={t("email_address")}
-              placeholder="john.doe@example.com"
-              required
-              {...form.register("email")}
-            />
-            <div className="relative">
-              <div className="absolute right-0 -top-[2px]">
-                <Link href="/auth/forgot-password">
-                  <a tabIndex={-1} className="text-sm font-medium text-primary-600">
-                    {t("forgot")}
-                  </a>
-                </Link>
-              </div>
-              <PasswordField
-                id="password"
-                type="password"
-                autoComplete="current-password"
-                required
-                {...form.register("password")}
-              />
-            </div>
-          </div>
-
-          {twoFactorRequired && <TwoFactor />}
-
-          {errorMessage && <Alert severity="error" title={errorMessage} />}
           <div className="flex space-y-2">
             <Button
               className="flex w-full justify-center"
