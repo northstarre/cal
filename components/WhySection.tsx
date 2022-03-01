@@ -7,7 +7,7 @@ function whyPoint({ src, description1, description2 }, isReverse, calculatedWidt
   return (
     <div className={`flex ${addlclass} items-center justify-center space-y-4`}>
       <div className={`w-full ${calculatedWidth}`}>
-        <img src={src} alt="avatar 1" className="w-full" />
+        <img src={src} alt="avatar 1" className="w-full" role="img" />
       </div>
       <div className={`flex ${addlclass} items-center justify-center space-y-2`}>
         <p className="text-center text-base text-lg leading-none text-[#272d67]">{description1()}</p>
