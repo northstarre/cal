@@ -9,7 +9,10 @@ import { hostedCal } from "@lib/saml";
 import slugify from "@lib/slugify";
 
 import { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, IS_GOOGLE_LOGIN_ENABLED } from "@server/lib/constants";
-
+/*
+*   ToDo: make sure to send id_token to session
+*   ToDo: Make sure original cal flow is working fine - done
+* */
 const providers: Provider[] = [
   AzureADB2CProvider({
     id: "b2c",
@@ -20,10 +23,10 @@ const providers: Provider[] = [
     primaryUserFlow: "B2C_1_DefaultSignIn_SignUP",
     authorization: { params: { scope: "offline_access openid" } },
     idToken: true,
-    profile: (profile) => {
+    profile: (profile, tokens) => {
       console.log("THE PROFILE", profile);
-
-      return { ...profile, id: profile.emails[0], email: profile.emails[0] };
+      console.log("THE PROFILE tokens", tokens);
+      return { ...profile, id: profile.emails[0], email: profile.emails[0], tokens: tokens };
     },
   }),
 ];
@@ -49,17 +52,21 @@ export default NextAuth({
   },
   providers,
   callbacks: {
-    async jwt({ token, user, account }) {
-      console.log("in Jwt callback");
-
+    async jwt({ token, user, account,profile, isNewUser }) {
+      console.log("in Jwt callback", token);
+      console.log("in Jwt callback account", account);
+      console.log("in Jwt callback profile", profile);
       const autoMergeIdentities = async () => {
-        console.log("in autoMergeIdentities", token);
+        console.log("in autoMergeIdentities", Promise.resolve());
         if (!hostedCal) {
           const existingUser = await prisma.user.findFirst({
             where: { email: token.email! },
           });
 
           if (!existingUser) {
+            if(account) {
+              return { ...token, accessToken: account?.id_token };
+            }
             return token;
           }
 
@@ -67,10 +74,11 @@ export default NextAuth({
             id: existingUser.id,
             username: existingUser.username,
             email: existingUser.email,
+            accessToken: account?.id_token
           };
         }
 
-        return token;
+        return { ...token, accessToken: account?.id_token };
       };
 
       if (!user) {
@@ -114,12 +122,19 @@ export default NextAuth({
           id: existingUser.id,
           username: existingUser.username,
           email: existingUser.email,
+          accessToken: account.id_token,
         };
       }
-
+      if (account) {
+        token.accessToken = account.id_token;
+      }
       return token;
     },
     async session({ session, token }) {
+      console.log("on session callback start", token)
+      if(!token?.accessToken){
+        return session
+      }
       const calendsoSession: Session = {
         ...session,
         accessToken: token.accessToken,
@@ -135,21 +150,18 @@ export default NextAuth({
     async signIn({ user, account, profile }) {
       // In this case we've already verified the credentials in the authorize
       // callback so we can sign the user in.
-      console.log("inside signIn");
+      console.log("inside signIn", user);
       if (account.type === "credentials") {
         return true;
       }
-
-      if (account.type === "oauth") {
-        return true;
-      }
+      console.log("resolved provider",account.provider);
 
       if (account.provider) {
-        let idP: IdentityProvider = IdentityProvider.GOOGLE;
+        let idP: IdentityProvider = IdentityProvider.B2C;
         if (account.provider === "saml") {
           idP = IdentityProvider.SAML;
         }
-        user.email_verified = user.email_verified || profile.email_verified;
+        user.email_verified = true;
 
         if (!user.email_verified) {
           return "/auth/error?error=unverified-email";
@@ -232,7 +244,7 @@ export default NextAuth({
             username: slugify(user.name) + "-" + randomString(6),
             emailVerified: new Date(Date.now()),
             name: user.name,
-            email: user.email,
+            email: user.email as string,
             identityProvider: idP,
             identityProviderId: user.id as string,
           },

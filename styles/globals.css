@@ -384,3 +384,10 @@ hr {
 .react-date-picker__wrapper {
   border: none !important;
 }
+.signup-btn {
+  width: 90px !important;
+}
+
+.hero-btn {
+  width: 220px !important;
+}

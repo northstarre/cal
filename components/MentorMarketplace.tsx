@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { doGet } from "../pages/makeAPICall";
 import Grid from "./Grid";
 import unique from "lodash.uniqby";
-import { QueryBuilder } from "odata-query-builder";
+import buildQuery from "odata-query";
 
 // To start, populate with mentors from the waitlist
 function getUniversityShorthand(str) {
@@ -25,16 +25,14 @@ export default function MentorMarketplace({ size }) {
   const [selectedMajor, setSlectedMajor] = useState("");
   const [query, setQuery] = useState("");
   const [selectedUniversity, setSelectedUniversity] = useState("");
-
+  const top = 30;
+  const select = ["id", "name", "email", "major", "university", "preprofessionTrack"];
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     doGet("waitlist?$select=major", onMajorsFetch, () => {});
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     doGet("waitlist?$select=university", onUniversitiesFetch, () => {});
-    const newQuery = new QueryBuilder()
-      .top(30)
-      .select("id, name, email, major, university, preprofessionTrack");
-    setQuery(newQuery.toQuery());
+    setQuery(buildQuery({ top, select }));
   }, []);
   useEffect(() => {
     if (query) {
@@ -46,22 +44,15 @@ export default function MentorMarketplace({ size }) {
     onMentorsFetch(fetchedMentors);
   }, [fetchedMentors, size]);
   useEffect(() => {
-    let newQuery = new QueryBuilder();
+    const filter = [];
     if (selectedMajor && selectedUniversity) {
-      newQuery.filter(
-        (f) =>
-          f
-            .filterExpression("Major", "eq", selectedMajor)
-            .filterExpression("University", "eq", selectedUniversity),
-        "and"
-      );
+      filter.push({ Major: selectedMajor }, { University: selectedUniversity });
     } else if (selectedUniversity) {
-      newQuery.filter((f) => f.filterExpression("University", "eq", selectedUniversity));
+      filter.push({ University: selectedUniversity });
     } else if (selectedMajor) {
-      newQuery.filter((f) => f.filterExpression("Major", "eq", selectedMajor));
+      filter.push({ Major: selectedMajor });
     }
-    newQuery = newQuery.top(30).select("id, name, email, major, university, preprofessionTrack");
-    setQuery(newQuery.toQuery());
+    setQuery(buildQuery({ top, select, filter }));
   }, [selectedMajor, selectedUniversity]);
 
   const onMajorsFetch = (data) => {

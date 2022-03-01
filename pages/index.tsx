@@ -6,7 +6,7 @@ function RedirectPage() {
 
 export async function getServerSideProps(context) {
   const session = await getSession(context);
-  console.log(session?.user);
+  console.log("on Client", session?.user);
   if (!session?.user) {
     return { redirect: { permanent: false, destination: "/auth/login" } };
   }

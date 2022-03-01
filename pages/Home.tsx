@@ -9,6 +9,7 @@ import { doGet } from "./makeAPICall";
 import ImageWithCTA from "../components/ImageWithCTA";
 import Grid from "../components/Grid";
 import useWindowSize from "@components/useWindowResizeHook";
+import Navbar from "@components/Navbar";
 const getTokenFromAPi = () => {
   console.log("making fetch");
   fetch("/api/fetchToken", {
@@ -32,6 +33,7 @@ export default function Homepage() {
   const [mentors, setMentors] = useState([]);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [loading, setLoading] = useState(false);
+  const [profileToDisplay, setProfile] = useState(undefined);
   useEffect(() => {
     fetchData();
   }, []);
@@ -48,7 +50,11 @@ export default function Homepage() {
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       () => {}
     );
-    getTokenFromAPi();
+    const id = "e8443f32-92e9-439b-895b-a49cfae0ee81";
+    doGet(`userInfo?$filter=userObjectId eq ${id}`, setProfile, () => {
+      return "avoiding Es lint";
+    });
+    //getTokenFromAPi();
     setLoading(false);
   };
 
@@ -65,6 +71,7 @@ export default function Homepage() {
 
   return (
     <>
+      <Navbar isBeta={false} signedIn={profileToDisplay ? true : false} profile={profileToDisplay} />
       <Hero
         heading={"Take charge of your future."}
         heroContent={
@@ -99,6 +106,9 @@ export default function Homepage() {
         className={
           "hidden h-[556px] w-full bg-[url('/assets/Frame%2011.png')] bg-contain bg-no-repeat md:block"
         }></div>
+      <div>
+        
+      </div>
 
       <h2 className="why-header text-center text-4xl font-extrabold leading-10 text-[#272d67]">
         Why get advice on Northstarre?{" "}
@@ -115,11 +125,13 @@ export default function Homepage() {
             title={"Customized to Your Needs."}
             content={"15+"}
             footer={"topics that are on the table for discussion with you rmentor. That change as you grow."}
+            className={"bg-[url('/assets/database.svg')] bg-left-top bg-no-repeat"}
           />
           <PlainInfoBox
             title={"Talk to the Experts, Directly."}
             content={"Hundreds"}
             footer={"of experts that have been in your shoes. And are living your dreams."}
+            className={"bg-[url('/assets/user.svg')] bg-left-top bg-no-repeat"}
           />
         </div>
         <div className={"flex flex-col items-center md:col-span-3"}>
@@ -162,7 +174,7 @@ export default function Homepage() {
 
       <div
         className={
-          "mx-0 mb-12 flex h-[600px] flex-col items-center justify-start rounded-[20px] bg-[url('/assets/image%209.png')] bg-cover text-center md:mx-48"
+          "mx-0 mb-12 flex h-[600px] flex-col items-center justify-start rounded-[20px] bg-[url('/assets/image%20HomeFooter.png')] bg-cover text-center md:mx-48"
         }>
         <span className={"font-700 mt-[34px] text-2xl  font-bold text-[#272d67]"}>
           The average person spends{" "}

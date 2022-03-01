@@ -86,6 +86,7 @@ enum IdentityProvider {
   CAL
   GOOGLE
   SAML
+  B2C
 }
 
 model DestinationCalendar {
