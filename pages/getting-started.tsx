@@ -85,12 +85,6 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
       slug: "30min",
       length: 30,
     },
-    {
-      title: t("secret_meeting"),
-      slug: "secret",
-      length: 15,
-      hidden: true,
-    },
   ];
 
   const [isSubmitting, setSubmitting] = React.useState(false);

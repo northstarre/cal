@@ -106,7 +106,7 @@ export default function Homepage() {
       {/*  className={*/}
       {/*    "hidden h-[556px] w-full bg-[url('/assets/Frame%2011.png')] bg-contain bg-no-repeat md:block"*/}
       {/*  }></div>*/}
-      <div className={"font-raleway flex w-full flex-col px-0 md:flex-row md:px-20"}>
+      <div className={"font-raleway my-20 flex w-full flex-col px-0 md:flex-row md:px-20"}>
         <div className={"flex w-3/5 flex-col text-left"}>
           <h2 className="why-header text-left text-4xl font-extrabold leading-10 text-[#272d67]">
             Did you know...
@@ -129,7 +129,7 @@ export default function Homepage() {
           </h4>
         </div>
         <div className={"content-left flex w-2/5 flex-row items-center gap-x-2 px-0 md:px-5"}>
-          <img src="/assets/Group%207.png" className={"rounded-[20px]"} />
+          <img src="/assets/Group%207.png" className={"cursor-pointer rounded-[20px]"} />
           <img src="/assets/Group%208.png" className={"rounded-[20px]"} />
         </div>
       </div>

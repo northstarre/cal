@@ -9,10 +9,7 @@ import { hostedCal } from "@lib/saml";
 import slugify from "@lib/slugify";
 
 import { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, IS_GOOGLE_LOGIN_ENABLED } from "@server/lib/constants";
-/*
-*   ToDo: make sure to send id_token to session
-*   ToDo: Make sure original cal flow is working fine - done
-* */
+
 const providers: Provider[] = [
   AzureADB2CProvider({
     id: "b2c",
@@ -131,10 +128,7 @@ export default NextAuth({
       return token;
     },
     async session({ session, token }) {
-      console.log("on session callback start", token)
-      if(!token?.accessToken){
-        return session
-      }
+      console.log("on session callback start", token);
       const calendsoSession: Session = {
         ...session,
         accessToken: token.accessToken,
