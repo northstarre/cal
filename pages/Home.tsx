@@ -71,7 +71,7 @@ export default function Homepage() {
 
   return (
     <>
-      <Navbar isBeta={false} signedIn={profileToDisplay ? true : false} profile={profileToDisplay} />
+      <Navbar isBeta={false} signedIn={false} profile={profileToDisplay} />
       <Hero
         heading={"Take charge of your future."}
         heroContent={

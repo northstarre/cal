@@ -1,29 +1,93 @@
 import { IdentityProvider } from "@prisma/client";
 import NextAuth, { Session } from "next-auth";
 import { Provider } from "next-auth/providers";
-import AzureADB2CProvider from "next-auth/providers/azure-ad-b2c";
+import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
+import { authenticator } from "otplib";
+
+import { ErrorCode, verifyPassword } from "@lib/auth";
+import { symmetricDecrypt } from "@lib/crypto";
 import prisma from "@lib/prisma";
 import { randomString } from "@lib/random";
-import { hostedCal } from "@lib/saml";
+import { isSAMLLoginEnabled, samlLoginUrl, hostedCal } from "@lib/saml";
 import slugify from "@lib/slugify";
 
 import { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, IS_GOOGLE_LOGIN_ENABLED } from "@server/lib/constants";
 
 const providers: Provider[] = [
-  AzureADB2CProvider({
-    id: "b2c",
-    name: "Northstarre",
-    tenantId: "NorthstarreApp",
-    clientId: "359665e3-a4ce-477f-94d1-3a1b41722bab",
-    clientSecret: "tXO7Q~iZBD1RH-KeSx6gU3miNY_InaVNQyyEn",
-    primaryUserFlow: "B2C_1_DefaultSignIn_SignUP",
-    authorization: { params: { scope: "offline_access openid" } },
-    idToken: true,
-    profile: (profile, tokens) => {
-      console.log("THE PROFILE", profile);
-      console.log("THE PROFILE tokens", tokens);
-      return { ...profile, id: profile.emails[0], email: profile.emails[0], tokens: tokens };
+  CredentialsProvider({
+    id: "credentials",
+    name: "Cal.com",
+    type: "credentials",
+    credentials: {
+      email: { label: "Email Address", type: "email", placeholder: "john.doe@example.com" },
+      password: { label: "Password", type: "password", placeholder: "Your super secure password" },
+      totpCode: { label: "Two-factor Code", type: "input", placeholder: "Code from authenticator app" },
+    },
+    async authorize(credentials) {
+      if (!credentials) {
+        console.error(`For some reason credentials are missing`);
+        throw new Error(ErrorCode.InternalServerError);
+      }
+
+      const user = await prisma.user.findUnique({
+        where: {
+          email: credentials.email.toLowerCase(),
+        },
+      });
+
+      if (!user) {
+        throw new Error(ErrorCode.UserNotFound);
+      }
+
+      if (user.identityProvider !== IdentityProvider.CAL) {
+        throw new Error(ErrorCode.ThirdPartyIdentityProviderEnabled);
+      }
+
+      if (!user.password) {
+        throw new Error(ErrorCode.UserMissingPassword);
+      }
+
+      const isCorrectPassword = await verifyPassword(credentials.password, user.password);
+      if (!isCorrectPassword) {
+        throw new Error(ErrorCode.IncorrectPassword);
+      }
+
+      if (user.twoFactorEnabled) {
+        if (!credentials.totpCode) {
+          throw new Error(ErrorCode.SecondFactorRequired);
+        }
+
+        if (!user.twoFactorSecret) {
+          console.error(`Two factor is enabled for user ${user.id} but they have no secret`);
+          throw new Error(ErrorCode.InternalServerError);
+        }
+
+        if (!process.env.CALENDSO_ENCRYPTION_KEY) {
+          console.error(`"Missing encryption key; cannot proceed with two factor login."`);
+          throw new Error(ErrorCode.InternalServerError);
+        }
+
+        const secret = symmetricDecrypt(user.twoFactorSecret, process.env.CALENDSO_ENCRYPTION_KEY);
+        if (secret.length !== 32) {
+          console.error(
+            `Two factor secret decryption failed. Expected key with length 32 but got ${secret.length}`
+          );
+          throw new Error(ErrorCode.InternalServerError);
+        }
+
+        const isValidToken = authenticator.check(credentials.totpCode, secret);
+        if (!isValidToken) {
+          throw new Error(ErrorCode.IncorrectTwoFactorCode);
+        }
+      }
+
+      return {
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        name: user.name,
+      };
     },
   }),
 ];
@@ -35,6 +99,43 @@ if (IS_GOOGLE_LOGIN_ENABLED) {
       clientSecret: GOOGLE_CLIENT_SECRET,
     })
   );
+}
+
+if (isSAMLLoginEnabled) {
+  providers.push({
+    id: "saml",
+    name: "BoxyHQ",
+    type: "oauth",
+    version: "2.0",
+    checks: ["pkce", "state"],
+    authorization: {
+      url: `${samlLoginUrl}/api/auth/saml/authorize`,
+      params: {
+        scope: "",
+        response_type: "code",
+        provider: "saml",
+      },
+    },
+    token: {
+      url: `${samlLoginUrl}/api/auth/saml/token`,
+      params: { grant_type: "authorization_code" },
+    },
+    userinfo: `${samlLoginUrl}/api/auth/saml/userinfo`,
+    profile: (profile) => {
+      return {
+        id: profile.id || "",
+        firstName: profile.firstName || "",
+        lastName: profile.lastName || "",
+        email: profile.email || "",
+        name: `${profile.firstName || ""} ${profile.lastName || ""}`.trim(),
+        email_verified: true,
+      };
+    },
+    options: {
+      clientId: "dummy",
+      clientSecret: "dummy",
+    },
+  });
 }
 
 export default NextAuth({
@@ -49,21 +150,14 @@ export default NextAuth({
   },
   providers,
   callbacks: {
-    async jwt({ token, user, account,profile, isNewUser }) {
-      console.log("in Jwt callback", token);
-      console.log("in Jwt callback account", account);
-      console.log("in Jwt callback profile", profile);
+    async jwt({ token, user, account }) {
       const autoMergeIdentities = async () => {
-        console.log("in autoMergeIdentities", Promise.resolve());
         if (!hostedCal) {
           const existingUser = await prisma.user.findFirst({
             where: { email: token.email! },
           });
 
           if (!existingUser) {
-            if(account) {
-              return { ...token, accessToken: account?.id_token };
-            }
             return token;
           }
 
@@ -71,11 +165,10 @@ export default NextAuth({
             id: existingUser.id,
             username: existingUser.username,
             email: existingUser.email,
-            accessToken: account?.id_token
           };
         }
 
-        return { ...token, accessToken: account?.id_token };
+        return token;
       };
 
       if (!user) {
@@ -105,7 +198,7 @@ export default NextAuth({
                 identityProvider: idP,
               },
               {
-                //identityProviderId: account.providerAccountId as string,
+                identityProviderId: account.providerAccountId as string,
               },
             ],
           },
@@ -119,43 +212,47 @@ export default NextAuth({
           id: existingUser.id,
           username: existingUser.username,
           email: existingUser.email,
-          accessToken: account.id_token,
         };
       }
-      if (account) {
-        token.accessToken = account.id_token;
-      }
+
       return token;
     },
     async session({ session, token }) {
-      console.log("on session callback start", token);
       const calendsoSession: Session = {
         ...session,
-        accessToken: token.accessToken,
         user: {
           ...session.user,
           id: token.id as number,
           username: token.username as string,
         },
       };
-      console.log("inside session", calendsoSession);
       return calendsoSession;
     },
     async signIn({ user, account, profile }) {
       // In this case we've already verified the credentials in the authorize
       // callback so we can sign the user in.
-      console.log("inside signIn", user);
       if (account.type === "credentials") {
         return true;
       }
-      console.log("resolved provider",account.provider);
+
+      if (account.type !== "oauth") {
+        return false;
+      }
+
+      if (!user.email) {
+        return false;
+      }
+
+      if (!user.name) {
+        return false;
+      }
 
       if (account.provider) {
-        let idP: IdentityProvider = IdentityProvider.B2C;
+        let idP: IdentityProvider = IdentityProvider.GOOGLE;
         if (account.provider === "saml") {
           idP = IdentityProvider.SAML;
         }
-        user.email_verified = true;
+        user.email_verified = user.email_verified || profile.email_verified;
 
         if (!user.email_verified) {
           return "/auth/error?error=unverified-email";
@@ -238,7 +335,7 @@ export default NextAuth({
             username: slugify(user.name) + "-" + randomString(6),
             emailVerified: new Date(Date.now()),
             name: user.name,
-            email: user.email as string,
+            email: user.email,
             identityProvider: idP,
             identityProviderId: user.id as string,
           },

@@ -23,18 +23,7 @@ export default function Navbar({ signedIn, isBeta, msalInstance, profile }) {
   };
 
   const handleLogin = () => {
-    signIn<"b2c">("b2c",{} )
-      .then((res) => {
-        console.log(res);
-        if (!res) setErrorMessage(errorMessages[ErrorCode.InternalServerError]);
-        // we're logged in! let's do a hard refresh to the desired url
-        else if (!res.error) window.location.replace(callbackUrl);
-        // reveal two factor input if required
-        else if (res.error === ErrorCode.SecondFactorRequired) setTwoFactorRequired(true);
-        // fallback if error not found
-        else setErrorMessage(errorMessages[res.error] || t("something_went_wrong"));
-      })
-      .catch(() => setErrorMessage(errorMessages[ErrorCode.InternalServerError]));
+   navigate.push("/auth/login")
   };
   return (
     <>
@@ -129,7 +118,7 @@ export default function Navbar({ signedIn, isBeta, msalInstance, profile }) {
                   <>
                     <Button
                       kind={"default"}
-                      onClick={handleLogin}
+                      onClick={() => navigate.push("/auth/login")}
                       text={"Sign In"}
                       size="sm"
                       className={"signup-btn"}

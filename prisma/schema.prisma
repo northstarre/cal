@@ -143,8 +143,18 @@ model User {
   away                Boolean              @default(false)
   metadata            Json?
   verified            Boolean?             @default(false)
-  isMentor            Boolean              @default(false)
-  isMentee            Boolean              @default(false)
+  describer           String?              @default("")
+  willGiveAdvice      Boolean              @default(false)
+  willGetAdvice       Boolean              @default(false)
+  interest1           String?
+  interest2           String?
+  interest3           String?
+  interest4           String?
+  major               String?
+  preProfessionalTrack String?
+  school              String?
+  schoolYear          String?
+  zipCode             String?
 
   @@map(name: "users")
 }

@@ -610,6 +610,12 @@ const loggedInViewerRouter = createProtectedRouter()
       brandColor: z.string().optional(),
       theme: z.string().optional().nullable(),
       completedOnboarding: z.boolean().optional(),
+      willGiveAdvice: z.boolean().optional(),
+      willGetAdvice: z.boolean().optional(),
+      zipCode: z.string().optional(),
+      describer: z.string().optional(),
+      school: z.string().optional(),
+      schoolYear: z.string().optional(),
       locale: z.string().optional(),
     }),
     async resolve({ input, ctx }) {
@@ -627,6 +633,18 @@ const loggedInViewerRouter = createProtectedRouter()
             throw new TRPCError({ code: "BAD_REQUEST", message: response.message });
           }
         }
+      }
+      if (input.zipCode) {
+        data.zipCode = input.zipCode;
+      }
+      if (input.describer) {
+        data.describer = input.describer;
+      }
+      if (input.school) {
+        data.school = input.school;
+      }
+      if (input.schoolYear) {
+        data.schoolYear = input.schoolYear;
       }
       if (input.avatar) {
         data.avatar = await resizeBase64Image(input.avatar);

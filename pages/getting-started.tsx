@@ -39,6 +39,7 @@ import Text from "@components/ui/Text";
 import Schedule from "@components/ui/form/Schedule";
 
 import getEventTypes from "../lib/queries/event-types/get-event-types";
+import ToggleButton from "@components/ToggleButton";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -89,11 +90,15 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
 
   const [isSubmitting, setSubmitting] = React.useState(false);
   const [enteredName, setEnteredName] = React.useState("");
+  const [isMentor, setIsMentor] = React.useState(false);
+  const [isMentee, setIsMentee] = React.useState(false);
+  const [describer, setDescriber] = React.useState("");
   const { status } = useSession();
   const loading = status === "loading";
   const [ready, setReady] = useState(false);
-  const [selectedImport, setSelectedImport] = useState("");
   const [error, setError] = useState<Error | null>(null);
+  const [school, setSchool] = React.useState("");
+  const [schoolYear, setSchoolYear] = React.useState("");
 
   const updateUser = async (data: Prisma.UserUpdateInput) => {
     const res = await fetch(`/api/user/${props.user.id}`, {
@@ -146,7 +151,8 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
   /** Name */
   const nameRef = useRef<HTMLInputElement>(null);
   const usernameRef = useRef<HTMLInputElement>(null);
-  const bioRef = useRef<HTMLInputElement>(null);
+  const bioRef = useRef<HTMLTextAreaElement>(null);
+  const zipCodeRef = useRef<HTMLInputElement>(null);
   /** End Name */
   /** TimeZone */
   const [selectedTimeZone, setSelectedTimeZone] = useState(props.user.timeZone ?? dayjs.tz.guess());
@@ -156,7 +162,12 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
   const [currentStep, setCurrentStep] = useState(0);
   const detectStep = () => {
     let step = 0;
-    const hasSetUserNameOrTimeZone = props.user?.name && props.user?.timeZone && !props.usernameParam;
+    const hasSetUserNameOrTimeZone =
+      props.user?.name &&
+      props.user?.timeZone &&
+      !props.usernameParam &&
+      props.user.zipCode &&
+      props.user.avatar;
     if (hasSetUserNameOrTimeZone) {
       step = 1;
     }
@@ -258,7 +269,7 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
   const formMethods = useForm<{
     token: string;
   }>({ resolver: zodResolver(schema), mode: "onSubmit" });
-
+  // todo: swap step2 and step 3 with Step4 and step5
   const availabilityForm = useForm({ defaultValues: { schedule: DEFAULT_SCHEDULE } });
   const steps = [
     {
@@ -267,85 +278,11 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
       description: t("welcome_instructions"),
       Component: (
         <>
-          {selectedImport == "" && (
-            <div className="mb-4 grid grid-cols-2 gap-x-4">
-              <Button color="secondary" onClick={() => setSelectedImport("calendly")}>
-                {t("import_from")} Calendly
-              </Button>
-              <Button color="secondary" onClick={() => setSelectedImport("savvycal")}>
-                {t("import_from")} SavvyCal
-              </Button>
-            </div>
-          )}
-          {selectedImport && (
-            <div>
-              <h2 className="font-cal text-2xl text-gray-900">
-                {t("import_from")} {selectedImport === "calendly" ? "Calendly" : "SavvyCal"}
-              </h2>
-              <p className="mb-2 text-sm text-gray-500">
-                {t("you_will_need_to_generate")}. Find out how to do this{" "}
-                <a href="https://docs.cal.com/import">here</a>.
-              </p>
-              <form
-                className="flex"
-                onSubmit={formMethods.handleSubmit(async (values) => {
-                  // track the number of imports. Without personal data/payload
-                  telemetry.withJitsu((jitsu) =>
-                    jitsu.track(telemetryEventTypes.importSubmitted, {
-                      ...collectPageParameters(),
-                      selectedImport,
-                    })
-                  );
-                  setSubmitting(true);
-                  const response = await fetch(`/api/import/${selectedImport}`, {
-                    method: "POST",
-                    body: JSON.stringify({
-                      token: values.token,
-                    }),
-                    headers: {
-                      "Content-Type": "application/json",
-                    },
-                  });
-                  if (response.status === 201) {
-                    setSubmitting(false);
-                    handleSkipStep();
-                  } else {
-                    await response.json().catch((e) => {
-                      console.log("Error: response.json invalid: " + e);
-                      setSubmitting(false);
-                    });
-                  }
-                })}>
-                <input
-                  onChange={async (e) => {
-                    formMethods.setValue("token", e.target.value);
-                  }}
-                  type="text"
-                  name="token"
-                  id="token"
-                  placeholder={t("access_token")}
-                  required
-                  className="mt-1 block w-full rounded-sm border border-gray-300 px-3 py-2 shadow-sm focus:border-neutral-500 focus:outline-none focus:ring-neutral-500 sm:text-sm"
-                />
-                <Button type="submit" className="mt-1 ml-4 h-10">
-                  {t("import")}
-                </Button>
-              </form>
-            </div>
-          )}
-          <div className="relative my-4">
-            <div className="absolute inset-0 flex items-center" aria-hidden="true">
-              <div className="w-full border-t border-gray-300" />
-            </div>
-            <div className="relative flex justify-center">
-              <span className="bg-white px-2 text-sm text-gray-500">or</span>
-            </div>
-          </div>
           <form className="sm:mx-auto sm:w-full">
             <section className="space-y-8">
               {props.usernameParam && (
                 <fieldset>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+                  <label htmlFor="name" className="block text-sm font-medium text-brand">
                     {t("username")}
                   </label>
                   <input
@@ -363,7 +300,7 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
               )}
 
               <fieldset>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="name" className="block text-sm font-medium text-brand">
                   {t("full_name")}
                 </label>
                 <input
@@ -378,10 +315,26 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
                   className="mt-1 block w-full rounded-sm border border-gray-300 px-3 py-2 shadow-sm focus:border-neutral-500 focus:outline-none focus:ring-neutral-500 sm:text-sm"
                 />
               </fieldset>
+              <fieldset>
+                <label htmlFor="zipcode" className="block text-sm font-medium text-brand">
+                  {t("zip_code")}
+                </label>
+                <input
+                  ref={zipCodeRef}
+                  type="text"
+                  name="zipCode"
+                  id="zipCode"
+                  autoComplete="zip"
+                  placeholder={"Zip Code"}
+                  defaultValue={props.user.zipCode ?? ""}
+                  required
+                  className="mt-1 block w-full rounded-sm border border-gray-300 px-3 py-2 shadow-sm focus:border-neutral-500 focus:outline-none focus:ring-neutral-500 sm:text-sm"
+                />
+              </fieldset>
 
               <fieldset>
                 <section className="flex justify-between">
-                  <label htmlFor="timeZone" className="block text-sm font-medium text-gray-700">
+                  <label htmlFor="timeZone" className="block text-sm font-medium text-brand">
                     {t("timezone")}
                   </label>
                   <Text variant="caption">
@@ -420,6 +373,7 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
         mutation.mutate({
           username: usernameRef.current?.value,
           name: nameRef.current?.value,
+          zipCode: zipCodeRef.current?.value,
           timeZone: selectedTimeZone,
         });
 
@@ -427,20 +381,6 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
           await mutationAsync;
         }
       },
-    },
-    {
-      id: "connect-calendar",
-      title: t("connect_your_calendar"),
-      description: t("connect_your_calendar_instructions"),
-      Component: (
-        <ClientSuspense fallback={<Loader />}>
-          <CalendarListContainer heading={false} />
-        </ClientSuspense>
-      ),
-      hideConfirm: true,
-      confirmText: t("continue"),
-      showCancel: true,
-      cancelText: t("continue_without_calendar"),
     },
     {
       id: "set-availability",
@@ -476,6 +416,102 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
       showCancel: false,
     },
     {
+      id: "Northstarre Role",
+      title: "What can Northstarre do for you?",
+      Component: (
+        <>
+          <div className="flex flex-col items-center space-x-9">
+            <label htmlFor="NorthStarreRole" className="block w-full text-sm font-medium text-brand">
+              Are you looking to get advice or give advice?
+            </label>
+            <div className="my-10 flex w-full flex-row">
+              <ToggleButton
+                kind={"default"}
+                onClick={(isActive: boolean) => {
+                  setIsMentor(isActive);
+                }}
+                type={"button"}
+                size={"md"}
+                className="mx-4 w-1/3 rounded-[5px] "
+                text={"Give Advice"}
+                disabled={false}
+              />
+              <ToggleButton
+                kind={"default"}
+                onClick={(isActive: boolean) => {
+                  setIsMentee(isActive);
+                }}
+                type={"button"}
+                size={"md"}
+                className="mx-4 w-1/3 rounded-[5px]"
+                text={"Get Advice"}
+                disabled={false}
+              />
+              {/*Todo: Remove and Restyle*/}
+              <ToggleButton
+                kind={"default"}
+                onClick={(isActive: boolean) => {
+                  setIsMentor(isActive);
+                  setIsMentee(isActive);
+                }}
+                type={"button"}
+                size={"md"}
+                disabled={isMentor || isMentee}
+                className="mx-4 w-1/3 rounded-[5px]"
+                text={"Both"}
+              />
+            </div>
+          </div>
+          <div className="flex flex-col items-center space-x-9">
+            <label htmlFor="describer" className="block w-full text-sm font-medium text-brand">
+              Which of the following describes you?
+            </label>
+            <div className="flex w-full flex-row">
+              <select
+                onChange={(e) => {
+                  setDescriber(e.target.value);
+                }}
+                className="react-select-container my-4 block w-full min-w-0 flex-1 rounded-sm border border-gray-300 focus:border-primary-500 focus:ring-primary-500 sm:text-sm">
+                <option selected disabled value="">
+                  Select one.
+                </option>
+                {props.describers.map((item: any, idx: number) => (
+                  <option key={idx}>{item}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+        </>
+      ),
+      hideConfirm: false,
+      confirmText: t("continue"),
+      showCancel: true,
+      cancelText: t("set_up_later"),
+      onComplete: async () => {
+        mutationComplete = null;
+        setError(null);
+        const mutationAsync = new Promise((resolve, reject) => {
+          mutationComplete = (err) => {
+            if (err) {
+              reject(err);
+              return;
+            }
+            resolve(null);
+          };
+        });
+
+        mutation.mutate({
+          willGiveAdvice: isMentor,
+          willGetAdvice: isMentee,
+          describer: describer,
+        });
+
+        if (mutationComplete) {
+          await mutationAsync;
+        }
+      },
+    },
+    {
       id: "profile",
       title: t("nearly_there"),
       description: t("nearly_there_instructions"),
@@ -483,7 +519,7 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
         <form className="sm:mx-auto sm:w-full" id="ONBOARDING_STEP_4">
           <section className="space-y-4">
             <fieldset>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="name" className="block text-sm font-medium text-brand">
                 {t("full_name")}
               </label>
               <input
@@ -502,9 +538,8 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
               <label htmlFor="bio" className="block text-sm font-medium text-gray-700">
                 {t("about")}
               </label>
-              <input
+              <textarea
                 ref={bioRef}
-                type="text"
                 name="bio"
                 id="bio"
                 required
@@ -514,6 +549,40 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
               <Text variant="caption" className="mt-2">
                 {t("few_sentences_about_yourself")}
               </Text>
+            </fieldset>
+            <fieldset>
+              <label className="block text-sm font-medium text-brand">What school do you go to?</label>
+              <div className="mb-10 flex w-full flex-row">
+                <select
+                  onChange={(e) => {
+                    setSchool(e.target.value);
+                  }}
+                  className={`mt-4  mr-4  flex h-10 max-w-xs items-center rounded border border-gray-300   pl-3 text-sm shadow focus:border focus:border-indigo-700 focus:outline-none dark:border-gray-700 dark:focus:border-indigo-700 md:mr-10`}>
+                  <option selected disabled value={""}>
+                    select school
+                  </option>
+                  {props.universities.map((item: any, idx: number) => (
+                    <option key={idx}>{item.instnm}</option>
+                  ))}
+                </select>
+              </div>
+            </fieldset>
+            <fieldset>
+              <label className="block text-sm font-medium text-brand">What year in school are you?</label>
+              <div className="flex w-full flex-row items-center">
+                <select
+                  className={`mt-4  mr-4  flex h-10 w-2/3 max-w-xs items-center rounded border border-gray-300 pl-3 text-sm shadow focus:border focus:border-indigo-700 focus:outline-none dark:border-gray-700 dark:focus:border-indigo-700 md:mr-10`}
+                  onChange={(e) => {
+                    setSchoolYear(e.target.value);
+                  }}>
+                  <option selected disabled value={""}>
+                    select year
+                  </option>
+                  {props.schoolYears.map((item: any, idx: number) => (
+                    <option key={idx}>{item}</option>
+                  ))}
+                </select>
+              </div>
             </fieldset>
           </section>
         </form>
@@ -527,6 +596,8 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
           setSubmitting(true);
           await updateUser({
             bio: bioRef.current?.value,
+            school: school,
+            schoolYear: schoolYear,
           });
           setSubmitting(false);
         } catch (error) {
@@ -549,9 +620,9 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
   }
 
   return (
-    <div className="min-h-screen bg-brand" data-testid="onboarding">
+    <div className="min-h-screen bg-brand bg-opacity-50" data-testid="onboarding">
       <Head>
-        <title>Cal.com - {t("getting_started")}</title>
+        <title>Welcome to NorthStarre - {t("getting_started")}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -644,6 +715,24 @@ export async function getServerSideProps(context: NextPageContext) {
   let credentials = [];
   let eventTypes = [];
   let schedules = [];
+  const schoolYears = ["Freshmen", "Sophomore", "Junior", "Senior"];
+  const describers = [
+    "High School student",
+    "College Student (2 year or 4 year)",
+    "Graduate School student",
+    "Working Professional",
+  ];
+  const universitiesResp = await fetch("https://devmynorthstarre-api.azurewebsites.net/api/universities", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  if (!universitiesResp.ok) {
+    throw new Error((await universitiesResp.json()).message);
+  }
+  const universities = await universitiesResp.json();
+
   if (!session?.user?.id) {
     return {
       redirect: {
@@ -667,6 +756,13 @@ export async function getServerSideProps(context: NextPageContext) {
       avatar: true,
       timeZone: true,
       completedOnboarding: true,
+      willGiveAdvice: true,
+      willGetAdvice: true,
+      preProfessionalTrack: true,
+      school: true,
+      schoolYear: true,
+      zipCode: true,
+      describer: true,
       selectedCalendars: {
         select: {
           externalId: true,
@@ -683,7 +779,7 @@ export async function getServerSideProps(context: NextPageContext) {
     return {
       redirect: {
         permanent: false,
-        destination: "/event-types",
+        destination: "/Home",
       },
     };
   }
@@ -740,6 +836,9 @@ export async function getServerSideProps(context: NextPageContext) {
       eventTypes,
       schedules,
       usernameParam,
+      universities,
+      schoolYears,
+      describers,
     },
   };
 }

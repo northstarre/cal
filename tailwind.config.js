@@ -7,7 +7,7 @@ module.exports = {
   darkMode: "class",
   theme: {
     fontFamily: {
-      sans: ["Roboto", "sans-serif"],
+      sans: ["fira-sans", "Roboto", "sans-serif"],
     },
     extend: {
       colors: {
@@ -101,7 +101,7 @@ module.exports = {
         },
       },
       fontFamily: {
-        cal: ["Cal Sans", "sans-serif"],
+        cal: ["fira-sans", "Cal Sans", "sans-serif"],
       },
       maxHeight: (theme) => ({
         0: "0",

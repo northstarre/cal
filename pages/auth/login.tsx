@@ -1,6 +1,8 @@
 import { ArrowLeftIcon } from "@heroicons/react/solid";
+import classNames from "classnames";
 import { GetServerSidePropsContext } from "next";
 import { getCsrfToken, signIn } from "next-auth/react";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -14,7 +16,9 @@ import { inferSSRProps } from "@lib/types/inferSSRProps";
 
 import AddToHomescreen from "@components/AddToHomescreen";
 import SAMLLogin from "@components/auth/SAMLLogin";
-import { Form } from "@components/form/fields";
+import TwoFactor from "@components/auth/TwoFactor";
+import { EmailField, PasswordField, Form } from "@components/form/fields";
+import { Alert } from "@components/ui/Alert";
 import AuthContainer from "@components/ui/AuthContainer";
 import Button from "@components/ui/Button";
 
@@ -88,18 +92,15 @@ export default function Login({
         footerText={twoFactorRequired ? TwoFactorFooter : LoginFooter}>
         <Form
           form={form}
-          className="space-y-6"
+          className="text-[#267d72]"
           handleSubmit={(values) => {
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            signIn<"b2c">("b2c", { ...values, callbackUrl, redirect: false })
+            signIn<"credentials">("credentials", { ...values, callbackUrl, redirect: false })
               .then((res) => {
-                console.log(res)
                 if (!res) setErrorMessage(errorMessages[ErrorCode.InternalServerError]);
                 // we're logged in! let's do a hard refresh to the desired url
                 else if (!res.error) window.location.replace(callbackUrl);
                 // reveal two factor input if required
-                else if (res.error === ErrorCode.SecondFactorRequired) setTwoFactorRequired(true);
+                else if (res.error === ErrorCode.SecondFactorRequired) setTwoFactorRequired(false);
                 // fallback if error not found
                 else setErrorMessage(errorMessages[res.error] || t("something_went_wrong"));
               })
@@ -107,9 +108,46 @@ export default function Login({
           }}>
           <input defaultValue={csrfToken || undefined} type="hidden" hidden {...form.register("csrfToken")} />
 
+          <div className={classNames("space-y-6", { hidden: twoFactorRequired })}>
+            <EmailField
+              id="email"
+              label={t("email_address")}
+              labelProps={{ className: "text-lg font-semibold text-[#272d67] leading-tight" }}
+              placeholder="john.doe@example.com"
+              required
+              className={
+                "mt-2 h-10 w-full rounded border border-gray-300 px-2 text-gray-600 shadow focus:border  focus:border-indigo-700 focus:outline-none dark:focus:border-indigo-700"
+              }
+              {...form.register("email")}
+            />
+            <div className="relative">
+              <div className="absolute right-0 -top-[2px]">
+                <Link href="/auth/forgot-password">
+                  <a tabIndex={-1} className="text-sm font-medium text-primary-600">
+                    {t("forgot")}
+                  </a>
+                </Link>
+              </div>
+              <PasswordField
+                id="password"
+                type="password"
+                autoComplete="current-password"
+                labelProps={{ className: "text-lg font-semibold text-[#272d67] fleading-tight" }}
+                className={
+                  "mt-2 h-10 w-full rounded border border-gray-300 px-2 text-gray-600 shadow  focus:border focus:border-indigo-700 focus:outline-none"
+                }
+                required
+                {...form.register("password")}
+              />
+            </div>
+          </div>
+
+          {twoFactorRequired && <TwoFactor />}
+
+          {errorMessage && <Alert severity="error" title={errorMessage} />}
           <div className="flex space-y-2">
             <Button
-              className="flex w-full justify-center"
+              className="mt-6 w-full rounded bg-indigo-700 px-8 py-3  text-center text-sm text-white transition duration-150 ease-in-out hover:bg-indigo-600 focus:bg-indigo-800 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2"
               type="submit"
               disabled={form.formState.isSubmitting}>
               {twoFactorRequired ? t("submit") : t("sign_in")}
@@ -117,7 +155,7 @@ export default function Login({
           </div>
         </Form>
 
-        {!twoFactorRequired && (
+        {true && (
           <>
             {isGoogleLoginEnabled && (
               <div className="mt-5">
