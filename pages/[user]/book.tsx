@@ -11,6 +11,7 @@ import { inferSSRProps } from "@lib/types/inferSSRProps";
 import BookingPage from "@components/booking/pages/BookingPage";
 
 import { ssrInit } from "@server/lib/ssr";
+import { getSession } from "@lib/auth";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -23,6 +24,26 @@ export default function Book(props: BookPageProps) {
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const ssr = await ssrInit(context);
+  const session = await getSession(context);
+
+  if (!session?.user?.id) {
+    return { redirect: { permanent: false, destination: "/auth/login" } };
+  }
+  const loggedInUser = await prisma.user.findUnique({
+    where: {
+      id: session?.user?.id,
+    },
+    select: {
+      id: true,
+      username: true,
+      name: true,
+      email: true,
+      bio: true,
+      avatar: true,
+      theme: true,
+      brandColor: true,
+    },
+  });
   const user = await prisma.user.findUnique({
     where: {
       username: asStringOrThrow(context.query.user),
@@ -128,6 +149,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   return {
     props: {
+      loggedInUser,
       profile: {
         slug: user.username,
         name: user.name,

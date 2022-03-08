@@ -1,6 +1,5 @@
 import crypto from "crypto";
 import { GetServerSidePropsContext } from "next";
-import { useRouter } from "next/router";
 import { ComponentProps, FormEvent, useEffect, useRef, useState } from "react";
 import { QueryCell } from "@lib/QueryCell";
 import { getSession } from "@lib/auth";
@@ -13,6 +12,7 @@ import ProfileComponent from "@components/nsprofile/Profile";
 import { Alert } from "@components/ui/Alert";
 import { Prisma } from "@prisma/client";
 import Navbar from "@components/Navbar";
+import { asStringOrThrow } from "@lib/asStringOrNull";
 
 type Props = inferSSRProps<typeof getServerSideProps>;
 
@@ -91,8 +91,8 @@ function SettingsView(props: ComponentProps<typeof Settings> & { localeProp: str
         updateProfile={updateUser}
         profile={props.user}
         avatarRef={avatarRef}
-        isReadOnly={false}
-        setShouldRefetch={false}
+        isReadOnly={true}
+        loggedInUser={props.loggedInUser}
         onProfilePicEdit={updateProfileHandler}
       />
     </>
@@ -105,7 +105,7 @@ export default function Settings(props: Props) {
 
   return (
     <>
-      <Navbar signedIn={true} profile={props.user} isBeta={false} />
+      <Navbar signedIn={true} profile={props.loggedInUser} isBeta={false} />
       <QueryCell query={query} success={({ data }) => <SettingsView {...props} localeProp={data.locale} />} />
     </>
   );
@@ -117,10 +117,25 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
   if (!session?.user?.id) {
     return { redirect: { permanent: false, destination: "/auth/login" } };
   }
+  const loggedInUser = await prisma.user.findUnique({
+    where: {
+      id: session?.user?.id,
+    },
+    select: {
+      id: true,
+      username: true,
+      name: true,
+      email: true,
+      bio: true,
+      avatar: true,
+      theme: true,
+      brandColor: true,
+    },
+  });
 
   const user = await prisma.user.findUnique({
     where: {
-      id: session.user.id,
+      username: asStringOrThrow(context.query.user),
     },
     select: {
       id: true,
@@ -163,6 +178,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
 
   return {
     props: {
+      loggedInUser,
       user: {
         ...user,
         emailMd5: crypto.createHash("md5").update(user.email).digest("hex"),

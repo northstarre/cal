@@ -226,6 +226,7 @@ export default NextAuth({
           username: token.username as string,
         },
       };
+      console.log("Session", calendsoSession);
       return calendsoSession;
     },
     async signIn({ user, account, profile }) {

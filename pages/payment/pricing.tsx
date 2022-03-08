@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+
 export default function Pricing() {
   const router = useRouter();
   return (
@@ -185,3 +186,5 @@ export default function Pricing() {
     </div>
   );
 }
+
+

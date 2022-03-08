@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const brandColor = "#292929";
+const brandColor = "#272d67";
 const brandTextColor = "#ffffff";
 
 export function colorNameToHex(color: string) {

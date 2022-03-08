@@ -8,7 +8,7 @@ import { getCsrfToken, signIn } from "next-auth/react";
 import { ErrorCode } from "@lib/auth";
 import { useLocale } from "@lib/hooks/useLocale";
 
-export default function Navbar({ signedIn, isBeta, msalInstance, profile }) {
+export default function Navbar({ signedIn, isBeta, profile }) {
   const [sideBar, setsideBar] = useState();
   const [errorMessage, setErrorMessage] = useState();
   const navigate = useRouter();
@@ -104,11 +104,11 @@ export default function Navbar({ signedIn, isBeta, msalInstance, profile }) {
                         aria-label="dropdown"
                         className="relative flex w-full cursor-pointer items-center justify-end border-b-2 border-transparent text-gray-800 hover:text-gray-900 focus:border-gray-800 focus:text-gray-900 focus:outline-none"
                         onClick={() => {
-                          navigate.push("/nsprofile");
+                          navigate.replace("/settings/profile");
                         }}>
                         <img
                           className="h-10 w-10 rounded-full object-cover"
-                          src={`data:image/png;base64,${profile?.profilePhoto ?? ""}`}
+                          src={profile?.avatar ?? ""}
                           alt="profile picture"
                         />
                       </button>

@@ -174,7 +174,11 @@ const BookingPage = (props: BookingPageProps) => {
     }
     const primaryAttendee = props.booking.attendees[0];
     if (!primaryAttendee) {
-      return {};
+      return {
+        name: props.loggedInUser.name,
+        email: props.loggedInUser.email,
+        guests: [],
+      };
     }
     return {
       name: primaryAttendee.name || "",
@@ -286,7 +290,7 @@ const BookingPage = (props: BookingPageProps) => {
                 eventTypeTitle: props.eventType.title,
                 profileName: props.profile.name,
               })}{" "}
-          | Cal.com
+          | Northstarre
         </title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -366,6 +370,7 @@ const BookingPage = (props: BookingPageProps) => {
                         name="name"
                         id="name"
                         required
+                        disabled={true}
                         className="block w-full rounded-sm border-gray-300 shadow-sm focus:border-brand focus:ring-black dark:border-gray-900 dark:bg-black dark:text-white sm:text-sm"
                         placeholder="John Doe"
                       />

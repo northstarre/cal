@@ -16,12 +16,12 @@ export const seoConfig: {
   defaultNextSeo: DefaultSeoProps;
 } = {
   headSeo: {
-    siteName: "Cal.com",
+    siteName: "mynorthstarre",
   },
   defaultNextSeo: {
     twitter: {
-      handle: "@calendso",
-      site: "@Calendso",
+      handle: "@mynorthstarre",
+      site: "@mynorthstarre",
       cardType: "summary_large_image",
     },
   },

@@ -155,7 +155,11 @@ model User {
   school              String?
   schoolYear          String?
   zipCode             String?
-
+  expertise           String[]
+  graduationMonth     String?
+  graduationYear      String?
+  degree              String?
+  credits             Credit[]
   @@map(name: "users")
 }
 
@@ -185,6 +189,16 @@ model Membership {
   user     User           @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@id([userId, teamId])
+}
+
+model Credit {
+  userId           Int @id
+  activeCredits    Int
+  expiredCredits   Int
+  LastPurchaseDate DateTime
+  UsedCredits      Int
+  LastUtilisedDate DateTime
+  user             User           @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model VerificationRequest {

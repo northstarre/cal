@@ -24,15 +24,13 @@ import { useLocale } from "@lib/hooks/useLocale";
 import { getCalendarCredentials, getConnectedCalendars } from "@lib/integrations/calendar/CalendarManager";
 import getIntegrations from "@lib/integrations/getIntegrations";
 import prisma from "@lib/prisma";
-import { collectPageParameters, telemetryEventTypes, useTelemetry } from "@lib/telemetry";
+import { useTelemetry } from "@lib/telemetry";
 import { trpc } from "@lib/trpc";
 import { inferSSRProps } from "@lib/types/inferSSRProps";
 import { Schedule as ScheduleType } from "@lib/types/schedule";
 
-import { ClientSuspense } from "@components/ClientSuspense";
 import Loader from "@components/Loader";
 import { Form } from "@components/form/fields";
-import { CalendarListContainer } from "@components/integrations/CalendarListContainer";
 import { Alert } from "@components/ui/Alert";
 import Button from "@components/ui/Button";
 import Text from "@components/ui/Text";
@@ -259,7 +257,7 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
     });
 
     setSubmitting(false);
-    router.push("/event-types");
+    router.push("/settings/profile");
   };
 
   const schema = z.object({

@@ -10,30 +10,19 @@ import ImageWithCTA from "../components/ImageWithCTA";
 import Grid from "../components/Grid";
 import useWindowSize from "@components/useWindowResizeHook";
 import Navbar from "@components/Navbar";
-const getTokenFromAPi = () => {
-  console.log("making fetch");
-  fetch("/api/fetchToken", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then((resp) => {
-      resp.json().then((data) => {
-        console.log(data);
-      });
-    })
-    .catch((e) => {
-      console.error(`Error Fetching Token`, e);
-    });
-};
-export default function Homepage() {
+import { NextPageContext } from "next";
+import { getSession } from "@lib/auth";
+import { inferSSRProps } from "@lib/types/inferSSRProps";
+import Loader from "@components/Loader";
+import prisma from "@lib/prisma";
+
+export default function Homepage(props: inferSSRProps<typeof getServerSideProps>) {
+  console.log(props);
   const size = useWindowSize();
   const [fetchedMentors, setFetchedMentors] = useState([]);
   const [mentors, setMentors] = useState([]);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [loading, setLoading] = useState(false);
-  const [profileToDisplay, setProfile] = useState(undefined);
   useEffect(() => {
     fetchData();
   }, []);
@@ -50,10 +39,6 @@ export default function Homepage() {
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       () => {}
     );
-    const id = "e8443f32-92e9-439b-895b-a49cfae0ee81";
-    doGet(`userInfo?$filter=userObjectId eq ${id}`, setProfile, () => {
-      return "avoiding Es lint";
-    });
     //getTokenFromAPi();
     setLoading(false);
   };
@@ -71,7 +56,7 @@ export default function Homepage() {
 
   return (
     <>
-      <Navbar isBeta={false} signedIn={false} profile={profileToDisplay} />
+      <Navbar isBeta={false} signedIn={props.signedIn} profile={props.user} />
       <Hero
         heading={"Take charge of your future."}
         heroContent={
@@ -102,10 +87,6 @@ export default function Homepage() {
           }}
         />
       </div>
-      {/*<div*/}
-      {/*  className={*/}
-      {/*    "hidden h-[556px] w-full bg-[url('/assets/Frame%2011.png')] bg-contain bg-no-repeat md:block"*/}
-      {/*  }></div>*/}
       <div className={"font-raleway my-20 flex w-full flex-col px-0 md:flex-row md:px-20"}>
         <div className={"flex w-3/5 flex-col text-left"}>
           <h2 className="why-header text-left text-4xl font-extrabold leading-10 text-[#272d67]">
@@ -162,7 +143,7 @@ export default function Homepage() {
           {mentors.length ? (
             <Grid rows={mentors} shouldDisplaySchool={false} shouldDisplayMajor={true} />
           ) : (
-            "Loading Mentor Info"
+            <Loader />
           )}
         </div>
       </div>
@@ -227,4 +208,54 @@ export default function Homepage() {
       </div>
     </>
   );
+}
+
+export async function getServerSideProps(context: NextPageContext) {
+  const session = await getSession(context);
+  const signedIn = session?.user?.id ?? false;
+  const isBeta = null;
+  let user = {};
+
+  if (signedIn) {
+    user = await prisma.user.findFirst({
+      where: {
+        id: session?.user?.id,
+      },
+      select: {
+        id: true,
+        startTime: true,
+        endTime: true,
+        username: true,
+        name: true,
+        email: true,
+        bio: true,
+        avatar: true,
+        timeZone: true,
+        completedOnboarding: true,
+        willGiveAdvice: true,
+        willGetAdvice: true,
+        preProfessionalTrack: true,
+        school: true,
+        schoolYear: true,
+        zipCode: true,
+        describer: true,
+        selectedCalendars: {
+          select: {
+            externalId: true,
+            integration: true,
+          },
+        },
+      },
+    });
+    if (!user.completedOnboarding) {
+      return { redirect: { permanent: false, destination: "/getting-started" } };
+    }
+  }
+  return {
+    props: {
+      user,
+      isBeta,
+      signedIn,
+    },
+  };
 }

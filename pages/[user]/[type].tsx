@@ -10,6 +10,7 @@ import { inferSSRProps } from "@lib/types/inferSSRProps";
 import AvailabilityPage from "@components/booking/pages/AvailabilityPage";
 
 import { ssrInit } from "@server/lib/ssr";
+import { getSession } from "@lib/auth";
 
 export type AvailabilityPageProps = inferSSRProps<typeof getServerSideProps>;
 
@@ -19,6 +20,11 @@ export default function Type(props: AvailabilityPageProps) {
 
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
   const ssr = await ssrInit(context);
+  const session = await getSession(context);
+
+  if (!session?.user?.id) {
+    return { redirect: { permanent: false, destination: "/auth/login" } };
+  }
   // get query params and typecast them to string
   // (would be even better to assert them instead of typecasting)
   const userParam = asStringOrNull(context.query.user);

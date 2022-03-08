@@ -4,8 +4,12 @@ import { loadStripe } from "@stripe/stripe-js";
 // recreating the `Stripe` object on every render.
 import React, { useEffect, useState } from "react";
 import { useStripe, useElements, Elements, PaymentElement } from "@stripe/react-stripe-js";
+import { GetServerSidePropsContext } from "next";
+import { getSession } from "@lib/auth";
+import prisma from "@lib/prisma";
+import { inferSSRProps } from "@lib/types/inferSSRProps";
 const stripePromise = loadStripe(
-  "pk_test_51KU09MSDt29BH2KbisPU2njdufxeGVaijvz8mPZxgitt4B9pevxnrbF10gi1r2ohZl7e2e0NZtkNmPFsQEg44WhV00BOjWD9Qz"
+  "pk_test_51KKnHHBjmu6fdZ6OyOnc32x7byECMWMzolqXYjvtkqltuliBeLi8LaA6iBiLyOqvzHVX1hYIKUKaFp4mWw3ycx6r00n5nrzSx2"
 );
 function CheckoutForm() {
   const stripe = useStripe();
@@ -30,6 +34,7 @@ function CheckoutForm() {
       switch (paymentIntent.status) {
         case "succeeded":
           setMessage("Payment succeeded!");
+          console.log("payment succeeded");
           break;
         case "processing":
           setMessage("Your payment is processing.");
@@ -59,7 +64,7 @@ function CheckoutForm() {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: "http://localhost:3000",
+        return_url: "http://localhost:3000/payment/paymentConfirmed/?credits=3",
       },
     });
 
@@ -78,7 +83,10 @@ function CheckoutForm() {
   };
 
   return (
-    <form className={"mx-auto mt-28 flex flex-col px-60 items-center"} id="payment-form" onSubmit={handleSubmit}>
+    <form
+      className={"mx-auto mt-28 flex flex-col items-center px-60"}
+      id="payment-form"
+      onSubmit={handleSubmit}>
       <PaymentElement id="payment-element" />
       <button
         className={
@@ -93,15 +101,15 @@ function CheckoutForm() {
     </form>
   );
 }
-export default function CollectPayment() {
+export default function CollectPayment(props: inferSSRProps<typeof getServerSideProps>) {
   const [clientSecret, setClientSecret] = useState("");
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
-    fetch("https://localhost:7236/api/Payments", {
+    fetch(`https://localhost:7236/api/Payments/${props.user.id}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ subscriptionName: "astra" }),
+      body: JSON.stringify({ subscriptionName: "sirius" }),
     })
       .then((res) => res.json())
       .then((data) => setClientSecret(data.clientSecret));
@@ -124,3 +132,36 @@ export default function CollectPayment() {
     </>
   );
 }
+
+export const getServerSideProps = async (context: GetServerSidePropsContext) => {
+  const session = await getSession(context);
+
+  if (!session?.user?.id) {
+    return { redirect: { permanent: false, destination: "/auth/login" } };
+  }
+  const user = await prisma.user.findUnique({
+    where: {
+      id: session?.user?.id,
+    },
+    select: {
+      id: true,
+      username: true,
+      name: true,
+      email: true,
+      bio: true,
+      avatar: true,
+      theme: true,
+      brandColor: true,
+    },
+  });
+
+  if (!user) {
+    throw new Error("User seems logged in but cannot be found in the db");
+  }
+
+  return {
+    props: {
+      user,
+    },
+  };
+};

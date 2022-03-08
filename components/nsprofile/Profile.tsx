@@ -7,11 +7,12 @@ import ProfileListContent from "./ProfileListContent";
 import Biography from "./Biography";
 import Modal from "../Modal";
 import Expertise from "./Expertise";
+import { useRouter } from "next/router";
 
-export default function Index({ setShouldRefetch, profile, isReadOnly }) {
+export default function Index({ loggedInUser, profile: user, isReadOnly, updateProfile, avatarRef,onProfilePicEdit  }) {
   const [showBioGraphy, setShowBiography] = useState(false);
   const [showChoices, setShowChoices] = useState(false);
-
+  const navigate = useRouter();
   return (
     <>
       <main className="profile-page lg:px-60">
@@ -35,7 +36,7 @@ export default function Index({ setShouldRefetch, profile, isReadOnly }) {
                     <div className="relative ">
                       <img
                         alt="..."
-                        src={`data:image/png;base64,${profile?.profilePhoto ?? ""}`}
+                        src={`${user?.avatar ?? ""}`}
                         className="absolute -m-16  -ml-20 h-auto rounded-full border-8 border-none border-[#FFF6DB] align-middle shadow-xl lg:-ml-16"
                         style={{ maxWidth: "168px", maxHeight: "162px" }}
                       />
@@ -72,12 +73,22 @@ export default function Index({ setShouldRefetch, profile, isReadOnly }) {
                 </div>
                 <div className="text-center ">
                   <h3 className="font-800 mb-2 mb-2 text-4xl font-semibold leading-normal text-[#272d67]">
-                    {`${profile.firstName} ${profile.lastname}`}
+                    {user.name}
                   </h3>
                   <div>
-                    <h4 className={"font-600 text-left text-3xl font-semibold text-[#272d67] "}>About</h4>
+                    <div className={"flex flex-row w-full justify-between"}>
+                      <h4 className={"font-600 text-left self-left text-3xl font-semibold text-[#272d67] "}>About</h4>
+                      <button className={"bg-[#60ab67] rounded-full font-bold text-white text-center justify-self-end w-[180px] self-right float-right"} onClick={(e)=> {
+                        if(loggedInUser && loggedInUser.id !== user.id){
+                          navigate.replace(`/${user.username}`)
+                        }
+                        else {
+                          navigate.replace(`/event-types`)
+                        }
+                      }}>{loggedInUser && loggedInUser.id !== user.id ? "Book": "Edit Availability"} </button>
+                    </div>
                     <p className="text-md font-600 mb-4 text-left leading-relaxed text-[#272d67]">
-                      {profile.about}
+                      {user.bio}
                     </p>
                   </div>
                 </div>
@@ -91,27 +102,27 @@ export default function Index({ setShouldRefetch, profile, isReadOnly }) {
             isEditable={!isReadOnly}
             className={"mx-4 shadow-xl"}
             items={[
-              { image: "/assets/profile/text-bgcolor.png", value: profile.school },
-              { image: "/assets/profile/Union.png", value: profile.zipCode },
-              { image: "/assets/profile/icon.png", value: profile.zipCode },
-              { image: "/assets/profile/pencil-create.png", value: profile.major },
-              { image: "/assets/profile/pencil-create.png", value: profile.preProfessionalTrack },
-              { image: "/assets/profile/calculator.png", value: profile.schoolYear },
-              { image: "/assets/profile/case.png", value: profile.graduationYear },
+              { image: "/assets/profile/text-bgcolor.png", value: user.school },
+              { image: "/assets/profile/Union.png", value: user.zipCode },
+              { image: "/assets/profile/icon.png", value: user.zipCode },
+              { image: "/assets/profile/pencil-create.png", value: user.major },
+              { image: "/assets/profile/pencil-create.png", value: user.preProfessionalTrack },
+              { image: "/assets/profile/calculator.png", value: user.schoolYear },
+              { image: "/assets/profile/case.png", value: user.graduationYear },
               {
                 image: "/assets/profile/dribbble.png",
-                value: `${profile.interest1}, ${profile.interest2}, ${profile.interest3}, ${profile.interes4}`,
+                value: `${user.interest1}, ${user.interest2}, ${user.interest3}, ${user.interest4}`,
               },
             ]}
             onEditClick={() => setShowBiography(true)}
           />
           <ProfileListContent
-            header={"Key Goals (you choose!)"}
+            header={user.willGiveAdvice? "Expertise" : "Key Goals (you choose!)"}
             isEditable={!isReadOnly}
             className={"mx-4 shadow-xl"}
             items={
-              profile?.expertise?.map((itm) => {
-                return { image: "./assets/profile/check-mark.png", value: itm };
+              user?.expertise?.map((itm) => {
+                return { image: "/assets/profile/check-mark.png", value: itm };
               }) ?? []
             }
             onEditClick={() => setShowChoices(true)}
@@ -126,19 +137,21 @@ export default function Index({ setShouldRefetch, profile, isReadOnly }) {
       <Modal isOpen={showBioGraphy} handlePopUp={(d) => setShowBiography(d)} header={"Update Biography"}>
         <Biography
           onIsEditComplete={() => {
-            setShouldRefetch(true);
             setShowBiography(false);
           }}
-          profile={profile}
+          profile={user}
+          onEdit={updateProfile}
+          avatarRef={avatarRef}
+          onProfilePicEdit = {onProfilePicEdit}
         />
       </Modal>
       <Modal isOpen={showChoices} handlePopUp={(d) => setShowChoices(d)} header={"Key Goals"}>
         <Expertise
           onIsEditComplete={() => {
-            setShouldRefetch(true);
             setShowChoices(false);
           }}
-          profile={profile}
+          profile={user}
+          onEdit={updateProfile}
         />
       </Modal>
     </>

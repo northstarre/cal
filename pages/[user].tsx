@@ -20,6 +20,7 @@ import Avatar from "@components/ui/Avatar";
 import { ssrInit } from "@server/lib/ssr";
 
 import CryptoSection from "../ee/components/web3/CryptoSection";
+import { getSession } from "@lib/auth";
 
 interface EvtsToVerify {
   [evtId: string]: boolean;
@@ -125,7 +126,25 @@ export default function User(props: inferSSRProps<typeof getServerSideProps>) {
 
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
   const ssr = await ssrInit(context);
-
+  const session = await getSession(context);
+  if (!session?.user?.id) {
+    return { redirect: { permanent: false, destination: "/auth/login" } };
+  }
+  const credits = await prisma.credit.findUnique({
+    where: {
+      userId: session?.user?.id,
+    },
+    select: {
+      userId: true,
+      activeCredits: true,
+    },
+  });
+  if (!credits) {
+    return { redirect: { permanent: false, destination: "/payment/pricing" } };
+  }
+  if (credits && credits.activeCredits < 0) {
+    return { redirect: { permanent: false, destination: "/payment/pricing" } };
+  }
   const username = (context.query.user as string).toLowerCase();
 
   const user = await prisma.user.findUnique({

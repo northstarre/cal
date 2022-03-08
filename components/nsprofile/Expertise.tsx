@@ -6,7 +6,7 @@ import Button from "../Button";
 import { useForm } from "react-hook-form";
 import { doGet, doPatch } from "../../pages/makeAPICall";
 
-export default function Expertise({ onIsEditComplete, profile }) {
+export default function Expertise({ onIsEditComplete, profile, onEdit }) {
   const [expertise, setExpertise] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const {
@@ -31,18 +31,9 @@ export default function Expertise({ onIsEditComplete, profile }) {
       data.expertise7,
       data.expertise8,
     ];
-    doPatch(
-      "userInfo/Expertise",
-      JSON.stringify({ expertise: list }),
-      { "Content-type": "application/json" },
-      () => {
-        alert("data Saved Successfully");
-        setIsLoading(false);
-        onIsEditComplete();
-      },
-      () => {
-      }
-    );
+    onEdit({
+      expertise: list,
+    }, onIsEditComplete).then(data => setIsLoading(false) );
   };
   return (
     <div className=" my-5">
