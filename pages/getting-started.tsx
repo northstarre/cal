@@ -35,6 +35,7 @@ import { Alert } from "@components/ui/Alert";
 import Button from "@components/ui/Button";
 import Text from "@components/ui/Text";
 import Schedule from "@components/ui/form/Schedule";
+import { doPatch } from "./makeAPICall";
 
 import getEventTypes from "../lib/queries/event-types/get-event-types";
 import ToggleButton from "@components/ToggleButton";
@@ -62,6 +63,7 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
         mutationComplete(null);
         mutationComplete = null;
       }
+
       setSubmitting(false);
     },
     onError: (err) => {
@@ -74,11 +76,6 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
   });
 
   const DEFAULT_EVENT_TYPES = [
-    {
-      title: t("15min_meeting"),
-      slug: "15min",
-      length: 15,
-    },
     {
       title: t("30min_meeting"),
       slug: "30min",
@@ -278,24 +275,22 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
         <>
           <form className="sm:mx-auto sm:w-full">
             <section className="space-y-8">
-              {props.usernameParam && (
-                <fieldset>
-                  <label htmlFor="name" className="block text-sm font-medium text-brand">
-                    {t("username")}
-                  </label>
-                  <input
-                    ref={usernameRef}
-                    type="text"
-                    name="username"
-                    id="username"
-                    data-testid="username"
-                    placeholder={t("username")}
-                    defaultValue={props.usernameParam ?? ""}
-                    required
-                    className="mt-1 block w-full rounded-sm border border-gray-300 px-3 py-2 shadow-sm focus:border-neutral-500 focus:outline-none focus:ring-neutral-500 sm:text-sm"
-                  />
-                </fieldset>
-              )}
+              <fieldset>
+                <label htmlFor="name" className="block text-sm font-medium text-brand">
+                  {t("username")}
+                </label>
+                <input
+                  ref={usernameRef}
+                  type="text"
+                  name="username"
+                  id="username"
+                  data-testid="username"
+                  placeholder={t("username")}
+                  defaultValue={props.usernameParam ?? ""}
+                  required
+                  className="mt-1 block w-full rounded-sm border border-gray-300 px-3 py-2 shadow-sm focus:border-neutral-500 focus:outline-none focus:ring-neutral-500 sm:text-sm"
+                />
+              </fieldset>
 
               <fieldset>
                 <label htmlFor="name" className="block text-sm font-medium text-brand">
@@ -314,6 +309,23 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
                 />
               </fieldset>
               <fieldset>
+                <label htmlFor="bio" className="block text-sm font-medium text-gray-700">
+                  {t("about")}
+                </label>
+                <textarea
+                  ref={bioRef}
+                  name="bio"
+                  id="bio"
+                  required
+                  className="mt-1 block w-full rounded-sm border border-gray-300 px-3 py-2 shadow-sm focus:border-neutral-500 focus:outline-none focus:ring-neutral-500 sm:text-sm"
+                  defaultValue={props.user.bio || undefined}
+                />
+                <Text variant="caption" className="mt-2">
+                  {t("few_sentences_about_yourself")}
+                </Text>
+              </fieldset>
+              {/*TODO : Profile Photo */}
+              <fieldset>
                 <label htmlFor="zipcode" className="block text-sm font-medium text-brand">
                   {t("zip_code")}
                 </label>
@@ -329,7 +341,6 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
                   className="mt-1 block w-full rounded-sm border border-gray-300 px-3 py-2 shadow-sm focus:border-neutral-500 focus:outline-none focus:ring-neutral-500 sm:text-sm"
                 />
               </fieldset>
-
               <fieldset>
                 <section className="flex justify-between">
                   <label htmlFor="timeZone" className="block text-sm font-medium text-brand">
@@ -356,6 +367,16 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
       showCancel: true,
       cancelText: t("set_up_later"),
       onComplete: async () => {
+        await updateUser({
+          bio: bioRef.current?.value,
+        });
+        doPatch(
+          `userInfo/setup/stripe/${props.user.id}`,
+          {},
+          {},
+          () => {},
+          () => {}
+        );
         mutationComplete = null;
         setError(null);
         const mutationAsync = new Promise((resolve, reject) => {
@@ -379,39 +400,6 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
           await mutationAsync;
         }
       },
-    },
-    {
-      id: "set-availability",
-      title: t("set_availability"),
-      description: t("set_availability_instructions"),
-      Component: (
-        <Form<ScheduleFormValues>
-          className="mx-auto max-w-lg bg-white text-black dark:bg-opacity-5 dark:text-white"
-          form={availabilityForm}
-          handleSubmit={async (values) => {
-            try {
-              setSubmitting(true);
-              await createSchedule({ ...values });
-              debouncedHandleConfirmStep();
-              setSubmitting(false);
-            } catch (error) {
-              if (error instanceof Error) {
-                setError(error);
-              }
-            }
-          }}>
-          <section>
-            <Schedule name="schedule" />
-            <footer className="flex flex-col space-y-6 py-6 sm:mx-auto sm:w-full">
-              <Button className="justify-center" EndIcon={ArrowRightIcon} type="submit">
-                {t("continue")}
-              </Button>
-            </footer>
-          </section>
-        </Form>
-      ),
-      hideConfirm: true,
-      showCancel: false,
     },
     {
       id: "Northstarre Role",
@@ -479,6 +467,40 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
               </select>
             </div>
           </div>
+          <fieldset>
+            <label className="block text-sm font-medium text-brand">What school do you go to?</label>
+            <div className="mb-10 flex w-full flex-row">
+              <select
+                onChange={(e) => {
+                  setSchool(e.target.value);
+                }}
+                className={`mt-4 mr-4 flex  h-10 w-full max-w-xs items-center rounded border border-gray-300   pl-3 text-sm shadow focus:border focus:border-indigo-700 focus:outline-none dark:border-gray-700 dark:focus:border-indigo-700 md:mr-10`}>
+                <option selected disabled value={""}>
+                  Select School
+                </option>
+                {props.universities.map((item: any, idx: number) => (
+                  <option key={idx}>{item.instnm}</option>
+                ))}
+              </select>
+            </div>
+          </fieldset>
+          <fieldset>
+            <label className="block text-sm font-medium text-brand">What year in school are you?</label>
+            <div className="flex w-full flex-row items-center">
+              <select
+                className={`mt-4  mr-4  flex h-10 w-2/3 max-w-xs items-center rounded border border-gray-300 pl-3 text-sm shadow focus:border focus:border-indigo-700 focus:outline-none dark:border-gray-700 dark:focus:border-indigo-700 md:mr-10`}
+                onChange={(e) => {
+                  setSchoolYear(e.target.value);
+                }}>
+                <option selected disabled value={""}>
+                  select year
+                </option>
+                {props.schoolYears.map((item: any, idx: number) => (
+                  <option key={idx}>{item}</option>
+                ))}
+              </select>
+            </div>
+          </fieldset>
         </>
       ),
       hideConfirm: false,
@@ -486,6 +508,10 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
       showCancel: true,
       cancelText: t("set_up_later"),
       onComplete: async () => {
+        await updateUser({
+          school: school,
+          schoolYear: schoolYear,
+        });
         mutationComplete = null;
         setError(null);
         const mutationAsync = new Promise((resolve, reject) => {
@@ -510,99 +536,37 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
       },
     },
     {
-      id: "profile",
-      title: t("nearly_there"),
-      description: t("nearly_there_instructions"),
+      id: "set-availability",
+      title: t("set_availability"),
+      description: t("set_availability_instructions"),
       Component: (
-        <form className="sm:mx-auto sm:w-full" id="ONBOARDING_STEP_4">
-          <section className="space-y-4">
-            <fieldset>
-              <label htmlFor="name" className="block text-sm font-medium text-brand">
-                {t("full_name")}
-              </label>
-              <input
-                ref={nameRef}
-                type="text"
-                name="name"
-                id="name"
-                autoComplete="given-name"
-                placeholder={t("your_name")}
-                defaultValue={props.user.name || enteredName}
-                required
-                className="mt-1 block w-full rounded-sm border border-gray-300 px-3 py-2 shadow-sm focus:border-neutral-500 focus:outline-none focus:ring-neutral-500 sm:text-sm"
-              />
-            </fieldset>
-            <fieldset>
-              <label htmlFor="bio" className="block text-sm font-medium text-gray-700">
-                {t("about")}
-              </label>
-              <textarea
-                ref={bioRef}
-                name="bio"
-                id="bio"
-                required
-                className="mt-1 block w-full rounded-sm border border-gray-300 px-3 py-2 shadow-sm focus:border-neutral-500 focus:outline-none focus:ring-neutral-500 sm:text-sm"
-                defaultValue={props.user.bio || undefined}
-              />
-              <Text variant="caption" className="mt-2">
-                {t("few_sentences_about_yourself")}
-              </Text>
-            </fieldset>
-            <fieldset>
-              <label className="block text-sm font-medium text-brand">What school do you go to?</label>
-              <div className="mb-10 flex w-full flex-row">
-                <select
-                  onChange={(e) => {
-                    setSchool(e.target.value);
-                  }}
-                  className={`mt-4  mr-4  flex h-10 max-w-xs items-center rounded border border-gray-300   pl-3 text-sm shadow focus:border focus:border-indigo-700 focus:outline-none dark:border-gray-700 dark:focus:border-indigo-700 md:mr-10`}>
-                  <option selected disabled value={""}>
-                    select school
-                  </option>
-                  {props.universities.map((item: any, idx: number) => (
-                    <option key={idx}>{item.instnm}</option>
-                  ))}
-                </select>
-              </div>
-            </fieldset>
-            <fieldset>
-              <label className="block text-sm font-medium text-brand">What year in school are you?</label>
-              <div className="flex w-full flex-row items-center">
-                <select
-                  className={`mt-4  mr-4  flex h-10 w-2/3 max-w-xs items-center rounded border border-gray-300 pl-3 text-sm shadow focus:border focus:border-indigo-700 focus:outline-none dark:border-gray-700 dark:focus:border-indigo-700 md:mr-10`}
-                  onChange={(e) => {
-                    setSchoolYear(e.target.value);
-                  }}>
-                  <option selected disabled value={""}>
-                    select year
-                  </option>
-                  {props.schoolYears.map((item: any, idx: number) => (
-                    <option key={idx}>{item}</option>
-                  ))}
-                </select>
-              </div>
-            </fieldset>
+        <Form<ScheduleFormValues>
+          className="mx-auto max-w-lg bg-white text-black dark:bg-opacity-5 dark:text-white"
+          form={availabilityForm}
+          handleSubmit={async (values) => {
+            try {
+              setSubmitting(true);
+              await createSchedule({ ...values });
+              debouncedHandleConfirmStep();
+              setSubmitting(false);
+            } catch (error) {
+              if (error instanceof Error) {
+                setError(error);
+              }
+            }
+          }}>
+          <section>
+            <Schedule name="schedule" />
+            <footer className="flex flex-col space-y-6 py-6 sm:mx-auto sm:w-full">
+              <Button className="justify-center" EndIcon={ArrowRightIcon} type="submit">
+                {t("continue")}
+              </Button>
+            </footer>
           </section>
-        </form>
+        </Form>
       ),
-      hideConfirm: false,
-      confirmText: t("finish"),
-      showCancel: true,
-      cancelText: t("set_up_later"),
-      onComplete: async () => {
-        try {
-          setSubmitting(true);
-          await updateUser({
-            bio: bioRef.current?.value,
-            school: school,
-            schoolYear: schoolYear,
-          });
-          setSubmitting(false);
-        } catch (error) {
-          setError(error as Error);
-          setSubmitting(false);
-        }
-      },
+      hideConfirm: true,
+      showCancel: false,
     },
   ];
   /** End Onboarding Steps */

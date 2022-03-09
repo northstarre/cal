@@ -160,6 +160,9 @@ model User {
   graduationYear      String?
   degree              String?
   credits             Credit[]
+  payouts             Payout[]
+  stripeDetailsCollected Boolean          @default(false)
+  stripeAccountId     String?
   @@map(name: "users")
 }
 
@@ -221,6 +224,14 @@ model BookingReference {
   meetingUrl      String?
   booking         Booking? @relation(fields: [bookingId], references: [id])
   bookingId       Int?
+}
+
+model Payout {
+  id                    Int      @id @default(autoincrement())
+  providerReferenceId   String
+  userId                Int
+  amount                Decimal  @db.Money
+  user                  User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Attendee {

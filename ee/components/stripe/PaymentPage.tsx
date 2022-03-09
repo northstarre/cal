@@ -36,7 +36,7 @@ const PaymentPage: FC<PaymentPageProps> = (props) => {
     <div className="h-screen bg-neutral-50 dark:bg-neutral-900">
       <Head>
         <title>
-          {t("payment")} | {eventName} | Cal.com
+          {t("payment")} | {eventName} | Northstarre
         </title>
         <link rel="icon" href="/favicon.ico" />
       </Head>

@@ -95,7 +95,7 @@ export default function Navbar({ signedIn, isBeta, profile }) {
             <div className="hidden items-center justify-end md:flex">
               <div className="flex items-center">
                 {signedIn ? (
-                  <>
+                  <>s
                     <div className="flex h-full items-center">
 
                     </div>
@@ -183,8 +183,8 @@ export default function Navbar({ signedIn, isBeta, profile }) {
                               className="focus:text-[#272D67]-900 text-[#272D67]-800 hover:text-[#272D67]-900 relative mx-4 flex w-full cursor-pointer items-center justify-end border-b-2 border-transparent focus:border-gray-800 focus:outline-none">
                               <img
                                 className="h-10 w-10 rounded-full object-cover"
-                                src="https://i.ibb.co/GTLTzZY/Unsplash-Avatars-0000s-0035-azamat-zhanisov-a5s-RFie-A3-BY-unsplash-1.png"
-                                alt="Unsplash-Avatars-0000s-0035-azamat-zhanisov-a5s-RFie-A3-BY-unsplash-1"
+                                src={profile.avatar}
+                                alt="profile pic"
                               />
                             </button>
                           </div>
@@ -295,7 +295,7 @@ export default function Navbar({ signedIn, isBeta, profile }) {
                               <div className="flex items-center">
                                 <p
                                   tabIndex={0}
-                                  className="text-[#272D67]-800 text-sm font-medium focus:outline-none">
+                                  className="text-[#272D67]-800 text-sm font-medium focus:outline-none cursor-pointer">
                                   Get Advice
                                 </p>
                               </div>

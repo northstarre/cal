@@ -10,6 +10,7 @@ import {
   PuzzleIcon,
   MoonIcon,
   MapIcon,
+  UserCircleIcon,
 } from "@heroicons/react/solid";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
@@ -137,10 +138,10 @@ export default function Shell(props: {
 
   const navigation = [
     {
-      name: t("event_types_page_title"),
-      href: "/event-types",
-      icon: LinkIcon,
-      current: router.asPath.startsWith("/event-types"),
+      name: "Account",
+      href: "/Account/Account",
+      icon: UserCircleIcon,
+      current: router.asPath.startsWith("/Account"),
     },
     {
       name: t("bookings"),
@@ -161,7 +162,7 @@ export default function Shell(props: {
       current: router.asPath.startsWith("/integrations"),
     },
     {
-      name: t("settings"),
+      name: "Profile",
       href: "/settings/profile",
       icon: CogIcon,
       current: router.asPath.startsWith("/settings"),
@@ -443,46 +444,6 @@ function UserDropdown({ small }: { small?: boolean }) {
           </DropdownMenuItem>
         )}
         <DropdownMenuSeparator className="h-px bg-gray-200" />
-        <DropdownMenuItem>
-          <a
-            href="https://cal.com/slack"
-            target="_blank"
-            rel="noreferrer"
-            className="flex px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900">
-            <svg
-              viewBox="0 0 2447.6 2452.5"
-              className={classNames(
-                "text-gray-500 group-hover:text-gray-700",
-                "mt-0.5 h-4 w-4 flex-shrink-0 ltr:mr-2 rtl:ml-2"
-              )}
-              xmlns="http://www.w3.org/2000/svg">
-              <g clipRule="evenodd" fillRule="evenodd">
-                <path
-                  d="m897.4 0c-135.3.1-244.8 109.9-244.7 245.2-.1 135.3 109.5 245.1 244.8 245.2h244.8v-245.1c.1-135.3-109.5-245.1-244.9-245.3.1 0 .1 0 0 0m0 654h-652.6c-135.3.1-244.9 109.9-244.8 245.2-.2 135.3 109.4 245.1 244.7 245.3h652.7c135.3-.1 244.9-109.9 244.8-245.2.1-135.4-109.5-245.2-244.8-245.3z"
-                  fill="currentColor"></path>
-                <path
-                  d="m2447.6 899.2c.1-135.3-109.5-245.1-244.8-245.2-135.3.1-244.9 109.9-244.8 245.2v245.3h244.8c135.3-.1 244.9-109.9 244.8-245.3zm-652.7 0v-654c.1-135.2-109.4-245-244.7-245.2-135.3.1-244.9 109.9-244.8 245.2v654c-.2 135.3 109.4 245.1 244.7 245.3 135.3-.1 244.9-109.9 244.8-245.3z"
-                  fill="currentColor"></path>
-                <path
-                  d="m1550.1 2452.5c135.3-.1 244.9-109.9 244.8-245.2.1-135.3-109.5-245.1-244.8-245.2h-244.8v245.2c-.1 135.2 109.5 245 244.8 245.2zm0-654.1h652.7c135.3-.1 244.9-109.9 244.8-245.2.2-135.3-109.4-245.1-244.7-245.3h-652.7c-135.3.1-244.9 109.9-244.8 245.2-.1 135.4 109.4 245.2 244.7 245.3z"
-                  fill="currentColor"></path>
-                <path
-                  d="m0 1553.2c-.1 135.3 109.5 245.1 244.8 245.2 135.3-.1 244.9-109.9 244.8-245.2v-245.2h-244.8c-135.3.1-244.9 109.9-244.8 245.2zm652.7 0v654c-.2 135.3 109.4 245.1 244.7 245.3 135.3-.1 244.9-109.9 244.8-245.2v-653.9c.2-135.3-109.4-245.1-244.7-245.3-135.4 0-244.9 109.8-244.8 245.1 0 0 0 .1 0 0"
-                  fill="currentColor"></path>
-              </g>
-            </svg>
-            {t("join_our_slack")}
-          </a>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://cal.com/roadmap"
-            className="flex items-center px-4 py-2 text-sm text-gray-700">
-            <MapIcon className="h-5 w-5 text-gray-500 ltr:mr-3 rtl:ml-3" /> {t("visit_roadmap")}
-          </a>
-        </DropdownMenuItem>
         <HelpMenuItemDynamic />
         <DropdownMenuSeparator className="h-px bg-gray-200" />
         <DropdownMenuItem>

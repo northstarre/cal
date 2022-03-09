@@ -49,7 +49,7 @@ export const Button = forwardRef<HTMLAnchorElement | HTMLButtonElement, ButtonPr
       ref: forwardedRef,
       className: classNames(
         // base styles independent what type of button it is
-        "inline-flex items-center text-center",
+        "text-center",
         // different styles depending on size
         size === "sm" && "px-3 py-2 text-sm leading-4 font-medium rounded-sm",
         size === "base" && "px-3 py-2 text-sm font-medium rounded-sm",

@@ -138,6 +138,7 @@ export default function Index({ loggedInUser, profile: user, isReadOnly, updateP
         <Biography
           onIsEditComplete={() => {
             setShowBiography(false);
+            navigate.reload(window.location.pathname);
           }}
           profile={user}
           onEdit={updateProfile}
@@ -149,6 +150,7 @@ export default function Index({ loggedInUser, profile: user, isReadOnly, updateP
         <Expertise
           onIsEditComplete={() => {
             setShowChoices(false);
+            navigate.reload(window.location.pathname);
           }}
           profile={user}
           onEdit={updateProfile}

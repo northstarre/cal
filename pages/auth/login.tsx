@@ -147,7 +147,7 @@ export default function Login({
           {errorMessage && <Alert severity="error" title={errorMessage} />}
           <div className="flex space-y-2">
             <Button
-              className="mt-6 w-full rounded bg-indigo-700 px-8 py-3  text-center text-sm text-white transition duration-150 ease-in-out hover:bg-indigo-600 focus:bg-indigo-800 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2"
+              className="mt-6 w-full rounded py-3 text-sm text-white"
               type="submit"
               disabled={form.formState.isSubmitting}>
               {twoFactorRequired ? t("submit") : t("sign_in")}
