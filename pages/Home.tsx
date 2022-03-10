@@ -5,7 +5,7 @@ import Hero from "../components/HeroComponent";
 import Button from "../components/Button";
 import PlainInfoBox from "../components/PlainInfoBox";
 import WhySection from "../components/WhySection";
-import { doGet } from "./makeAPICall";
+import { doGet } from "../makeAPICall";
 import ImageWithCTA from "../components/ImageWithCTA";
 import Grid from "../components/Grid";
 import useWindowSize from "@components/useWindowResizeHook";

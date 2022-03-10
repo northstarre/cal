@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Avatar from "./Avatar";
 import Button from "./Button";
-import { doGet } from "../pages/makeAPICall";
+import { doGet } from "../makeAPICall";
 
 export default function ProfileSnapshot({
   displayName,

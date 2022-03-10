@@ -1,7 +1,7 @@
 /* eslint-disable */
 //@ts-nocheck
 import React, { useEffect, useState } from "react";
-import { doGet } from "../../pages/makeAPICall";
+import { doGet } from "../../makeAPICall";
 import Profile from "./Profile";
 
 export default function ProfileRead() {

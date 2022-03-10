@@ -5,7 +5,7 @@ import Button from "../Button";
 import ToggleButton from "../ToggleButton";
 
 import { useForm } from "react-hook-form";
-import { doGet, doPut, doPost } from "../../pages/makeAPICall";
+import { doGet, doPut, doPost } from "../../makeAPICall";
 import { useRouter } from "next/router";
 
 function sortHash(property) {

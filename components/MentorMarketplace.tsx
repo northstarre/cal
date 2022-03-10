@@ -1,7 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-nocheck
 import React, { useState, useEffect } from "react";
-import { doGet } from "../pages/makeAPICall";
+import { doGet } from "../makeAPICall";
 import Grid from "./Grid";
 import unique from "lodash.uniqby";
 import buildQuery from "odata-query";

@@ -7,7 +7,7 @@ import MentorMarketplace from "../components/MentorMarketplace";
 import Button from "../components/Button";
 import useWindowSize from "@components/useWindowResizeHook";
 import Navbar from "@components/Navbar";
-import { doGet } from "./makeAPICall";
+import { doGet } from "../makeAPICall";
 
 export default function ExpertLandingPage() {
   const size = useWindowSize();
@@ -59,9 +59,9 @@ export default function ExpertLandingPage() {
             description1: () => <span>At as few or as many</span>,
             description2: () => <span>colleges as you’d like.</span>,
           },
-        ]} 
+        ]}
       />
-      <MentorMarketplace 
+      <MentorMarketplace
       heading={"Your Mentors"}
       size={size} />
       <div

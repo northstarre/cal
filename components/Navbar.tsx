@@ -2,9 +2,9 @@
 //@ts-nocheck
 import React, { useState } from "react";
 import Button from "./Button";
-import MenuDropdown from "./MenuDropdown";
+import MenuDropdown, { ProfileDropDown } from "./MenuDropdown";
 import { useRouter } from "next/router";
-import { getCsrfToken, signIn } from "next-auth/react";
+import { getCsrfToken, signIn, signOut } from "next-auth/react";
 import { ErrorCode } from "@lib/auth";
 import { useLocale } from "@lib/hooks/useLocale";
 
@@ -95,24 +95,22 @@ export default function Navbar({ signedIn, isBeta, profile }) {
             <div className="hidden items-center justify-end md:flex">
               <div className="flex items-center">
                 {signedIn ? (
-                  <>s
+                  <>
                     <div className="flex h-full items-center">
 
                     </div>
-                    <div className="flex h-full items-center">
-                      <button
-                        aria-label="dropdown"
-                        className="relative flex w-full cursor-pointer items-center justify-end border-b-2 border-transparent text-gray-800 hover:text-gray-900 focus:border-gray-800 focus:text-gray-900 focus:outline-none"
-                        onClick={() => {
-                          navigate.replace("/settings/profile");
-                        }}>
-                        <img
-                          className="h-10 w-10 rounded-full object-cover"
-                          src={profile?.avatar ?? ""}
-                          alt="profile picture"
-                        />
-                      </button>
-                    </div>
+                    <ProfileDropDown img={profile?.avatar} options={[
+                        { text: "Profile", onClick: () => navigate.push("/settings/profile") },
+                         {
+                      text: "Account",
+                      onClick: () => {
+                      navigate.push("/Account/Account");
+                    },
+                    },
+                      {text: "Sign Out", onClick: () => signOut({ callbackUrl: "/auth/logout" })}
+                      ]}
+
+                    />
                   </>
                 ) : !isBeta ? (
                   <>
@@ -173,16 +171,7 @@ export default function Navbar({ signedIn, isBeta, profile }) {
                       signedIn ? (
                         <>
                           <div className="flex h-full items-center">
-                            {/*<button aria-label="show notifications" className="relative focus:outline-none focus:text-indigo-700 hover:text-indigo-700 focus:border-indigo-700 hover:border-indigo-700 h-full flex items-center justify-center text-[#272D67]-600 cursor-pointer">*/}
-                            {/*    <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-bell" width={28} height={28} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">*/}
-                            {/*        <path stroke="none" d="M0 0h24v24H0z" />*/}
-                            {/*        <path d="M10 5a2 2 0 0 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" />*/}
-                            {/*        <path d="M9 17v1a3 3 0 0 0 6 0v-1" />*/}
-                            {/*    </svg>*/}
-                            {/*    <div className="absolute top-0 left-4 mt-0 mr-4 pr-1 pt-1">*/}
-                            {/*        <div className="animate-ping w-2 h-2 rounded-full bg-blue-400" />*/}
-                            {/*    </div>*/}
-                            {/*</button>*/}
+
                           </div>
                           <div className="flex h-full items-center">
                             <button

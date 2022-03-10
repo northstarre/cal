@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Button from "../Button";
 
 import { useForm } from "react-hook-form";
-import { doGet, doPatch } from "../../pages/makeAPICall";
+import { doGet, doPatch } from "../../makeAPICall";
 
 export default function Expertise({ onIsEditComplete, profile, onEdit }) {
   const [expertise, setExpertise] = useState([]);

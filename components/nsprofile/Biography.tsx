@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Button from "../Button";
 import Avatar from "@components/ui/Avatar"
 import { useForm } from "react-hook-form";
-import { doGet, doPost, doPatch } from "../../pages/makeAPICall";
+import { doGet, doPost, doPatch } from "../../makeAPICall";
 import ImageUploader from "@components/ImageUploader";
 import { useLocale } from "@lib/hooks/useLocale";
 

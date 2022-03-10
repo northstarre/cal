@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import Hero from "../components/HeroComponent";
 import WhySection from "../components/WhySection";
 import Testimonial from "../components/Testimonial";
-import { doGet } from "./makeAPICall";
+import { doGet } from "../makeAPICall";
 import Navbar from "@components/Navbar";
 
 export default function GiveAdvice() {

@@ -35,7 +35,7 @@ import { Alert } from "@components/ui/Alert";
 import Button from "@components/ui/Button";
 import Text from "@components/ui/Text";
 import Schedule from "@components/ui/form/Schedule";
-import { doPatch } from "./makeAPICall";
+import { doPatch } from "../makeAPICall";
 
 import getEventTypes from "../lib/queries/event-types/get-event-types";
 import ToggleButton from "@components/ToggleButton";
