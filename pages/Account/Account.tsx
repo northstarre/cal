@@ -34,7 +34,7 @@ export default function Account(props: inferSSRProps<typeof getServerSideProps>)
   return (
     <>
       <Shell heading={"Accounts"} subtitle={"Your Northstarre Activity."}>
-        {props.profile && accountIfo && (
+        {props.profile && accountIfo && props.profile.willGiveAdvice && (
           <div className={"flex flex-col justify-center"}>
             <div
               className={

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { doGet, doPut } from "../../../northstarre/src/makeApiCall";
+import { doGet, doPut } from "../makeAPICall";
 import { NextPageContext } from "next";
 import { getSession } from "@lib/auth";
 import prisma from "@lib/prisma";
