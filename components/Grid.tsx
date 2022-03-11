@@ -5,10 +5,10 @@ import ProfileSnapshot from "./ProfileSnapshot";
 
 export default function Grid({ rows, shouldDisplayMajor, shouldDisplaySchool }) {
   return (
-    <div>
+    <div className={"w-[100%]"}>
       {rows.map((itm) => (
         <>
-          <div className={"mt-6 flex flex-row gap-y-6 gap-x-4 md:gap-y-4 md:gap-x-12 xl:gap-y-0"}>
+          <div className={"mt-6 flex flex-row align-start justify-start"}>
             {itm?.map((prof) => (
               <ProfileSnapshot
                 displayName={prof.Name}
@@ -23,5 +23,6 @@ export default function Grid({ rows, shouldDisplayMajor, shouldDisplaySchool }) 
         </>
       ))}
     </div>
+
   );
 }

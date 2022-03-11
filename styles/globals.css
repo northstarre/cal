@@ -385,9 +385,12 @@ hr {
   border: none !important;
 }
 .signup-btn {
-  width: 90px !important;
+  width: 154px !important;
 }
 
 .hero-btn {
   width: 220px !important;
+}
+.hero-btn-alter {
+  width: 309px !important;
 }

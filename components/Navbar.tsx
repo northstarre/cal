@@ -23,13 +23,13 @@ export default function Navbar({ signedIn, isBeta, profile }) {
   };
 
   const handleLogin = () => {
-   navigate.push("/auth/login")
+    navigate.push("/auth/login")
   };
   return (
     <>
       <div className="h-full w-full">
-        <nav role="navigation" className="mx-auto hidden w-full bg-white md:block md:px-6 lg:px-4">
-          <div className="container  mx-auto flex h-20 items-center justify-between border-b border-gray-200 bg-white md:items-stretch">
+        <nav role="navigation" className="mx-auto hidden w-full bg-white md:block md:px-6 lg:px-4 pt-4">
+          <div className="container  mx-auto flex h-20 items-center justify-between border-gray-200 bg-white md:items-stretch">
             <div className="flex h-full w-full items-center justify-between">
               <button
                 onClick={() => navigate.push("/")}
@@ -65,7 +65,7 @@ export default function Navbar({ signedIn, isBeta, profile }) {
                 </svg>
               </button>
               {!isBeta ? (
-                <ul className="hidden h-full w-full items-center justify-center pr-12 md:flex">
+                <ul className="hidden h-full w-full items-center justify-center pr-12 md:flex font-[Raleway]">
                   <li>
                     <MenuDropdown
                       text={"Get Advice"}
@@ -83,7 +83,7 @@ export default function Navbar({ signedIn, isBeta, profile }) {
                   <li>
                     <a
                       href="/give-advice"
-                      className="text-[#272D67]-800 mr-6 flex h-full cursor-pointer items-center border-b-2 border-transparent text-sm font-medium tracking-normal hover:text-indigo-700 focus:outline-none">
+                      className="text-[#272D67] mr-6 flex h-full cursor-pointer items-center border-b-2 border-transparent py-3 pl-3 text-base font-medium tracking-normal hover:text-indigo-700 focus:outline-none">
                       Give Advice
                     </a>
                   </li>
@@ -116,13 +116,20 @@ export default function Navbar({ signedIn, isBeta, profile }) {
                   </>
                 ) : !isBeta ? (
                   <>
-                    <Button
-                      kind={"default"}
-                      onClick={() => navigate.push("/auth/login")}
-                      text={"Sign In"}
-                      size="sm"
-                      className={"signup-btn"}
-                    />
+                    <div className="flex items-center">
+                      <a
+                        href=""
+                        className="w-[60px] text-[#272D67] mr-1 flex cursor-pointer items-center border-b-2 border-transparent text-base font-medium tracking-normal hover:text-indigo-700 focus:outline-none font-[Raleway]">
+                        Sign In
+                      </a>
+                      <Button
+                        kind={"default"}
+                        onClick={() => navigate.push("/auth/login")}
+                        text={"Sign Up"}
+                        size="md"
+                        className={"signup-btn text-2xl text-[#EFE2BA] px-2 font-[Raleway]"}
+                      />
+                    </div>
                   </>
                 ) : (
                   ""

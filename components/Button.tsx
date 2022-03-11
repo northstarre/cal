@@ -11,10 +11,13 @@ export default function Button({ kind, text, className, size, type, isLoading, o
       color = `bg-[#272d67] text-white`;
       break;
     case "primary":
-      color = "bg-[#60ab67] text-white";
+      color = "bg-[#379392] text-white";
       break;
     case "secondary":
       color = "bg-[#379392] text-white";
+      break;
+    case "white":
+      color = "bg-[#fff] text-black";
       break;
   }
   let height = "h-32";
@@ -23,7 +26,7 @@ export default function Button({ kind, text, className, size, type, isLoading, o
       height = "h-[24px]";
       break;
     case "md":
-      height = "h-[32px]";
+      height = "h-[40px]";
       break;
     default:
       height = "h-[32px]";

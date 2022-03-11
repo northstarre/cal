@@ -17,7 +17,7 @@ function getUniversityShorthand(str) {
   return firstLetters;
 }
 
-export default function MentorMarketplace({ size }) {
+export default function MentorMarketplace({ size, heading, subText }) {
   const [majors, setMajors] = useState([]);
   const [universities, setUniversities] = useState([]);
   const [mentors, setMentors] = useState([]);
@@ -29,15 +29,15 @@ export default function MentorMarketplace({ size }) {
   const select = ["id", "name", "email", "major", "university", "preprofessionTrack"];
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
-    doGet("waitlist?$select=major", onMajorsFetch, () => {});
+    doGet("waitlist?$select=major", onMajorsFetch, () => { });
     // eslint-disable-next-line @typescript-eslint/no-empty-function
-    doGet("waitlist?$select=university", onUniversitiesFetch, () => {});
+    doGet("waitlist?$select=university", onUniversitiesFetch, () => { });
     setQuery(buildQuery({ top, select }));
   }, []);
   useEffect(() => {
     if (query) {
       // eslint-disable-next-line @typescript-eslint/no-empty-function
-      doGet(`waitList${query}`, setFetchedMentors, () => {});
+      doGet(`waitList${query}`, setFetchedMentors, () => { });
     }
   }, [query]);
   useEffect(() => {
@@ -78,54 +78,64 @@ export default function MentorMarketplace({ size }) {
   };
   return (
     <>
-      <div className={"my-8 flex w-full flex-col gap-4 px-0 md:grid md:grid-cols-5 md:px-12 lg:px-24"}>
-        <div className={"col-span-1 flex flex-col"}>
-          <span className={"text-2xl"}>{"Filter"}</span>
-          <div className={"flex flex-row md:flex-col"}>
-            <div className="mx-2 mt-[18px] flex w-full flex-col md:mr-16">
-              <label
-                htmlFor="University"
-                className="mb-2  text-sm font-bold leading-tight tracking-normal text-gray-800">
-                University
-              </label>
-              <select
-                className={`flex h-10 w-full items-center rounded  border border-gray-300 pl-3 text-sm shadow focus:border focus:border-indigo-700 focus:outline-none dark:border-gray-700 dark:focus:border-indigo-700`}
-                onChange={(e) => {
-                  setSelectedUniversity(e.target.value);
-                }}>
-                <option value=""></option>
+      <div className={"my-8 w-full px-0 md:px-12 lg:px-24"}>
+        <div className="flex flex-col items-center justify-center space-y-4 text-center">
+          <h2 className="why-header text-[50px] font-bold leading-[60px] text-[#272d67]">{heading}</h2>
+          {subText ? (
+            <p className="w-11/12 text-center text-base leading-normal text-gray-600">{subText}</p>
+          ) : (
+            ""
+          )}
+        </div>
+        <div className={"flex w-full flex-col gap-4 md:grid md:grid-cols-5"}>
+          <div className={"col-span-1 flex flex-col"}>
+            <span className={"text-base text-[#272D67] uppercase font-bold"}>{"Filter"}</span>
+            <div className={"flex flex-row md:flex-col"}>
+              <div className="mx-2 mt-[18px] flex w-full flex-col md:mr-16">
+                <label
+                  htmlFor="University"
+                  className="mb-2  text-sm font-bold leading-tight tracking-normal text-gray-800">
+                  University
+                </label>
+                <select
+                  className={`flex h-10 w-full items-center rounded  border border-gray-300 pl-3 text-sm shadow focus:border focus:border-indigo-700 focus:outline-none dark:border-gray-700 dark:focus:border-indigo-700`}
+                  onChange={(e) => {
+                    setSelectedUniversity(e.target.value);
+                  }}>
+                  <option value=""></option>
 
-                {universities.map((item, idx) => (
-                  <option key={idx}>{item.University}</option>
-                ))}
-              </select>
-            </div>
-            <div className="mx-2 mt-[18px] flex w-full flex-col md:mr-16">
-              <label
-                htmlFor="University"
-                className="mb-2  text-sm font-bold leading-tight tracking-normal text-gray-800">
-                Major
-              </label>
-              <select
-                className={`flex h-10 w-full items-center rounded  border border-gray-300 pl-3 text-sm shadow focus:border focus:border-indigo-700 focus:outline-none dark:border-gray-700 dark:focus:border-indigo-700`}
-                onChange={(e) => {
-                  setSlectedMajor(e.target.value);
-                }}>
-                <option value=""></option>
+                  {universities.map((item, idx) => (
+                    <option key={idx}>{item.University}</option>
+                  ))}
+                </select>
+              </div>
+              <div className="mx-2 mt-[18px] flex w-full flex-col md:mr-16">
+                <label
+                  htmlFor="University"
+                  className="mb-2  text-sm font-bold leading-tight tracking-normal text-gray-800">
+                  Major
+                </label>
+                <select
+                  className={`flex h-10 w-full items-center rounded  border border-gray-300 pl-3 text-sm shadow focus:border focus:border-indigo-700 focus:outline-none dark:border-gray-700 dark:focus:border-indigo-700`}
+                  onChange={(e) => {
+                    setSlectedMajor(e.target.value);
+                  }}>
+                  <option value=""></option>
 
-                {majors.map((item, idx) => (
-                  <option key={idx}>{item.Major}</option>
-                ))}
-              </select>
+                  {majors.map((item, idx) => (
+                    <option key={idx}>{item.Major}</option>
+                  ))}
+                </select>
+              </div>
             </div>
           </div>
-        </div>
-        <div className={"col-span-4 flex flex-col"}>
-          {mentors.length ? (
-            <Grid rows={mentors} shouldDisplaySchool={true} shouldDisplayMajor={true} />
-          ) : (
-            "Loading Mentor Info"
-          )}
+          <div className={"col-span-4 flex flex-col"}>
+            {mentors.length ? (
+              <Grid rows={mentors} shouldDisplaySchool={true} shouldDisplayMajor={true} />
+            ) : (
+              "Loading Mentor Info"
+            )}
+          </div>
         </div>
       </div>
     </>

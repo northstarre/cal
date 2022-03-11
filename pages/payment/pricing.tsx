@@ -3,186 +3,195 @@ import { useRouter } from "next/router";
 export default function Pricing() {
   const router = useRouter();
   return (
-    <div className={"flex flex-col items-center py-0 text-center font-[fira-sans] text-[#272D67] md:py-24 "}>
-      <div className={"font-[fira-sans] text-3xl font-bold md:text-4xl lg:text-5xl"}>
-        You’re one step away from your dream school.
+    <div className="2xl:container mx-auto">
+      <div className={"flex flex-col items-center py-0 text-center font-[Fira Sans] text-[#272D67] md:pt-24 "}>
+      <div className={"font-[Fira Sans] text-3xl font-bold md:text-4xl lg:text-5xl max-w-[1200px] mx-auto"}>
+      You’re one step away from finding your professional mentor...or a whole lot of them.
       </div>
       <div
         className={
-          "mx-0 mt-5 flex w-full flex-col px-[20px] md:mt-10 md:flex-row md:px-[100px] lg:mt-24 lg:gap-x-2"
+          "mx-0 mt-5 flex w-full flex-col px-[20px] md:mt-10 md:flex-row md:px-[100px] lg:mt-12 lg:gap-x-2"
         }>
-        <div className={"mb-10 flex w-full flex-col xl:w-1/3"}>
-          <span className={"text-4xl"}>Astra</span>
-          <div className={"mt-5 mb-2 rounded-[20px] border border-[#272d67] p-2"}>
-            <div className={"flex flex-col items-center rounded-[20px] bg-[#FFEFED] p-4 text-center"}>
-              <span className={"my-5 text-4xl font-bold"}>1 Expert Call</span>
-              <span className={"my-5 text-2xl"}>This Month</span>
+        <div className={"mb-10 flex w-full flex-col xl:w-1/3 font-[Raleway]"}>
+          <span className={"text-4xl font-normal"}>Astra</span>
+          <div className={"my-10 rounded-[20px] border-2 border-[#272d67] py-4 px-2 min-h-[440px]"}>
+            <div className={"flex flex-col items-center rounded-[20px] bg-[#FFEFED] p-4 text-center  font-[Raleway]"}>
+              <span className={"text-4xl font-bold"}>1 Expert Call</span>
+              <span className={"mt-5 mb-1 text-2xl"}>This Month</span>
             </div>
             <div className={"mt-[40px] mb-[60px] flex flex-col items-center  text-center"}>
-              <span className={"mb-[80px] text-center text-5xl"}>$30.00</span>
+              <span className={"mb-[40px] text-center text-5xl"}>$30.00</span>
               <button
                 className={
-                  "mb-[24px] min-h-[40px] min-w-[240px] rounded-full bg-[#379392] font-bold text-white"
+                  "mb-[24px] min-h-[40px] min-w-[240px] rounded-full bg-[#379392] font-normal text-white text-2xl shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
                 }>
                 Buy Now
               </button>
-              <span className={"text-2xl italic"}>Billed Monthly</span>
+              <span className={"text-2xl italic hidden"}>Billed Monthly</span>
             </div>
           </div>
-          <div className={"flex flex-row items-center gap-x-[4px] px-2"}>
-            <img src={"../image%2068.svg"} width={"40px"} height={"40px"} />
-            <span className={"text-2xl"}>Introduce yourself to a coach</span>
+          <div className={"flex flex-row items-center gap-x-[10px] py-2 px-2"}>
+            <img src={"../image%2068.svg"} width={"40px"} height={"38px"} />
+            <span className={"text-[19px] text-[#272D67] leading[23px]"}>Introduce yourself to a coach</span>
           </div>
-          <div className={"flex flex-row items-center gap-x-[4px] px-2"}>
-            <img src={"../image%2068.svg"} width={"40px"} height={"40px"} />
-            <span className={"text-2xl"}>Get a specific perspective</span>
+          <div className={"flex flex-row items-center gap-x-[10px] py-2 px-2"}>
+            <img src={"../image%2068.svg"} width={"40px"} height={"38px"} />
+            <span className={"text-[19px] text-[#272D67] leading[23px]"}>Get a specific perspective</span>
           </div>
-          <div className={"flex flex-row items-center gap-x-[4px] px-2"}>
-            <img src={"../image%2068.svg"} width={"40px"} height={"40px"} />
-            <span className={"text-2xl"}>Get a 101 on a professional track</span>
+          <div className={"flex flex-row items-center gap-x-[10px] py-2 px-2"}>
+            <img src={"../image%2068.svg"} width={"40px"} height={"38px"} />
+            <span className={"text-[19px] text-[#272D67] leading[23px]"}>Get a 101 on a professional track</span>
           </div>
         </div>
-        <div className={"mb-10 flex w-full flex-col xl:w-1/3"}>
-          <span className={"text-4xl"}>Sirius</span>
-          <div className={"mt-5 mb-2 rounded-[20px] border border-[#272d67] p-2"}>
+        <div className={"mb-10 flex w-full flex-col xl:w-1/3 font-[Raleway]"}>
+          <span className={"text-4xl font-normal"}>Sirius</span>
+          <div className={"my-10 rounded-[20px] border-2 border-[#272d67] py-4 px-2 min-h-[440px]"}>
             <div className={"flex flex-col items-center rounded-[20px] bg-[#7C4DFF]/[0.16] p-4 text-center"}>
-              <span className={"my-5 text-4xl font-bold"}>3 Expert Calls</span>
-              <span className={"my-5 text-2xl"}>This Month</span>
+              <span className={"text-4xl font-bold"}>3 Expert Call</span>
+              <span className={"mt-5 mb-1 text-2xl"}>This Month</span>
             </div>
             <div className={"mt-[40px] mb-[30px] flex flex-col items-center  text-center"}>
-              <span className={"mb-[80px] text-center text-5xl"}>$85.00</span>
+              <span className={"mb-[40px] text-center text-5xl"}>$85.00</span>
               <button
                 className={
-                  "mb-[24px] min-h-[40px] min-w-[240px] rounded-full bg-[#379392] font-bold text-white"
+                  "mb-[24px] min-h-[40px] min-w-[240px] rounded-full bg-[#379392] font-normal text-white text-2xl shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
                 }
                 onClick={() => router.push("/payment/CollectPayment")}>
                 Buy Now
               </button>
-              <span className={"text-2xl italic"}>Billed Monthly</span>
+              <span className={"text-2xl italic hidden"}>Billed Monthly</span>
             </div>
-            <div className={"flex flex-col items-center rounded-[20px] bg-[#7C4DFF]/[0.16] p-0 text-center"}>
+            <div className={"flex flex-col items-center rounded-[20px] bg-[#7C4DFF]/[0.16] py-3 px-0 text-center"}>
               <span className={"text-2xl"}>Best Value</span>
             </div>
           </div>
-          <div className={"flex flex-row items-center gap-x-[4px] px-2"}>
-            <img src={"../image%2068.svg"} width={"40px"} height={"40px"} />
-            <span className={"text-2xl"}>Get feedback on your dream schools</span>
+          <div className={"flex flex-row items-center gap-x-[10px] py-2 px-2"}>
+            <img src={"../image%2068.svg"} width={"40px"} height={"38px"} />
+            <span className={"text-[19px] text-[#272D67] leading[23px]"}>Get feedback on your dream schools</span>
           </div>
-          <div className={"flex flex-row items-center gap-x-[4px] px-2"}>
-            <img src={"../image%2068.svg"} width={"40px"} height={"40px"} />
-            <span className={"text-2xl"}>Get advice on an upcoming decision</span>
+          <div className={"flex flex-row items-center gap-x-[10px] py-2 px-2"}>
+            <img src={"../image%2068.svg"} width={"40px"} height={"38px"} />
+            <span className={"text-[19px] text-[#272D67] leading[23px]"}>Get advice on an upcoming decision</span>
           </div>
-          <div className={"flex flex-row items-center gap-x-[4px] px-2"}>
-            <img src={"../image%2068.svg"} width={"40px"} height={"40px"} />
-            <span className={"text-2xl"}>Get up to speed on a major</span>
+          <div className={"flex flex-row items-center gap-x-[10px] py-2 px-2"}>
+            <img src={"../image%2068.svg"} width={"40px"} height={"38px"} />
+            <span className={"text-[19px] text-[#272D67] leading[23px]"}>Get up to speed on a major</span>
           </div>
         </div>
-        <div className={"mb-10 flex w-full flex-col xl:w-1/3"}>
-          <span className={"text-4xl"}>Polaris</span>
-          <div className={"mt-5 mb-2 rounded-[20px] border border-[#272d67] p-2"}>
+        <div className={"mb-10 flex w-full flex-col xl:w-1/3 font-[Raleway]"}>
+          <span className={"text-4xl font-normal"}>Polaris</span>
+          <div className={"my-10 rounded-[20px] border-2 border-[#272d67] py-4 px-2 min-h-[440px]"}>
             <div className={"flex flex-col items-center rounded-[20px] bg-[#FFEFED] p-4 text-center"}>
-              <span className={"my-5 text-4xl font-bold"}>5 Expert Calls</span>
-              <span className={"my-5 text-2xl"}>This Month</span>
+              <span className={"text-4xl font-bold"}>5 Expert Call</span>
+              <span className={"mt-5 mb-1 text-2xl"}>This Month</span>
             </div>
             <div className={"mt-[40px] mb-[60px] flex flex-col items-center  text-center"}>
-              <span className={"mb-[80px] text-center text-5xl"}>$140.00</span>
+              <span className={"mb-[40px] text-center text-5xl"}>$140.00</span>
               <button
                 className={
-                  "mb-[24px] min-h-[40px] min-w-[240px] rounded-full bg-[#379392] font-bold text-white"
+                  "mb-[24px] min-h-[40px] min-w-[240px] rounded-full bg-[#379392] font-normal text-white text-2xl shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
                 }>
                 Buy Now
               </button>
-              <span className={"text-2xl italic"}>Billed Monthly</span>
+              <span className={"text-2xl italic hidden"}>Billed Monthly</span>
             </div>
           </div>
-          <div className={"flex flex-row items-center gap-x-[4px] px-2"}>
-            <img src={"../image%2068.svg"} width={"40px"} height={"40px"} />
-            <span className={"text-2xl"}>Mix & match experts across schools</span>
+          <div className={"flex flex-row items-center gap-x-[10px] py-2 px-2"}>
+            <img src={"../image%2068.svg"} width={"40px"} height={"38px"} />
+            <span className={"text-[19px] text-[#272D67] leading[23px]"}>Mix & match experts across schools</span>
           </div>
-          <div className={"flex flex-row items-center gap-x-[4px] px-2"}>
-            <img src={"../image%2068.svg"} width={"40px"} height={"40px"} />
-            <span className={"text-2xl"}>Laser focus on 1-2 schools</span>
+          <div className={"flex flex-row items-center gap-x-[10px] py-2 px-2"}>
+            <img src={"../image%2068.svg"} width={"40px"} height={"38px"} />
+            <span className={"text-[19px] text-[#272D67] leading[23px]"}>Laser focus on 1-2 schools</span>
           </div>
-          <div className={"flex flex-row items-center gap-x-[4px] px-2"}>
-            <img src={"../image%2068.svg"} width={"40px"} height={"40px"} />
-            <span className={"text-2xl"}>Get up to speed on a track</span>
+          <div className={"flex flex-row items-center gap-x-[10px] py-2 px-2"}>
+            <img src={"../image%2068.svg"} width={"40px"} height={"38px"} />
+            <span className={"text-[19px] text-[#272D67] leading[23px]"}>Get up to speed on a track</span>
           </div>
         </div>
       </div>
-      <div className={"mt-24 mb-16 font-[fira-sans] text-3xl font-bold md:text-4xl lg:text-5xl"}>
+      <div className={"mt-16 mb-8 font-[Fira Sans] text-3xl font-bold md:text-4xl lg:text-5xl"}>
         Want to see more from us? Let us know.
       </div>
-      <div className={"mx-0 mb-8 flex w-full flex-col px-[20px] text-3xl lg:text-4xl "}>
+      <div className={"mx-0 mb-8 flex w-full flex-col px-[20px] text-3xl lg:text-4xl font-[Raleway]"}>
         I’m interested in...(select all that apply)
       </div>
-      <form className={"md:px-68 flex flex-col self-center px-0"}>
+      <form className={"md:px-68 flex flex-col self-center px-0 font-[Raleway]"}>
         <div className={"flex flex-row items-center gap-x-[8px] px-2"}>
           <input
             type="checkbox"
             id="feedback1"
-            className={"h-[20px] w-[20px] md:h-[40px] md:w-[40px]"}
+            className={"h-[20px] w-[20px] md:h-[35px] md:w-[35px] bg-[#C4C4C4] border-0"}
             value="Bike"
           />
-          <span className={"text-2xl"}>Multi-month College 101 series</span>
+          <span className={"text-[28px] text-[#272D67] font-normal"}>College 101 Series</span>
         </div>
 
         <div className={"mt-5 flex flex-row items-center gap-x-[8px] px-2"}>
           <input
             type="checkbox"
             id="feedback1"
-            className={"h-[20px] w-[20px] md:h-[40px] md:w-[40px]"}
+            className={"h-[20px] w-[20px] md:h-[35px] md:w-[35px] bg-[#C4C4C4] border-0"}
             value="Bike"
           />
-          <span className={"text-2xl"}>Multi-month Ivy League series</span>
+          <span className={"text-[28px] text-[#272D67] font-normal"}>Career Exploration Series</span>
         </div>
         <div className={"items-left mt-5 flex flex-row gap-x-[8px] px-2 md:items-center"}>
           <input
             type="checkbox"
             id="feedback1"
-            className={"h-[20px] w-[20px] md:h-[40px] md:w-[40px]"}
+            className={"h-[20px] w-[20px] md:h-[35px] md:w-[35px] bg-[#C4C4C4] border-0"}
             value="Bike"
           />
-          <span className={"text-2xl"}>Multi-month College Application series </span>
+          <span className={"text-[28px] text-[#272D67] font-normal"}>College Application Series </span>
         </div>
         <div className={" mt-5 flex flex-row items-center gap-x-[8px] px-2 text-left md:text-center"}>
           <input
             type="checkbox"
             id="feedback1"
-            className={"h-[20px] w-[20px] md:h-[40px] md:w-[40px]"}
+            className={"h-[20px] w-[20px] md:h-[35px] md:w-[35px] bg-[#C4C4C4] border-0"}
             value="Bike"
           />
-          <span className={"text-2xl"}>Multi-month Around the Country series</span>
+          <span className={"text-[28px] text-[#272D67] font-normal"}>Colleges Around the Country Series</span>
         </div>
         <div className={"mt-5 flex flex-row items-center gap-x-[8px] px-2 text-left md:text-center"}>
           <input
             type="checkbox"
             id="feedback1"
-            className={"h-[20px] w-[20px] md:h-[40px] md:w-[40px]"}
+            className={"h-[20px] w-[20px] md:h-[35px] md:w-[35px] bg-[#C4C4C4] border-0"}
             value="Bike"
           />
-          <span className={"text-2xl"}>Multi-month Post-College-Decision series</span>
+          <span className={"text-[28px] text-[#272D67] font-normal"}>STEM Career Series</span>
         </div>
-        <div className={"mt-5 flex flex-row items-center gap-x-[8px] px-2"}>
+        <div className={"mt-5 flex flex-row items-center gap-x-[8px] px-2 font-[Raleway]"}>
           <input
             type="checkbox"
             id="feedback1"
-            className={"h-[20px] w-[20px] md:h-[40px] md:w-[40px]"}
+            className={"h-[20px] w-[20px] md:h-[35px] md:w-[35px] bg-[#C4C4C4] border-0"}
             value="Bike"
           />
-          <span className={"text-2xl"}>AMA College Forums</span>
+          <span className={"text-[28px] text-[#272D67] font-normal "}>Mental Health Series</span>
         </div>
-        <div className={"mt-10 flex flex-col items-center text-center"}>
-          <span className={"text-2xl"}>We’ll let you know when these launch.</span>
-          <input type={"email"} className={"mt-5 min-w-[360px]"} placeholder={"Email"} />
+        <div className={"mt-10 flex flex-col items-center text-center font-[Raleway]"}>
+          <span className={"text-[25px] text-[#272D67] leading-[30px]"}>We’ll let you know when these launch.</span>
+          <input type={"email"} className={"mt-5 min-w-[424px] text-[20] border-[2px] rounded-[5px] border-[#e0e0e0] h-[36px] "} placeholder={"Email"} />
           <input
             type={"submit"}
             className={
-              "mt-5 mb-[24px] min-h-[40px] min-w-[240px] rounded-full bg-[#379392] font-bold text-white"
+              "mt-5 min-h-[40px] min-w-[166px] rounded-full bg-[#379392] text-white text-2xl shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
             }
             value={"Submit"}
           />
         </div>
       </form>
+    </div>
+    <div className={"font-[Raleway] font-normal my-16 flex w-full flex-col md:flex-row"}>
+        <div className={"flex w-[100%] flex-col"}>
+          <h2 className="why-header text-center text-[25px] font-normal leading-[29px] text-[#272d67]">
+          Questions? Contact support@mynorthstarre.com. We’re here to help.
+          </h2>
+        </div>
+      </div>
     </div>
   );
 }

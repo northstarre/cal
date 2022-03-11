@@ -58,104 +58,127 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
     <>
       <Navbar isBeta={false} signedIn={props.signedIn} profile={props.user} />
       <Hero
-        heading={"Take charge of your future."}
+        heading={"A Professional Network for Students, Finally."}
         heroContent={
-          "The one-stop-shop of resources to empower you to make the right decision in high school, " +
-          "college, adn beyond. It's finally here."
+          "Find mentors across the country, and join a " +
+          "community of students just like you."
         }
         kind={"primary"}
         src={"/assets/image%2052.png"}
         imagePosition={"right"}
         btnText={"Get Started"}
-        containerClassName={"h-[90vh]"}
+        containerClassName={"h-[auto]"}
       />
-      <div className={"w-full bg-[#FFEFED]"}>
-        <ImageWithCTA
-          data={{
-            leftHeaderText: "What do you want to be when you grow up?",
-            leftText: "Talk to a college student you admire for custom advice.",
-            leftButtonText: "Get Advice",
-            leftButtonKind: "primary",
-            leftButtonClass: "w-[120px]",
-            leftImage: "/assets/image%207.png",
-            rightHeaderText: "What do you want to be when you grow up?",
-            rightText: "Talk to a college student you admire for custom advice.",
-            rightButtonText: "Give Advice",
-            rightButtonKind: "primary",
-            rightButtonClass: "w-[120px]",
-            rightImage: "/assets/image%208.png",
-          }}
-        />
-      </div>
-      <div className={"font-raleway my-20 flex w-full flex-col px-0 md:flex-row md:px-20"}>
-        <div className={"flex w-3/5 flex-col text-left"}>
-          <h2 className="why-header text-left text-4xl font-extrabold leading-10 text-[#272d67]">
-            Did you know...
-          </h2>
-          <p className={"mt-5 text-2xl text-[#272d67]"}>
-            <span className={"font-bold text-[#F13C20]"}>30%</span> of undergraduates change their major at
-            least once.
-          </p>
-          <p className={"mt-5 text-2xl text-[#272d67]"}>
-            <span className={"font-bold text-[#F13C20]"}>90%</span> of working professionals wish they could
-            change <br /> something about their high school, college or work experience.
-          </p>
-          <p className={"mt-5 text-2xl text-[#272d67]"}>
-            The average price of a four year public out of the state university education is{" "}
-            <span className={"font-bold text-[#F13C20]"}>$104,000</span>.
-          </p>
-          <h4 className={"mt-5 text-2xl font-extrabold text-[#272d67]"}>Be Informed. Earlier</h4>
-          <h4 className={"text-2xl font-extrabold text-[#272d67]"}>
-            And set the right trajectory for your future self.
-          </h4>
-        </div>
-        <div className={"content-left flex w-2/5 flex-row items-center gap-x-2 px-0 md:px-5"}>
-          <img src="/assets/Group%207.png" className={"cursor-pointer rounded-[20px]"} />
-          <img src="/assets/Group%208.png" className={"rounded-[20px]"} />
+      <div className={"w-full bg-[#FFEFED] rounded-[20px]"}>
+        <div className={`2xl:container 2xl:mx-auto`}>
+          <ImageWithCTA
+            data={{
+              leftHeaderText: "What do you want to be when you grow up?",
+              leftText: "Talk to a college student you admire for custom advice.",
+              leftButtonText: "Get Advice",
+              leftButtonKind: "primary",
+              leftButtonClass: "w-[160px] text-[#F7ECE1] text-2xl font-[Raleway]",
+              leftImageClass: "w-full",
+              leftImage: "/assets/image%207.png",
+              rightHeaderText: "We believe students are untapped experts.",
+              rightText: "Get paid to mentor students, just like you.",
+              rightButtonText: "Give Advice",
+              rightButtonKind: "primary",
+              rightButtonClass: "w-[160px] text-[#F7ECE1] text-2xl font-[Raleway]",
+              RightImageClass: "w-full",
+              rightImage: "/assets/image%208.png",
+            }}
+          />
         </div>
       </div>
-
-      <h2 className="why-header text-center text-4xl font-extrabold leading-10 text-[#272d67]">
-        Why get advice on Northstarre?{" "}
-      </h2>
-      <div className={"flex w-full flex-col gap-4 px-0 md:grid md:grid-cols-5 md:px-24"}>
-        <div className={"flex flex-col items-center md:col-span-2"}>
-          <PlainInfoBox
-            title={"Know Your Options."}
-            content={"10+"}
-            footer={"majors captured by our experts across universities."}
-            className={"bg-[url('/assets/sun.svg')] bg-left-top bg-no-repeat"}
-          />
-          <PlainInfoBox
-            title={"Customized to Your Needs."}
-            content={"15+"}
-            footer={"topics that are on the table for discussion with you rmentor. That change as you grow."}
-            className={"bg-[url('/assets/database.svg')] bg-left-top bg-no-repeat"}
-          />
-          <PlainInfoBox
-            title={"Talk to the Experts, Directly."}
-            content={"Hundreds"}
-            footer={"of experts that have been in your shoes. And are living your dreams."}
-            className={"bg-[url('/assets/user.svg')] bg-left-top bg-no-repeat"}
-          />
-        </div>
-        <div className={"flex flex-col items-center md:col-span-3"}>
-          {mentors.length ? (
-            <Grid rows={mentors} shouldDisplaySchool={false} shouldDisplayMajor={true} />
-          ) : (
-            <Loader />
-          )}
+      {/*<div*/}
+      {/*  className={*/}
+      {/*    "hidden h-[556px] w-full bg-[url('/assets/Frame%2011.png')] bg-contain bg-no-repeat md:block"*/}
+      {/*  }></div>*/}
+      <div className={`2xl:container 2xl:mx-auto`}>
+        <div className={"font-[Raleway] font-normal my-20 flex w-full flex-col md:flex-row"}>
+          <div className={"flex w-3/5 flex-col text-left"}>
+            <img src="/assets/Group103.png" className={"w-[61px] mb-3"} />
+            <h2 className="why-header text-left text-[34px] font-bold leading-10 text-[#272d67]">
+              Did you know...
+            </h2>
+            <p className={"mt-5 text-2xl text-[#272d67]"}>
+              <span className={"font-bold text-[#F13C20] "}>30%</span> of undergraduates change their major at
+              least once.
+            </p>
+            <p className={"mt-5 text-2xl text-[#272d67]"}>
+              <span className={"font-bold text-[#F13C20]"}>90%</span> of working professionals wish they could
+              change <br /> something about their high school, college or work experience.
+            </p>
+            <p className={"mt-5 text-2xl text-[#272d67]"}>
+              The average price of a four year public out of the state university education is{" "}
+              <span className={"font-bold text-[#F13C20]"}>$104,000</span>.
+            </p>
+            <h4 className={"mt-5 text-2xl font-bold text-[#272d67]"}>Be Informed. Earlier</h4>
+            <h4 className={"text-2xl font-bold text-[#272d67]"}>
+              And set the right trajectory for your future self.
+            </h4>
+          </div>
+          <div className={"content-left flex w-2/5 flex-row items-center gap-x-2 px-0 md:px-5"}>
+            <img src="/assets/Group%207.png" className={"cursor-pointer rounded-[20px]"} />
+            <img src="/assets/Group%208.png" className={"rounded-[20px]"} />
+          </div>
         </div>
       </div>
 
+      <div className={`2xl:container 2xl:mx-auto`}>
+        <h2 className="why-header text-center text-[50px] mb-3 font-bold leading-10 text-[#272d67]">
+          Why Get Advice on Northstarre?{" "}
+        </h2>
+        <div className={"flex w-full flex-col gap-4 px-0 md:grid md:grid-cols-5"}>
+          <div className={"flex flex-col items-start md:col-span-2"}>
+            <PlainInfoBox
+              title={"Know Your Options."}
+              content={"40+"}
+              footer={"majors captured by our mentors across universities."}
+              className={"bg-[url('/assets/sun.svg')] bg-[left_20px_top_20px] bg-no-repeat"}
+            />
+            <PlainInfoBox
+              title={"Customized to Your Needs."}
+              content={"15+"}
+              footer={"topics that are on the table for discussion with your mentor. That change as you grow."}
+              className={"bg-[url('/assets/database.svg')] bg-[left_10px_top_10px] bg-no-repeat"}
+            />
+            <PlainInfoBox
+              title={"Talk to the Experts, Directly."}
+              content={"Hundreds"}
+              footer={"of experts across 30+ universities that have been in your shoes. "}
+              className={"bg-[url('/assets/user.svg')] bg-[left_10px_top_23px] bg-no-repeat"}
+            />
+          </div>
+          <div className={"flex flex-col items-start md:col-span-3"}>
+            {mentors.length ? (
+              <Grid rows={mentors} shouldDisplaySchool={false} shouldDisplayMajor={true} />
+            ) : (
+              "Loading Mentor Info"
+            )}
+            <div className="flex justify-center text-center w-[100%] mt-3">
+              <Button
+                kind={"primary"}
+                size={"md"}
+                text={"Talk to a Mentor"}
+                className={"my-2 mx-4 w-[220px] font-[Raleway] text-2xl text-[#F7ECE1]"}
+                isLoading={false}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
       <WhySection
         heading={"Why Give Advice on Northstarre?"}
         className={"rounded-[20px]"}
+        butntext={"How It Works"}
+        butnwrap={"justify-center mb-3 mt-3"}
         isReverse={true}
         footerText={() => (
           <p>
             At Northstarre, we believe students are{" "}
-            <span className="font-semibold text-red-600">untapped experts.</span> Give back and get paid.
+            <span className="font-bold text-[#F13C20]">untapped experts.</span> Give back and get paid.
           </p>
         )}
         points={[
@@ -166,44 +189,53 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
           },
           {
             src: "/assets/ellipse%2021.png",
-            description1: () => <span className="font-semibold text-red-600">$20 for every 30 minutes.</span>,
+            description1: () => <span className="font-bold text-[#F13C20]"></span>,
             description2: () => <span>Get paid for what you’re good at.</span>,
           },
           {
             src: "/assets/ellipse%2022.png",
-            description1: () => <span>& gain a network of mentees.</span>,
-            description2: () => <span>Join a network of mentors</span>,
+            description1: () => <span>a network of mentees.</span>,
+            description2: () => <span>Join a network of mentors and gain</span>,
           },
         ]}
       />
 
       <div
         className={
-          "mx-0 mb-12 flex h-[600px] flex-col items-center justify-start rounded-[20px] bg-[url('/assets/image%20HomeFooter.png')] bg-cover text-center md:mx-48"
+          "max-w-[1014px] mx-auto font-[Raleway] mb-12 flex h-[600px] flex-col items-center justify-start rounded-[20px] bg-[url('/assets/image%20HomeFooter.png')] bg-cover text-center"
         }>
-        <span className={"font-700 mt-[34px] text-2xl  font-bold text-[#272d67]"}>
+        <span className={"font-700 mt-[34px] text-[20px]  font-bold text-[#272d67]"}>
           The average person spends{" "}
           <span className={"text-red-600"}>90,000 hours at work over a lifetime.</span>
         </span>
-        <span className={"font-700 text-2xl font-bold text-[#272d67]"}>
+        <span className={"font-700 text-[20px] font-bold text-[#272d67]"}>
           {" "}
           Feel empowered to make the right career decisions for your life.
         </span>
-        <div className={"mt-4 flex w-full flex-row justify-around px-0 sm:mx-0 md:mx-24 md:px-48"}>
+        <div className={"mt-4 flex w-full flex-row justify-center px-0 sm:mx-0 md:mx-24 md:px-48"}>
           <Button
             kind={"primary"}
             size={"md"}
             text={"Give Advice"}
-            className={"my-2 w-[180px]"}
+            className={"my-2 mx-4 w-[180px] font-[Raleway] text-2xl text-[#F7ECE1]"}
             isLoading={false}
           />
           <Button
             kind={"primary"}
             size={"md"}
             text={"Get Advice"}
-            className={"my-2 w-[180px]"}
+            className={"my-2 mx-4 w-[180px] font-[Raleway] text-2xl text-[#F7ECE1]"}
             isLoading={false}
           />
+        </div>
+      </div>
+      <div className={`2xl:container 2xl:mx-auto`}>
+        <div className={"font-[Raleway] font-normal my-16 flex w-full flex-col md:flex-row"}>
+          <div className={"flex w-[100%] flex-col"}>
+            <h2 className="why-header text-center text-[25px] font-normal leading-[29px] text-[#272d67]">
+            Questions? Contact support@mynorthstarre.com. We’re here to help.
+            </h2>
+          </div>
         </div>
       </div>
     </>
