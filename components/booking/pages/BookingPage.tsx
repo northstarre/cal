@@ -156,8 +156,8 @@ const BookingPage = (props: BookingPageProps) => {
   const defaultValues = () => {
     if (!rescheduleUid) {
       return {
-        name: (router.query.name as string) || "",
-        email: (router.query.email as string) || "",
+        name: (router.query.name as string) || props.loggedInUser.name || "",
+        email: (router.query.email as string) || props.loggedInUser.email || "",
         notes: (router.query.notes as string) || "",
         guests: ensureArray(router.query.guest) as string[],
         customInputs: props.eventType.customInputs.reduce(

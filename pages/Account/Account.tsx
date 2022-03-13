@@ -31,6 +31,7 @@ export default function Account(props: inferSSRProps<typeof getServerSideProps>)
       () => {}
     );
   };
+  console.log(props.profile.credits);
   return (
     <>
       <Shell heading={"Accounts"} subtitle={"Your Northstarre Activity."}>
@@ -102,7 +103,7 @@ export default function Account(props: inferSSRProps<typeof getServerSideProps>)
                 <div className={"mt-5 mb-2 rounded-[20px] border border-[#272d67] p-2"}>
                   <div className={"mt-[40px] mb-[60px] flex flex-col items-center  text-center"}>
                     <span className={"mb-[80px] text-center text-5xl"}>
-                      {props.profile.credits.UsedCredits}
+                      {props.profile.credits[0].UsedCredits ?? 0}
                     </span>
 
                     <span className={"text-2xl italic"}>Used Credits</span>
@@ -111,9 +112,9 @@ export default function Account(props: inferSSRProps<typeof getServerSideProps>)
               </div>
               <div className={"mb-10 flex w-full flex-col xl:w-1/3"}>
                 <div className={"mt-5 mb-2 rounded-[20px] border border-[#272d67] p-2"}>
-                  <div className={"mt-[40px] mb-[30px] flex flex-col items-center  text-center"}>
+                  <div className={"mt-[40px] mb-[60px] flex flex-col items-center  text-center"}>
                     <span className={"mb-[80px] text-center text-5xl"}>
-                      {props.profile.credits.activeCredits}
+                      {props.profile.credits[0].activeCredits ?? 0}
                     </span>
                     <span className={"text-2xl italic"}>Active Credits</span>
                   </div>
@@ -123,7 +124,7 @@ export default function Account(props: inferSSRProps<typeof getServerSideProps>)
                 <div className={"mt-5 mb-2 rounded-[20px] border border-[#272d67] p-2"}>
                   <div className={"mt-[40px] mb-[60px] flex flex-col items-center  text-center"}>
                     <span className={"mb-[80px] text-center text-5xl"}>
-                      {props.profile.credits.expiredCredits}
+                      {props.profile.credits[0].expiredCredits ?? 0}
                     </span>
                     <span className={"text-2xl italic"}>Expired Credits</span>
                   </div>
@@ -184,6 +185,7 @@ export async function getServerSideProps(context: NextPageContext) {
       },
     });
   }
+  console.log("user Credits", user.credits);
   return {
     props: {
       profile: user,

@@ -27,7 +27,7 @@ type FormValues = {
   apiError: string;
 };
 
-export default function Signup({ email }: Props) {
+export default function Signupe({ email }: Props) {
   const { t } = useLocale();
   const router = useRouter();
   const methods = useForm<FormValues>();
@@ -139,53 +139,12 @@ export default function Signup({ email }: Props) {
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const ssr = await ssrInit(ctx);
   const token = asStringOrNull(ctx.query.token);
-  if (!token) {
-    return {
-      notFound: true,
-    };
-  }
-  const verificationRequest = await prisma.verificationRequest.findUnique({
-    where: {
-      token,
-    },
-  });
-
-  // for now, disable if no verificationRequestToken given or token expired
-  if (!verificationRequest || verificationRequest.expires < new Date()) {
-    return {
-      notFound: true,
-    };
-  }
-
-  const existingUser = await prisma.user.findFirst({
-    where: {
-      AND: [
-        {
-          email: verificationRequest.identifier,
-        },
-        {
-          emailVerified: {
-            not: null,
-          },
-        },
-      ],
-    },
-  });
-
-  if (existingUser) {
-    return {
-      redirect: {
-        permanent: false,
-        destination: "/auth/login?callbackUrl=" + ctx.query.callbackUrl,
-      },
-    };
-  }
 
   return {
     props: {
       isGoogleLoginEnabled: IS_GOOGLE_LOGIN_ENABLED,
       isSAMLLoginEnabled,
-      email: verificationRequest.identifier,
+      email: '',
       trpcState: ssr.dehydrate(),
     },
   };

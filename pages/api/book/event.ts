@@ -412,6 +412,31 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   type Booking = Prisma.PromiseReturnType<typeof createBooking>;
   let booking: Booking | null = null;
   try {
+    evt.attendees.map(async (attendee) => {
+      const intAttendee = await prisma.user.findUnique({
+        where: {
+          email: attendee.email,
+        },
+        select: {
+          id: true,
+        },
+      });
+      console.log("intAttendee", intAttendee);
+      const creditUpdated = await prisma.credit.update({
+        where: {
+          userId: intAttendee?.id,
+        },
+        data: {
+          UsedCredits: {
+            increment: 1,
+          },
+          activeCredits: {
+            decrement: 1,
+          },
+        },
+      });
+      console.log("Updated response", creditUpdated);
+    });
     booking = await createBooking();
     evt.uid = booking.uid;
   } catch (_err) {
