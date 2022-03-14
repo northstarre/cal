@@ -82,7 +82,7 @@ export default function Navbar({ signedIn, isBeta, profile }) {
                   </li>
                   <li>
                     <a
-                      href="/give-advice"
+                      href="/Mentor"
                       className="text-[#272D67] mr-6 flex h-full cursor-pointer items-center border-b-2 border-transparent py-3 pl-3 text-base font-medium tracking-normal hover:text-indigo-700 focus:outline-none">
                       Give Advice
                     </a>

@@ -146,7 +146,7 @@ export default function Index({ loggedInUser, profile: user, isReadOnly, updateP
           onProfilePicEdit = {onProfilePicEdit}
         />
       </Modal>
-      <Modal isOpen={showChoices} handlePopUp={(d) => setShowChoices(d)} header={"Key Goals"}>
+      <Modal isOpen={showChoices} handlePopUp={(d) => setShowChoices(d)} header={user.willGiveAdvice? "Expertise Areas" : "Key Goals"}>
         <Expertise
           onIsEditComplete={() => {
             setShowChoices(false);
