@@ -83,7 +83,7 @@ export default function Index({ loggedInUser, profile: user, isReadOnly, updateP
                           navigate.replace(`/${user.username}`)
                         }
                         else {
-                          navigate.replace(`/event-types`)
+                          navigate.replace(`/availability`)
                         }
                       }}>{loggedInUser && loggedInUser.id !== user.id ? "Book": "Edit Availability"} </button>
                     </div>
