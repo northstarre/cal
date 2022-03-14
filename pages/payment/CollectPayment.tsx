@@ -8,10 +8,11 @@ import { GetServerSidePropsContext } from "next";
 import { getSession } from "@lib/auth";
 import prisma from "@lib/prisma";
 import { inferSSRProps } from "@lib/types/inferSSRProps";
+import { useRouter } from "next/router";
 const stripePromise = loadStripe(
   "pk_test_51KKnHHBjmu6fdZ6OyOnc32x7byECMWMzolqXYjvtkqltuliBeLi8LaA6iBiLyOqvzHVX1hYIKUKaFp4mWw3ycx6r00n5nrzSx2"
 );
-function CheckoutForm() {
+function CheckoutForm({ credits }) {
   const stripe = useStripe();
   const elements = useElements();
 
@@ -64,7 +65,7 @@ function CheckoutForm() {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: "http://localhost:3000/payment/paymentConfirmed/?credits=3",
+        return_url: `https://mynorthstarre-dev.herokuapp.com/payment/paymentConfirmed/?credits=${credits}`,
       },
     });
 
@@ -103,13 +104,13 @@ function CheckoutForm() {
 }
 export default function CollectPayment(props: inferSSRProps<typeof getServerSideProps>) {
   const [clientSecret, setClientSecret] = useState("");
-
+  const { query } = useRouter();
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
-    fetch(`https://localhost:7236/api/Payments/${props.user.id}`, {
+    fetch(`https://devmynorthstarre-api.azurewebsites.net/api/Payments/${props.user.id}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ subscriptionName: "sirius" }),
+      body: JSON.stringify({ subscriptionName: query.subscriptionName }),
     })
       .then((res) => res.json())
       .then((data) => setClientSecret(data.clientSecret));
@@ -122,11 +123,21 @@ export default function CollectPayment(props: inferSSRProps<typeof getServerSide
     clientSecret,
     appearance,
   };
+  const getCredits = () => {
+    switch (query.subscriptionName) {
+      case "sirius":
+        return 3;
+      case "polaris":
+        return 5;
+      default:
+        return 1;
+    }
+  };
   return (
     <>
       {clientSecret && (
         <Elements options={options} stripe={stripePromise}>
-          <CheckoutForm />
+          <CheckoutForm credits={getCredits()} />
         </Elements>
       )}
     </>

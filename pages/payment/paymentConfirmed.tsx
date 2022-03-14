@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import { NextPageContext } from "next";
 import { getSession } from "@lib/auth";
 import { inferSSRProps } from "@lib/types/inferSSRProps";
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
 import prisma from "@lib/prisma";
 
 export default function Homepage(props: inferSSRProps<typeof getServerSideProps>) {
@@ -12,11 +12,14 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
   const { query } = useRouter();
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
-    fetch(`https://localhost:7236/api/Payments/credits/add/${props.user.id}/${query.credits}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ subscriptionName: "sirius" }),
-    })
+    fetch(
+      `https://devmynorthstarre-api.azurewebsites.net/api/Payments/credits/add/${props.user.id}/${query.credits}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ subscriptionName: "sirius" }),
+      }
+    )
       .then((res) => res.json())
       .then((data) => console.log("Credits processed Successfully"));
   }, []);
