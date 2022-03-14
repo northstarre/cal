@@ -87,7 +87,7 @@ export default function Index({ loggedInUser, profile: user, isReadOnly, updateP
                         }
                       }}>{loggedInUser && loggedInUser.id !== user.id ? "Book": "Edit Availability"} </button>
                     </div>
-                    <p className="text-md font-600 mb-4 text-left leading-relaxed text-[#272d67]">
+                    <p className="text-md font-400 mb-4 text-left leading-relaxed font-[20px] min-h-[280px] text-[#272d67]">
                       {user.bio}
                     </p>
                   </div>
