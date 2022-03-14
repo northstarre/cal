@@ -131,7 +131,7 @@ export default function Availability() {
   const query = trpc.useQuery(["viewer.availability"]);
   return (
     <div>
-      <Shell heading={t("availability")} subtitle={t("configure_availability")}>
+      <Shell heading={t("availability")} subtitle={t("configure_availability")} isMentor={true}>
         <QueryCell query={query} success={({ data }) => <AvailabilityForm {...data} />} />
       </Shell>
     </div>

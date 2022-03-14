@@ -153,7 +153,29 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       cancellationReason: cancellationReason,
     },
   });
-
+  const attendee = await prisma.user.findUnique({
+    where: {
+      email: evt.attendees[0].email,
+    },
+    select: {
+      id: true,
+    },
+  });
+  if (attendee?.id) {
+    await prisma.credit.update({
+      where: {
+        userId: attendee?.id,
+      },
+      data: {
+        activeCredits: {
+          increment: 1,
+        },
+        UsedCredits: {
+          decrement: 1,
+        },
+      },
+    });
+  }
   if (bookingToDelete.location === "integrations:daily") {
     bookingToDelete.user.credentials.push(FAKE_DAILY_CREDENTIAL);
   }

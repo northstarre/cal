@@ -34,7 +34,10 @@ export default function Account(props: inferSSRProps<typeof getServerSideProps>)
   console.log(props.profile.credits);
   return (
     <>
-      <Shell heading={"Accounts"} subtitle={"Your Northstarre Activity."}>
+      <Shell
+        heading={"Accounts"}
+        subtitle={"Your Northstarre Activity."}
+        isMentor={props.profile.willGiveAdvice}>
         {props.profile && accountIfo && props.profile.willGiveAdvice && (
           <div className={"flex flex-col justify-center"}>
             <div

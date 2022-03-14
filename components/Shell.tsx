@@ -128,6 +128,7 @@ export default function Shell(props: {
   backPath?: string; // renders back button to specified path
   // use when content needs to expand with flex
   flexChildrenContainer?: boolean;
+  isMentor?: boolean;
 }) {
   const { t } = useLocale();
   const router = useRouter();
@@ -142,6 +143,12 @@ export default function Shell(props: {
       href: "/Account/Account",
       icon: UserCircleIcon,
       current: router.asPath.startsWith("/Account"),
+    },
+    {
+      name: "Profile",
+      href: "/settings/profile",
+      icon: CogIcon,
+      current: router.asPath.startsWith("/settings"),
     },
     {
       name: t("bookings"),
@@ -266,7 +273,7 @@ export default function Shell(props: {
             )}>
             {/* show top navigation for md and smaller (tablet and phones) */}
             <nav className="flex items-center justify-between border-b border-gray-200 bg-white p-4 md:hidden">
-              <Link href="/event-types">
+              <Link href="/account">
                 <a>
                   <Logo />
                 </a>
