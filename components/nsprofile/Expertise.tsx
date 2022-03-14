@@ -40,7 +40,7 @@ export default function Expertise({ onIsEditComplete, profile, onEdit }) {
       <form className="mx-5 mt-5" onSubmit={handleSubmit(onSubmit)}>
         <div className="flex items-center space-x-9">
           <label htmlFor="email1" className="w-1/3 py-3   px-3 text-sm leading-none text-[#272d67]">
-            {profile.isMentor
+            {profile.willGiveAdvice
               ? "Choose your Top 8 Areas of Expertise"
               : "what are you curious to learn more about"}
           </label>
@@ -53,7 +53,7 @@ export default function Expertise({ onIsEditComplete, profile, onEdit }) {
               </option>
 
               {expertise.map((item, idx) => (
-                <option key={idx}>{profile.isMentor ? item.mentorText : item.menteeText}</option>
+                <option key={idx}>{profile.willGiveAdvice ? item.mentorText : item.menteeText}</option>
               ))}
             </select>
           </div>
@@ -68,7 +68,7 @@ export default function Expertise({ onIsEditComplete, profile, onEdit }) {
                 Select a Expertise
               </option>
               {expertise.map((item, idx) => (
-                <option key={idx}>{profile.isMentor ? item.mentorText : item.menteeText}</option>
+                <option key={idx}>{profile.willGiveAdvice ? item.mentorText : item.menteeText}</option>
               ))}
             </select>
           </div>
@@ -83,7 +83,7 @@ export default function Expertise({ onIsEditComplete, profile, onEdit }) {
                 Select a Expertise
               </option>
               {expertise.map((item, idx) => (
-                <option key={idx}>{profile.isMentor ? item.mentorText : item.menteeText}</option>
+                <option key={idx}>{profile.willGiveAdvice ? item.mentorText : item.menteeText}</option>
               ))}
             </select>
           </div>
@@ -98,7 +98,7 @@ export default function Expertise({ onIsEditComplete, profile, onEdit }) {
                 Select a Expertise
               </option>
               {expertise.map((item, idx) => (
-                <option key={idx}>{profile.isMentor ? item.mentorText : item.menteeText}</option>
+                <option key={idx}>{profile.willGiveAdvice ? item.mentorText : item.menteeText}</option>
               ))}
             </select>
           </div>
@@ -113,7 +113,7 @@ export default function Expertise({ onIsEditComplete, profile, onEdit }) {
                 Select a Expertise
               </option>
               {expertise.map((item, idx) => (
-                <option key={idx}>{profile.isMentor ? item.mentorText : item.menteeText}</option>
+                <option key={idx}>{profile.willGiveAdvice ? item.mentorText : item.menteeText}</option>
               ))}
             </select>
           </div>
@@ -128,7 +128,7 @@ export default function Expertise({ onIsEditComplete, profile, onEdit }) {
                 Select a Expertise
               </option>
               {expertise.map((item, idx) => (
-                <option key={idx}>{profile.isMentor ? item.mentorText : item.menteeText}</option>
+                <option key={idx}>{profile.willGiveAdvice ? item.mentorText : item.menteeText}</option>
               ))}
             </select>
           </div>
@@ -143,7 +143,7 @@ export default function Expertise({ onIsEditComplete, profile, onEdit }) {
                 Select a Expertise
               </option>
               {expertise.map((item, idx) => (
-                <option key={idx}>{profile.isMentor ? item.mentorText : item.menteeText}</option>
+                <option key={idx}>{profile.willGiveAdvice ? item.mentorText : item.menteeText}</option>
               ))}
             </select>
           </div>
@@ -158,7 +158,7 @@ export default function Expertise({ onIsEditComplete, profile, onEdit }) {
                 Select a Expertise
               </option>
               {expertise.map((item, idx) => (
-                <option key={idx}>{profile.isMentor ? item.mentorText : item.menteeText}</option>
+                <option key={idx}>{profile.willGiveAdvice ? item.mentorText : item.menteeText}</option>
               ))}
             </select>
           </div>

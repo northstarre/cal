@@ -39,7 +39,7 @@ export default function Biography({ onIsEditComplete, profile, onEdit, avatarRef
   return (
     <div className=" my-5">
       <form className="mx-5 mt-5" onSubmit={handleSubmit(onSubmit)}>
-        {profile.isMentor ? (
+        {profile.willGiveAdvice ? (
           <div className="flex items-center space-x-9">
             <label htmlFor="email1" className="w-1/3 py-3   px-3 text-sm leading-none text-[#272d67]">
               Degree
