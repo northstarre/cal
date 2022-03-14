@@ -117,7 +117,7 @@ export default function Index({ loggedInUser, profile: user, isReadOnly, updateP
             onEditClick={() => setShowBiography(true)}
           />
           <ProfileListContent
-            header={user.willGiveAdvice? "Expertise" : "Key Goals (you choose!)"}
+            header={user.willGiveAdvice? "Expertise Areas" : "Key Goals"}
             isEditable={!isReadOnly}
             className={"mx-4 shadow-xl"}
             items={
