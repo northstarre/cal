@@ -49,7 +49,7 @@ export default function Expertise({ onIsEditComplete, profile, onEdit }) {
               className={`flex h-10 w-full items-center rounded  border border-gray-300 pl-3 text-sm shadow focus:border focus:border-indigo-700 focus:outline-none dark:border-gray-700 dark:focus:border-indigo-700`}
               {...register("expertise1", { required: true })}>
               <option selected disabled value>
-                Select a Expertise
+                {profile.willGiveAdvice ? "Select a Expertise": "Select a Goal" }
               </option>
 
               {expertise.map((item, idx) => (
@@ -65,7 +65,7 @@ export default function Expertise({ onIsEditComplete, profile, onEdit }) {
               className={`flex h-10 w-full items-center rounded  border border-gray-300 pl-3 text-sm shadow focus:border focus:border-indigo-700 focus:outline-none dark:border-gray-700 dark:focus:border-indigo-700`}
               {...register("expertise2", { required: true })}>
               <option selected disabled value>
-                Select a Expertise
+                {profile.willGiveAdvice ? "Select a Expertise": "Select a Goal" }
               </option>
               {expertise.map((item, idx) => (
                 <option key={idx}>{profile.willGiveAdvice ? item.mentorText : item.menteeText}</option>
@@ -80,7 +80,7 @@ export default function Expertise({ onIsEditComplete, profile, onEdit }) {
               className={`flex h-10 w-full items-center rounded  border border-gray-300 pl-3 text-sm shadow focus:border focus:border-indigo-700 focus:outline-none dark:border-gray-700 dark:focus:border-indigo-700`}
               {...register("expertise3")}>
               <option selected disabled value>
-                Select a Expertise
+                {profile.willGiveAdvice ? "Select a Expertise": "Select a Goal" }
               </option>
               {expertise.map((item, idx) => (
                 <option key={idx}>{profile.willGiveAdvice ? item.mentorText : item.menteeText}</option>
@@ -95,7 +95,7 @@ export default function Expertise({ onIsEditComplete, profile, onEdit }) {
               className={`flex h-10 w-full items-center rounded  border border-gray-300 pl-3 text-sm shadow focus:border focus:border-indigo-700 focus:outline-none dark:border-gray-700 dark:focus:border-indigo-700`}
               {...register("expertise4")}>
               <option selected disabled value>
-                Select a Expertise
+                {profile.willGiveAdvice ? "Select a Expertise": "Select a Goal" }
               </option>
               {expertise.map((item, idx) => (
                 <option key={idx}>{profile.willGiveAdvice ? item.mentorText : item.menteeText}</option>
@@ -110,7 +110,7 @@ export default function Expertise({ onIsEditComplete, profile, onEdit }) {
               className={`flex h-10 w-full items-center rounded  border border-gray-300 pl-3 text-sm shadow focus:border focus:border-indigo-700 focus:outline-none dark:border-gray-700 dark:focus:border-indigo-700`}
               {...register("expertise5")}>
               <option selected disabled value>
-                Select a Expertise
+                {profile.willGiveAdvice ? "Select a Expertise": "Select a Goal" }
               </option>
               {expertise.map((item, idx) => (
                 <option key={idx}>{profile.willGiveAdvice ? item.mentorText : item.menteeText}</option>
@@ -125,7 +125,7 @@ export default function Expertise({ onIsEditComplete, profile, onEdit }) {
               className={`flex h-10 w-full items-center rounded  border border-gray-300 pl-3 text-sm shadow focus:border focus:border-indigo-700 focus:outline-none dark:border-gray-700 dark:focus:border-indigo-700`}
               {...register("expertise6")}>
               <option selected disabled value>
-                Select a Expertise
+                {profile.willGiveAdvice ? "Select a Expertise": "Select a Goal" }
               </option>
               {expertise.map((item, idx) => (
                 <option key={idx}>{profile.willGiveAdvice ? item.mentorText : item.menteeText}</option>
@@ -140,7 +140,7 @@ export default function Expertise({ onIsEditComplete, profile, onEdit }) {
               className={`flex h-10 w-full items-center rounded  border border-gray-300 pl-3 text-sm shadow focus:border focus:border-indigo-700 focus:outline-none dark:border-gray-700 dark:focus:border-indigo-700`}
               {...register("expertise7")}>
               <option selected disabled value>
-                Select a Expertise
+                {profile.willGiveAdvice ? "Select a Expertise": "Select a Goal" }
               </option>
               {expertise.map((item, idx) => (
                 <option key={idx}>{profile.willGiveAdvice ? item.mentorText : item.menteeText}</option>
@@ -155,7 +155,7 @@ export default function Expertise({ onIsEditComplete, profile, onEdit }) {
               className={`flex h-10 w-full items-center rounded  border border-gray-300 pl-3 text-sm shadow focus:border focus:border-indigo-700 focus:outline-none dark:border-gray-700 dark:focus:border-indigo-700`}
               {...register("expertise8")}>
               <option selected disabled value>
-                Select a Expertise
+                {profile.willGiveAdvice ? "Select a Expertise": "Select a Goal" }
               </option>
               {expertise.map((item, idx) => (
                 <option key={idx}>{profile.willGiveAdvice ? item.mentorText : item.menteeText}</option>
