@@ -148,6 +148,8 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
   const usernameRef = useRef<HTMLInputElement>(null);
   const bioRef = useRef<HTMLTextAreaElement>(null);
   const zipCodeRef = useRef<HTMLInputElement>(null);
+  const homeTownRef = useRef<HTMLInputElement>(null);
+  const currentLocationRef = useRef<HTMLInputElement>(null);
   /** End Name */
   /** TimeZone */
   const [selectedTimeZone, setSelectedTimeZone] = useState(props.user.timeZone ?? dayjs.tz.guess());
@@ -326,17 +328,33 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
               </fieldset>
               {/*TODO : Profile Photo */}
               <fieldset>
-                <label htmlFor="zipcode" className="block text-sm font-medium text-brand">
-                  {t("zip_code")}
+                <label htmlFor="currentLocation" className="block text-sm font-medium text-brand">
+                  Current Location
                 </label>
                 <input
-                  ref={zipCodeRef}
+                  ref={currentLocationRef}
                   type="text"
-                  name="zipCode"
-                  id="zipCode"
-                  autoComplete="zip"
-                  placeholder={"Zip Code"}
-                  defaultValue={props.user.zipCode ?? ""}
+                  name="currentLocation"
+                  id="currentLocation"
+                  autoComplete="Location"
+                  placeholder={"San Francisco, CA"}
+                  defaultValue={props.user.currentLocation ?? ""}
+                  required
+                  className="mt-1 block w-full rounded-sm border border-gray-300 px-3 py-2 shadow-sm focus:border-neutral-500 focus:outline-none focus:ring-neutral-500 sm:text-sm"
+                />
+              </fieldset>
+              <fieldset>
+                <label htmlFor="homeTown" className="block text-sm font-medium text-brand">
+                  Hometown
+                </label>
+                <input
+                  ref={homeTownRef}
+                  type="text"
+                  name="homeTown"
+                  id="homeTown"
+                  autoComplete="homeTown"
+                  placeholder={"Naperville, IL"}
+                  defaultValue={props.user.homeTown ?? ""}
                   required
                   className="mt-1 block w-full rounded-sm border border-gray-300 px-3 py-2 shadow-sm focus:border-neutral-500 focus:outline-none focus:ring-neutral-500 sm:text-sm"
                 />
@@ -369,6 +387,8 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
       onComplete: async () => {
         await updateUser({
           bio: bioRef.current?.value,
+          currentLocation: currentLocationRef.current?.value,
+          homeTown: homeTownRef.current?.value,
         });
         doPatch(
           `userInfo/setup/stripe/${props.user.id}`,
@@ -725,6 +745,8 @@ export async function getServerSideProps(context: NextPageContext) {
       schoolYear: true,
       zipCode: true,
       describer: true,
+      homeTown: true,
+      currentLocation: true,
       selectedCalendars: {
         select: {
           externalId: true,

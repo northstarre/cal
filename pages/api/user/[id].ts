@@ -59,6 +59,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           "interest4",
           "school",
           "schoolYear",
+          "homeTown",
+          "currentLocation",
         ]),
         bio: req.body.description ?? req.body.data?.bio,
       },
@@ -80,6 +82,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         createdDate: true,
         plan: true,
         completedOnboarding: true,
+        homeTown: true,
+        currentLocation: true,
       },
     });
     return res.status(200).json({ message: "User Updated", data: updatedUser });

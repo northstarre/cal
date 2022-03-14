@@ -154,6 +154,8 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
       graduationYear: true,
       graduationMonth: true,
       degree: true,
+      homeTown: true,
+      currentLocation: true,
     },
   });
 

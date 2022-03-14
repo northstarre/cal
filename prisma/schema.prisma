@@ -155,6 +155,8 @@ model User {
   school              String?
   schoolYear          String?
   zipCode             String?
+  currentLocation     String?
+  homeTown            String?
   expertise           String[]
   graduationMonth     String?
   graduationYear      String?

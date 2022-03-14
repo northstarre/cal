@@ -92,6 +92,11 @@ module.exports = () => plugins.reduce((acc, next) => next(acc), {
         destination: "/bookings/upcoming",
         permanent: true,
       },
+      {
+        source: "/account",
+        destination: "/Account/Account",
+        permanent: true,
+      },
     ];
   },
 });

@@ -42,7 +42,7 @@ export default function Expertise({ onIsEditComplete, profile, onEdit }) {
           <label htmlFor="email1" className="w-1/3 py-3   px-3 text-sm leading-none text-[#272d67]">
             {profile.willGiveAdvice
               ? "Your Expertise"
-              : "what are you curious to learn more about"}
+              : "Your Goals"}
           </label>
           <div className="w-2/3 rounded border-gray-200 py-2.5 px-3">
             <select

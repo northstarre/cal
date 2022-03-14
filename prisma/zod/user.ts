@@ -50,6 +50,8 @@ export const _UserModel = z.object({
   school: z.string().nullish(),
   schoolYear: z.string().nullish(),
   zipCode: z.string().nullish(),
+  currentLocation: z.string().nullish(),
+  homeTown: z.string().nullish(),
   expertise: z.string().array(),
   graduationMonth: z.string().nullish(),
   graduationYear: z.string().nullish(),

@@ -102,15 +102,15 @@ export default function Index({ loggedInUser, profile: user, isReadOnly, updateP
             isEditable={!isReadOnly}
             className={"mx-4 shadow-xl"}
             items={[
-              { image: "/assets/profile/text-bgcolor.png", value: user.school },
-              { image: "/assets/profile/Union.png", value: user.zipCode },
-              { image: "/assets/profile/icon.png", value: user.zipCode },
-              { image: "/assets/profile/pencil-create.png", value: user.major },
-              { image: "/assets/profile/pencil-create.png", value: user.preProfessionalTrack },
-              { image: "/assets/profile/calculator.png", value: user.schoolYear },
-              { image: "/assets/profile/case.png", value: user.graduationYear },
+              { image: "/assets/Profile/text-bgcolor.png", value: user.school },
+              { image: "/assets/Profile/Union.png", value: user.currentLocation },
+              { image: "/assets/Profile/icon.png", value: user.homeTown },
+              { image: "/assets/Profile/pencil-create.png", value: user.major },
+              { image: "/assets/Profile/pencil-create.png", value: user.preProfessionalTrack },
+              { image: "/assets/Profile/calculator.png", value: user.schoolYear },
+              { image: "/assets/Profile/case.png", value: user.graduationYear },
               {
-                image: "/assets/profile/dribbble.png",
+                image: "/assets/Profile/dribbble.png",
                 value: `${user.interest1}, ${user.interest2}, ${user.interest3}, ${user.interest4}`,
               },
             ]}
@@ -122,7 +122,7 @@ export default function Index({ loggedInUser, profile: user, isReadOnly, updateP
             className={"mx-4 shadow-xl"}
             items={
               user?.expertise?.map((itm) => {
-                return { image: "/assets/profile/check-mark.png", value: itm };
+                return { image: "/assets/Profile/check-mark.png", value: itm };
               }) ?? []
             }
             onEditClick={() => setShowChoices(true)}

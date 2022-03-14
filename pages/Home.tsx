@@ -142,7 +142,7 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
               title={"Customized to Your Needs."}
               content={"15+"}
               footer={"topics that are on the table for discussion with your mentor. That change as you grow."}
-              className={"bg-[url('/assets/database.svg')] bg-[left_10px_top_10px] bg-no-repeat"}
+              className={"bg-[url('/assets/Database.svg')] bg-[left_10px_top_10px] bg-no-repeat"}
             />
             <PlainInfoBox
               title={"Talk to the Experts, Directly."}
@@ -183,17 +183,17 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
         )}
         points={[
           {
-            src: "/assets/ellipse%2020.png",
+            src: "/assets/Ellipse%2020.png",
             description1: () => <span>Give back to students, just like you.</span>,
             description2: () => "",
           },
           {
-            src: "/assets/ellipse%2021.png",
+            src: "/assets/Ellipse%2021.png",
             description1: () => <span className="font-bold text-[#F13C20]"></span>,
             description2: () => <span>Get paid for what you’re good at.</span>,
           },
           {
-            src: "/assets/ellipse%2022.png",
+            src: "/assets/Ellipse%2022.png",
             description1: () => <span>a network of mentees.</span>,
             description2: () => <span>Join a network of mentors and gain</span>,
           },
