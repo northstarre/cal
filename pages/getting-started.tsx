@@ -529,7 +529,7 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
                 }}
                 className="react-select-container my-4 block w-full min-w-0 flex-1 rounded-sm border border-gray-300 focus:border-primary-500 focus:ring-primary-500 sm:text-sm">
                 <option selected disabled value="">
-                  Select one.
+                  Select One
                 </option>
                 {props.describers.map((item: any, idx: number) => (
                   <option key={idx}>{item}</option>
@@ -749,9 +749,9 @@ export async function getServerSideProps(context: NextPageContext) {
   let schedules = [];
   const schoolYears = ["Freshmen", "Sophomore", "Junior", "Senior"];
   const describers = [
-    "High School student",
+    "High School Student",
     "College Student (2 year or 4 year)",
-    "Graduate School student",
+    "Graduate School Student",
     "Working Professional",
   ];
   const universitiesResp = await fetch("https://devmynorthstarre-api.azurewebsites.net/api/universities", {

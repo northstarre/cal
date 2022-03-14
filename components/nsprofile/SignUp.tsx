@@ -26,9 +26,9 @@ export default function SignUp({ objectId, onSubmit }) {
 
   const [step, setStep] = useState(1);
   const [describers, setDescribers] = useState([
-    "High School student",
+    "High School Student",
     "College Student (2 year or 4 year)",
-    "Graduate School student",
+    "Graduate School Student",
     "Working Professional",
   ]);
   const [schoolYears, setSchoolYear] = useState(["Freshmen", "Sophomore", "Junior", "Senior"]);
