@@ -12,7 +12,7 @@ import { NextPageContext } from "next";
 import { useSession } from "next-auth/react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import React, { useEffect, useRef, useState } from "react";
+import React, { FormEvent, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import TimezoneSelect from "react-timezone-select";
 import * as z from "zod";
@@ -39,6 +39,9 @@ import { doPatch } from "../makeAPICall";
 
 import getEventTypes from "../lib/queries/event-types/get-event-types";
 import ToggleButton from "@components/ToggleButton";
+import Avatar from "@components/ui/Avatar";
+import ImageUploader from "@components/ImageUploader";
+import crypto from "crypto";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -150,6 +153,9 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
   const zipCodeRef = useRef<HTMLInputElement>(null);
   const homeTownRef = useRef<HTMLInputElement>(null);
   const currentLocationRef = useRef<HTMLInputElement>(null);
+  const avatarRef = useRef<HTMLInputElement>(null!);
+
+  const [imageSrc, setImageSrc] = useState<string>("");
   /** End Name */
   /** TimeZone */
   const [selectedTimeZone, setSelectedTimeZone] = useState(props.user.timeZone ?? dayjs.tz.guess());
@@ -157,6 +163,13 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
 
   /** Onboarding Steps */
   const [currentStep, setCurrentStep] = useState(0);
+  async function updateProfileHandler(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const enteredAvatar = avatarRef.current.value;
+    mutation.mutate({
+      avatar: enteredAvatar,
+    });
+  }
   const detectStep = () => {
     let step = 0;
     const hasSetUserNameOrTimeZone =
@@ -376,6 +389,43 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                 />
               </fieldset>
+              <div className="flex items-center space-x-9">
+                <Avatar
+                  alt={props.user.name || ""}
+                  className="relative h-10 w-10 rounded-full"
+                  gravatarFallbackMd5={props.user.emailMd5}
+                  imageSrc={imageSrc}
+                />
+                <input
+                  ref={avatarRef}
+                  type="hidden"
+                  name="avatar"
+                  id="avatar"
+                  placeholder="URL"
+                  className="mt-1 block w-full rounded-sm border border-gray-300 px-3 py-2 shadow-sm focus:border-neutral-800 focus:outline-none focus:ring-neutral-800 sm:text-sm"
+                  defaultValue={imageSrc}
+                />
+                <div className="flex items-center px-5">
+                  <ImageUploader
+                    target="avatar"
+                    id="avatar-upload"
+                    buttonMsg={t("change_avatar")}
+                    handleAvatarChange={(newAvatar) => {
+                      avatarRef.current.value = newAvatar;
+                      const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
+                        window.HTMLInputElement.prototype,
+                        "value"
+                      )?.set;
+                      nativeInputValueSetter?.call(avatarRef.current, newAvatar);
+                      const ev2 = new Event("input", { bubbles: true });
+                      avatarRef.current.dispatchEvent(ev2);
+                      updateProfileHandler(ev2 as unknown as FormEvent<HTMLFormElement>);
+                      setImageSrc(newAvatar);
+                    }}
+                    imageSrc={imageSrc}
+                  />
+                </div>
+              </div>
             </section>
           </form>
         </>
@@ -814,7 +864,10 @@ export async function getServerSideProps(context: NextPageContext) {
   return {
     props: {
       session,
-      user,
+      user: {
+        ...user,
+        emailMd5: crypto.createHash("md5").update(user.email).digest("hex"),
+      },
       integrations,
       connectedCalendars,
       eventTypes,
