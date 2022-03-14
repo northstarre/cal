@@ -209,13 +209,13 @@ export default function Shell(props: {
           <div className="flex w-14 flex-col lg:w-56">
             <div className="flex h-0 flex-1 flex-col border-r border-gray-200 bg-white">
               <div className="flex flex-1 flex-col overflow-y-auto pt-3 pb-4 lg:pt-5">
-                <Link href="/event-types">
+                <Link href="/Account/Account">
                   <a className="px-4 md:hidden lg:inline">
                     <Logo small />
                   </a>
                 </Link>
                 {/* logo icon for tablet */}
-                <Link href="/event-types">
+                <Link href="/Account/Account">
                   <a className="md:inline lg:hidden">
                     <Logo small icon />
                   </a>
