@@ -106,7 +106,7 @@ export default function Account(props: inferSSRProps<typeof getServerSideProps>)
                 <div className={"mt-5 mb-2 rounded-[20px] border border-[#272d67] p-2"}>
                   <div className={"mt-[40px] mb-[60px] flex flex-col items-center  text-center"}>
                     <span className={"mb-[80px] text-center text-5xl"}>
-                      {props.profile.credits[0].UsedCredits ?? 0}
+                      {props.profile.credits[0]?.UsedCredits ?? 0}
                     </span>
 
                     <span className={"text-2xl italic"}>Used Credits</span>
@@ -117,7 +117,7 @@ export default function Account(props: inferSSRProps<typeof getServerSideProps>)
                 <div className={"mt-5 mb-2 rounded-[20px] border border-[#272d67] p-2"}>
                   <div className={"mt-[40px] mb-[60px] flex flex-col items-center  text-center"}>
                     <span className={"mb-[80px] text-center text-5xl"}>
-                      {props.profile.credits[0].activeCredits ?? 0}
+                      {props.profile.credits[0]?.activeCredits ?? 0}
                     </span>
                     <span className={"text-2xl italic"}>Active Credits</span>
                   </div>
@@ -127,7 +127,7 @@ export default function Account(props: inferSSRProps<typeof getServerSideProps>)
                 <div className={"mt-5 mb-2 rounded-[20px] border border-[#272d67] p-2"}>
                   <div className={"mt-[40px] mb-[60px] flex flex-col items-center  text-center"}>
                     <span className={"mb-[80px] text-center text-5xl"}>
-                      {props.profile.credits[0].expiredCredits ?? 0}
+                      {props.profile.credits[0]?.expiredCredits ?? 0}
                     </span>
                     <span className={"text-2xl italic"}>Expired Credits</span>
                   </div>
