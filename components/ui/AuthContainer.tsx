@@ -19,7 +19,7 @@ export default function AuthContainer(props: React.PropsWithChildren<Props>) {
         <HeadSeo title={props.title} description={props.description} />
         <div className="mx-auto flex h-full flex-col lg:flex-row lg:justify-center">
           <div className="relative flex w-full flex-col items-center justify-center py-20 sm:py-40 lg:w-1/2">
-            <img src="/assets/rectangle%2076.png" className="w-full rounded-3xl" />
+            <img src="/assets/Rectangle%2076.png" className="w-full rounded-3xl" />
           </div>
           <div id="loginContainer" className="flex w-full justify-center bg-white lg:w-1/2">
             <div className="flex w-full flex-col justify-center px-2 py-16 text-gray-800 dark:text-gray-100 sm:w-4/6 sm:px-0 md:w-3/6 lg:w-2/3">
