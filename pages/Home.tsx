@@ -59,17 +59,14 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
       <Navbar isBeta={false} signedIn={props.signedIn} profile={props.user} />
       <Hero
         heading={"A Professional Network for Students, Finally."}
-        heroContent={
-          "Find mentors across the country, and join a " +
-          "community of students just like you."
-        }
+        heroContent={"Find mentors across the country, and join a " + "community of students just like you."}
         kind={"primary"}
         src={"/assets/image%2052.png"}
         imagePosition={"right"}
         btnText={"Get Started"}
         containerClassName={"h-[auto]"}
       />
-      <div className={"w-full bg-[#FFEFED] rounded-[20px]"}>
+      <div className={"w-full rounded-[20px] bg-[#FFEFED]"}>
         <div className={`2xl:container 2xl:mx-auto`}>
           <ImageWithCTA
             data={{
@@ -96,9 +93,9 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
       {/*    "hidden h-[556px] w-full bg-[url('/assets/Frame%2011.png')] bg-contain bg-no-repeat md:block"*/}
       {/*  }></div>*/}
       <div className={`2xl:container 2xl:mx-auto`}>
-        <div className={"font-[Raleway] font-normal my-20 flex w-full flex-col md:flex-row"}>
+        <div className={"my-20 flex w-full flex-col font-[Raleway] font-normal md:flex-row"}>
           <div className={"flex w-3/5 flex-col text-left"}>
-            <img src="/assets/Group103.png" className={"w-[61px] mb-3"} />
+            <img src="/assets/Group103.png" className={"mb-3 w-[61px]"} />
             <h2 className="why-header text-left text-[34px] font-bold leading-10 text-[#272d67]">
               Did you know...
             </h2>
@@ -127,7 +124,7 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
       </div>
 
       <div className={`2xl:container 2xl:mx-auto`}>
-        <h2 className="why-header text-center text-[50px] mb-3 font-bold leading-10 text-[#272d67]">
+        <h2 className="why-header mb-3 text-center text-[50px] font-bold leading-10 text-[#272d67]">
           Why Get Advice on Northstarre?{" "}
         </h2>
         <div className={"flex w-full flex-col gap-4 px-0 md:grid md:grid-cols-5"}>
@@ -141,7 +138,9 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
             <PlainInfoBox
               title={"Customized to Your Needs."}
               content={"15+"}
-              footer={"topics that are on the table for discussion with your mentor. That change as you grow."}
+              footer={
+                "topics that are on the table for discussion with your mentor. That change as you grow."
+              }
               className={"bg-[url('/assets/Database.svg')] bg-[left_10px_top_10px] bg-no-repeat"}
             />
             <PlainInfoBox
@@ -155,9 +154,9 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
             {mentors.length ? (
               <Grid rows={mentors} shouldDisplaySchool={false} shouldDisplayMajor={true} />
             ) : (
-              "Loading Mentor Info"
+              <Loader className={"loader"} />
             )}
-            <div className="flex justify-center text-center w-[100%] mt-3">
+            <div className="mt-3 flex w-[100%] justify-center text-center">
               <Button
                 kind={"primary"}
                 size={"md"}
@@ -202,7 +201,7 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
 
       <div
         className={
-          "max-w-[1014px] mx-auto font-[Raleway] mb-12 flex h-[600px] flex-col items-center justify-start rounded-[20px] bg-[url('/assets/image%20HomeFooter.png')] bg-cover text-center"
+          "mx-auto mb-12 flex h-[600px] max-w-[1014px] flex-col items-center justify-start rounded-[20px] bg-[url('/assets/image%20HomeFooter.png')] bg-cover text-center font-[Raleway]"
         }>
         <span className={"font-700 mt-[34px] text-[20px]  font-bold text-[#272d67]"}>
           The average person spends{" "}
@@ -230,10 +229,10 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
         </div>
       </div>
       <div className={`2xl:container 2xl:mx-auto`}>
-        <div className={"font-[Raleway] font-normal my-16 flex w-full flex-col md:flex-row"}>
+        <div className={"my-16 flex w-full flex-col font-[Raleway] font-normal md:flex-row"}>
           <div className={"flex w-[100%] flex-col"}>
             <h2 className="why-header text-center text-[25px] font-normal leading-[29px] text-[#272d67]">
-            Questions? Contact support@mynorthstarre.com. We’re here to help.
+              Questions? Contact support@mynorthstarre.com. We’re here to help.
             </h2>
           </div>
         </div>

@@ -255,29 +255,16 @@ export default function Success(props: inferSSRProps<typeof getServerSideProps>)
                       </div>
                     </div>
                   )}
-                  {!props.hideBranding && (
+                  {
                     <div className="pt-4 text-center text-xs text-gray-400 dark:border-gray-900 dark:text-white">
-                      <a href="https://cal.com/signup">{t("create_booking_link_with_calcom")}</a>
-
-                      <form
-                        onSubmit={(e) => {
-                          e.preventDefault();
-                          router.push(`https://cal.com/signup?email=` + (e as any).target.email.value);
-                        }}
-                        className="mt-4 flex">
-                        <EmailInput
-                          name="email"
-                          id="email"
-                          defaultValue={router.query.email}
-                          className="block w-full border-gray-300 text-gray-600 shadow-sm focus:border-brand focus:ring-black dark:border-gray-900 dark:bg-brand dark:text-brandcontrast sm:text-sm"
-                          placeholder="rick.astley@cal.com"
-                        />
-                        <Button type="submit" className="min-w-max" color="primary">
-                          {t("try_for_free")}
-                        </Button>
-                      </form>
+                      <Button
+                        className="min-w-max"
+                        color="primary"
+                        onClick={() => router.push("bookings/upcoming")}>
+                        Check your bookings
+                      </Button>
                     </div>
-                  )}
+                  }
                 </div>
               </div>
             </div>
@@ -367,7 +354,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   return {
     props: {
-      hideBranding: eventType.team ? eventType.team.hideBranding : isBrandingHidden(eventType.users[0]),
+      hideBranding: true,
       profile,
       eventType,
       trpcState: ssr.dehydrate(),

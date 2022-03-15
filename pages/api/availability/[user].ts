@@ -1,5 +1,5 @@
 // import { getBusyVideoTimes } from "@lib/videoClient";
-import { Prisma } from "@prisma/client";
+import { BookingStatus, Prisma } from "@prisma/client";
 import dayjs from "dayjs";
 import timezone from "dayjs/plugin/timezone";
 import utc from "dayjs/plugin/utc";
@@ -9,6 +9,7 @@ import { asStringOrNull } from "@lib/asStringOrNull";
 import { getWorkingHours } from "@lib/availability";
 import { getBusyCalendarTimes } from "@lib/integrations/calendar/CalendarManager";
 import prisma from "@lib/prisma";
+import { EventBusyDate } from "@lib/integrations/calendar/constants/types";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -68,10 +69,32 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     dateTo.format(),
     selectedCalendars
   );
+  const alreadyBookedSlots = await prisma.booking.findMany({
+    where: {
+      AND: {
+        userId: rawUser.id,
+        startTime: {
+          gt: dateFrom.toDate(),
+          lt: dateTo.toDate(),
+        },
+        status: {
+          not: BookingStatus.CANCELLED,
+        },
+      },
+    },
+    select: {
+      startTime: true,
+      endTime: true,
+    },
+  });
+  const bookingsData: EventBusyDate[] = alreadyBookedSlots.map((itm) => {
+    return { start: itm.startTime, end: itm.endTime };
+  });
+  const busyTimesWithData: EventBusyDate[] = [...busyTimes, ...bookingsData];
 
   // busyTimes.push(...await getBusyVideoTimes(currentUser.credentials, dateFrom.format(), dateTo.format()));
 
-  const bufferedBusyTimes = busyTimes.map((a) => ({
+  const bufferedBusyTimes = busyTimesWithData.map((a) => ({
     start: dayjs(a.start).subtract(currentUser.bufferTime, "minute").toString(),
     end: dayjs(a.end).add(currentUser.bufferTime, "minute").toString(),
   }));

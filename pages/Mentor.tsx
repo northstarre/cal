@@ -44,19 +44,19 @@ export default function GiveAdvice() {
         )}
         points={[
           {
-            src: "./assets/ellipse%2020.png",
+            src: "./assets/Ellipse%2020.png",
             description1: () => <span>Set up your profile and tell us what you’d like to coach.</span>,
             description2: () => "",
           },
           {
-            src: "./assets/ellipse%2021.png",
+            src: "./assets/Ellipse%2021.png",
             description1: () => (
               <span>Set your availability. As little or as much as you’d like to give back.</span>
             ),
             description2: () => "",
           },
           {
-            src: "./assets/ellipse%2022.png",
+            src: "./assets/Ellipse%2022.png",
             description1: () => <span>Sit back and get paid for your time spent with a student.</span>,
             description2: () => "",
           },

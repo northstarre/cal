@@ -41,6 +41,7 @@ import Dropdown, {
 import { useViewerI18n } from "./I18nLanguageHandler";
 import Logo from "./Logo";
 import Button from "./ui/Button";
+import Navbar from "@components/Navbar";
 
 export function useMeQuery() {
   const meQuery = trpc.useQuery(["viewer.me"], {
@@ -129,6 +130,7 @@ export default function Shell(props: {
   // use when content needs to expand with flex
   flexChildrenContainer?: boolean;
   isMentor?: boolean;
+  user: object;
 }) {
   const { t } = useLocale();
   const router = useRouter();
@@ -143,12 +145,6 @@ export default function Shell(props: {
       href: "/Account/Account",
       icon: UserCircleIcon,
       current: router.asPath.startsWith("/Account"),
-    },
-    {
-      name: "Profile",
-      href: "/settings/profile",
-      icon: CogIcon,
-      current: router.asPath.startsWith("/settings"),
     },
     {
       name: t("bookings"),
@@ -210,23 +206,12 @@ export default function Shell(props: {
       <div>
         <Toaster position="bottom-right" />
       </div>
-
-      <div className="flex h-screen overflow-hidden bg-gray-100" data-testid="dashboard-shell">
+      {user && <Navbar isBeta={false} signedIn={true} profile={user} />}
+      <div className="flex h-screen overflow-hidden" data-testid="dashboard-shell">
         <div className="hidden md:flex lg:flex-shrink-0">
-          <div className="flex w-14 flex-col lg:w-56">
+          <div className="flex w-14 flex-col lg:w-60">
             <div className="flex h-0 flex-1 flex-col border-r border-gray-200 bg-white">
               <div className="flex flex-1 flex-col overflow-y-auto pt-3 pb-4 lg:pt-5">
-                <Link href="/Account/Account">
-                  <a className="px-4 md:hidden lg:inline">
-                    <Logo small />
-                  </a>
-                </Link>
-                {/* logo icon for tablet */}
-                <Link href="/Account/Account">
-                  <a className="md:inline lg:hidden">
-                    <Logo small icon />
-                  </a>
-                </Link>
                 <nav className="mt-2 flex-1 space-y-1 bg-white px-2 lg:mt-5">
                   {navigation.map((item) => (
                     <Link key={item.name} href={item.href}>
@@ -251,15 +236,6 @@ export default function Shell(props: {
                     </Link>
                   ))}
                 </nav>
-              </div>
-              <TrialBanner />
-              <div className="m-2 rounded-sm p-2 pt-2 pr-2 hover:bg-gray-100">
-                <span className="hidden lg:inline">
-                  <UserDropdown />
-                </span>
-                <span className="hidden md:inline lg:hidden">
-                  <UserDropdown small />
-                </span>
               </div>
             </div>
           </div>

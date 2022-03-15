@@ -55,7 +55,7 @@ export default function Account(props: inferSSRProps<typeof getServerSideProps>)
               </div>
               <div className={"mb-10 flex w-full flex-col xl:w-1/3"}>
                 <div className={"mt-5 mb-2 rounded-[20px] border border-[#272d67] p-2"}>
-                  <div className={"mt-[40px] mb-[30px] flex flex-col items-center  text-center"}>
+                  <div className={"mt-[40px] mb-[60px] flex flex-col items-center  text-center"}>
                     <span className={"mb-[80px] text-center text-5xl"}>{accountIfo.totalEarnings}</span>
                     <span className={"text-2xl italic"}>Total earned</span>
                   </div>
