@@ -59,12 +59,6 @@ export default function Index({ loggedInUser, profile: user, isReadOnly, updateP
                   </div>
                   <div className="w-full px-4 lg:order-1 lg:w-4/12">
                     <div className="flex justify-center py-4 pt-8 lg:pt-4">
-                      {/*<div className="mr-4 p-3 text-center">*/}
-                      {/*    <span className="text-3xl  flex flex-row font-bold block uppercase tracking-wide font-700 text-[#272d67]">*/}
-                      {/*      4.5 <Rating/>*/}
-                      {/*    </span>*/}
-
-                      {/*</div>*/}
                       <div className="mr-4 p-3 text-center">
                         <span className="block flex flex-row text-3xl font-bold uppercase tracking-wide text-gray-700">
                           2 <CallIcon />
@@ -94,11 +88,11 @@ export default function Index({ loggedInUser, profile: user, isReadOnly, updateP
                             }
                           }
                         }}>{loggedInUser && loggedInUser.id !== user.id ? "Book": user.willGiveAdvice ? "Edit Availability": "Book 1:1 mentor"} </button>
-                        <Link href="/QNA">
+                        {!user.willGiveAdvice && <Link href="/QNA">
                           <a className="text-base font-medium text-indigo underline hover:text-gray-500 p-x-2 flex flex-row">
                             {"help me find a mentor"}<QuestionMarkCircleIcon   height={"20px"} width={"20px"} />
                           </a>
-                        </Link>
+                        </Link>}
 
                       </div>
 
