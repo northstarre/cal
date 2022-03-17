@@ -11,6 +11,7 @@ import { HeadSeo } from "@components/seo/head-seo";
 import { CheckIcon } from "@heroicons/react/outline";
 import Button from "@components/ui/Button";
 import { ArrowLeftIcon } from "@heroicons/react/solid";
+import { TRPCError } from "@trpc/server";
 
 export default function Homepage(props: inferSSRProps<typeof getServerSideProps>) {
   console.log(props);
@@ -18,19 +19,7 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
   const query = router.query;
   const { data: session, status } = useSession();
   const loading = status === "loading";
-  useEffect(() => {
-    // Create PaymentIntent as soon as the page loads
-    fetch(
-      `https://devmynorthstarre-api.azurewebsites.net/api/Payments/credits/add/${props.user.id}/${query.credits}`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ subscriptionName: "sirius" }),
-      }
-    )
-      .then((res) => res.json())
-      .then((data) => console.log("Credits processed Successfully"));
-  }, []);
+
   return (
     <div>
       <HeadSeo title={"Payment Confirmation | Northstarre"} description={"Payment Completed Successfully"} />
@@ -77,6 +66,7 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
 export async function getServerSideProps(context: NextPageContext) {
   const session = await getSession(context);
   const signedIn = session?.user?.id ?? false;
+  const credits = parseInt(context.query.credits);
   let user = {};
   if (signedIn) {
     user = await prisma.user.findFirst({
@@ -109,6 +99,17 @@ export async function getServerSideProps(context: NextPageContext) {
         },
       },
     });
+    const resp = await fetch(
+      `https://devmynorthstarre-api.azurewebsites.net/api/Payments/credits/add/${user.id}/${credits}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ subscriptionName: "sirius" }),
+      }
+    );
+    if (resp.status != 200) {
+      throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+    }
   }
   return {
     props: {
