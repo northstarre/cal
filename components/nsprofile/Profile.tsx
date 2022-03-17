@@ -9,7 +9,7 @@ import Modal from "../Modal";
 import Expertise from "./Expertise";
 import { useRouter } from "next/router";
 
-export default function Index({ loggedInUser, profile: user, isReadOnly, updateProfile, avatarRef,onProfilePicEdit  }) {
+export default function Index({ loggedInUser, profile: user, isReadOnly, updateProfile, avatarRef,onProfilePicEdit, majors, degrees, professions, interests, years, goals  }) {
   const [showBioGraphy, setShowBiography] = useState(false);
   const [showChoices, setShowChoices] = useState(false);
   const navigate = useRouter();
@@ -144,6 +144,11 @@ export default function Index({ loggedInUser, profile: user, isReadOnly, updateP
           onEdit={updateProfile}
           avatarRef={avatarRef}
           onProfilePicEdit = {onProfilePicEdit}
+          majors={majors}
+          years={years}
+          professions={professions}
+          degrees={degrees}
+          interests={interests}
         />
       </Modal>
       <Modal isOpen={showChoices} handlePopUp={(d) => setShowChoices(d)} header={user.willGiveAdvice? "Expertise Areas" : "Key Goals"}>
@@ -154,6 +159,7 @@ export default function Index({ loggedInUser, profile: user, isReadOnly, updateP
           }}
           profile={user}
           onEdit={updateProfile}
+          expertise={goals}
         />
       </Modal>
     </>

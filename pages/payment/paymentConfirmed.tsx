@@ -48,7 +48,7 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
                 <div className="mt-5 text-center sm:mt-6">
                   <div className="mt-5">
                     {!loading && session?.user && (
-                      <Button data-testid="back-to-Homes" href="/Home" EndIcon={ArrowLeftIcon}>
+                      <Button data-testid="back-to-Homes" href="/Home" StartIcon={ArrowLeftIcon}>
                         Back to home
                       </Button>
                     )}

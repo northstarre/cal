@@ -1,6 +1,5 @@
 import crypto from "crypto";
 import { GetServerSidePropsContext } from "next";
-import { useRouter } from "next/router";
 import { ComponentProps, FormEvent, useEffect, useRef, useState } from "react";
 import { QueryCell } from "@lib/QueryCell";
 import { getSession } from "@lib/auth";
@@ -63,7 +62,6 @@ function SettingsView(props: ComponentProps<typeof Settings> & { localeProp: str
   ];
 
   const avatarRef = useRef<HTMLInputElement>(null!);
-  const [selectedTheme, setSelectedTheme] = useState<typeof themeOptions[number] | undefined>();
 
   const [hasErrors, setHasErrors] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -72,7 +70,6 @@ function SettingsView(props: ComponentProps<typeof Settings> & { localeProp: str
     if (!props.user.theme) return;
     const userTheme = themeOptions.find((theme) => theme.value === props.user.theme);
     if (!userTheme) return;
-    setSelectedTheme(userTheme);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -92,15 +89,20 @@ function SettingsView(props: ComponentProps<typeof Settings> & { localeProp: str
         profile={props.user}
         avatarRef={avatarRef}
         isReadOnly={false}
-        setShouldRefetch={false}
+        majors={props.majors}
+        interests={props.interests}
+        professions={props.professions}
+        years={props.years}
         onProfilePicEdit={updateProfileHandler}
+        degrees={props.degrees}
+        loggedInUser={undefined}
+        goals={props.goals}
       />
     </>
   );
 }
 
 export default function Settings(props: Props) {
-  const { t } = useLocale();
   const query = trpc.useQuery(["viewer.i18n"]);
 
   return (
@@ -116,6 +118,43 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
 
   if (!session?.user?.id) {
     return { redirect: { permanent: false, destination: "/auth/login" } };
+  }
+
+  let majors: string[] = [];
+  const majorsResp = await fetch(`https://devmynorthstarre-api.azurewebsites.net/api/majorsMeta`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
+  if (majorsResp.ok) {
+    majors = await majorsResp.json();
+  }
+  let professions: string[] = [];
+  const professionsResp = await fetch(
+    `https://devmynorthstarre-api.azurewebsites.net/api/PreProfessionalPrograms`,
+    {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    }
+  );
+  if (professionsResp.ok) {
+    professions = await professionsResp.json();
+  }
+
+  let interests: string[] = [];
+  const interestsResp = await fetch(`https://devmynorthstarre-api.azurewebsites.net/api/Interests`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
+  if (interestsResp.ok) {
+    interests = await interestsResp.json();
+  }
+  let goals: string[] = [];
+  const goalsResp = await fetch(`https://devmynorthstarre-api.azurewebsites.net/api/goals`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
+  if (interestsResp.ok) {
+    goals = await goalsResp.json();
   }
 
   const user = await prisma.user.findUnique({
@@ -162,6 +201,11 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
   if (!user) {
     throw new Error("User seems logged in but cannot be found in the db");
   }
+  const date = new Date();
+  const year = date.getFullYear();
+  const pastyears = Array.from(new Array(5), (val, index) => year - index);
+  const futureYears = Array.from(new Array(15), (val, index) => year + 1 + index);
+  const years = [...pastyears.reverse(), ...futureYears];
 
   return {
     props: {
@@ -169,6 +213,12 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
         ...user,
         emailMd5: crypto.createHash("md5").update(user.email).digest("hex"),
       },
+      majors,
+      professions,
+      interests,
+      years,
+      goals,
+      degrees: ["Bachelors", "Masters", "High Shool Graduate", "Diploma"],
     },
   };
 };

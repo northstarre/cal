@@ -8,25 +8,14 @@ import { doGet, doPost, doPatch } from "../../makeAPICall";
 import ImageUploader from "@components/ImageUploader";
 import { useLocale } from "@lib/hooks/useLocale";
 
-export default function Biography({ onIsEditComplete, profile, onEdit, avatarRef, onProfilePicEdit }) {
-  const [majors, setMajors] = useState([]);
-  const [degrees, setDegrees] = useState(["Bachelors", "Masters", "High Shool Graduate", "Diploma"]);
-  const [professions, setProfessions] = useState([]);
-  const [Interests, setInterests] = useState([]);
+export default function Biography({ onIsEditComplete, profile, onEdit, avatarRef, onProfilePicEdit,
+                                    majors, degrees, professions, interests, years  }) {
+
   const [isLoading, setIsLoading] = useState(false);
-  const [years, setYears] = useState([]);
   const [imageSrc, setImageSrc] = useState<string>(profile.avatar || "");
   const { register, handleSubmit, setValue, reset } = useForm();
   const { t } = useLocale();
   useEffect(() => {
-    doGet("majorsMeta", setMajors, () => {});
-    doGet("PreProfessionalPrograms", setProfessions, () => {});
-    doGet("Interests", setInterests, () => {});
-    const date = new Date();
-    const year = date.getFullYear();
-    const pastyears = Array.from(new Array(5), (val, index) => year - index);
-    const futureYears = Array.from(new Array(15), (val, index) => year + 1 + index);
-    setYears([ ...pastyears.reverse(), ...futureYears]);
     reset(profile)
   }, []);
 
@@ -136,7 +125,7 @@ export default function Biography({ onIsEditComplete, profile, onEdit, avatarRef
               <option selected disabled value>
                 Interest 1
               </option>
-              {Interests.map((item, idx) => (
+              {interests.map((item, idx) => (
                 <option key={idx}>{item.name}</option>
               ))}
             </select>
@@ -146,7 +135,7 @@ export default function Biography({ onIsEditComplete, profile, onEdit, avatarRef
               <option selected disabled value>
                 Interest 2
               </option>
-              {Interests.map((item, idx) => (
+              {interests.map((item, idx) => (
                 <option key={idx}>{item.name}</option>
               ))}
             </select>
@@ -161,7 +150,7 @@ export default function Biography({ onIsEditComplete, profile, onEdit, avatarRef
               <option selected disabled value>
                 Interest 3
               </option>
-              {Interests.map((item, idx) => (
+              {interests.map((item, idx) => (
                 <option key={idx}>{item.name}</option>
               ))}
             </select>
@@ -171,7 +160,7 @@ export default function Biography({ onIsEditComplete, profile, onEdit, avatarRef
               <option selected disabled value>
                 Interest 4
               </option>
-              {Interests.map((item, idx) => (
+              {interests.map((item, idx) => (
                 <option key={idx}>{item.name}</option>
               ))}
             </select>
