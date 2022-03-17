@@ -5,6 +5,7 @@ import { doGet } from "../makeAPICall";
 import Grid from "./Grid";
 import unique from "lodash.uniqby";
 import buildQuery from "odata-query";
+import Loader from "@components/Loader";
 
 // To start, populate with mentors from the waitlist
 function getUniversityShorthand(str) {
@@ -29,15 +30,15 @@ export default function MentorMarketplace({ size, heading, subText }) {
   const select = ["id", "name", "email", "major", "university", "preprofessionTrack"];
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
-    doGet("waitlist?$select=major", onMajorsFetch, () => { });
+    doGet("waitlist?$select=major", onMajorsFetch, () => {});
     // eslint-disable-next-line @typescript-eslint/no-empty-function
-    doGet("waitlist?$select=university", onUniversitiesFetch, () => { });
+    doGet("waitlist?$select=university", onUniversitiesFetch, () => {});
     setQuery(buildQuery({ top, select }));
   }, []);
   useEffect(() => {
     if (query) {
       // eslint-disable-next-line @typescript-eslint/no-empty-function
-      doGet(`waitList${query}`, setFetchedMentors, () => { });
+      doGet(`waitList${query}`, setFetchedMentors, () => {});
     }
   }, [query]);
   useEffect(() => {
@@ -78,7 +79,7 @@ export default function MentorMarketplace({ size, heading, subText }) {
   };
   return (
     <>
-      <div className={"my-8 w-full px-0 md:px-12 lg:px-24"}>
+      <div id={"marketplace"} className={"my-8 w-full px-0 md:px-12 lg:px-24"}>
         <div className="flex flex-col items-center justify-center space-y-4 text-center">
           <h2 className="why-header text-[50px] font-bold leading-[60px] text-[#272d67]">{heading}</h2>
           {subText ? (
@@ -89,7 +90,7 @@ export default function MentorMarketplace({ size, heading, subText }) {
         </div>
         <div className={"flex w-full flex-col gap-4 md:grid md:grid-cols-5"}>
           <div className={"col-span-1 flex flex-col"}>
-            <span className={"text-base text-[#272D67] uppercase font-bold"}>{"Filter"}</span>
+            <span className={"text-base font-bold uppercase text-[#272D67]"}>{"Filter"}</span>
             <div className={"flex flex-row md:flex-col"}>
               <div className="mx-2 mt-[18px] flex w-full flex-col md:mr-16">
                 <label
@@ -133,7 +134,7 @@ export default function MentorMarketplace({ size, heading, subText }) {
             {mentors.length ? (
               <Grid rows={mentors} shouldDisplaySchool={true} shouldDisplayMajor={true} />
             ) : (
-              "Loading Mentor Info"
+              <Loader className={"loader"} />
             )}
           </div>
         </div>
@@ -141,5 +142,3 @@ export default function MentorMarketplace({ size, heading, subText }) {
     </>
   );
 }
-
-

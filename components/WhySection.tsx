@@ -21,7 +21,7 @@ function whyPoint({ src, description1, description2 }, isReverse, calculatedWidt
     </div>
   );
 }
-export default function Index({ heading, subText, className, points, isReverse, footerText, butntext, butnwrap, flexclass }) {
+export default function Index({ heading, subText, className, points, isReverse, footerText, butntext, butnwrap, flexclass, btnClick }) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const gridCountOnLarge = ``;
   const calculatedWidths = points.length <= 3 ? "w-72" : "w-60";
@@ -42,7 +42,7 @@ export default function Index({ heading, subText, className, points, isReverse, 
         </div>
         <div>
           {footerText() ? (
-            <p className="mt-[18px] w-full text-center text-[30px] leading-normal text-[#272d67] font-[Raleway]">
+            <p className="mt-[18px] w-full text-center font-[Raleway] text-[30px] leading-normal text-[#272d67]">
               {footerText()}
             </p>
           ) : (
@@ -54,7 +54,16 @@ export default function Index({ heading, subText, className, points, isReverse, 
             kind={"primary"}
             size={"md"}
             text={butntext}
-            className={"my-2 mx-4 w-[auto] px-6 min-w-[220px] font-[Raleway] text-2xl text-[#F7ECE1] shadow-[0_4px_4px_rgba(0,0,0,0.25)]"}
+            onClick={
+              btnClick
+                ? btnClick
+                : () => {
+                    console.log("No Action Defined");
+                  }
+            }
+            className={
+              "my-2 mx-4 w-[auto] min-w-[220px] px-6 font-[Raleway] text-2xl text-[#F7ECE1] shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
+            }
             isLoading={false}
           />
         </div>

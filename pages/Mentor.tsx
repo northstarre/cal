@@ -6,18 +6,17 @@ import WhySection from "../components/WhySection";
 import Testimonial from "../components/Testimonial";
 import { doGet } from "../makeAPICall";
 import Navbar from "@components/Navbar";
+import { NextPageContext } from "next";
+import { getSession } from "@lib/auth";
+import prisma from "@lib/prisma";
+import { inferSSRProps } from "@lib/types/inferSSRProps";
+import { useRouter } from "next/router";
 
-export default function GiveAdvice() {
-  const [profileToDisplay, setProfile] = useState(undefined);
-  useEffect(() => {
-    const id = "e8443f32-92e9-439b-895b-a49cfae0ee81";
-    doGet(`userInfo?$filter=userObjectId eq ${id}`, setProfile, () => {
-      return "avoiding Es lint";
-    });
-  }, []);
+export default function GiveAdvice(props: inferSSRProps<typeof getServerSideProps>) {
+  const navigate = useRouter();
   return (
     <>
-      <Navbar isBeta={false} signedIn={profileToDisplay ? true: false} profile={profileToDisplay} />
+      <Navbar isBeta={false} signedIn={props.signedIn} profile={props.user} />
       <Hero
         heading={"We believe students are the untapped experts."}
         flexclass={"items-end"}
@@ -29,6 +28,7 @@ export default function GiveAdvice() {
         imagePosition={"right"}
         btnText={"Submit an Application"}
         btnclass={"hero-btn-alter"}
+        btnClick={() => { props.signedIn ? console.log("No Action") :  navigate.push("/auth/signupe"); }}
       />
       <WhySection
         heading={"How It Works"}
@@ -36,6 +36,7 @@ export default function GiveAdvice() {
         className={"rounded-[20px] 2xl:container 2xl:mx-auto"}
         butntext={"Submit an Application"}
         butnwrap={"justify-center mb-3 mt-3"}
+        btnClick={() => { props.signedIn ? console.log("No Action") :  navigate.push("/auth/signupe"); }}
         isReverse={true}
         footerText={() => (
           <p>
@@ -74,4 +75,53 @@ export default function GiveAdvice() {
       </div>
     </>
   );
+}
+export async function getServerSideProps(context: NextPageContext) {
+  const session = await getSession(context);
+  const signedIn = session?.user?.id ?? false;
+  const isBeta = null;
+  let user = {};
+
+  if (signedIn) {
+    user = await prisma.user.findFirst({
+      where: {
+        id: session?.user?.id,
+      },
+      select: {
+        id: true,
+        startTime: true,
+        endTime: true,
+        username: true,
+        name: true,
+        email: true,
+        bio: true,
+        avatar: true,
+        timeZone: true,
+        completedOnboarding: true,
+        willGiveAdvice: true,
+        willGetAdvice: true,
+        preProfessionalTrack: true,
+        school: true,
+        schoolYear: true,
+        zipCode: true,
+        describer: true,
+        selectedCalendars: {
+          select: {
+            externalId: true,
+            integration: true,
+          },
+        },
+      },
+    });
+    if (!user.completedOnboarding) {
+      return { redirect: { permanent: false, destination: "/getting-started" } };
+    }
+  }
+  return {
+    props: {
+      user,
+      isBeta,
+      signedIn,
+    },
+  };
 }

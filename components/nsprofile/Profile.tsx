@@ -8,6 +8,8 @@ import Biography from "./Biography";
 import Modal from "../Modal";
 import Expertise from "./Expertise";
 import { useRouter } from "next/router";
+import { QuestionMarkCircleIcon } from "@heroicons/react/outline"
+import Link from "next/link";
 
 export default function Index({ loggedInUser, profile: user, isReadOnly, updateProfile, avatarRef,onProfilePicEdit, majors, degrees, professions, interests, years, goals  }) {
   const [showBioGraphy, setShowBiography] = useState(false);
@@ -78,14 +80,28 @@ export default function Index({ loggedInUser, profile: user, isReadOnly, updateP
                   <div>
                     <div className={"flex flex-row w-full justify-between"}>
                       <h4 className={"font-600 text-left self-left text-3xl font-semibold text-[#272d67] "}>About</h4>
-                      <button className={"bg-[#60ab67] rounded-full font-bold text-white text-center justify-self-end w-[180px] self-right float-right"} onClick={(e)=> {
-                        if(loggedInUser && loggedInUser.id !== user.id){
-                          navigate.replace(`/${user.username}`)
-                        }
-                        else {
-                          navigate.replace(`/availability`)
-                        }
-                      }}>{loggedInUser && loggedInUser.id !== user.id ? "Book": "Edit Availability"} </button>
+                      <div className={"self-right float-right justify-self-end flex flex-col text-center"}>
+                        <button className={"bg-[#60ab67] rounded-full font-bold text-white text-center w-[180px] p-2 "} onClick={(e)=> {
+                          if(loggedInUser && loggedInUser.id !== user.id){
+                            navigate.replace(`/${user.username}`)
+                          }
+                          else {
+                            if(user.willGiveAdvice) {
+                              navigate.replace(`/availability`)
+                            }
+                            else {
+                              navigate.replace('/Mentee')
+                            }
+                          }
+                        }}>{loggedInUser && loggedInUser.id !== user.id ? "Book": user.willGiveAdvice ? "Edit Availability": "Book 1:1 mentor"} </button>
+                        <Link href="/QNA">
+                          <a className="text-base font-medium text-indigo underline hover:text-gray-500 p-x-2 flex flex-row">
+                            {"help me find a mentor"}<QuestionMarkCircleIcon   height={"20px"} width={"20px"} />
+                          </a>
+                        </Link>
+
+                      </div>
+
                     </div>
                     <p className="text-md font-400 mb-4 text-left leading-relaxed font-[20px] min-h-[280px] text-[#272d67]">
                       {user.bio}
