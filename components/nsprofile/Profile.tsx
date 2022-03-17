@@ -89,7 +89,7 @@ export default function Index({ loggedInUser, profile: user, isReadOnly, updateP
                           }
                         }}>{loggedInUser && loggedInUser.id !== user.id ? "Book": user.willGiveAdvice ? "Edit Availability": "Book 1:1 mentor"} </button>
                         {!user.willGiveAdvice && <Link href="/QNA">
-                          <a className="text-base font-medium text-indigo underline hover:text-gray-500 p-x-2 flex flex-row">
+                          <a className="text-base font-medium font-indigo-600 underline hover:text-gray-500 p-x-2 flex flex-row">
                             {"help me find a mentor"}<QuestionMarkCircleIcon   height={"20px"} width={"20px"} />
                           </a>
                         </Link>}
