@@ -191,6 +191,7 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
         className={"rounded-[20px]"}
         butntext={"How It Works"}
         butnwrap={"justify-center mb-3 mt-3"}
+        btnClick={() => navigate.push("/Mentor")}
         isReverse={true}
         footerText={() => (
           <p>
