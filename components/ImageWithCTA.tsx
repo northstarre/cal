@@ -11,24 +11,34 @@ export default function ImageWithCTA({ data }) {
       }>
       <div className={"flex w-full flex-col items-start"}>
         <img className={data.leftImageClass} src={data.leftImage} />
-        <span className={"font-700 text-[27px] mt-3 leading-[32px] font-bold text-[#272d67]"}>{data.leftHeaderText} </span>
-        <p className={"font-500 text-2xl text-[#272d67] mb-3 font-[Raleway] leading-[28px]"}>{data.leftText}</p>
+        <span className={"font-700 mt-3 text-[27px] font-bold leading-[32px] text-[#272d67]"}>
+          {data.leftHeaderText}{" "}
+        </span>
+        <p className={"font-500 mb-3 font-[Raleway] text-2xl leading-[28px] text-[#272d67]"}>
+          {data.leftText}
+        </p>
         <Button
           kind={data.leftButtonKind}
           className={data.leftButtonClass}
           text={data.leftButtonText}
           isLoading={false}
+          onClick={data.leftOnClick}
         />
       </div>
       <div className={"flex w-full flex-col items-end"}>
         <img className={data.RightImageClass} src={data.rightImage} />
-        <span className={"font-700 text-[27px] mt-3 leading-[32px] font-bold text-[#272d67] "}>{data.rightHeaderText} </span>
-        <p className={"font-500 text-2xl text-[#272d67] mb-3 font-[Raleway] leading-[28px]"}>{data.rightText}</p>
+        <span className={"font-700 mt-3 text-[27px] font-bold leading-[32px] text-[#272d67] "}>
+          {data.rightHeaderText}{" "}
+        </span>
+        <p className={"font-500 mb-3 font-[Raleway] text-2xl leading-[28px] text-[#272d67]"}>
+          {data.rightText}
+        </p>
         <Button
           kind={data.rightButtonKind}
           className={data.rightButtonClass}
           text={data.rightButtonText}
           isLoading={false}
+          onClick={data.rightOnClick}
         />
       </div>
     </div>

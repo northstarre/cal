@@ -15,6 +15,7 @@ import { getSession } from "@lib/auth";
 import { inferSSRProps } from "@lib/types/inferSSRProps";
 import Loader from "@components/Loader";
 import prisma from "@lib/prisma";
+import { useRouter } from "next/router";
 
 export default function Homepage(props: inferSSRProps<typeof getServerSideProps>) {
   console.log(props);
@@ -23,6 +24,7 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
   const [mentors, setMentors] = useState([]);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [loading, setLoading] = useState(false);
+  const navigate = useRouter();
   useEffect(() => {
     fetchData();
   }, []);
@@ -65,6 +67,13 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
         imagePosition={"right"}
         btnText={"Get Started"}
         containerClassName={"h-[auto]"}
+        btnClick={() => {
+          if (props.signedId) {
+            props.user?.willGiveAdvice ? navigate.push("/Availability") : navigate.push("/QNA");
+          } else {
+            navigate.push("/auth/login");
+          }
+        }}
       />
       <div className={"w-full rounded-[20px] bg-[#FFEFED]"}>
         <div className={`2xl:container 2xl:mx-auto`}>
@@ -84,14 +93,12 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
               rightButtonClass: "w-[160px] text-[#F7ECE1] text-2xl font-[Raleway]",
               RightImageClass: "w-full",
               rightImage: "/assets/image%208.png",
+              rightOnClick: () => navigate.push("/Mentor"),
+              leftOnClick: () => navigate.push("/QNA"),
             }}
           />
         </div>
       </div>
-      {/*<div*/}
-      {/*  className={*/}
-      {/*    "hidden h-[556px] w-full bg-[url('/assets/Frame%2011.png')] bg-contain bg-no-repeat md:block"*/}
-      {/*  }></div>*/}
       <div className={`2xl:container 2xl:mx-auto`}>
         <div className={"my-20 flex w-full flex-col font-[Raleway] font-normal md:flex-row"}>
           <div className={"flex w-3/5 flex-col text-left"}>
@@ -117,8 +124,16 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
             </h4>
           </div>
           <div className={"content-left flex w-2/5 flex-row items-center gap-x-2 px-0 md:px-5"}>
-            <img src="/assets/Group%207.png" className={"cursor-pointer rounded-[20px]"} />
-            <img src="/assets/Group%208.png" className={"rounded-[20px]"} />
+            <img
+              src="/assets/Group%207.png"
+              className={"cursor-pointer rounded-[20px]"}
+              onClick={() => navigate.push("/Mentee")}
+            />
+            <img
+              src="/assets/Group%208.png"
+              className={"cursor-pointer rounded-[20px]"}
+              onClick={() => navigate.push("/QNA")}
+            />
           </div>
         </div>
       </div>
@@ -163,6 +178,9 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
                 text={"Talk to a Mentor"}
                 className={"my-2 mx-4 w-[220px] font-[Raleway] text-2xl text-[#F7ECE1]"}
                 isLoading={false}
+                onClick={() => {
+                  navigate.push("/Mentee");
+                }}
               />
             </div>
           </div>
@@ -218,6 +236,7 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
             text={"Give Advice"}
             className={"my-2 mx-4 w-[180px] font-[Raleway] text-2xl text-[#F7ECE1]"}
             isLoading={false}
+            onClick={() => navigate.push("/Mentor")}
           />
           <Button
             kind={"primary"}
@@ -225,6 +244,7 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
             text={"Get Advice"}
             className={"my-2 mx-4 w-[180px] font-[Raleway] text-2xl text-[#F7ECE1]"}
             isLoading={false}
+            onClick={() => navigate.push("/QNA")}
           />
         </div>
       </div>
