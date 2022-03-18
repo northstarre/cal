@@ -1,10 +1,25 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-nocheck
+import React, { useEffect, useState } from "react";
 import Hero from "../components/HeroComponent";
 import Event from "@components/Event";
+// import WhySection from "../components/WhySection";
+// import MentorMarketplace from "../components/MentorMarketplace";
+
+import useWindowSize from "@components/useWindowResizeHook";
 import Navbar from "@components/Navbar";
+import { doGet } from "../makeAPICall";
 
 export default function Events() {
+  const size = useWindowSize();
+  const [profileToDisplay, setProfile] = useState(undefined);
+  useEffect(() => {
+    const id = "e8443f32-92e9-439b-895b-a49cfae0ee81";
+    doGet(`userInfo?$filter=userObjectId eq ${id}`, setProfile, () => {
+      return "avoiding Es lint";
+    });
+  }, []);
+
   return (
     <>
       <Navbar isBeta={false} signedIn={false} profile={profileToDisplay} />
