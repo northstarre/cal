@@ -553,7 +553,7 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
                     <option key={idx}>{item.instnm}</option>
                   ))}
                 {!displayUniversity &&
-                  props.schools.map((item: any, idx: number) => <option key={idx}>{item.name}</option>)}
+                  props.schools.map((item: any, idx: number) => <option key={idx}>{item.Name}</option>)}
               </select>
             </div>
           </fieldset>
@@ -652,6 +652,9 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
   useEffect(() => {
     if (describer === "High School Student") {
       setDisplayUniversity(false);
+    }
+    else {
+      setDisplayUniversity(true);
     }
   }, [describer]);
   if (loading || !ready) {
