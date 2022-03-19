@@ -29,9 +29,14 @@ export default function ProfileSnapshot({
     <>
       <div
         key={id}
-        className="profileSnapshot flex grow shrink-0 basis-[0%] pt-6 px-4 md:pt-4 md:px-4 flex-col items-center justify-start text-center font-[Assistant] font-normal">
+        className="profileSnapshot flex shrink-0 grow basis-[0%] flex-col items-center justify-start px-4 pt-6 text-center font-[Assistant] font-normal md:px-4 md:pt-4">
         <Avatar profilePhoto={profile[0].Profile} displayName={displayName} />
-        <Button className={"mt-[15px] w-[auto] px-2 text-[22px]"} text={displayName} isLoading={false} kind={"secondary"} />
+        <Button
+          className={"mt-[15px] min-w-[160px] px-2 text-[22px]"}
+          text={displayName}
+          isLoading={false}
+          kind={"secondary"}
+        />
         {shouldDisplaySchool ? <span className={"mx-[7px] mt-[4px] text-[22px]"}>{schoolNickname}</span> : ""}
         {shouldDisplayMajor ? <span className={"mx-[7px] mt-[4px] text-[22px]"}>{major}</span> : ""}
       </div>

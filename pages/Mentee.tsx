@@ -1,13 +1,12 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-nocheck
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Hero from "../components/HeroComponent";
 import WhySection from "../components/WhySection";
 import MentorMarketplace from "../components/MentorMarketplace";
 import Button from "../components/Button";
 import useWindowSize from "@components/useWindowResizeHook";
 import Navbar from "@components/Navbar";
-import { doGet } from "../makeAPICall";
 import { useRouter } from "next/router";
 import { NextPageContext } from "next";
 import { getSession } from "@lib/auth";
@@ -29,7 +28,9 @@ export default function ExpertLandingPage(props: inferSSRProps<typeof getServerS
         src={"./assets/image%2055.png"}
         imagePosition={"left"}
         btnText={"Help Me Choose"}
-        btnClick={() => { navigate.push("/Mentee#marketplace")}}
+        btnClick={() => {
+          navigate.push("/Mentee#marketplace");
+        }}
       />
       <WhySection
         heading={"Why Northstarre Mentors?"}
@@ -41,22 +42,22 @@ export default function ExpertLandingPage(props: inferSSRProps<typeof getServerS
         footerText={() => ""}
         points={[
           {
-            src: "/assets/ellipse%2023.png",
+            src: "/assets/Ellipse%2023.png",
             description1: () => <span>The best of the best,</span>,
             description2: () => <span> across the country.</span>,
           },
           {
-            src: "/assets/ellipse%2024.png",
+            src: "/assets/Ellipse%2024.png",
             description1: () => <span>On your own schedule.</span>,
             description2: () => "",
           },
           {
-            src: "/assets/ellipse%2025.png",
+            src: "/assets/Ellipse%2025.png",
             description1: () => <span>As few or as many 1:1s</span>,
             description2: () => <span> as you&lsquo;d like.</span>,
           },
           {
-            src: "/assets/ellipse%2026.png",
+            src: "/assets/Ellipse%2026.png",
             description1: () => <span>At as few or as many</span>,
             description2: () => <span>colleges as you’d like.</span>,
           },

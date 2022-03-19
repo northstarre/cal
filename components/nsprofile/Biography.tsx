@@ -28,6 +28,32 @@ export default function Biography({ onIsEditComplete, profile, onEdit, avatarRef
   return (
     <div className=" my-5">
       <form className="mx-5 mt-5" onSubmit={handleSubmit(onSubmit)}>
+        <div className="flex items-center space-x-9">
+          <label htmlFor="homeTown" className="w-1/3 py-3   px-3 text-sm leading-none text-[#272d67]">
+            Hometown
+          </label>
+          <div className="w-2/3 rounded border-gray-200 py-2.5 px-3">
+            <input
+              className={`flex h-10 w-full items-center rounded  border border-gray-300 pl-3 text-sm shadow focus:border focus:border-indigo-700 focus:outline-none dark:border-gray-700 dark:focus:border-indigo-700`}
+              {...register("homeTown")}
+              placeholder={"Naperville, IL"}
+              type="text">
+            </input>
+          </div>
+        </div>
+        <div className="flex items-center space-x-9">
+          <label htmlFor="homeTown" className="w-1/3 py-3   px-3 text-sm leading-none text-[#272d67]">
+            Current Location
+          </label>
+          <div className="w-2/3 rounded border-gray-200 py-2.5 px-3">
+            <input
+              className={`flex h-10 w-full items-center rounded  border border-gray-300 pl-3 text-sm shadow focus:border focus:border-indigo-700 focus:outline-none dark:border-gray-700 dark:focus:border-indigo-700`}
+              {...register("currentLocation")}
+              placeholder={"San Francisco, CA"}
+              type="text">
+            </input>
+          </div>
+        </div>
         {profile.willGiveAdvice ? (
           <div className="flex items-center space-x-9">
             <label htmlFor="email1" className="w-1/3 py-3   px-3 text-sm leading-none text-[#272d67]">
