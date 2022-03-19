@@ -13,7 +13,7 @@ export default function Grid({ rows, shouldDisplayMajor, shouldDisplaySchool }) 
     <div className={"w-[100%]"}>
       {rows.map((itm) => (
         <>
-          <div className={"align-start mt-6 flex flex-row justify-start"}>
+          <div className={"align-start mt-6 flex flex-wrap justify-start md:flex-row"}>
             {itm?.map((prof) => (
               <ProfileSnapshot
                 key={prof.Id}

@@ -56,7 +56,6 @@ let mutationComplete: ((err: Error | null) => void) | null;
 export default function Onboarding(props: inferSSRProps<typeof getServerSideProps>) {
   const { t } = useLocale();
   const router = useRouter();
-  const telemetry = useTelemetry();
 
   const mutation = trpc.useMutation("viewer.updateProfile", {
     onSuccess: async () => {
@@ -97,6 +96,7 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
   const [error, setError] = useState<Error | null>(null);
   const [school, setSchool] = React.useState("");
   const [schoolYear, setSchoolYear] = React.useState("");
+  const [displayUniversity, setDisplayUniversity] = React.useState(true);
 
   const updateUser = async (data: Prisma.UserUpdateInput) => {
     const res = await fetch(`/api/user/${props.user.id}`, {
@@ -548,9 +548,12 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
                 <option selected disabled value={""}>
                   Select School
                 </option>
-                {props.universities.map((item: any, idx: number) => (
-                  <option key={idx}>{item.instnm}</option>
-                ))}
+                {displayUniversity &&
+                  props.universities.map((item: any, idx: number) => (
+                    <option key={idx}>{item.instnm}</option>
+                  ))}
+                {!displayUniversity &&
+                  props.schools.map((item: any, idx: number) => <option key={idx}>{item.name}</option>)}
               </select>
             </div>
           </fieldset>
@@ -646,7 +649,11 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
     setReady(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  useEffect(() => {
+    if (describer === "High School Student") {
+      setDisplayUniversity(false);
+    }
+  }, [describer]);
   if (loading || !ready) {
     return <div className="loader"></div>;
   }
@@ -764,6 +771,19 @@ export async function getServerSideProps(context: NextPageContext) {
     throw new Error((await universitiesResp.json()).message);
   }
   const universities = await universitiesResp.json();
+  const schoolsResp = await fetch(
+    "https://devmynorthstarre-api.azurewebsites.net/api/schools?$select=name,id",
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  if (!schoolsResp.ok) {
+    throw new Error((await schoolsResp.json()).message);
+  }
+  const schools = await schoolsResp.json();
 
   if (!session?.user?.id) {
     return {
@@ -876,6 +896,7 @@ export async function getServerSideProps(context: NextPageContext) {
       universities,
       schoolYears,
       describers,
+      schools,
     },
   };
 }
