@@ -82,8 +82,8 @@ export default function MentorMarketplace({ size, heading, subText }) {
       const newRow = newRowbkp.map((itm) => {
         return {
           ...itm,
-          university: itm.unishortcode ?? itm.university,
-          major: itm.majorshortcode ?? itm.major,
+          university: itm.UniShortCode ?? itm.University,
+          major: itm.MajorShortCode ?? itm.Major,
         };
       });
       rows.push(newRow);

@@ -19,7 +19,7 @@ export default function Grid({ rows, shouldDisplayMajor, shouldDisplaySchool }) 
                 key={prof.Id}
                 displayName={createDisplayName(prof.Name)}
                 id={prof.Id}
-                major={prof.Major}
+                major={prof.major}
                 schoolNickname={prof.university}
                 shouldDisplayMajor={shouldDisplayMajor}
                 shouldDisplaySchool={shouldDisplaySchool}
