@@ -27,7 +27,16 @@ export default function MentorMarketplace({ size, heading, subText }) {
   const [query, setQuery] = useState("");
   const [selectedUniversity, setSelectedUniversity] = useState("");
   const top = 30;
-  const select = ["id", "name", "email", "majorshortcode", "unishortcode", "preprofessionTrack"];
+  const select = [
+    "id",
+    "name",
+    "email",
+    "majorshortcode",
+    "university",
+    "major",
+    "unishortcode",
+    "preprofessionTrack",
+  ];
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     doGet("WaitListView?$select=major", onMajorsFetch, () => {});
@@ -71,7 +80,11 @@ export default function MentorMarketplace({ size, heading, subText }) {
     while (remainingData.length >= 1) {
       const newRowbkp = remainingData.splice(0, defaultSize);
       const newRow = newRowbkp.map((itm) => {
-        return { ...itm, university: getUniversityShorthand(itm.University) };
+        return {
+          ...itm,
+          university: itm.unishortcode ?? itm.university,
+          major: itm.majorshortcode ?? itm.major,
+        };
       });
       rows.push(newRow);
     }
