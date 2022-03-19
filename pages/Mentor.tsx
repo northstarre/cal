@@ -32,8 +32,8 @@ export default function GiveAdvice(props: inferSSRProps<typeof getServerSideProp
       />
       <WhySection
         heading={"How It Works"}
-        flexclass={"py-0 px-0 lg:px-0"}
-        className={"rounded-[20px] 2xl:container 2xl:mx-auto"}
+        flexclass={"py-0 px-4 lg:px-0"}
+        className={"rounded-[20px] container mx-auto"}
         butntext={"Submit an Application"}
         butnwrap={"justify-center mb-3 mt-3"}
         btnClick={() => { props.signedIn ? console.log("No Action") :  navigate.push("/auth/signupe"); }}
@@ -64,11 +64,11 @@ export default function GiveAdvice(props: inferSSRProps<typeof getServerSideProp
         ]}
       />
       <Testimonial />
-      <div className={`2xl:container 2xl:mx-auto`}>
+      <div className={`container mx-auto px-4 md:px-6 lg:px-4`}>
         <div className={"font-[Raleway] font-normal my-16 flex w-full flex-col md:flex-row"}>
           <div className={"flex w-[100%] flex-col"}>
             <h2 className="why-header text-center text-[25px] font-normal leading-[29px] text-[#272d67]">
-            Questions? Contact support@mynorthstarre.com. We’re here to help.
+              Questions? Contact support@mynorthstarre.com. We’re here to help.
             </h2>
           </div>
         </div>
