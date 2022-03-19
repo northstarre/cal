@@ -97,6 +97,11 @@ module.exports = () => plugins.reduce((acc, next) => next(acc), {
         destination: "/Account/Account",
         permanent: true,
       },
+      {
+        source: "/QNA",
+        destination: "/events",
+        permanent: true,
+      },
     ];
   },
 });
