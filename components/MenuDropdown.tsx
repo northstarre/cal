@@ -58,7 +58,7 @@ export const ProfileDropDown = ({ options, img }) => {
               </button>
             </div>
             {show && (
-              <ul className="visible absolute mt-2 w-48 rounded-[10px] border border-[#272d67] bg-white py-1 opacity-100 shadow transition duration-300 z-[9999]">
+              <ul className="visible absolute right-[10px] mt-2 w-48 rounded-[10px] border border-[#272d67] bg-white py-1 opacity-100 shadow transition duration-300 z-[9999]">
                 {options.map((itm) => (
                   <li
                     className="cursor-pointer py-3   px-3 text-sm font-medium leading-3 tracking-normal text-gray-600 hover:text-indigo-600"

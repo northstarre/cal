@@ -27,18 +27,18 @@ export default function MentorMarketplace({ size, heading, subText }) {
   const [query, setQuery] = useState("");
   const [selectedUniversity, setSelectedUniversity] = useState("");
   const top = 30;
-  const select = ["id", "name", "email", "major", "university", "preprofessionTrack"];
+  const select = ["id", "name", "email", "majorshortcode", "unishortcode", "preprofessionTrack"];
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
-    doGet("waitlist?$select=major", onMajorsFetch, () => {});
+    doGet("WaitListView?$select=major", onMajorsFetch, () => {});
     // eslint-disable-next-line @typescript-eslint/no-empty-function
-    doGet("waitlist?$select=university", onUniversitiesFetch, () => {});
+    doGet("WaitListView?$select=university", onUniversitiesFetch, () => {});
     setQuery(buildQuery({ top, select }));
   }, []);
   useEffect(() => {
     if (query) {
       // eslint-disable-next-line @typescript-eslint/no-empty-function
-      doGet(`waitList${query}`, setFetchedMentors, () => {});
+      doGet(`WaitListView${query}`, setFetchedMentors, () => {});
     }
   }, [query]);
   useEffect(() => {

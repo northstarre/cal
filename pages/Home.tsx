@@ -36,7 +36,7 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
   const fetchData = () => {
     setLoading(true);
     doGet(
-      "waitlist?$top=12&$select=id,name,email,major,university,preprofessionTrack",
+      "WaitListView?$top=12&$select=id,name,email,majorshortcode,unishortcode,preprofessionTrack",
       setFetchedMentors,
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       () => {}
