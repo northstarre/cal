@@ -165,8 +165,34 @@ export default function Shell(props: {
       current: router.asPath.startsWith("/integrations"),
     },
     {
-      name: "Profile",
-      href: "/settings/profile",
+      name: "Manage Password",
+      href: "/settings/security",
+      icon: CogIcon,
+      current: router.asPath.startsWith("/settings"),
+    },
+  ];
+  const menteeNavigation = [
+    {
+      name: "Account",
+      href: "/Account/Account",
+      icon: UserCircleIcon,
+      current: router.asPath.startsWith("/Account"),
+    },
+    {
+      name: t("bookings"),
+      href: "/bookings/upcoming",
+      icon: CalendarIcon,
+      current: router.asPath.startsWith("/bookings"),
+    },
+    {
+      name: t("integrations"),
+      href: "/integrations",
+      icon: PuzzleIcon,
+      current: router.asPath.startsWith("/integrations"),
+    },
+    {
+      name: "Manage Password",
+      href: "/settings/security",
       icon: CogIcon,
       current: router.asPath.startsWith("/settings"),
     },
@@ -184,6 +210,7 @@ export default function Shell(props: {
   const user = query.data;
 
   const i18n = useViewerI18n();
+  const resolvedNav = user?.willGiveAdvice ? navigation : menteeNavigation;
 
   if (i18n.status === "loading" || isRedirectingToOnboarding || loading) {
     // show spinner whilst i18n is loading to avoid language flicker
@@ -213,7 +240,7 @@ export default function Shell(props: {
             <div className="flex h-0 flex-1 flex-col border-r border-gray-200 bg-white">
               <div className="flex flex-1 flex-col overflow-y-auto pt-3 pb-4 lg:pt-5">
                 <nav className="mt-2 flex-1 space-y-1 bg-white px-2 lg:mt-5">
-                  {navigation.map((item) => (
+                  {resolvedNav.map((item) => (
                     <Link key={item.name} href={item.href}>
                       <a
                         className={classNames(
@@ -302,7 +329,7 @@ export default function Shell(props: {
               {/* show bottom navigation for md and smaller (tablet and phones) */}
               <nav className="bottom-nav fixed bottom-0 z-40 flex w-full bg-white shadow md:hidden">
                 {/* note(PeerRich): using flatMap instead of map to remove settings from bottom nav */}
-                {navigation.flatMap((item, itemIdx) =>
+                {resolvedNav.flatMap((item, itemIdx) =>
                   item.href === "/settings/profile" ? (
                     []
                   ) : (
@@ -311,7 +338,7 @@ export default function Shell(props: {
                         className={classNames(
                           item.current ? "text-gray-900" : "text-neutral-400 hover:text-gray-700",
                           itemIdx === 0 ? "rounded-l-lg" : "",
-                          itemIdx === navigation.length - 1 ? "rounded-r-lg" : "",
+                          itemIdx === resolvedNav.length - 1 ? "rounded-r-lg" : "",
                           "group relative min-w-0 flex-1 overflow-hidden bg-white py-2 px-2 text-center text-xs font-medium hover:bg-gray-50 focus:z-10 sm:text-sm"
                         )}
                         aria-current={item.current ? "page" : undefined}>

@@ -9,6 +9,7 @@ import Button from "@components/ui/Button";
 const ChangePasswordSection = () => {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  const [newPasswordRetype, setNewPassRetype] = useState("");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { t } = useLocale();
@@ -25,8 +26,15 @@ const ChangePasswordSection = () => {
       return;
     }
 
-    setIsSubmitting(true);
     setErrorMessage(null);
+    setIsSubmitting(true);
+    if (newPassword !== newPasswordRetype) {
+      console.log(newPassword);
+      console.log(newPasswordRetype);
+      setErrorMessage("New password and Retyped password should match");
+      setIsSubmitting(false);
+      return;
+    }
 
     try {
       const response = await fetch("/api/auth/changepw", {
@@ -40,6 +48,7 @@ const ChangePasswordSection = () => {
       if (response.status === 200) {
         setOldPassword("");
         setNewPassword("");
+        setNewPassRetype("");
         showToast(t("password_has_been_changed"), "success");
         return;
       }
@@ -61,7 +70,7 @@ const ChangePasswordSection = () => {
       </div>
       <form className="divide-y divide-gray-200 lg:col-span-9" onSubmit={changePasswordHandler}>
         <div className="py-6 lg:pb-8">
-          <div className="flex">
+          <div className="flex flex-col">
             <div className="w-1/2 ltr:mr-2 rtl:ml-2">
               <label htmlFor="current_password" className="block text-sm font-medium text-gray-700">
                 {t("current_password")}
@@ -79,7 +88,7 @@ const ChangePasswordSection = () => {
                 />
               </div>
             </div>
-            <div className="ml-2 w-1/2">
+            <div className="mt-4 w-1/2 ltr:mr-2 rtl:ml-2">
               <label htmlFor="new_password" className="block text-sm font-medium text-gray-700">
                 {t("new_password")}
               </label>
@@ -92,7 +101,24 @@ const ChangePasswordSection = () => {
                   required
                   onInput={(e) => setNewPassword(e.currentTarget.value)}
                   className="block w-full rounded-sm border-gray-300 shadow-sm focus:border-brand focus:ring-black sm:text-sm"
-                  placeholder={t("super_secure_new_password")}
+                  placeholder={"New password"}
+                />
+              </div>
+            </div>
+            <div className="mt-4 w-1/2 ltr:mr-2 rtl:ml-2">
+              <label htmlFor="new_password_retype" className="block text-sm font-medium text-gray-700">
+                {"Re-enter your new password"}
+              </label>
+              <div className="mt-1">
+                <input
+                  type="password"
+                  name="new_password_retype"
+                  id="new_password_retype"
+                  value={newPasswordRetype}
+                  required
+                  onInput={(e) => setNewPassRetype(e.currentTarget.value)}
+                  className="block w-full rounded-sm border-gray-300 shadow-sm focus:border-brand focus:ring-black sm:text-sm"
+                  placeholder={"New password"}
                 />
               </div>
             </div>

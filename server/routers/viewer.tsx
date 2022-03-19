@@ -83,6 +83,7 @@ const loggedInViewerRouter = createProtectedRouter()
         brandColor: user.brandColor,
         plan: user.plan,
         away: user.away,
+        willGiveAdvice: user.willGiveAdvice,
       };
     },
   })

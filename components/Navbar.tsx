@@ -65,7 +65,7 @@ export default function Navbar({ signedIn, isBeta, profile }) {
                 </svg>
               </button>
               {!isBeta ? (
-                <ul className="hidden h-full w-full items-center justify-center pr-12 md:flex font-[Raleway]">
+                <ul className="hidden h-full w-full items-center justify-center lg:pr-12 md:flex font-[Raleway]">
                   <li>
                     <MenuDropdown
                       text={"Get Advice"}
@@ -186,7 +186,7 @@ export default function Navbar({ signedIn, isBeta, profile }) {
                           </div>
                         </>
                       ) : (
-                        <Button kind={"default"} text={"Sign Up"} />
+                        <Button kind={"default"} text={"Sign Up"} className={"px-4 mr-4"} />
                       )
                     ) : (
                       ""

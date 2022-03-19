@@ -6,18 +6,17 @@ import WhySection from "../components/WhySection";
 import Testimonial from "../components/Testimonial";
 import { doGet } from "../makeAPICall";
 import Navbar from "@components/Navbar";
+import { NextPageContext } from "next";
+import { getSession } from "@lib/auth";
+import prisma from "@lib/prisma";
+import { inferSSRProps } from "@lib/types/inferSSRProps";
+import { useRouter } from "next/router";
 
-export default function GiveAdvice() {
-  const [profileToDisplay, setProfile] = useState(undefined);
-  useEffect(() => {
-    const id = "e8443f32-92e9-439b-895b-a49cfae0ee81";
-    doGet(`userInfo?$filter=userObjectId eq ${id}`, setProfile, () => {
-      return "avoiding Es lint";
-    });
-  }, []);
+export default function GiveAdvice(props: inferSSRProps<typeof getServerSideProps>) {
+  const navigate = useRouter();
   return (
     <>
-      <Navbar isBeta={false} signedIn={profileToDisplay ? true: false} profile={profileToDisplay} />
+      <Navbar isBeta={false} signedIn={props.signedIn} profile={props.user} />
       <Hero
         heading={"We believe students are the untapped experts."}
         flexclass={"items-end"}
@@ -29,13 +28,15 @@ export default function GiveAdvice() {
         imagePosition={"right"}
         btnText={"Submit an Application"}
         btnclass={"hero-btn-alter"}
+        btnClick={() => { props.signedIn ? console.log("No Action") :  navigate.push("/auth/signupe"); }}
       />
       <WhySection
         heading={"How It Works"}
-        flexclass={"py-0 px-0 lg:px-0"}
-        className={"rounded-[20px] 2xl:container 2xl:mx-auto"}
+        flexclass={"py-0 px-4 lg:px-0"}
+        className={"rounded-[20px] container mx-auto"}
         butntext={"Submit an Application"}
         butnwrap={"justify-center mb-3 mt-3"}
+        btnClick={() => { props.signedIn ? console.log("No Action") :  navigate.push("/auth/signupe"); }}
         isReverse={true}
         footerText={() => (
           <p>
@@ -63,15 +64,64 @@ export default function GiveAdvice() {
         ]}
       />
       <Testimonial />
-      <div className={`2xl:container 2xl:mx-auto`}>
+      <div className={`container mx-auto px-4 md:px-6 lg:px-4`}>
         <div className={"font-[Raleway] font-normal my-16 flex w-full flex-col md:flex-row"}>
           <div className={"flex w-[100%] flex-col"}>
             <h2 className="why-header text-center text-[25px] font-normal leading-[29px] text-[#272d67]">
-            Questions? Contact support@mynorthstarre.com. We’re here to help.
+              Questions? Contact support@mynorthstarre.com. We’re here to help.
             </h2>
           </div>
         </div>
       </div>
     </>
   );
+}
+export async function getServerSideProps(context: NextPageContext) {
+  const session = await getSession(context);
+  const signedIn = session?.user?.id ?? false;
+  const isBeta = null;
+  let user = {};
+
+  if (signedIn) {
+    user = await prisma.user.findFirst({
+      where: {
+        id: session?.user?.id,
+      },
+      select: {
+        id: true,
+        startTime: true,
+        endTime: true,
+        username: true,
+        name: true,
+        email: true,
+        bio: true,
+        avatar: true,
+        timeZone: true,
+        completedOnboarding: true,
+        willGiveAdvice: true,
+        willGetAdvice: true,
+        preProfessionalTrack: true,
+        school: true,
+        schoolYear: true,
+        zipCode: true,
+        describer: true,
+        selectedCalendars: {
+          select: {
+            externalId: true,
+            integration: true,
+          },
+        },
+      },
+    });
+    if (!user.completedOnboarding) {
+      return { redirect: { permanent: false, destination: "/getting-started" } };
+    }
+  }
+  return {
+    props: {
+      user,
+      isBeta,
+      signedIn,
+    },
+  };
 }
