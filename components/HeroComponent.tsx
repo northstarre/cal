@@ -14,7 +14,8 @@ function Index({
   containerClassName,
   flexclass,
   btnclass,
-  btnClick,
+
+  btnClick
 }) {
   const image = (
     <div className="flex w-full items-center md:w-1/2">
