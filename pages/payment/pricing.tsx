@@ -66,7 +66,7 @@ export default function Pricing(props: inferSSRProps<typeof getServerSideProps>)
               <div className={"my-10 min-h-[440px] rounded-[20px] border-2 border-[#272d67] py-4 px-2"}>
                 <div
                   className={"flex flex-col items-center rounded-[20px] bg-[#7C4DFF]/[0.16] p-4 text-center"}>
-                  <span className={"text-4xl font-bold"}>3 Expert Call</span>
+                  <span className={"text-4xl font-bold"}>3 Expert Calls</span>
                   <span className={"mt-5 mb-1 text-2xl"}>This Month</span>
                 </div>
                 <div className={"mt-[40px] mb-[30px] flex flex-col items-center  text-center"}>
@@ -108,7 +108,7 @@ export default function Pricing(props: inferSSRProps<typeof getServerSideProps>)
               <span className={"text-4xl font-normal"}>Polaris</span>
               <div className={"my-10 min-h-[440px] rounded-[20px] border-2 border-[#272d67] py-4 px-2"}>
                 <div className={"flex flex-col items-center rounded-[20px] bg-[#FFEFED] p-4 text-center"}>
-                  <span className={"text-4xl font-bold"}>5 Expert Call</span>
+                  <span className={"text-4xl font-bold"}>5 Expert Calls</span>
                   <span className={"mt-5 mb-1 text-2xl"}>This Month</span>
                 </div>
                 <div className={"mt-[40px] mb-[60px] flex flex-col items-center  text-center"}>
