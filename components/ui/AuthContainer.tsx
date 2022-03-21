@@ -24,7 +24,7 @@ export default function AuthContainer(props: React.PropsWithChildren<Props>) {
           <div id="loginContainer" className="flex w-full justify-center bg-white lg:w-1/2">
             <div className="flex w-full flex-col justify-center px-2 py-16 text-gray-800 dark:text-gray-100 sm:w-4/6 sm:px-0 md:w-3/6 lg:w-2/3">
               <div className="px-2 sm:px-6">
-                <h3 className="text-2xl font-bold leading-tight text-[#272d67] sm:text-3xl md:text-2xl">
+                <h3 className="text-center text-2xl font-bold leading-tight text-[#272d67] sm:text-3xl md:text-2xl">
                   Sign In To Your Northstarre Account
                 </h3>
               </div>

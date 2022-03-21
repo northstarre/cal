@@ -15,10 +15,10 @@ function Index({
   flexclass,
   btnclass,
 
-  btnClick
+  btnClick,
 }) {
   const image = (
-    <div className="flex w-full items-center md:w-1/2">
+    <div className="flex w-full justify-end md:w-1/2">
       <img
         loading="lazy"
         className="mt-5 rounded-[20px] md:mt-0 lg:rounded-[90px]"
@@ -55,7 +55,7 @@ function Index({
       <div className="pb-0">
         <dh-component>
           <section className={`w-full pt-24 pb-16 md:pt-6 ${containerClassName} bg-white`}>
-            <div className={`mx-auto px-4 md:px-6 lg:px-4`}>
+            <div className={`mx-auto px-4 md:px-10 lg:px-16`}>
               <div className={`flex flex-col  space-y-4 md:flex-row md:space-y-0 md:space-x-20 ${flexclass}`}>
                 {imagePosition === "left" ? image : content()}
                 {imagePosition === "right" ? image : content()}

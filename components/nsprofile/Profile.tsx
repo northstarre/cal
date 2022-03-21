@@ -61,13 +61,13 @@ export default function Index({ loggedInUser, profile: user, isReadOnly, updateP
                     <div className="flex justify-center py-4 pt-8 lg:pt-4">
                       <div className="mr-4 p-3 text-center">
                         <span className="block flex flex-row text-3xl font-bold uppercase tracking-wide text-gray-700">
-                          2 <CallIcon />
+                          {/*2 <CallIcon />*/}
                         </span>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div className="text-center ">
+                <div className="text-center mt-6">
                   <h3 className="font-800 mb-2 mb-2 text-4xl font-semibold leading-normal text-[#272d67]">
                     {user.name}
                   </h3>
@@ -87,17 +87,17 @@ export default function Index({ loggedInUser, profile: user, isReadOnly, updateP
                               navigate.replace('/Mentee')
                             }
                           }
-                        }}>{loggedInUser && loggedInUser.id !== user.id ? "Book": user.willGiveAdvice ? "Edit Availability": "Book 1:1 mentor"} </button>
+                        }}>{loggedInUser && loggedInUser.id !== user.id ? "Book": user.willGiveAdvice ? "Edit Availability": "Book a Mentor 1:1"} </button>
                         {!user.willGiveAdvice && <Link href="/QNA">
-                          <a className="text-base font-medium font-indigo-600 underline hover:text-gray-500 p-x-2 flex flex-row">
-                            {"help me find a mentor"}<QuestionMarkCircleIcon   height={"20px"} width={"20px"} />
+                          <a className="text-base font-medium font-indigo-600 underline hover:text-gray-500 mt-2 p-x-2 flex flex-row">
+                            {"Help Me Find a Mentor"}<QuestionMarkCircleIcon  className={"mt-1"} height={"20px"} width={"20px"} />
                           </a>
                         </Link>}
 
                       </div>
 
                     </div>
-                    <p className="text-md font-400 mb-4 text-left leading-relaxed font-[20px] min-h-[280px] text-[#272d67]">
+                    <p className="text-md font-400 mb-4 text-left leading-relaxed text-[20px] min-h-[100px] text-[#272d67]">
                       {user.bio}
                     </p>
                   </div>

@@ -24,7 +24,7 @@ export default function GiveAdvice(props: inferSSRProps<typeof getServerSideProp
           "With your expertise, we can democratize access to professional resources. "
         }
         kind={"primary"}
-        src={"/assets/image%202.png"}
+        src={"/assets/mentor2.jpg"}
         imagePosition={"right"}
         btnText={"Submit an Application"}
         btnclass={"hero-btn-alter"}

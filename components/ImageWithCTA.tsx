@@ -7,7 +7,7 @@ export default function ImageWithCTA({ data }) {
   return (
     <div
       className={
-        "grid w-full grid-cols-1 gap-y-4 py-8 sm:grid-cols-1  md:grid-cols-2 md:gap-x-4 lg:grid-cols-2 lg:gap-y-0"
+        "grid w-full grid-cols-1 gap-y-4 py-8 px-4 sm:grid-cols-1 md:grid-cols-2 md:gap-x-4 md:px-10 lg:grid-cols-2 lg:gap-y-0 lg:px-16"
       }>
       <div className={"flex w-full flex-col items-start"}>
         <img className={data.leftImageClass} src={data.leftImage} />

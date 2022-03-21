@@ -36,7 +36,7 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
   const fetchData = () => {
     setLoading(true);
     doGet(
-      "WaitListView?$top=12&$select=id,name,email,majorshortcode,unishortcode,preprofessionTrack",
+      "WaitListView?$top=12&$select=id,name,email,university,major,majorshortcode,unishortcode,preprofessionTrack",
       setFetchedMentors,
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       () => {}
@@ -50,7 +50,14 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
     const defaultSize = size.width < 400 ? 2 : size.width < 700 ? 3 : 4;
     const rows = [];
     while (remainingData.length >= 1) {
-      const newRow = remainingData.splice(0, defaultSize);
+      const newRowbkp = remainingData.splice(0, defaultSize);
+      const newRow = newRowbkp.map((itm) => {
+        return {
+          ...itm,
+          university: itm.UniShortCode ?? itm.University,
+          major: itm.MajorShortCode ?? itm.Major,
+        };
+      });
       rows.push(newRow);
     }
     setMentors(rows);
@@ -94,7 +101,7 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
               RightImageClass: "w-full",
               rightImage: "/assets/image%208.png",
               rightOnClick: () => navigate.push("/Mentor"),
-              leftOnClick: () => navigate.push("/QNA"),
+              leftOnClick: () => navigate.replace("/events"),
             }}
           />
         </div>
@@ -123,7 +130,10 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
               And set the right trajectory for your future self.
             </h4>
           </div>
-          <div className={"\"content-left flex flex-wrap md:w-2/5 md:flex-row items-center justify-between md:justify-end gap-x-2 px-0 md:px-5 mt-6 md:mt-0"}>
+          <div
+            className={
+              '"content-left mt-6 flex flex-wrap items-center justify-between gap-x-2 px-0 md:mt-0 md:w-2/5 md:flex-row md:justify-end md:px-5'
+            }>
             <img
               src="/assets/Group%207.png"
               className={"cursor-pointer rounded-[20px]"}
@@ -132,7 +142,7 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
             <img
               src="/assets/Group%208.png"
               className={"mt-4 cursor-pointer rounded-[20px] md:mt-0"}
-              onClick={() => navigate.push("/QNA")}
+              onClick={() => navigate.push("/events")}
             />
           </div>
         </div>
@@ -173,11 +183,11 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
           </div>
           <div className={"flex flex-col items-start md:col-span-3"}>
             {mentors.length ? (
-              <Grid rows={mentors} shouldDisplaySchool={false} shouldDisplayMajor={true} />
+              <Grid rows={mentors} shouldDisplaySchool={true} shouldDisplayMajor={true} />
             ) : (
               <Loader className={"loader"} />
             )}
-            <div className="mt-3 flex w-[100%] justify-center text-center">
+            <div className="mt-3 flex w-[100%] content-end items-end justify-center text-center">
               <Button
                 kind={"primary"}
                 size={"md"}

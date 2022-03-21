@@ -70,13 +70,20 @@ export default function Navbar({ signedIn, isBeta, profile }) {
                     <MenuDropdown
                       text={"Get Advice"}
                       options={[
-                        { text: "Get Advice", onClick: () => navigate.push("/Mentee") },
+                        {
+                          text: "Join Our Q&As",
+                          onClick: () => {
+                            navigate.push("/events");
+                          },
+                        },
+                        { text: "Talk to a Mentor", onClick: () => navigate.push("/Mentee") },
                         {
                           text: "Pricing",
                           onClick: () => {
                             navigate.push("/payment/pricing");
                           },
                         },
+
                       ]}
                     />
                   </li>

@@ -480,7 +480,7 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
             <label htmlFor="NorthStarreRole" className="block w-full text-sm font-medium text-brand">
               Are you looking to get advice or give advice?
             </label>
-            <div className="my-10 flex w-full flex-row">
+            <div className="my-10 flex w-full flex-row items-center justify-around">
               <ToggleButton
                 kind={"default"}
                 onClick={(isActive: boolean) => {
@@ -488,7 +488,7 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
                 }}
                 type={"button"}
                 size={"md"}
-                className="mx-4 w-1/3 rounded-[5px] "
+                className="mx-4 w-2/5 rounded-[5px] "
                 text={"Give Advice"}
                 disabled={false}
               />
@@ -499,26 +499,13 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
                 }}
                 type={"button"}
                 size={"md"}
-                className="mx-4 w-1/3 rounded-[5px]"
+                className="mx-4 w-2/5 rounded-[5px]"
                 text={"Get Advice"}
                 disabled={false}
               />
-              {/*Todo: Remove and Restyle*/}
-              <ToggleButton
-                kind={"default"}
-                onClick={(isActive: boolean) => {
-                  setIsMentor(isActive);
-                  setIsMentee(isActive);
-                }}
-                type={"button"}
-                size={"md"}
-                disabled={isMentor || isMentee}
-                className="mx-4 w-1/3 rounded-[5px]"
-                text={"Both"}
-              />
             </div>
           </div>
-          <div className="flex flex-col items-center space-x-9">
+          <div className="flex flex-col items-center">
             <label htmlFor="describer" className="block w-full text-sm font-medium text-brand">
               Which of the following describes you?
             </label>
@@ -539,7 +526,7 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
           </div>
           <fieldset>
             <label className="block text-sm font-medium text-brand">What school do you go to?</label>
-            <div className="mb-10 flex w-full flex-row">
+            <div className="mb-4 flex w-full flex-row">
               <select
                 onChange={(e) => {
                   setSchool(e.target.value);
@@ -566,7 +553,7 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
                   setSchoolYear(e.target.value);
                 }}>
                 <option selected disabled value={""}>
-                  select year
+                  Select Year
                 </option>
                 {props.schoolYears.map((item: any, idx: number) => (
                   <option key={idx}>{item}</option>
@@ -652,8 +639,7 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
   useEffect(() => {
     if (describer === "High School Student") {
       setDisplayUniversity(false);
-    }
-    else {
+    } else {
       setDisplayUniversity(true);
     }
   }, [describer]);
@@ -664,7 +650,7 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
   return (
     <div className="min-h-screen bg-brand bg-opacity-50" data-testid="onboarding">
       <Head>
-        <title>Welcome to NorthStarre - {t("getting_started")}</title>
+        <title>Welcome to Northstarre - {t("getting_started")}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
