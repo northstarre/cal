@@ -33,7 +33,7 @@ export default function ProfileSnapshot({
         <Avatar profilePhoto={profile[0].Profile} displayName={displayName} />
         <Button
           className={
-            "mt-[15px] w-[auto] px-2 text-lg lg:text-[20px] lg:leading-[28px] xl:text-[22px] xl:leading-[33px]"
+            "mt-[15px] w-[160px] px-2 text-lg lg:text-[20px] lg:leading-[28px] xl:text-[22px] xl:leading-[33px]"
           }
           text={displayName}
           isLoading={false}

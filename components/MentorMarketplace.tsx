@@ -7,7 +7,6 @@ import unique from "lodash.uniqby";
 import buildQuery from "odata-query";
 import Loader from "@components/Loader";
 
-
 export default function MentorMarketplace({ size, heading, subText }) {
   const [majors, setMajors] = useState([]);
   const [universities, setUniversities] = useState([]);
@@ -66,8 +65,8 @@ export default function MentorMarketplace({ size, heading, subText }) {
   const onMentorsFetch = (data) => {
     const remainingData = [...data];
     const rows = [];
-    const defaultSize = size.width < 400 ? 3 : size.width < 700 ? 4 : 6;
-    while (remainingData.length >= 1) {
+    const defaultSize = size.width < 400 ? 3 : size.width < 1500 ? 4 : size.width < 1875 ? 5 : 6;
+    while (remainingData.length >= 1 && remainingData.length > defaultSize) {
       const newRowbkp = remainingData.splice(0, defaultSize);
       const newRow = newRowbkp.map((itm) => {
         return {
