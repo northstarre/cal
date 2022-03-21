@@ -56,7 +56,7 @@ export default function Signupe({ email }: Props) {
       method: "POST",
     })
       .then(handleErrors)
-      .then(async () => await signIn("Cal.com", { callbackUrl: (router.query.callbackUrl || "") as string }))
+      .then(async () => await signIn("Cal.com", { callbackUrl: "/Home" as string }))
       .catch((err) => {
         methods.setError("apiError", { message: err.message });
       });
@@ -144,7 +144,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     props: {
       isGoogleLoginEnabled: IS_GOOGLE_LOGIN_ENABLED,
       isSAMLLoginEnabled,
-      email: '',
+      email: "",
       trpcState: ssr.dehydrate(),
     },
   };

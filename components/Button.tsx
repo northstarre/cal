@@ -35,7 +35,7 @@ export default function Button({ kind, text, className, size, type, isLoading, o
   return (
     <>
       <button
-        className={`${height} ${color} rounded-full font-bold ${className}`}
+        className={`${height} ${color} rounded-full py-2 font-bold md:py-0 ${className}`}
         type={type}
         onClick={onClick}>
         {isLoading ? <Loader color={loaderColor} height={size === "sm" ? "24px" : "32px"} /> : text}

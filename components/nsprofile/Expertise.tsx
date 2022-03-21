@@ -6,17 +6,24 @@ import Button from "../Button";
 import { useForm } from "react-hook-form";
 import { doGet, doPatch } from "../../makeAPICall";
 
-export default function Expertise({ onIsEditComplete, profile, onEdit }) {
-  const [expertise, setExpertise] = useState([]);
+export default function Expertise({ onIsEditComplete, profile, onEdit, expertise }) {
   const [isLoading, setIsLoading] = useState(false);
   const {
     register,
     handleSubmit,
+    reset
   } = useForm();
 
   useEffect(() => {
-    doGet("goals", setExpertise, () => {
-    });
+   reset({expertise1: profile.expertise[0],
+     expertise2: profile.expertise[1],
+     expertise3: profile.expertise[2],
+     expertise4: profile.expertise[3],
+     expertise5: profile.expertise[4],
+     expertise6: profile.expertise[5],
+     expertise7: profile.expertise[6],
+     expertise8: profile.expertise[7],
+   })
   }, []);
 
   const onSubmit = (data) => {

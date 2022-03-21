@@ -94,6 +94,12 @@ function SettingsView(props: ComponentProps<typeof Settings> & { localeProp: str
         isReadOnly={true}
         loggedInUser={props.loggedInUser}
         onProfilePicEdit={updateProfileHandler}
+        majors={props.majors}
+        interests={props.interests}
+        professions={props.professions}
+        years={props.years}
+        degrees={props.degrees}
+        goals={props.goals}
       />
     </>
   );
@@ -169,12 +175,54 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
       graduationYear: true,
       graduationMonth: true,
       degree: true,
+      major: true,
     },
   });
 
   if (!user) {
     throw new Error("User seems logged in but cannot be found in the db");
   }
+  let majors: string[] = [];
+  const majorsResp = await fetch(`https://devmynorthstarre-api.azurewebsites.net/api/majorsMeta`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
+  if (majorsResp.ok) {
+    majors = await majorsResp.json();
+  }
+  let professions: string[] = [];
+  const professionsResp = await fetch(
+    `https://devmynorthstarre-api.azurewebsites.net/api/PreProfessionalPrograms`,
+    {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    }
+  );
+  if (professionsResp.ok) {
+    professions = await professionsResp.json();
+  }
+
+  let interests: string[] = [];
+  const interestsResp = await fetch(`https://devmynorthstarre-api.azurewebsites.net/api/Interests`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
+  if (interestsResp.ok) {
+    interests = await interestsResp.json();
+  }
+  let goals: string[] = [];
+  const goalsResp = await fetch(`https://devmynorthstarre-api.azurewebsites.net/api/goals`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
+  if (interestsResp.ok) {
+    goals = await goalsResp.json();
+  }
+  const date = new Date();
+  const year = date.getFullYear();
+  const pastyears = Array.from(new Array(5), (val, index) => year - index);
+  const futureYears = Array.from(new Array(15), (val, index) => year + 1 + index);
+  const years = [...pastyears.reverse(), ...futureYears];
 
   return {
     props: {
@@ -183,6 +231,12 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
         ...user,
         emailMd5: crypto.createHash("md5").update(user.email).digest("hex"),
       },
+      majors,
+      professions,
+      interests,
+      years,
+      goals,
+      degrees: ["Bachelors", "Masters", "High Shool Graduate", "Diploma"],
     },
   };
 };

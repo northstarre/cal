@@ -15,6 +15,7 @@ import { getSession } from "@lib/auth";
 import { inferSSRProps } from "@lib/types/inferSSRProps";
 import Loader from "@components/Loader";
 import prisma from "@lib/prisma";
+import { useRouter } from "next/router";
 
 export default function Homepage(props: inferSSRProps<typeof getServerSideProps>) {
   console.log(props);
@@ -23,6 +24,7 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
   const [mentors, setMentors] = useState([]);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [loading, setLoading] = useState(false);
+  const navigate = useRouter();
   useEffect(() => {
     fetchData();
   }, []);
@@ -34,7 +36,7 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
   const fetchData = () => {
     setLoading(true);
     doGet(
-      "waitlist?$top=12&$select=id,name,email,major,university,preprofessionTrack",
+      "WaitListView?$top=12&$select=id,name,email,majorshortcode,unishortcode,preprofessionTrack",
       setFetchedMentors,
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       () => {}
@@ -65,6 +67,13 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
         imagePosition={"right"}
         btnText={"Get Started"}
         containerClassName={"h-[auto]"}
+        btnClick={() => {
+          if (props.signedId) {
+            props.user?.willGiveAdvice ? navigate.push("/Availability") : navigate.push("/QNA");
+          } else {
+            navigate.push("/auth/login");
+          }
+        }}
       />
       <div className={"w-full rounded-[20px] bg-[#FFEFED]"}>
         <div className={`2xl:container 2xl:mx-auto`}>
@@ -84,15 +93,13 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
               rightButtonClass: "w-[160px] text-[#F7ECE1] text-2xl font-[Raleway]",
               RightImageClass: "w-full",
               rightImage: "/assets/image%208.png",
+              rightOnClick: () => navigate.push("/Mentor"),
+              leftOnClick: () => navigate.push("/QNA"),
             }}
           />
         </div>
       </div>
-      {/*<div*/}
-      {/*  className={*/}
-      {/*    "hidden h-[556px] w-full bg-[url('/assets/Frame%2011.png')] bg-contain bg-no-repeat md:block"*/}
-      {/*  }></div>*/}
-      <div className={`2xl:container 2xl:mx-auto`}>
+      <div className={`container mx-auto px-4 md:px-6 lg:px-4`}>
         <div className={"my-20 flex w-full flex-col font-[Raleway] font-normal md:flex-row"}>
           <div className={"flex w-3/5 flex-col text-left"}>
             <img src="/assets/Group103.png" className={"mb-3 w-[61px]"} />
@@ -116,15 +123,23 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
               And set the right trajectory for your future self.
             </h4>
           </div>
-          <div className={"content-left flex w-2/5 flex-row items-center gap-x-2 px-0 md:px-5"}>
-            <img src="/assets/Group%207.png" className={"cursor-pointer rounded-[20px]"} />
-            <img src="/assets/Group%208.png" className={"rounded-[20px]"} />
+          <div className={"\"content-left flex flex-wrap md:w-2/5 md:flex-row items-center justify-between md:justify-end gap-x-2 px-0 md:px-5 mt-6 md:mt-0"}>
+            <img
+              src="/assets/Group%207.png"
+              className={"cursor-pointer rounded-[20px]"}
+              onClick={() => navigate.push("/Mentee")}
+            />
+            <img
+              src="/assets/Group%208.png"
+              className={"mt-4 cursor-pointer rounded-[20px] md:mt-0"}
+              onClick={() => navigate.push("/QNA")}
+            />
           </div>
         </div>
       </div>
 
-      <div className={`2xl:container 2xl:mx-auto`}>
-        <h2 className="why-header mb-3 text-center text-[50px] font-bold leading-10 text-[#272d67]">
+      <div className={`container mx-auto px-4 md:px-6 lg:px-4`}>
+        <h2 className="why-header mb-3 text-center text-4xl font-bold leading-10 text-[#272d67] lg:text-[50px]">
           Why Get Advice on Northstarre?{" "}
         </h2>
         <div className={"flex w-full flex-col gap-4 px-0 md:grid md:grid-cols-5"}>
@@ -133,7 +148,9 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
               title={"Know Your Options."}
               content={"40+"}
               footer={"majors captured by our mentors across universities."}
-              className={"bg-[url('/assets/sun.svg')] bg-[left_20px_top_20px] bg-no-repeat"}
+              className={
+                "bg-[url('/assets/sun.svg')] bg-[top_20px_center] bg-no-repeat pt-20 lg:bg-[left_20px_top_20px] lg:pt-[30px]"
+              }
             />
             <PlainInfoBox
               title={"Customized to Your Needs."}
@@ -141,13 +158,17 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
               footer={
                 "topics that are on the table for discussion with your mentor. That change as you grow."
               }
-              className={"bg-[url('/assets/Database.svg')] bg-[left_10px_top_10px] bg-no-repeat"}
+              className={
+                "bg-[url('/assets/Database.svg')] bg-[top_10px_center] bg-no-repeat pt-20 lg:bg-[left_10px_top_10px] lg:pt-[30px]"
+              }
             />
             <PlainInfoBox
               title={"Talk to the Experts, Directly."}
               content={"Hundreds"}
               footer={"of experts across 30+ universities that have been in your shoes. "}
-              className={"bg-[url('/assets/user.svg')] bg-[left_10px_top_23px] bg-no-repeat"}
+              className={
+                "bg-[url('/assets/user.svg')] bg-[top_20px_center] bg-no-repeat pt-20 lg:bg-[left_10px_top_23px] lg:pt-[30px]"
+              }
             />
           </div>
           <div className={"flex flex-col items-start md:col-span-3"}>
@@ -163,6 +184,9 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
                 text={"Talk to a Mentor"}
                 className={"my-2 mx-4 w-[220px] font-[Raleway] text-2xl text-[#F7ECE1]"}
                 isLoading={false}
+                onClick={() => {
+                  navigate.push("/Mentee");
+                }}
               />
             </div>
           </div>
@@ -173,6 +197,7 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
         className={"rounded-[20px]"}
         butntext={"How It Works"}
         butnwrap={"justify-center mb-3 mt-3"}
+        btnClick={() => navigate.push("/Mentor")}
         isReverse={true}
         footerText={() => (
           <p>
@@ -211,13 +236,17 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
           {" "}
           Feel empowered to make the right career decisions for your life.
         </span>
-        <div className={"mt-4 flex w-full flex-row justify-center px-0 sm:mx-0 md:mx-24 md:px-48"}>
+        <div
+          className={
+            "mt-4 flex w-full flex-row flex-wrap justify-center px-0 sm:mx-0 md:mx-24 md:flex-row md:px-48"
+          }>
           <Button
             kind={"primary"}
             size={"md"}
             text={"Give Advice"}
             className={"my-2 mx-4 w-[180px] font-[Raleway] text-2xl text-[#F7ECE1]"}
             isLoading={false}
+            onClick={() => navigate.push("/Mentor")}
           />
           <Button
             kind={"primary"}
@@ -225,13 +254,14 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
             text={"Get Advice"}
             className={"my-2 mx-4 w-[180px] font-[Raleway] text-2xl text-[#F7ECE1]"}
             isLoading={false}
+            onClick={() => navigate.push("/QNA")}
           />
         </div>
       </div>
-      <div className={`2xl:container 2xl:mx-auto`}>
+      <div className={`container mx-auto px-4 md:px-6 lg:px-4`}>
         <div className={"my-16 flex w-full flex-col font-[Raleway] font-normal md:flex-row"}>
           <div className={"flex w-[100%] flex-col"}>
-            <h2 className="why-header text-center text-[25px] font-normal leading-[29px] text-[#272d67]">
+            <h2 className="why-header text-center text-[20px] font-normal leading-[29px] text-[#272d67] md:text-[25px]">
               Questions? Contact support@mynorthstarre.com. We’re here to help.
             </h2>
           </div>

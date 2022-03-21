@@ -14,12 +14,14 @@ function Index({
   containerClassName,
   flexclass,
   btnclass,
+
+  btnClick
 }) {
   const image = (
     <div className="flex w-full items-center md:w-1/2">
       <img
         loading="lazy"
-        className="rounded-[90px]"
+        className="mt-5 rounded-[20px] md:mt-0 lg:rounded-[90px]"
         src={src}
         alt="Two Developer Girls writing code"
         role="img"
@@ -27,11 +29,9 @@ function Index({
     </div>
   );
   const content = () => (
-    <div className="flex w-full flex-col items-center justify-center md:w-1/2 ">
-      <div className="px-4 lg:px-0">
-        <h3
-          role="heading"
-          className="mt-10 max-w-[550px] text-2xl font-bold leading-6 text-[#272d67] md:my-0 xl:text-5xl">
+    <div className="flex w-full flex-col justify-center md:w-1/2 ">
+      <div className="lg:px-0">
+        <h3 role="heading" className="max-w-[550px] text-4xl font-bold text-[#272d67] 2xl:text-5xl">
           {heading}
         </h3>
         <p
@@ -42,9 +42,10 @@ function Index({
         <Button
           kind={kind}
           text={btnText}
-          className={`${btnclass} hero-btn mt-6 font-[Raleway] text-2xl text-[#EFE2BA] shadow-[0_4px_4px_rgba(0,0,0,0.25)] `}
+          className={`${btnclass} hero-btn mt-6 font-[Raleway] text-2xl text-[#EFE2BA] shadow-[0_4px_4px_rgba(0,0,0,0.25)]`}
           size={"md"}
           isLoading={false}
+          onClick={btnClick}
         />
       </div>
     </div>
@@ -53,10 +54,9 @@ function Index({
     <div className="overflow-y-hidden">
       <div className="pb-0">
         <dh-component>
-          <section className={`w-full pt-6 pb-16 ${containerClassName} bg-white`}>
-            <div className={`2xl:container 2xl:mx-auto`}>
-              <div
-                className={`flex flex-col space-y-4  px-1 md:flex-row md:space-y-0 md:space-x-20 md:px-2 ${flexclass}`}>
+          <section className={`w-full pt-24 pb-16 md:pt-6 ${containerClassName} bg-white`}>
+            <div className={`mx-auto px-4 md:px-6 lg:px-4`}>
+              <div className={`flex flex-col  space-y-4 md:flex-row md:space-y-0 md:space-x-20 ${flexclass}`}>
                 {imagePosition === "left" ? image : content()}
                 {imagePosition === "right" ? image : content()}
               </div>

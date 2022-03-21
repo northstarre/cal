@@ -5,17 +5,8 @@ import { doGet } from "../makeAPICall";
 import Grid from "./Grid";
 import unique from "lodash.uniqby";
 import buildQuery from "odata-query";
+import Loader from "@components/Loader";
 
-// To start, populate with mentors from the waitlist
-function getUniversityShorthand(str) {
-  const firstLetters = str
-    .replace("of", "")
-    .split(" ")
-    .map((word) => word[0])
-    .join("");
-
-  return firstLetters;
-}
 
 export default function MentorMarketplace({ size, heading, subText }) {
   const [majors, setMajors] = useState([]);
@@ -26,18 +17,27 @@ export default function MentorMarketplace({ size, heading, subText }) {
   const [query, setQuery] = useState("");
   const [selectedUniversity, setSelectedUniversity] = useState("");
   const top = 30;
-  const select = ["id", "name", "email", "major", "university", "preprofessionTrack"];
+  const select = [
+    "id",
+    "name",
+    "email",
+    "majorshortcode",
+    "university",
+    "major",
+    "unishortcode",
+    "preprofessionTrack",
+  ];
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
-    doGet("waitlist?$select=major", onMajorsFetch, () => { });
+    doGet("WaitListView?$select=major", onMajorsFetch, () => {});
     // eslint-disable-next-line @typescript-eslint/no-empty-function
-    doGet("waitlist?$select=university", onUniversitiesFetch, () => { });
+    doGet("WaitListView?$select=university", onUniversitiesFetch, () => {});
     setQuery(buildQuery({ top, select }));
   }, []);
   useEffect(() => {
     if (query) {
       // eslint-disable-next-line @typescript-eslint/no-empty-function
-      doGet(`waitList${query}`, setFetchedMentors, () => { });
+      doGet(`WaitListView${query}`, setFetchedMentors, () => {});
     }
   }, [query]);
   useEffect(() => {
@@ -70,7 +70,11 @@ export default function MentorMarketplace({ size, heading, subText }) {
     while (remainingData.length >= 1) {
       const newRowbkp = remainingData.splice(0, defaultSize);
       const newRow = newRowbkp.map((itm) => {
-        return { ...itm, university: getUniversityShorthand(itm.University) };
+        return {
+          ...itm,
+          university: itm.UniShortCode ?? itm.University,
+          major: itm.MajorShortCode ?? itm.Major,
+        };
       });
       rows.push(newRow);
     }
@@ -78,7 +82,7 @@ export default function MentorMarketplace({ size, heading, subText }) {
   };
   return (
     <>
-      <div className={"my-8 w-full px-0 md:px-12 lg:px-24"}>
+      <div id={"marketplace"} className={"my-8 w-full px-0 md:px-12 lg:px-24"}>
         <div className="flex flex-col items-center justify-center space-y-4 text-center">
           <h2 className="why-header text-[50px] font-bold leading-[60px] text-[#272d67]">{heading}</h2>
           {subText ? (
@@ -88,8 +92,8 @@ export default function MentorMarketplace({ size, heading, subText }) {
           )}
         </div>
         <div className={"flex w-full flex-col gap-4 md:grid md:grid-cols-5"}>
-          <div className={"col-span-1 flex flex-col"}>
-            <span className={"text-base text-[#272D67] uppercase font-bold"}>{"Filter"}</span>
+          <div className={"col-span-1 flex flex-col px-4 md:px-0"}>
+            <span className={"text-base font-bold uppercase text-[#272D67]"}>{"Filter"}</span>
             <div className={"flex flex-row md:flex-col"}>
               <div className="mx-2 mt-[18px] flex w-full flex-col md:mr-16">
                 <label
@@ -133,7 +137,7 @@ export default function MentorMarketplace({ size, heading, subText }) {
             {mentors.length ? (
               <Grid rows={mentors} shouldDisplaySchool={true} shouldDisplayMajor={true} />
             ) : (
-              "Loading Mentor Info"
+              <Loader className={"loader"} />
             )}
           </div>
         </div>
@@ -141,5 +145,3 @@ export default function MentorMarketplace({ size, heading, subText }) {
     </>
   );
 }
-
-

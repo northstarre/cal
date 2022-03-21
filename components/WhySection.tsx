@@ -21,7 +21,19 @@ function whyPoint({ src, description1, description2 }, isReverse, calculatedWidt
     </div>
   );
 }
-export default function Index({ heading, subText, className, points, isReverse, footerText, butntext, butnwrap, flexclass }) {
+export default function Index({
+  heading,
+  subText,
+  className,
+  points,
+  isReverse,
+  footerText,
+  butntext,
+  butnwrap,
+  flexclass,
+  btnClick,
+  gapclass,
+}) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const gridCountOnLarge = ``;
   const calculatedWidths = points.length <= 3 ? "w-72" : "w-60";
@@ -29,7 +41,7 @@ export default function Index({ heading, subText, className, points, isReverse, 
     <div className={`overflow-y-hidden ${className}`}>
       <div className={`flex flex-col items-center justify-center py-12 md:px-4 md:px-6 ${flexclass}`}>
         <div className="flex flex-col items-center justify-center space-y-4 text-center">
-          <h2 className="why-header text-[50px] font-bold leading-[60px] text-[#272d67]">{heading}</h2>
+          <h2 className="why-header text-4xl lg:text-[50px] font-bold md:leading-[60px] text-[#272d67]">{heading}</h2>
           {subText ? (
             <p className="w-11/12 text-center text-base leading-normal text-gray-600">{subText}</p>
           ) : (
@@ -37,7 +49,7 @@ export default function Index({ heading, subText, className, points, isReverse, 
           )}
         </div>
         <div
-          className={`mt-6 flex flex-col gap-y-12 md:mt-10 md:flex-row md:gap-y-14 md:gap-x-24 xl:mt-14 xl:gap-y-0`}>
+          className={`mt-6 flex flex-col gap-y-12 md:mt-10 lg:flex-row lg:gap-y-14 lg:gap-x-4 lg:px-4 xl:mt-14 xl:gap-y-0 xl:gap-x-24 ${gapclass}`}>
           {points.map((pt) => whyPoint(pt, isReverse, calculatedWidths))}
         </div>
         <div>
@@ -54,7 +66,16 @@ export default function Index({ heading, subText, className, points, isReverse, 
             kind={"primary"}
             size={"md"}
             text={butntext}
-            className={"my-2 mx-4 w-[auto] px-6 min-w-[220px] font-[Raleway] text-2xl text-[#F7ECE1] shadow-[0_4px_4px_rgba(0,0,0,0.25)]"}
+            onClick={
+              btnClick
+                ? btnClick
+                : () => {
+                    console.log("No Action Defined");
+                  }
+            }
+            className={
+              "my-2 mx-4 w-[auto] min-w-[220px] px-6 font-[Raleway] text-2xl text-[#F7ECE1] shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
+            }
             isLoading={false}
           />
         </div>
