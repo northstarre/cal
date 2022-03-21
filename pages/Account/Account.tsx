@@ -71,7 +71,7 @@ export default function Account(props: inferSSRProps<typeof getServerSideProps>)
               </div>
             </div>
             {linkInfo && !accountIfo.accountDetailsCollected && (
-              <div className="mt-5 mb-[24px] min-h-[40px] min-w-[320px] rounded-full bg-[#379392] font-bold text-white">
+              <div className="mt-5 mb-[24px] flex mx-auto min-h-[40px] min-w-[320px] max-w-[320px] items-center justify-center rounded-full bg-[#379392] font-bold text-white">
                 <a href={linkInfo.link}>Setup Banking Details</a>
               </div>
             )}
@@ -87,10 +87,10 @@ export default function Account(props: inferSSRProps<typeof getServerSideProps>)
                 <input
                   type={"button"}
                   className={
-                    "min-[240px] mt-5 mb-[24px] min-h-[40px] rounded-full bg-[#379392] font-bold text-white"
+                    "mt-5 mb-[24px] min-h-[40px] min-w-[240px] rounded-full bg-[#379392] font-bold text-white"
                   }
                   onClick={onSubmitInternal}
-                  value={"With draw"}
+                  value={"Withdraw"}
                 />
               </div>
             )}
@@ -145,7 +145,7 @@ export async function getServerSideProps(context: NextPageContext) {
   const signedIn = session?.user?.id ?? false;
   const isBeta = null;
   let user = {};
-  let credits = {};
+  const credits = {};
   console.log("session user id", session?.user?.id);
   console.log("Home Session", session);
   console.log("SignedIn", signedIn);
