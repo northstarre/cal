@@ -5,7 +5,7 @@ import Hero from "../components/HeroComponent";
 import Event from "@components/Event";
 import Navbar from "@components/Navbar";
 import EventFilter from "@components/EventFilter";
-import eventData from "./data";
+import eventData from "./api/data";
 import EventPagination from "@components/EventPagination";
 const eventType = ["all", ...new Set(eventData.map((event) => event.eventType))];
 // const eventType = ["all", "major", "skill", "career"];
