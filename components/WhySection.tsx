@@ -41,7 +41,9 @@ export default function Index({
     <div className={`overflow-y-hidden ${className}`}>
       <div className={`flex flex-col items-center justify-center py-12 md:px-4 md:px-6 ${flexclass}`}>
         <div className="flex flex-col items-center justify-center space-y-4 text-center">
-          <h2 className="why-header text-4xl lg:text-[50px] font-bold md:leading-[60px] text-[#272d67]">{heading}</h2>
+          <h2 className="why-header text-4xl font-bold text-[#272d67] md:leading-[60px] lg:text-[50px]">
+            {heading}
+          </h2>
           {subText ? (
             <p className="w-11/12 text-center text-base leading-normal text-gray-600">{subText}</p>
           ) : (
@@ -54,7 +56,7 @@ export default function Index({
         </div>
         <div>
           {footerText() ? (
-            <p className="mt-[18px] w-full text-center text-[30px] leading-normal text-[#272d67] font-[Raleway]">
+            <p className="mt-[18px] w-full text-center font-[Raleway] text-[30px] leading-normal text-[#272d67]">
               {footerText()}
             </p>
           ) : (

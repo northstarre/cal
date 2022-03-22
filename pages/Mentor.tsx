@@ -18,7 +18,7 @@ export default function GiveAdvice(props: inferSSRProps<typeof getServerSideProp
     <>
       <Navbar isBeta={false} signedIn={props.signedIn} profile={props.user} />
       <Hero
-        heading={"We believe students are the untapped experts."}
+        heading={"We believe students are untapped experts."}
         flexclass={"items-end"}
         heroContent={
           "With your expertise, we can democratize access to professional resources. "

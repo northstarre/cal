@@ -23,7 +23,7 @@ function Index({
         loading="lazy"
         className="mt-5 rounded-[20px] md:mt-0 lg:rounded-[90px]"
         src={src}
-        alt="Two Developer Girls writing code"
+        alt="Hero Image"
         role="img"
       />
     </div>
@@ -31,7 +31,9 @@ function Index({
   const content = () => (
     <div className="flex w-full flex-col justify-center md:w-1/2 ">
       <div className="lg:px-0">
-        <h3 role="heading" className="max-w-[550px] text-4xl font-bold text-[#272d67] 2xl:text-5xl">
+        <h3
+          role="heading"
+          className="why-header max-w-[550px] text-4xl font-bold text-[#272d67] md:leading-[60px] lg:text-[50px]">
           {heading}
         </h3>
         <p
