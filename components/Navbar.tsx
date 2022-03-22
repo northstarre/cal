@@ -122,14 +122,14 @@ export default function Navbar({ signedIn, isBeta, profile }) {
                 ) : !isBeta ? (
                   <>
                     <div className="flex items-center">
-                      <a
-                        href=""
+                      <div
+                        onClick={() => navigate.push("/auth/login")}
                         className="w-[60px] text-[#272D67] mr-1 flex cursor-pointer items-center border-b-2 border-transparent text-base font-medium tracking-normal hover:text-indigo-700 focus:outline-none font-[Raleway]">
                         Sign In
-                      </a>
+                      </div>
                       <Button
                         kind={"default"}
-                        onClick={() => navigate.push("/auth/login")}
+                        onClick={() => navigate.push("/auth/signupe")}
                         text={"Sign Up"}
                         size="md"
                         className={"signup-btn text-2xl text-[#EFE2BA] px-2 font-[Raleway]"}
