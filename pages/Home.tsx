@@ -132,7 +132,7 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
           </div>
           <div
             className={
-              '"content-left mt-6 flex flex-wrap items-center justify-between gap-x-2 px-0 md:mt-0 md:w-2/5 md:flex-row md:justify-end md:px-5'
+              "content-left mt-6 flex flex-wrap items-center justify-between gap-x-2 px-0 md:mt-0 md:w-2/5 md:flex-row md:justify-end md:px-5"
             }>
             <img
               src="/assets/Group%207.png"
