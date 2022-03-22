@@ -61,12 +61,14 @@ export default function Login({
   const callbackUrl = typeof router.query?.callbackUrl === "string" ? router.query.callbackUrl : "/";
 
   const LoginFooter = (
-    <span>
-      {t("dont_have_an_account")}{" "}
-      <a href={`${WEBSITE_URL}/auth/signup`} className="font-medium text-neutral-900">
+    <div className={"flex flex-row justify-center text-center"}>
+      <span>{t("dont_have_an_account")} &nbsp;</span>
+      <div
+        onClick={() => router.push("/auth/signupe")}
+        className="cursor-pointer font-medium text-neutral-900">
         {t("create_an_account")}
-      </a>
-    </span>
+      </div>
+    </div>
   );
 
   const TwoFactorFooter = (
