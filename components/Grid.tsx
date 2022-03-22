@@ -10,7 +10,7 @@ export default function Grid({ rows, shouldDisplayMajor, shouldDisplaySchool }) 
     return `${firstName} ${lastName.charAt(0).toUpperCase()}`;
   };
   return (
-    <div className={"flex w-[100%]"}>
+    <div className={"flex w-[100%] flex-col"}>
       {rows.map((itm) => (
         <>
           <div className={"align-start mt-6 flex flex-wrap justify-start md:flex-row"}>
