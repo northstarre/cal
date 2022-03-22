@@ -72,7 +72,7 @@ export default function Index({ loggedInUser, profile: user, isReadOnly, updateP
                     {user.name}
                   </h3>
                   <div>
-                    <div className={"flex flex-row w-full justify-between"}>
+                    <div className={"flex flex-row w-full justify-between mb-4"}>
                       <h4 className={"font-600 text-left self-left text-3xl font-semibold text-[#272d67] "}>About</h4>
                       <div className={"self-right float-right justify-self-end flex flex-col text-center"}>
                         <button className={"bg-[#60ab67] rounded-full font-bold text-white text-center w-[180px] p-2 "} onClick={(e)=> {
