@@ -17,7 +17,7 @@ export default function EventFilter({ activeType, setActiveType, setFilteredEven
   return (
     <button
       onClick={() => setActiveType(value)}
-      className={`event__filterbtncontainer py-1 px-3 ${activeType == value ? "rounded-full border-2 border-[#818997]" : ""
+      className={`event__filterbtncontainer py-1 px-3 capitalize ${activeType == value ? "rounded-full border-2 border-[#818997]" : ""
         }`}>
       {value}
     </button>

@@ -70,6 +70,11 @@ export default function Events() {
             />
           ))}
         </div>
+        <ul className="event_eventslist container mx-auto max-w-7xl gap-3 sm:grid sm:grid-cols-2 md:grid-cols-3 md:gap-6">
+          {currentEvents.map((event, index) => (
+            <Event key={index} event={event} />
+          ))}
+        </ul>
         <EventPagination
           currPage={currPage}
           eventsPerPage={eventsPerPage}
@@ -77,11 +82,6 @@ export default function Events() {
           totalEvents={filteredEvents.length}
           paginate={paginate}
         />
-        <ul className="event_eventslist container mx-auto max-w-7xl gap-3 sm:grid sm:grid-cols-2 md:grid-cols-3 md:gap-6">
-          {currentEvents.map((event, index) => (
-            <Event key={index} event={event} />
-          ))}
-        </ul>
 
         <div
           className={
