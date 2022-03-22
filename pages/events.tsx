@@ -3,26 +3,41 @@
 import React, { useEffect, useState } from "react";
 import Hero from "../components/HeroComponent";
 import Event from "@components/Event";
-// import WhySection from "../components/WhySection";
-// import MentorMarketplace from "../components/MentorMarketplace";
-
-import useWindowSize from "@components/useWindowResizeHook";
 import Navbar from "@components/Navbar";
-import { doGet } from "../makeAPICall";
+import EventFilter from "@components/EventFilter";
+import eventData from "./data";
+import EventPagination from "@components/EventPagination";
+const eventType = ["all", ...new Set(eventData.map((event) => event.eventType))];
+// const eventType = ["all", "major", "skill", "career"];
 
 export default function Events() {
-  const size = useWindowSize();
-  const [profileToDisplay, setProfile] = useState(undefined);
+  const [events, setEvents] = useState([]);
+  const [filteredEvents, setFilteredEvents] = useState([]);
+  const [currPage, setCurrPage] = useState(1);
+  const [activeType, setActiveType] = useState("all");
+  const eventsPerPage = 9;
+
+  //data
   useEffect(() => {
-    const id = "e8443f32-92e9-439b-895b-a49cfae0ee81";
-    doGet(`userInfo?$filter=userObjectId eq ${id}`, setProfile, () => {
-      return "avoiding Es lint";
-    });
+    setEvents(eventData);
+    setFilteredEvents(eventData);
   }, []);
+  //data
+
+  useEffect(() => {
+    setCurrPage(1);
+  }, [activeType]);
+
+  //pagination
+  const indexLastEvent = currPage * eventsPerPage;
+  const indexFirstEvent = indexLastEvent - eventsPerPage;
+  const currentEvents = filteredEvents.slice(indexFirstEvent, indexLastEvent);
+
+  const paginate = (pageNumber) => setCurrPage(pageNumber);
 
   return (
     <>
-      <Navbar isBeta={false} signedIn={false} profile={profileToDisplay} />
+      <Navbar isBeta={false} signedIn={false} profile={false} />
       <Hero
         heading={"Get to know our team." + " Join our Q&As."}
         heroContent={"Listen in or actively participate in our Q&As. " + "Free to you. And made for you."}
@@ -44,22 +59,29 @@ export default function Events() {
       </div>
       <section className="event">
         <div className="event__filterbtncontainer my-14 mx-auto flex max-w-xl items-center justify-around px-2 text-xl font-extrabold text-[#818997]">
-          <button className="event__filterbtncontainer">All</button>
-          <button className="event__filterbtncontainer">College</button>
-          <button className="event__filterbtncontainer">Majors</button>
-          <button className="event__filterbtncontainer">Miscellaneous</button>
+          {eventType.map((et) => (
+            <EventFilter
+              key={et}
+              activeType={activeType}
+              setActiveType={setActiveType}
+              setFilteredEvents={setFilteredEvents}
+              events={events}
+              value={et}
+            />
+          ))}
         </div>
-        <ul className="event_eventslist container mx-auto max-w-[1280px] gap-3 sm:grid sm:grid-cols-2 md:grid-cols-3 md:gap-6">
-          <Event />
-          <Event />
-          <Event />
-          <Event />
-          <Event />
-          <Event />
-          <Event />
-          <Event />
-          <Event />
+        <ul className="event_eventslist container mx-auto max-w-7xl gap-3 sm:grid sm:grid-cols-2 md:grid-cols-3 md:gap-6">
+          {currentEvents.map((event, index) => (
+            <Event key={index} event={event} />
+          ))}
         </ul>
+        <EventPagination
+          currPage={currPage}
+          eventsPerPage={eventsPerPage}
+          setCurrPage={setCurrPage}
+          totalEvents={filteredEvents.length}
+          paginate={paginate}
+        />
 
         <div
           className={
