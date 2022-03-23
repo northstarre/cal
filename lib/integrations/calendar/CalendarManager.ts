@@ -27,13 +27,13 @@ const log = logger.getChildLogger({ prefix: ["CalendarManager"] });
 
 export const getCalendar = (credential: Credential): Calendar | null => {
   const { type: calendarType } = credential;
-
+  console.log("getcalendar credential:", credential);
   const calendar = CALENDARS[calendarType];
+  console.log("getcalendar calendar:", calendar);
   if (!calendar) {
     log.warn(`calendar of type ${calendarType} does not implemented`);
     return null;
   }
-
   return new calendar(credential);
 };
 
