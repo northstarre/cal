@@ -42,6 +42,7 @@ import ToggleButton from "@components/ToggleButton";
 import Avatar from "@components/ui/Avatar";
 import ImageUploader from "@components/ImageUploader";
 import crypto from "crypto";
+import Select from "react-select";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -485,6 +486,7 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
                 kind={"default"}
                 onClick={(isActive: boolean) => {
                   setIsMentor(isActive);
+                  setIsMentee(!isActive);
                 }}
                 type={"button"}
                 size={"md"}
@@ -496,6 +498,7 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
                 kind={"default"}
                 onClick={(isActive: boolean) => {
                   setIsMentee(isActive);
+                  setIsMentor(!isActive);
                 }}
                 type={"button"}
                 size={"md"}
@@ -505,61 +508,67 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
               />
             </div>
           </div>
-          <div className="flex flex-col items-center">
-            <label htmlFor="describer" className="block w-full text-sm font-medium text-brand">
-              Which of the following describes you?
-            </label>
-            <div className="flex w-full flex-row">
-              <select
-                onChange={(e) => {
-                  setDescriber(e.target.value);
-                }}
-                className="react-select-container my-4 block w-full min-w-0 flex-1 rounded-sm border border-gray-300 focus:border-primary-500 focus:ring-primary-500 sm:text-sm">
-                <option selected disabled value="">
-                  Select One
-                </option>
-                {props.describers.map((item: any, idx: number) => (
-                  <option key={idx}>{item}</option>
-                ))}
-              </select>
-            </div>
-          </div>
           <fieldset>
-            <label className="block text-sm font-medium text-brand">What school do you go to?</label>
-            <div className="mb-4 flex w-full flex-row">
-              <select
-                onChange={(e) => {
-                  setSchool(e.target.value);
+            <section className="mb-4 flex flex-col justify-between">
+              <label htmlFor="describer" className="block text-sm font-medium text-brand">
+                Which of the following describes you?
+              </label>
+              <Select
+                id={"describer"}
+                isClearable
+                options={props.describers.map((itm: any) => ({ value: itm, label: itm }))}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500  sm:text-sm"
+                onChange={(e: any) => {
+                  if (e) {
+                    setDescriber(e.value);
+                  }
                 }}
-                className={`mt-4 mr-4 flex  h-10 w-full max-w-xs items-center rounded border border-gray-300   pl-3 text-sm shadow focus:border focus:border-indigo-700 focus:outline-none dark:border-gray-700 dark:focus:border-indigo-700 md:mr-10`}>
-                <option selected disabled value={""}>
-                  Select School
-                </option>
-                {displayUniversity &&
-                  props.universities.map((item: any, idx: number) => (
-                    <option key={idx}>{item.instnm}</option>
-                  ))}
-                {!displayUniversity &&
-                  props.schools.map((item: any, idx: number) => <option key={idx}>{item.Name}</option>)}
-              </select>
-            </div>
+              />
+            </section>
           </fieldset>
           <fieldset>
-            <label className="block text-sm font-medium text-brand">What year in school are you?</label>
-            <div className="flex w-full flex-row items-center">
-              <select
-                className={`mt-4  mr-4  flex h-10 w-2/3 max-w-xs items-center rounded border border-gray-300 pl-3 text-sm shadow focus:border focus:border-indigo-700 focus:outline-none dark:border-gray-700 dark:focus:border-indigo-700 md:mr-10`}
-                onChange={(e) => {
-                  setSchoolYear(e.target.value);
-                }}>
-                <option selected disabled value={""}>
-                  Select Year
-                </option>
-                {props.schoolYears.map((item: any, idx: number) => (
-                  <option key={idx}>{item}</option>
-                ))}
-              </select>
-            </div>
+            <section className="mb-4 flex flex-col justify-between">
+              <label htmlFor="school" className="block text-sm font-medium text-brand">
+                What school do you go to?
+              </label>
+              <Select
+                id={"school"}
+                isClearable
+                options={
+                  displayUniversity
+                    ? props.universities.map((itm: any) => {
+                        return { value: itm.instnm, label: itm.instnm };
+                      })
+                    : props.schools.map((itm: any) => {
+                        return { value: itm.Name, label: itm.Name };
+                      })
+                }
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 sm:text-sm"
+                onChange={(e: any) => {
+                  if (e) {
+                    setSchool(e.value);
+                  }
+                }}
+              />
+            </section>
+          </fieldset>
+          <fieldset>
+            <section className="mb-4 flex flex-col justify-between">
+              <label htmlFor="schoolYear" className="block text-sm font-medium text-brand">
+                What year in school are you?
+              </label>
+              <Select
+                id={"schoolYear"}
+                isClearable
+                options={props.schoolYears.map((itm: any) => ({ value: itm, label: itm }))}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 sm:text-sm"
+                onChange={(e: any) => {
+                  if (e) {
+                    setSchoolYear(e.value);
+                  }
+                }}
+              />
+            </section>
           </fieldset>
         </>
       ),
