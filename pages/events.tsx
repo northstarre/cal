@@ -94,7 +94,7 @@ export default function Events() {
             {"Meet the Northstarre Team."}
           </span>
           <div className={"mt-4 flex w-full flex-row justify-center px-0 sm:mx-0 md:mx-24 md:px-48"}>
-            <button className="h-[40px] whitespace-nowrap rounded-full bg-[#379392] px-4 text-2xl font-bold text-[#EFE2BA] ">
+            <button className="h-[40px] whitespace-nowrap rounded-full bg-[#379392] px-4 text-2xl font-bold text-white ">
               {"Meet Your Mentor"}
             </button>
           </div>
