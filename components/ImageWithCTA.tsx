@@ -14,7 +14,7 @@ export default function ImageWithCTA({ data }) {
         <span className={"font-700 mt-3 text-[27px] font-bold leading-[32px] text-[#272d67]"}>
           {data.leftHeaderText}{" "}
         </span>
-        <p className={"font-500 mb-3 font-[Raleway] text-2xl leading-[28px] text-[#272d67]"}>
+        <p className={"font-500 mb-3 font-[Raleway] text-lg leading-[28px] text-[#272d67] md:text-2xl"}>
           {data.leftText}
         </p>
         <Button
@@ -25,12 +25,12 @@ export default function ImageWithCTA({ data }) {
           onClick={data.leftOnClick}
         />
       </div>
-      <div className={"flex w-full flex-col items-end"}>
+      <div className={"mt-4 flex w-full flex-col items-start md:mt-0 md:items-end"}>
         <img className={data.RightImageClass} src={data.rightImage} />
         <span className={"font-700 mt-3 text-[27px] font-bold leading-[32px] text-[#272d67] "}>
           {data.rightHeaderText}{" "}
         </span>
-        <p className={"font-500 mb-3 font-[Raleway] text-2xl leading-[28px] text-[#272d67]"}>
+        <p className={"font-500 mb-3 font-[Raleway] text-lg leading-[28px] text-[#272d67] md:text-2xl"}>
           {data.rightText}
         </p>
         <Button

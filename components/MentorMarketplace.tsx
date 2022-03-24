@@ -7,16 +7,6 @@ import unique from "lodash.uniqby";
 import buildQuery from "odata-query";
 import Loader from "@components/Loader";
 
-// To start, populate with mentors from the waitlist
-function getUniversityShorthand(str) {
-  const firstLetters = str
-    .replace("of", "")
-    .split(" ")
-    .map((word) => word[0])
-    .join("");
-
-  return firstLetters;
-}
 
 export default function MentorMarketplace({ size, heading, subText }) {
   const [majors, setMajors] = useState([]);
@@ -102,7 +92,7 @@ export default function MentorMarketplace({ size, heading, subText }) {
           )}
         </div>
         <div className={"flex w-full flex-col gap-4 md:grid md:grid-cols-5"}>
-          <div className={"col-span-1 flex flex-col"}>
+          <div className={"col-span-1 flex flex-col px-4 md:px-0"}>
             <span className={"text-base font-bold uppercase text-[#272D67]"}>{"Filter"}</span>
             <div className={"flex flex-row md:flex-col"}>
               <div className="mx-2 mt-[18px] flex w-full flex-col md:mr-16">

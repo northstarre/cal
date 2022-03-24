@@ -35,8 +35,9 @@ export default function ExpertLandingPage(props: inferSSRProps<typeof getServerS
       <WhySection
         heading={"Why Northstarre Mentors?"}
         className={"rounded-[20px] bg-[#FFEFED]"}
-        butntext={"Pricing"}
         btnClick={() => navigate.push("/payment/pricing")}
+        gapclass={"md:flex-row md:flex-wrap md:justify-center md:gap-x-36 lg:gap-x-8"}
+        butntext={"Pricing"}
         butnwrap={"justify-center mt-4"}
         isReverse={false}
         footerText={() => ""}
@@ -80,8 +81,8 @@ export default function ExpertLandingPage(props: inferSSRProps<typeof getServerS
             className={
               "my-2 w-[210px] font-[Raleway] text-2xl text-[#F7ECE1] shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
             }
-            onClick={() => navigate.push("/auth/signupe")}
             isLoading={false}
+            onClick={() => navigate.push("/auth/signupe")}
           />
         </div>
       )}
@@ -107,7 +108,7 @@ export default function ExpertLandingPage(props: inferSSRProps<typeof getServerS
           isLoading={false}
         />
       </div>
-      <div className={`2xl:container 2xl:mx-auto`}>
+      <div className={`container mx-auto px-4 md:px-6 lg:px-4`}>
         <div className={"my-16 flex w-full flex-col font-[Raleway] font-normal md:flex-row"}>
           <div className={"flex w-[100%] flex-col"}>
             <h2 className="why-header text-center text-[25px] font-normal leading-[29px] text-[#272d67]">

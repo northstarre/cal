@@ -99,7 +99,7 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
           />
         </div>
       </div>
-      <div className={`2xl:container 2xl:mx-auto`}>
+      <div className={`container mx-auto px-4 md:px-6 lg:px-4`}>
         <div className={"my-20 flex w-full flex-col font-[Raleway] font-normal md:flex-row"}>
           <div className={"flex w-3/5 flex-col text-left"}>
             <img src="/assets/Group103.png" className={"mb-3 w-[61px]"} />
@@ -123,7 +123,7 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
               And set the right trajectory for your future self.
             </h4>
           </div>
-          <div className={"content-left flex w-2/5 flex-row items-center gap-x-2 px-0 md:px-5"}>
+          <div className={"\"content-left flex flex-wrap md:w-2/5 md:flex-row items-center justify-between md:justify-end gap-x-2 px-0 md:px-5 mt-6 md:mt-0"}>
             <img
               src="/assets/Group%207.png"
               className={"cursor-pointer rounded-[20px]"}
@@ -131,15 +131,15 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
             />
             <img
               src="/assets/Group%208.png"
-              className={"cursor-pointer rounded-[20px]"}
+              className={"mt-4 cursor-pointer rounded-[20px] md:mt-0"}
               onClick={() => navigate.push("/QNA")}
             />
           </div>
         </div>
       </div>
 
-      <div className={`2xl:container 2xl:mx-auto`}>
-        <h2 className="why-header mb-3 text-center text-[50px] font-bold leading-10 text-[#272d67]">
+      <div className={`container mx-auto px-4 md:px-6 lg:px-4`}>
+        <h2 className="why-header mb-3 text-center text-4xl font-bold leading-10 text-[#272d67] lg:text-[50px]">
           Why Get Advice on Northstarre?{" "}
         </h2>
         <div className={"flex w-full flex-col gap-4 px-0 md:grid md:grid-cols-5"}>
@@ -148,7 +148,9 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
               title={"Know Your Options."}
               content={"40+"}
               footer={"majors captured by our mentors across universities."}
-              className={"bg-[url('/assets/sun.svg')] bg-[left_20px_top_20px] bg-no-repeat"}
+              className={
+                "bg-[url('/assets/sun.svg')] bg-[top_20px_center] bg-no-repeat pt-20 lg:bg-[left_20px_top_20px] lg:pt-[30px]"
+              }
             />
             <PlainInfoBox
               title={"Customized to Your Needs."}
@@ -156,13 +158,17 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
               footer={
                 "topics that are on the table for discussion with your mentor. That change as you grow."
               }
-              className={"bg-[url('/assets/Database.svg')] bg-[left_10px_top_10px] bg-no-repeat"}
+              className={
+                "bg-[url('/assets/Database.svg')] bg-[top_10px_center] bg-no-repeat pt-20 lg:bg-[left_10px_top_10px] lg:pt-[30px]"
+              }
             />
             <PlainInfoBox
               title={"Talk to the Experts, Directly."}
               content={"Hundreds"}
               footer={"of experts across 30+ universities that have been in your shoes. "}
-              className={"bg-[url('/assets/user.svg')] bg-[left_10px_top_23px] bg-no-repeat"}
+              className={
+                "bg-[url('/assets/user.svg')] bg-[top_20px_center] bg-no-repeat pt-20 lg:bg-[left_10px_top_23px] lg:pt-[30px]"
+              }
             />
           </div>
           <div className={"flex flex-col items-start md:col-span-3"}>
@@ -230,7 +236,10 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
           {" "}
           Feel empowered to make the right career decisions for your life.
         </span>
-        <div className={"mt-4 flex w-full flex-row justify-center px-0 sm:mx-0 md:mx-24 md:px-48"}>
+        <div
+          className={
+            "mt-4 flex w-full flex-row flex-wrap justify-center px-0 sm:mx-0 md:mx-24 md:flex-row md:px-48"
+          }>
           <Button
             kind={"primary"}
             size={"md"}
@@ -249,10 +258,10 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
           />
         </div>
       </div>
-      <div className={`2xl:container 2xl:mx-auto`}>
+      <div className={`container mx-auto px-4 md:px-6 lg:px-4`}>
         <div className={"my-16 flex w-full flex-col font-[Raleway] font-normal md:flex-row"}>
           <div className={"flex w-[100%] flex-col"}>
-            <h2 className="why-header text-center text-[25px] font-normal leading-[29px] text-[#272d67]">
+            <h2 className="why-header text-center text-[20px] font-normal leading-[29px] text-[#272d67] md:text-[25px]">
               Questions? Contact support@mynorthstarre.com. We’re here to help.
             </h2>
           </div>
