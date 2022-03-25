@@ -170,6 +170,12 @@ export default function Shell(props: {
       icon: CogIcon,
       current: router.asPath.startsWith("/settings"),
     },
+    {
+      name: "Meeting Settings",
+      href: "/settings/meetingy",
+      icon: CalendarIcon,
+      current: router.asPath.startsWith("/settings"),
+    },
   ];
   const menteeNavigation = [
     {
