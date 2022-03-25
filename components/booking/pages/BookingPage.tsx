@@ -1,10 +1,4 @@
-import {
-  CalendarIcon,
-  ClockIcon,
-  CreditCardIcon,
-  ExclamationIcon,
-  LocationMarkerIcon,
-} from "@heroicons/react/solid";
+import { CalendarIcon, ClockIcon, CreditCardIcon, ExclamationIcon, LocationMarkerIcon } from "@heroicons/react/solid";
 import { EventTypeCustomInputType } from "@prisma/client";
 import { useContracts } from "contexts/contractsContext";
 import dayjs from "dayjs";
@@ -109,7 +103,7 @@ const BookingPage = (props: BookingPageProps) => {
           reschedule: !!rescheduleUid,
           name: attendees[0].name,
           email: attendees[0].email,
-          location,
+          location: responseData.location,
         },
       });
     },
@@ -213,6 +207,10 @@ const BookingPage = (props: BookingPageProps) => {
       }
       case LocationType.InPerson: {
         return locationInfo(locationType)?.address || "";
+      }
+      case LocationType.Jitsi: {
+        console.log("creating Location", location);
+        return "https://meet.jit.si/myns/" + uuidv4();
       }
       // Catches all other location types, such as Google Meet, Zoom etc.
       default:
