@@ -160,6 +160,11 @@ function BookingListItem(booking: BookingItem) {
               <a href={"mailto:" + booking.attendees[0].email}>{booking.attendees[0].email}</a>
             </div>
           )}
+          {booking.location && (
+            <div className="text-sm text-gray-900 hover:text-blue-500">
+              <a href={booking.location}>{booking.location}</a>
+            </div>
+          )}
         </td>
 
         <td className="whitespace-nowrap py-4 text-right text-sm font-medium ltr:pr-4 rtl:pl-4">

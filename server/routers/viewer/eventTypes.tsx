@@ -42,6 +42,7 @@ function handleCustomInputs(customInputs: EventTypeCustomInput[], eventTypeId: n
         label: input.label,
         required: input.required,
         placeholder: input.placeholder,
+        locations: input.locations
       },
       where: {
         id: input.id,
@@ -124,6 +125,7 @@ export const eventTypesRouter = createProtectedRouter()
         };
         data.schedulingType = schedulingType;
       }
+      console.log(data);
 
       const eventType = await ctx.prisma.eventType.create({ data });
 

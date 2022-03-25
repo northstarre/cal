@@ -369,6 +369,7 @@ const loggedInViewerRouter = createProtectedRouter()
           attendees: true,
           confirmed: true,
           rejected: true,
+          location: true,
           id: true,
           startTime: true,
           endTime: true,

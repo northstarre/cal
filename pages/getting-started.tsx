@@ -13,7 +13,7 @@ import { useSession } from "next-auth/react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { FormEvent, useEffect, useRef, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import TimezoneSelect from "react-timezone-select";
 import * as z from "zod";
 
@@ -43,6 +43,7 @@ import Avatar from "@components/ui/Avatar";
 import ImageUploader from "@components/ImageUploader";
 import crypto from "crypto";
 import Select from "react-select";
+import { LocationType } from "@lib/location";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -83,6 +84,7 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
       title: t("30min_meeting"),
       slug: "30min",
       length: 30,
+      locations: [{ type: LocationType.Jitsi }],
     },
   ];
 
