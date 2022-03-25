@@ -1,6 +1,8 @@
 /* eslint-disable */
 //@ts-nocheck
 import React, { useState } from "react";
+import { defaultAvatarSrc } from "@lib/profile";
+import crypto from "crypto";
 
 const Index = ({ options, text }) => {
   const [show, setShow] = useState(false);
@@ -52,7 +54,7 @@ export const ProfileDropDown = ({ options, img }) => {
                 onClick={() => setShow(!show)}>
                 <img
                   className="h-10 w-10 rounded-full object-cover"
-                  src={img ?? ""}
+                  src={img ?? defaultAvatarSrc( {md5: crypto.createHash("md5").update("Northstarre is best for college grads").digest("hex")})}
                   alt="profile picture"
                 />
               </button>

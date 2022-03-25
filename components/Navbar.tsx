@@ -4,23 +4,16 @@ import React, { useState } from "react";
 import Button from "./Button";
 import MenuDropdown, { ProfileDropDown } from "./MenuDropdown";
 import { useRouter } from "next/router";
-import { getCsrfToken, signIn, signOut } from "next-auth/react";
-import { ErrorCode } from "@lib/auth";
+import { signOut } from "next-auth/react";
 import { useLocale } from "@lib/hooks/useLocale";
+import { defaultAvatarSrc } from "@lib/profile";
+import crypto from "crypto";
 
 export default function Navbar({ signedIn, isBeta, profile }) {
   const [sideBar, setsideBar] = useState();
-  const [errorMessage, setErrorMessage] = useState();
   const navigate = useRouter();
   const { t } = useLocale();
-  const errorMessages: { [key: string]: string } = {
-    // [ErrorCode.SecondFactorRequired]: t("2fa_enabled_instructions"),
-    [ErrorCode.IncorrectPassword]: `${t("incorrect_password")} ${t("please_try_again")}`,
-    [ErrorCode.UserNotFound]: t("no_account_exists"),
-    [ErrorCode.IncorrectTwoFactorCode]: `${t("incorrect_2fa_code")} ${t("please_try_again")}`,
-    [ErrorCode.InternalServerError]: `${t("something_went_wrong")} ${t("please_try_again_and_contact_us")}`,
-    [ErrorCode.ThirdPartyIdentityProviderEnabled]: t("account_created_with_identity_provider"),
-  };
+
 
   const handleLogin = () => {
     navigate.push("/auth/login")
@@ -179,11 +172,13 @@ export default function Navbar({ signedIn, isBeta, profile }) {
                             <button
                               aria-label="dropdown"
                               className="focus:text-[#272D67]-900 text-[#272D67]-800 hover:text-[#272D67]-900 relative mx-4 flex w-full cursor-pointer items-center justify-end border-b-2 border-transparent focus:border-gray-800 focus:outline-none">
-                              <img
+                               <img
                                 className="h-10 w-10 rounded-full object-cover"
-                                src={profile.avatar}
-                                alt="profile pic"
-                              />
+                                src={profile.avatar ?? crypto.createHash("md5").update(profile.email).digest("hex")}
+                                alt="profile pic"/>
+
+
+
                             </button>
                           </div>
                         </>

@@ -121,7 +121,9 @@ export default function Index({ loggedInUser, profile: user, isReadOnly, updateP
               { image: "/assets/Profile/case.png", value: user.graduationYear },
               {
                 image: "/assets/Profile/dribbble.png",
-                value: `${user.interest1}, ${user.interest2}, ${user.interest3}, ${user.interest4}`,
+                value: [user.interest1,user.interest2,user.interest3,user.interest4].join(",").replaceAll(',','') ?
+                  [user.interest1,user.interest2,user.interest3,user.interest4].join(",") :'',
+
               },
             ]}
             onEditClick={() => setShowBiography(true)}

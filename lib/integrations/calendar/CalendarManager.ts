@@ -42,11 +42,12 @@ export const getCalendarCredentials = (credentials: Array<Omit<Credential, "user
     .filter((credential) => credential.type.endsWith("_calendar"))
     .flatMap((credential) => {
       const integration = ALL_INTEGRATIONS.find((integration) => integration.type === credential.type);
-
+      console.log("integration", integration);
       const calendar = getCalendar({
         ...credential,
         userId,
       });
+      console.log("calendar", calendar);
       return integration && calendar && integration.variant === "calendar"
         ? [{ integration, credential, calendar }]
         : [];
