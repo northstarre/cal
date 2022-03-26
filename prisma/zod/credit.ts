@@ -1,6 +1,6 @@
-import * as z from "zod"
-import * as imports from "../zod-utils"
-import { CompleteUser, UserModel } from "./index"
+import * as z from "zod";
+import * as imports from "../zod-utils";
+import { CompleteUser, UserModel } from "./index";
 
 export const _CreditModel = z.object({
   userId: z.number().int(),
@@ -9,10 +9,10 @@ export const _CreditModel = z.object({
   LastPurchaseDate: z.date(),
   UsedCredits: z.number().int(),
   LastUtilisedDate: z.date(),
-})
+});
 
 export interface CompleteCredit extends z.infer<typeof _CreditModel> {
-  user: CompleteUser
+  user: CompleteUser;
 }
 
 /**
@@ -20,6 +20,8 @@ export interface CompleteCredit extends z.infer<typeof _CreditModel> {
  *
  * NOTE: Lazy required in case of potential circular dependencies within schema
  */
-export const CreditModel: z.ZodSchema<CompleteCredit> = z.lazy(() => _CreditModel.extend({
-  user: UserModel,
-}))
+export const CreditModel: z.ZodSchema<CompleteCredit> = z.lazy(() =>
+  _CreditModel.extend({
+    user: UserModel,
+  })
+);

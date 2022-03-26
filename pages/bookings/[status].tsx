@@ -45,7 +45,7 @@ export default function Bookings() {
   return (
     <Shell heading={t("bookings")} subtitle={t("bookings_description")}>
       <BookingsShell>
-        <div className="-mx-4 flex flex-col sm:mx-auto">
+        <div className="-mx-4 flex flex-col dark:bg-[#ffffff] sm:mx-auto">
           <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
               {query.status === "error" && (

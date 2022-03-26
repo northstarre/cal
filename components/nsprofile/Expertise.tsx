@@ -71,7 +71,7 @@ export default function Expertise({ onIsEditComplete, profile, onEdit, expertise
             <select
               className={`flex h-10 w-full items-center rounded  border border-gray-300 pl-3 text-sm shadow focus:border focus:border-indigo-700 focus:outline-none dark:border-gray-700 dark:focus:border-indigo-700`}
               {...register("expertise2", { required: true })}>
-              <option selected disabled value>
+              <option selected disabled value={""}>
                 {profile.willGiveAdvice ? "Select an Expertise": "Select a Goal" }
               </option>
               {expertise.map((item, idx) => (

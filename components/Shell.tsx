@@ -240,7 +240,7 @@ export default function Shell(props: {
         <Toaster position="bottom-right" />
       </div>
       {user && <Navbar isBeta={false} signedIn={true} profile={user} />}
-      <div className="flex h-screen overflow-hidden" data-testid="dashboard-shell">
+      <div className="flex h-screen overflow-hidden dark:bg-[#ffffff]" data-testid="dashboard-shell">
         <div className="hidden md:flex lg:flex-shrink-0">
           <div className="flex w-14 flex-col lg:w-60">
             <div className="flex h-0 flex-1 flex-col border-r border-gray-200 bg-white">
