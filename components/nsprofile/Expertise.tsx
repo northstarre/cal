@@ -28,16 +28,31 @@ export default function Expertise({ onIsEditComplete, profile, onEdit, expertise
 
   const onSubmit = (data) => {
     setIsLoading(true);
-    const list = [
-      data.expertise1,
-      data.expertise2,
-      data.expertise3,
-      data.expertise4,
-      data.expertise5,
-      data.expertise6,
-      data.expertise7,
-      data.expertise8,
-    ];
+    const list = [];
+    if (data.expertise1) {
+      list.push(data.expertise1)
+    }
+    if (data.expertise2) {
+      list.push(data.expertise2)
+    }
+    if (data.expertise3) {
+      list.push(data.expertise3)
+    }
+    if (data.expertise4) {
+      list.push(data.expertise4)
+    }
+    if (data.expertise5) {
+      list.push(data.expertise5)
+    }
+    if (data.expertise6) {
+      list.push(data.expertise6)
+    }
+    if (data.expertise7) {
+      list.push(data.expertise7)
+    }
+    if (data.expertise8) {
+      list.push(data.expertise8)
+    }
     onEdit({
       expertise: list,
     }, onIsEditComplete).then(data => setIsLoading(false) );
@@ -54,8 +69,8 @@ export default function Expertise({ onIsEditComplete, profile, onEdit, expertise
           <div className="w-2/3 rounded border-gray-200 py-2.5 px-3">
             <select
               className={`flex h-10 w-full items-center rounded  border border-gray-300 pl-3 text-sm shadow focus:border focus:border-indigo-700 focus:outline-none dark:border-gray-700 dark:focus:border-indigo-700`}
-              {...register("expertise1", { required: true })}>
-              <option selected disabled value>
+              {...register("expertise1")}>
+              <option selected disabled value={""}>
                 {profile.willGiveAdvice ? "Select an Expertise": "Select a Goal" }
               </option>
 
@@ -70,7 +85,7 @@ export default function Expertise({ onIsEditComplete, profile, onEdit, expertise
           <div className="w-2/3 rounded border-gray-200 py-2.5 px-3">
             <select
               className={`flex h-10 w-full items-center rounded  border border-gray-300 pl-3 text-sm shadow focus:border focus:border-indigo-700 focus:outline-none dark:border-gray-700 dark:focus:border-indigo-700`}
-              {...register("expertise2", { required: true })}>
+              {...register("expertise2")}>
               <option selected disabled value={""}>
                 {profile.willGiveAdvice ? "Select an Expertise": "Select a Goal" }
               </option>
@@ -86,7 +101,7 @@ export default function Expertise({ onIsEditComplete, profile, onEdit, expertise
             <select
               className={`flex h-10 w-full items-center rounded  border border-gray-300 pl-3 text-sm shadow focus:border focus:border-indigo-700 focus:outline-none dark:border-gray-700 dark:focus:border-indigo-700`}
               {...register("expertise3")}>
-              <option selected disabled value>
+              <option selected disabled  value={""}>
                 {profile.willGiveAdvice ? "Select an Expertise": "Select a Goal" }
               </option>
               {expertise.map((item, idx) => (
@@ -101,7 +116,7 @@ export default function Expertise({ onIsEditComplete, profile, onEdit, expertise
             <select
               className={`flex h-10 w-full items-center rounded  border border-gray-300 pl-3 text-sm shadow focus:border focus:border-indigo-700 focus:outline-none dark:border-gray-700 dark:focus:border-indigo-700`}
               {...register("expertise4")}>
-              <option selected disabled value>
+              <option selected disabled  value={""}>
                 {profile.willGiveAdvice ? "Select an Expertise": "Select a Goal" }
               </option>
               {expertise.map((item, idx) => (
@@ -116,7 +131,7 @@ export default function Expertise({ onIsEditComplete, profile, onEdit, expertise
             <select
               className={`flex h-10 w-full items-center rounded  border border-gray-300 pl-3 text-sm shadow focus:border focus:border-indigo-700 focus:outline-none dark:border-gray-700 dark:focus:border-indigo-700`}
               {...register("expertise5")}>
-              <option selected disabled value>
+              <option selected disabled  value={""}>
                 {profile.willGiveAdvice ? "Select an Expertise": "Select a Goal" }
               </option>
               {expertise.map((item, idx) => (
@@ -131,7 +146,7 @@ export default function Expertise({ onIsEditComplete, profile, onEdit, expertise
             <select
               className={`flex h-10 w-full items-center rounded  border border-gray-300 pl-3 text-sm shadow focus:border focus:border-indigo-700 focus:outline-none dark:border-gray-700 dark:focus:border-indigo-700`}
               {...register("expertise6")}>
-              <option selected disabled value>
+              <option selected disabled  value={""}>
                 {profile.willGiveAdvice ? "Select an Expertise": "Select a Goal" }
               </option>
               {expertise.map((item, idx) => (
@@ -146,7 +161,7 @@ export default function Expertise({ onIsEditComplete, profile, onEdit, expertise
             <select
               className={`flex h-10 w-full items-center rounded  border border-gray-300 pl-3 text-sm shadow focus:border focus:border-indigo-700 focus:outline-none dark:border-gray-700 dark:focus:border-indigo-700`}
               {...register("expertise7")}>
-              <option selected disabled value>
+              <option selected disabled  value={""}>
                 {profile.willGiveAdvice ? "Select an Expertise": "Select a Goal" }
               </option>
               {expertise.map((item, idx) => (
@@ -161,7 +176,7 @@ export default function Expertise({ onIsEditComplete, profile, onEdit, expertise
             <select
               className={`flex h-10 w-full items-center rounded  border border-gray-300 pl-3 text-sm shadow focus:border focus:border-indigo-700 focus:outline-none dark:border-gray-700 dark:focus:border-indigo-700`}
               {...register("expertise8")}>
-              <option selected disabled value>
+              <option selected disabled  value={""}>
                 {profile.willGiveAdvice ? "Select an Expertise": "Select a Goal" }
               </option>
               {expertise.map((item, idx) => (
