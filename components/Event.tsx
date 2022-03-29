@@ -3,6 +3,7 @@
 
 import Button from "./Button";
 import { doPost } from "../makeAPICall";
+import showToast from "@lib/notification";
 
 export default function Event({ event, user }) {
   // console.log(event);
@@ -43,8 +44,12 @@ export default function Event({ event, user }) {
               `events/add/${id}/${user.email}`,
               {},
               {},
-              () => {},
-              () => {}
+              () => {
+                showToast("Calendar invite sent successfully", "success");
+              },
+              () => {
+                showToast("Failed to add calendar", "error");
+              }
             );
           }}
         />

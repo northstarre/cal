@@ -5,7 +5,7 @@ import Hero from "../components/HeroComponent";
 import Event from "@components/Event";
 import Navbar from "@components/Navbar";
 import EventFilter from "@components/EventFilter";
-import eventData from "./api/data";
+import showToast from "@lib/notification";
 import EventPagination from "@components/EventPagination";
 import { GetServerSidePropsContext } from "next";
 import { getSession } from "@lib/auth";
