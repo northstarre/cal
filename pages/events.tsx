@@ -12,6 +12,8 @@ import { getSession } from "@lib/auth";
 import prisma from "@lib/prisma";
 import crypto from "crypto";
 import { inferSSRProps } from "@lib/types/inferSSRProps";
+import { useRouter } from "next/router";
+import { Toaster } from "react-hot-toast";
 
 // const eventType = ["all", "major", "skill", "career"];
 
@@ -21,6 +23,7 @@ export default function Events(props: inferSSRProps<typeof getServerSideProps>) 
   const [filteredEvents, setFilteredEvents] = useState([]);
   const [currPage, setCurrPage] = useState(1);
   const [activeType, setActiveType] = useState("all");
+  const navigate = useRouter();
   const eventsPerPage = 9;
 
   //data
@@ -100,7 +103,11 @@ export default function Events(props: inferSSRProps<typeof getServerSideProps>) 
             {"Meet the Northstarre Team."}
           </span>
           <div className={"mt-4 flex w-full flex-row justify-center px-0 sm:mx-0 md:mx-24 md:px-48"}>
-            <button className="h-[40px] whitespace-nowrap rounded-full bg-[#379392] px-4 text-2xl font-bold text-[#EFE2BA] ">
+            <button
+              onClick={() => {
+                navigate.push("/Mentee");
+              }}
+              className="h-[40px] whitespace-nowrap rounded-full bg-[#379392] px-4 text-2xl font-bold text-[#FFFFFF] ">
               {"Meet Your Mentor"}
             </button>
           </div>
@@ -166,7 +173,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
       signedIn,
       user: {
         ...user,
-        emailMd5: crypto.createHash("md5").update(user.email).digest("hex"),
+        emailMd5: user.email ? crypto.createHash("md5").update(user.email).digest("hex"):"",
       },
       events,
     },
