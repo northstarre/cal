@@ -7,11 +7,17 @@ import Navbar from "@components/Navbar";
 import EventFilter from "@components/EventFilter";
 import eventData from "./api/data";
 import EventPagination from "@components/EventPagination";
-const eventType = ["all", ...new Set(eventData.map((event) => event.eventType))];
+import { GetServerSidePropsContext } from "next";
+import { getSession } from "@lib/auth";
+import prisma from "@lib/prisma";
+import crypto from "crypto";
+import { inferSSRProps } from "@lib/types/inferSSRProps";
+
 // const eventType = ["all", "major", "skill", "career"];
 
-export default function Events() {
-  const [events, setEvents] = useState([]);
+export default function Events(props: inferSSRProps<typeof getServerSideProps>) {
+  const eventType = ["all", ...new Set(props.events.map((event) => event.type))];
+  const [events, setEvents] = useState(props.events);
   const [filteredEvents, setFilteredEvents] = useState([]);
   const [currPage, setCurrPage] = useState(1);
   const [activeType, setActiveType] = useState("all");
@@ -19,8 +25,8 @@ export default function Events() {
 
   //data
   useEffect(() => {
-    setEvents(eventData);
-    setFilteredEvents(eventData);
+    setEvents(props.events);
+    setFilteredEvents(props.events);
   }, []);
   //data
 
@@ -37,7 +43,7 @@ export default function Events() {
 
   return (
     <>
-      <Navbar isBeta={false} signedIn={false} profile={false} />
+      <Navbar isBeta={false} signedIn={props.signedIn} profile={props.user} />
       <Hero
         heading={"Get to know our team." + " Join our Q&As."}
         heroContent={"Listen in or actively participate in our Q&As. " + "Free to you. And made for you."}
@@ -72,7 +78,7 @@ export default function Events() {
         </div>
         <ul className="event_eventslist container mx-auto max-w-7xl gap-3 sm:grid sm:grid-cols-2 md:grid-cols-3 md:gap-6">
           {currentEvents.map((event, index) => (
-            <Event key={index} event={event} />
+            <Event key={index} event={event} user={props.user} />
           ))}
         </ul>
         <EventPagination
@@ -103,3 +109,66 @@ export default function Events() {
     </>
   );
 }
+export const getServerSideProps = async (context: GetServerSidePropsContext) => {
+  const session = await getSession(context);
+  const signedIn = session?.user?.id ?? false;
+  let user = {};
+
+  if (signedIn) {
+    user = await prisma.user.findFirst({
+      where: {
+        id: session?.user?.id,
+      },
+      select: {
+        id: true,
+        startTime: true,
+        endTime: true,
+        username: true,
+        name: true,
+        email: true,
+        bio: true,
+        avatar: true,
+        timeZone: true,
+        completedOnboarding: true,
+        willGiveAdvice: true,
+        willGetAdvice: true,
+        preProfessionalTrack: true,
+        school: true,
+        schoolYear: true,
+        zipCode: true,
+        describer: true,
+        selectedCalendars: {
+          select: {
+            externalId: true,
+            integration: true,
+          },
+        },
+      },
+    });
+    if (!user.completedOnboarding) {
+      return { redirect: { permanent: false, destination: "/getting-started" } };
+    }
+  }
+  if (!user) {
+    throw new Error("User seems logged in but cannot be found in the db");
+  }
+  let events: string[] = [];
+  const goalsResp = await fetch(`https://devmynorthstarre-api.azurewebsites.net/api/events`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
+  if (goalsResp.ok) {
+    events = await goalsResp.json();
+  }
+
+  return {
+    props: {
+      signedIn,
+      user: {
+        ...user,
+        emailMd5: crypto.createHash("md5").update(user.email).digest("hex"),
+      },
+      events,
+    },
+  };
+};

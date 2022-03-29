@@ -151,7 +151,7 @@ export default function Biography({ onIsEditComplete, profile, onEdit, avatarRef
               <option selected disabled value>
                 Interest 1
               </option>
-              {interests.map((item, idx) => (
+              {interests.sort(itm => itm.name).map((item, idx) => (
                 <option key={idx}>{item.name}</option>
               ))}
             </select>
@@ -161,7 +161,7 @@ export default function Biography({ onIsEditComplete, profile, onEdit, avatarRef
               <option selected disabled value>
                 Interest 2
               </option>
-              {interests.map((item, idx) => (
+              {interests.sort(itm => itm.name).map((item, idx) => (
                 <option key={idx}>{item.name}</option>
               ))}
             </select>
@@ -176,7 +176,7 @@ export default function Biography({ onIsEditComplete, profile, onEdit, avatarRef
               <option selected disabled value>
                 Interest 3
               </option>
-              {interests.map((item, idx) => (
+              {interests.sort(itm => itm.name).map((item, idx) => (
                 <option key={idx}>{item.name}</option>
               ))}
             </select>
@@ -186,7 +186,7 @@ export default function Biography({ onIsEditComplete, profile, onEdit, avatarRef
               <option selected disabled value>
                 Interest 4
               </option>
-              {interests.map((item, idx) => (
+              {interests.sort().map((item, idx) => (
                 <option key={idx}>{item.name}</option>
               ))}
             </select>

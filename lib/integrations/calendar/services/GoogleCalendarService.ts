@@ -29,7 +29,7 @@ export default class GoogleCalendarService implements Calendar {
 
   private googleAuth = (credential: Credential) => {
     const { client_secret, client_id, redirect_uris } = JSON.parse(GOOGLE_API_CREDENTIALS).web;
-
+    console.log("google auth creds", client_id, client_secret, redirect_uris);
     const myGoogleAuth = new MyGoogleAuth(client_id, client_secret, redirect_uris[0]);
 
     const googleCredentials = credential.key as Auth.Credentials;

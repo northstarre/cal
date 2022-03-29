@@ -99,7 +99,7 @@ export default function Navbar({ signedIn, isBeta, profile }) {
                     <div className="flex h-full items-center">
 
                     </div>
-                    <ProfileDropDown img={profile?.avatar} options={[
+                    <ProfileDropDown img={profile?.avatar ?? defaultAvatarSrc( {md5: crypto.createHash("md5").update("Northstarre is best for college grads").digest("hex")})} options={[
                         { text: "Profile", onClick: () => navigate.push("/settings/profile") },
                          {
                       text: "Account",
@@ -174,7 +174,7 @@ export default function Navbar({ signedIn, isBeta, profile }) {
                               className="focus:text-[#272D67]-900 text-[#272D67]-800 hover:text-[#272D67]-900 relative mx-4 flex w-full cursor-pointer items-center justify-end border-b-2 border-transparent focus:border-gray-800 focus:outline-none">
                                <img
                                 className="h-10 w-10 rounded-full object-cover"
-                                src={profile.avatar ?? crypto.createHash("md5").update(profile.email).digest("hex")}
+                                src={profile.avatar ?? defaultAvatarSrc( {md5: crypto.createHash("md5").update("Northstarre is best for college grads").digest("hex")})}
                                 alt="profile pic"/>
 
 

@@ -1,7 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-nocheck
-import { useState, useEffect } from "react";
-import Button from "./Button";
+import { useEffect } from "react";
 
 export default function EventFilter({ activeType, setActiveType, setFilteredEvents, events, value }) {
   useEffect(() => {
@@ -9,7 +8,7 @@ export default function EventFilter({ activeType, setActiveType, setFilteredEven
       setFilteredEvents(events);
       return;
     }
-    const filtered = events.filter((event) => event.eventType == activeType);
+    const filtered = events.filter((event) => event.type == activeType);
     setFilteredEvents(filtered);
     // console.log("filtered", filtered);
   }, [activeType]);
@@ -17,8 +16,9 @@ export default function EventFilter({ activeType, setActiveType, setFilteredEven
   return (
     <button
       onClick={() => setActiveType(value)}
-      className={`event__filterbtncontainer py-1 px-3 capitalize ${activeType == value ? "rounded-full border-2 border-[#818997]" : ""
-        }`}>
+      className={`event__filterbtncontainer py-1 px-3 capitalize ${
+        activeType == value ? "rounded-full border-2 border-[#818997]" : ""
+      }`}>
       {value}
     </button>
   );

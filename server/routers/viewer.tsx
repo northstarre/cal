@@ -417,7 +417,11 @@ const loggedInViewerRouter = createProtectedRouter()
     async resolve({ ctx }) {
       const { user } = ctx;
       // get user's credentials + their connected integrations
+      console.log("trying to fetch cal credentials...");
+      console.log("user id", user.id);
+      console.log("user creds:", user.credentials);
       const calendarCredentials = getCalendarCredentials(user.credentials, user.id);
+      console.log("connected Calendars", calendarCredentials);
 
       // get all the connected integrations' calendars (from third party)
       const connectedCalendars = await getConnectedCalendars(calendarCredentials, user.selectedCalendars);

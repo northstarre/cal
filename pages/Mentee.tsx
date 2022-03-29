@@ -29,7 +29,9 @@ export default function ExpertLandingPage(props: inferSSRProps<typeof getServerS
         imagePosition={"left"}
         btnText={"Help Me Choose"}
         btnClick={() => {
-          navigate.push("/Mentee#marketplace");
+          navigate.push(
+            "https://docs.google.com/forms/d/e/1FAIpQLSd0LBwlCOufKiHXnv3zdNxfYqTA90wBwVu51tN6EKuVJcNwgA/viewform"
+          );
         }}
       />
       <WhySection
@@ -90,10 +92,11 @@ export default function ExpertLandingPage(props: inferSSRProps<typeof getServerS
         className={
           "mx-auto mb-12 flex h-[388px] max-w-[1066px] flex-col items-center justify-start rounded-[20px] bg-[url('/assets/imagemel.png')] bg-cover text-center"
         }>
-        <span
+        <a
+          href={"https://forms.gle/u3zArRVTsagN5K396"}
           className={"font-700 mt-[34px] font-[Raleway] text-2xl font-bold leading-[28px] text-[#272d67]"}>
           Don’t see a mentor you want to talk to?
-        </span>
+        </a>
         <span className={"font-700 mb-3 font-[Raleway] text-2xl font-bold leading-[28px] text-[#272d67]"}>
           {" "}
           Help us onboard who you want to see.
@@ -106,6 +109,9 @@ export default function ExpertLandingPage(props: inferSSRProps<typeof getServerS
             "my-2 w-[220px] font-[Raleway] text-2xl text-[#F7ECE1] shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
           }
           isLoading={false}
+          onClick={() => {
+            navigate.push("https://forms.gle/u3zArRVTsagN5K396");
+          }}
         />
       </div>
       <div className={`container mx-auto px-4 md:px-6 lg:px-4`}>

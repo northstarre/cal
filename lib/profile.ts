@@ -6,6 +6,6 @@ export const defaultAvatarSrc = function ({ email, md5 }: { md5?: string; email?
   if (email && !md5) {
     md5 = crypto.createHash("md5").update(email).digest("hex");
   }
-
+  console.log(`https://www.gravatar.com/avatar/${md5}?s=160&d=identicon&r=PG`);
   return `https://www.gravatar.com/avatar/${md5}?s=160&d=identicon&r=PG`;
 };

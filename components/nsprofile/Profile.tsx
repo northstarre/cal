@@ -89,7 +89,10 @@ export default function Index({ loggedInUser, profile: user, isReadOnly, updateP
                           }
                         }}>{loggedInUser && loggedInUser.id !== user.id ? "Book": user.willGiveAdvice ? "Edit Availability": "Book a Mentor 1:1"} </button>
                         {!user.willGiveAdvice && <Link href="/QNA">
-                          <a className="text-base font-medium font-indigo-600 underline hover:text-gray-500 mt-2 p-x-2 flex flex-row">
+                          <a className="text-base font-medium font-indigo-600 underline hover:text-gray-500 mt-2 p-x-2 flex flex-row"
+                             href={"https://docs.google.com/forms/d/e/1FAIpQLSd0LBwlCOufKiHXnv3zdNxfYqTA90wBwVu51tN6EKuVJcNwgA/viewform"}
+                          >
+
                             {"Help Me Find a Mentor"}<QuestionMarkCircleIcon  className={"mt-1"} height={"20px"} width={"20px"} />
                           </a>
                         </Link>}
