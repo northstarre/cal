@@ -100,7 +100,7 @@ export async function getServerSideProps(context: NextPageContext) {
       },
     });
     const resp = await fetch(
-      `https://devmynorthstarre-api.azurewebsites.net/api/Payments/credits/add/${user.id}/${credits}`,
+      `https://northstarre-api.azurewebsites.net/api/Payments/credits/add/${user.id}/${credits}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },

@@ -7,7 +7,7 @@ export default (url: string, methodName: string, successHandler: any, errorHandl
 };
 
 export function doFetch(target, methodName, successHandler, errorHandler, body, customHeaders) {
-  const url = "https://devmynorthstarre-api.azurewebsites.net/api/" + target;
+  const url = "https://northstarre-api.azurewebsites.net/api/" + target;
   const idToken = localStorage.getItem("idToken");
   let requestHeader = {
     ...customHeaders,

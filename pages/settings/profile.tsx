@@ -121,7 +121,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
   }
 
   let majors: string[] = [];
-  const majorsResp = await fetch(`https://devmynorthstarre-api.azurewebsites.net/api/majorsMeta`, {
+  const majorsResp = await fetch(`https://northstarre-api.azurewebsites.net/api/majorsMeta`, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   });
@@ -130,7 +130,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
   }
   let professions: string[] = [];
   const professionsResp = await fetch(
-    `https://devmynorthstarre-api.azurewebsites.net/api/PreProfessionalPrograms`,
+    `https://northstarre-api.azurewebsites.net/api/PreProfessionalPrograms`,
     {
       method: "GET",
       headers: { "Content-Type": "application/json" },
@@ -141,7 +141,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
   }
 
   let interests: string[] = [];
-  const interestsResp = await fetch(`https://devmynorthstarre-api.azurewebsites.net/api/Interests`, {
+  const interestsResp = await fetch(`https://northstarre-api.azurewebsites.net/api/Interests`, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   });
@@ -149,7 +149,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
     interests = await interestsResp.json();
   }
   let goals: string[] = [];
-  const goalsResp = await fetch(`https://devmynorthstarre-api.azurewebsites.net/api/goals`, {
+  const goalsResp = await fetch(`https://northstarre-api.azurewebsites.net/api/goals`, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   });

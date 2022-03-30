@@ -160,7 +160,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
     throw new Error("User seems logged in but cannot be found in the db");
   }
   let events: string[] = [];
-  const goalsResp = await fetch(`https://devmynorthstarre-api.azurewebsites.net/api/events`, {
+  const goalsResp = await fetch(`https://northstarre-api.azurewebsites.net/api/events`, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   });

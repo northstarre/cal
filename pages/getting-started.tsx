@@ -761,7 +761,7 @@ export async function getServerSideProps(context: NextPageContext) {
     "Graduate School Student",
     "Working Professional",
   ];
-  const universitiesResp = await fetch("https://devmynorthstarre-api.azurewebsites.net/api/universities", {
+  const universitiesResp = await fetch("https://northstarre-api.azurewebsites.net/api/universities", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -772,7 +772,7 @@ export async function getServerSideProps(context: NextPageContext) {
   }
   const universities = await universitiesResp.json();
   const schoolsResp = await fetch(
-    "https://devmynorthstarre-api.azurewebsites.net/api/schools?$select=name,id",
+    "https://northstarre-api.azurewebsites.net/api/schools?$select=name,id",
     {
       method: "GET",
       headers: {

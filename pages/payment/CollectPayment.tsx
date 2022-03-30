@@ -107,7 +107,7 @@ export default function CollectPayment(props: inferSSRProps<typeof getServerSide
   const { query } = useRouter();
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
-    fetch(`https://devmynorthstarre-api.azurewebsites.net/api/Payments/${props.user.id}`, {
+    fetch(`https://northstarre-api.azurewebsites.net/api/Payments/${props.user.id}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ subscriptionName: query.subscriptionName }),
