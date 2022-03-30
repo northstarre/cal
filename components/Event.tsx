@@ -7,10 +7,16 @@ import showToast from "@lib/notification";
 import { Toaster } from "react-hot-toast";
 import React from "react";
 import { useRouter } from "next/router";
+import dayjs from "dayjs";
+import timezone from "dayjs/plugin/timezone";
+import utc from "dayjs/plugin/utc";
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 export default function Event({ event, user }) {
   // console.log(event);
-  const { id, image, name, day, time, speakers, speakerBackground } = event;
+  const { id, image, name, day, time, speakers, speakerBackground, startTime, endTime } = event;
   const navigate = useRouter();
 
   return (
@@ -26,7 +32,7 @@ export default function Event({ event, user }) {
 
           <p className="mt-1 font-bold tracking-wide text-[#379392]">
             {day}
-            {day && time ? ` AT ${time}` : ""}
+            {day && time ? ` AT ${dayjs(startTime).utc().local().format("hh:mm a")}` : ""}
           </p>
           {/* <p className="font-bold  text-[#272d67]">Led by {eventSpeaker1.join(" and ")}</p> */}
           <p className="mt-1 font-bold text-[#272d67]">

@@ -5,7 +5,6 @@ import Hero from "../components/HeroComponent";
 import Event from "@components/Event";
 import Navbar from "@components/Navbar";
 import EventFilter from "@components/EventFilter";
-import showToast from "@lib/notification";
 import EventPagination from "@components/EventPagination";
 import { GetServerSidePropsContext } from "next";
 import { getSession } from "@lib/auth";
@@ -13,7 +12,6 @@ import prisma from "@lib/prisma";
 import crypto from "crypto";
 import { inferSSRProps } from "@lib/types/inferSSRProps";
 import { useRouter } from "next/router";
-import { Toaster } from "react-hot-toast";
 
 // const eventType = ["all", "major", "skill", "career"];
 
