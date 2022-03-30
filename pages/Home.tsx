@@ -47,7 +47,7 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
 
   const onMentorsFetch = (data) => {
     const remainingData = [...data];
-    const defaultSize = size.width < 400 ? 2 : size.width < 700 ? 3 : 4;
+    const defaultSize = size.width < 400 ? 2 : size.width < 1500 ? 3 : 4;
     const rows = [];
     while (remainingData.length >= 1) {
       const newRowbkp = remainingData.splice(0, defaultSize);
