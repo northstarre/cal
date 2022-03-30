@@ -16,7 +16,7 @@ dayjs.extend(timezone);
 
 export default function Event({ event, user }) {
   // console.log(event);
-  const { id, image, name, day, time, speakers, speakerBackground, startTime, endTime } = event;
+  const { id, image, name, day, time, speakers, speakerInfo, startTime, endTime } = event;
   const navigate = useRouter();
 
   return (
