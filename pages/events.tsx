@@ -51,9 +51,7 @@ export default function Events(props: inferSSRProps<typeof getServerSideProps>) 
         heading={"Get to know our team." + " Join our Q&As."}
         heroContent={"Listen in or actively participate in our Q&As. " + "Free to you. And made for you."}
         kind={"primary"}
-        src={
-          "https://s3-alpha-sig.figma.com/img/8910/6ed7/8e11d74ac9467939e352672bd5d8a94a?Expires=1648425600&Signature=WSdUin9srnuxfDcOzFyX9cAvuwED7IdfAI8rppTbIPx7lu6CFCqg~7XRGHeDFBIr0QvSgsBSrj9ymOiW6fwLaZO8M2kANiS4nguEBc9lL5cuH5XLaiJqlKPUMRj33drjcC2Lrv6F7we6Yt~3pdwW6RFeOHg1eln2QLBOTMG9d-USDpnhd1lF0bxo~JDO09KCI~~3QPH~B3iZVqSpeKaHoclrKW9dwHt63wl3BN2VUTmK4EXqFxgb4g-vGo0a5Wh735qhXnKq4qTAFHxwNZG-5nwjcE05WdXj4FiInoV-maEgltJZDq4QT8~09zj-UpbWiAWA9kTcEv-WqRx1RaHVfw__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
-        }
+        src={"/assets/events_hero_image.jpeg"}
         imagePosition={"right"}
         btnText={"Get Started"}
         containerClassName={"h-[auto]"}
