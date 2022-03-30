@@ -34,7 +34,7 @@ export default function Event({ event, user }) {
             {speakers[1] ? ` and ${speakers[1]}` : ""}
           </p>
 
-          <p className="mt-1 font-medium text-[#379392]">Speaker Background: {speakerBackground}</p>
+          <p className="mt-1 font-medium text-[#379392]">Speaker Background: {speakerInfo}</p>
         </div>
         <div>
           <Toaster />
