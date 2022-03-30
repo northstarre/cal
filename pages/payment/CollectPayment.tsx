@@ -10,7 +10,7 @@ import prisma from "@lib/prisma";
 import { inferSSRProps } from "@lib/types/inferSSRProps";
 import { useRouter } from "next/router";
 const stripePromise = loadStripe(
-  "pk_test_51KKnHHBjmu6fdZ6OyOnc32x7byECMWMzolqXYjvtkqltuliBeLi8LaA6iBiLyOqvzHVX1hYIKUKaFp4mWw3ycx6r00n5nrzSx2"
+  "pk_live_51KKnHHBjmu6fdZ6OAqzv5p65YuFnSiB3aVJ6F00JbikjUSKY1VrPAvmFkn6iRGWTnw0FVEAVX4wqZ29Ih1m2YEm300ppCSPZn8"
 );
 function CheckoutForm({ credits }) {
   const stripe = useStripe();
