@@ -27,12 +27,12 @@ export default function Event({ event, user }) {
         }>
         {/* <img className={"h-[136px] w-full object-cover"} src={`./assets/${eventImage}`} alt={eventName} /> */}
         <img className={"h-[136px] w-full object-cover"} src={`/assets/${image}`} alt={name} />
-        <div className=" h-[130px] w-full px-8 pt-4">
+        <div className=" h-[135px] w-full px-8 pt-4">
           <h3 className="text-2xl font-extrabold  text-[#272d67]">{name}</h3>
 
           <p className="mt-1 font-bold tracking-wide text-[#379392]">
             {day}
-            {day && time ? ` AT ${dayjs(startTime).utc().local().format("hh:mm a")}` : ""}
+            {day && time ? ` AT ${dayjs(startTime).utc(true).tz(dayjs.tz.guess()).format("hh:mm a")}` : ""}
           </p>
           {/* <p className="font-bold  text-[#272d67]">Led by {eventSpeaker1.join(" and ")}</p> */}
           <p className="mt-1 font-bold text-[#272d67]">
