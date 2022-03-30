@@ -77,6 +77,9 @@ export default function MentorMarketplace({ size, heading, subText }) {
       });
       rows.push(newRow);
     }
+    if (rows.length === 0 && remainingData.length !== 0) {
+      rows.push(remainingData);
+    }
     setMentors(rows);
   };
   return (
