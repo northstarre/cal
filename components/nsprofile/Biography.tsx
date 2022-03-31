@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { doGet, doPost, doPatch } from "../../makeAPICall";
 import ImageUploader from "@components/ImageUploader";
 import { useLocale } from "@lib/hooks/useLocale";
+import Select from "react-select";
 
 export default function Biography({ onIsEditComplete, profile, onEdit, avatarRef, onProfilePicEdit,
                                     majors, degrees, professions, interests, years  }) {
@@ -145,51 +146,43 @@ export default function Biography({ onIsEditComplete, profile, onEdit, avatarRef
             Interests
           </label>
           <div className="flex w-2/3 flex-row rounded border-gray-200 py-2.5 px-3">
-            <select
-              className={`mr-4  flex  h-10 w-1/2 items-center rounded border border-gray-300  pl-3 text-sm shadow focus:border focus:border-indigo-700 focus:outline-none dark:border-gray-700 dark:focus:border-indigo-700 md:mr-10`}
-              {...register("interest1")}>
-              <option selected disabled value>
-                Interest 1
-              </option>
-              {interests.sort(itm => itm.name).map((item, idx) => (
-                <option key={idx}>{item.name}</option>
+            <Select
+              id={"select interest"}
+              isClearable
+              isMulti
+              options={interests.sort(itm => itm.name).map((item, idx) => (
+                {label: item.name, value: item.name}
               ))}
-            </select>
-            <select
-              className={`flex  h-10 w-1/2 items-center rounded border  border-gray-300 pl-3 text-sm shadow focus:border focus:border-indigo-700 focus:outline-none dark:border-gray-700 dark:focus:border-indigo-700`}
-              {...register("interest2")}>
-              <option selected disabled value>
-                Interest 2
-              </option>
-              {interests.sort(itm => itm.name).map((item, idx) => (
-                <option key={idx}>{item.name}</option>
-              ))}
-            </select>
-          </div>
-        </div>
-        <div className="flex items-center space-x-9">
-          <label htmlFor="email1" className="w-1/3 py-3   px-3 text-sm leading-none text-[#272d67]"></label>
-          <div className="flex w-2/3 flex-row rounded border-gray-200 py-2.5 px-3">
-            <select
-              className={`mr-4 flex h-10   w-1/2 max-w-xs  items-center rounded border border-gray-300  pl-3 text-sm shadow focus:border focus:border-indigo-700 focus:outline-none dark:border-gray-700 dark:focus:border-indigo-700 md:mr-10`}
-              {...register("interest3")}>
-              <option selected disabled value>
-                Interest 3
-              </option>
-              {interests.sort(itm => itm.name).map((item, idx) => (
-                <option key={idx}>{item.name}</option>
-              ))}
-            </select>
-            <select
-              className={`flex h-10 w-1/2 max-w-xs items-center rounded border  border-gray-300 pl-3 text-sm shadow focus:border focus:border-indigo-700 focus:outline-none dark:border-gray-700 dark:focus:border-indigo-700`}
-              {...register("interest4")}>
-              <option selected disabled value>
-                Interest 4
-              </option>
-              {interests.sort().map((item, idx) => (
-                <option key={idx}>{item.name}</option>
-              ))}
-            </select>
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 sm:text-sm"
+              onChange={(e: any) => {
+                if (e) {
+                   if (e[0]) {
+                     setValue("interest1", e[0].value)
+                   }
+                   else {
+                     setValue("interest1", "")
+                   }
+                  if (e[1]) {
+                    setValue("interest2", e[1].value)
+                  }
+                  else {
+                      setValue("interest2", "")
+                  }
+                  if (e[2]) {
+                    setValue("interest3", e[2].value)
+                  }
+                  else {
+                    setValue("interest3", "")
+                  }
+                  if (e[3]) {
+                    setValue("interest4", e[3].value)
+                  }
+                  else {
+                    setValue("interest4", "")
+                  }
+                }
+              }}
+            />
           </div>
         </div>
         <div className="flex items-center space-x-9">

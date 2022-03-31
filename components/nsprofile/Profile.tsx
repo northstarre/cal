@@ -128,7 +128,7 @@ export default function Index({ loggedInUser, profile: user, isReadOnly, updateP
                   const arrRet = [];
                   arr.map(itm => {if (itm) { arrRet.push(itm) }})
                   return arrRet;
-                }([user.interest1,user.interest2,user.interest3,user.interest4]).join(","),
+                }([user.interest1,user.interest2,user.interest3,user.interest4]).join(", "),
 
               },
             ]}
