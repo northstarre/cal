@@ -65,7 +65,7 @@ function CheckoutForm({ credits }) {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: `https://mynorthstarre-dev.herokuapp.com/payment/paymentConfirmed/?credits=${credits}`,
+        return_url: `https://www.mynorthstarre.com/payment/paymentConfirmed/?credits=${credits}`,
       },
     });
 
