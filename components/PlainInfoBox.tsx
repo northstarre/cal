@@ -5,7 +5,7 @@ export default function PlainInfoBox({ className, footer, title, content }) {
     <>
       <div
         className={`my-[24px] flex  min-h-[277px] w-[100%] max-w-[100%] flex-col items-center rounded-[20px] border-[3px] border-[#c3c5d5] p-5 px-2 text-center text-[#272d67] shadow-[0_4px_4px_rgba(0,0,0,0.25)] md:px-5 ${className}`}>
-        <span className={"text-[28px] leading-[30px] lg:ml-12 lg:text-[34px] xl:ml-10 2xl:ml-0"}>
+        <span className={"text-[28px] text-semibold leading-[30px] lg:ml-12 lg:text-[28px] xl:ml-10 2xl:ml-0"}>
           {title}
         </span>
         <span
