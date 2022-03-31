@@ -28,7 +28,7 @@ export default function GiveAdvice(props: inferSSRProps<typeof getServerSideProp
         imagePosition={"right"}
         btnText={"Submit an Application"}
         btnclass={"hero-btn-alter text-[#ffffff]"}
-        btnClick={() => { props.signedIn ? console.log("No Action") :  navigate.push("/auth/signupe"); }}
+        btnClick={() => { props.signedIn ? console.log("No Action") :  navigate.push("https://forms.gle/1bXcraidJrvn32bg8"); }}
       />
       <WhySection
         heading={"How It Works"}
