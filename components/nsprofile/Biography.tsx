@@ -147,6 +147,10 @@ export default function Biography({ onIsEditComplete, profile, onEdit, avatarRef
           </label>
           <div className="flex w-2/3 flex-row rounded border-gray-200 py-2.5 px-3">
             <Select
+              defaultValue={[{value:profile.interest1, label:profile.interest1 },
+                {value:profile.interest2, label:profile.interest2 },
+                {value:profile.interest3, label:profile.interest3 },
+                {value:profile.interest4, label:profile.interest4 }].map(itm => itm.value? itm: null)}
               id={"select interest"}
               isClearable
               isMulti
