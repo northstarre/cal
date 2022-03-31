@@ -2,6 +2,7 @@ import React from "react";
 import "pure-react-carousel/dist/react-carousel.es.css";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from "pure-react-carousel";
+import Avatar from "@components/Avatar";
 export default function IndexPage() {
   return (
     <div className="container mx-auto">
@@ -18,7 +19,7 @@ export default function IndexPage() {
               naturalSlideHeight={125}
               totalSlides={3}
               infinite={true}
-              interval={10000}
+              interval={3000}
               isPlaying={true}
               playDirection={"forward"}
               isIntrinsicHeight={true}>
@@ -43,8 +44,12 @@ export default function IndexPage() {
                             </p>
                             <span className="inline-block border-t-[50px] border-r-[30px] border-l-[30px] border-solid border-l-[transparent] border-r-[transparent] border-t-[#fff]"></span>
                             <div className="flex flex-col items-center">
-                              <img className="mt-6 pb-4" src="/assets/monica.jpg" alt="a student" />
-                              <h2 className="pb-2 text-2xl font-medium leading-[28px] text-[#000]">
+                              <img
+                                className={"h-[136px] w-[140px] rounded-full object-cover"}
+                                src={`/assets/monica.jpg`}
+                                alt={"monica"}
+                              />
+                              <h2 className="mt-2 pb-2 text-2xl font-medium leading-[28px] text-[#000]">
                                 Monica
                               </h2>
                               <p className="hidden text-2xl text-[#000]">Michigan University</p>
@@ -78,9 +83,13 @@ export default function IndexPage() {
                             </p>
                             <span className="inline-block border-t-[50px] border-r-[30px] border-l-[30px] border-solid border-l-[transparent] border-r-[transparent] border-t-[#fff]"></span>
                             <div className="flex flex-col items-center">
-                              <img className="mt-6 pb-4" src="/assets/kenaiD.png" alt="a student" />
-                              <h2 className="pb-2 text-2xl font-medium leading-[28px] text-[#000]">
-                                Kenai Dindia
+                              <img
+                                className={"h-[136px] w-[140px] rounded-full object-cover"}
+                                src={`/assets/kenaiD.png`}
+                                alt={"Kenai"}
+                              />
+                              <h2 className="mt-2 pb-2 text-2xl font-medium leading-[28px] text-[#000]">
+                                Kenai
                               </h2>
                               <p className="hidden text-2xl text-[#000]">University of Washington</p>
                             </div>
@@ -104,17 +113,23 @@ export default function IndexPage() {
                             <p className=" rounded-[12px] bg-white p-6 text-center font-[Raleway] text-xl font-normal leading-6 text-[#272D67]">
                               "I didn&#39;t know a lot of things in high school and even in the early years of
                               college. I tripped into information by joining clubs somewhat blindly and I
-                              wished there was a more structured way to absorb this information.I think that&#39;s
-                              what we hope to do as mentors on Northstarre -- give back to high schoolers that
-                              are just like us."
+                              wished there was a more structured way to absorb this information.I think
+                              that&#39;s what we hope to do as mentors on Northstarre -- give back to high
+                              schoolers that are just like us."
                               <br></br>
                               <br></br>
                             </p>
                             <span className="inline-block border-t-[50px] border-r-[30px] border-l-[30px] border-solid border-l-[transparent] border-r-[transparent] border-t-[#fff]"></span>
                             <div className="flex flex-col items-center">
-                              <img className="mt-6 pb-4" src="/assets/IshaD.png" alt="a student" />
-                              <h2 className="pb-2 text-2xl font-medium leading-[28px] text-[#000]">
-                                Isha Tyle
+                              <div className={"h-[136px] w-[140px] rounded-full"}>
+                                <img
+                                  className={"h-[136px] w-[140px] rounded-full object-cover"}
+                                  src={`/assets/IshaD.png`}
+                                  alt={"Isha"}
+                                />
+                              </div>
+                              <h2 className="mt-2 pb-2 text-2xl font-medium leading-[28px] text-[#000]">
+                                Isha
                               </h2>
                               <p className="hidden text-2xl text-[#000]">University of Illinois</p>
                             </div>
