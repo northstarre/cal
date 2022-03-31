@@ -22,12 +22,13 @@ export default function ExpertLandingPage(props: inferSSRProps<typeof getServerS
       <Hero
         heading={"Meet Your Mentors."}
         heroContent={
-          "At Northstarre, we're bringing the best college students from across the country diretly to you, on your schedule."
+          "At Northstarre, we're bringing the best college students from across the country directly to you, on your schedule."
         }
         kind={"primary"}
         src={"./assets/image%2055.png"}
         imagePosition={"left"}
         btnText={"Help Me Choose"}
+        btnclass={"text-[#FFFFFF]"}
         btnClick={() => {
           navigate.push(
             "https://docs.google.com/forms/d/e/1FAIpQLSd0LBwlCOufKiHXnv3zdNxfYqTA90wBwVu51tN6EKuVJcNwgA/viewform"

@@ -27,7 +27,7 @@ export default function GiveAdvice(props: inferSSRProps<typeof getServerSideProp
         src={"/assets/mentor2.jpg"}
         imagePosition={"right"}
         btnText={"Submit an Application"}
-        btnclass={"hero-btn-alter"}
+        btnclass={"hero-btn-alter text-[#ffffff]"}
         btnClick={() => { props.signedIn ? console.log("No Action") :  navigate.push("/auth/signupe"); }}
       />
       <WhySection

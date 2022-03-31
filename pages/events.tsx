@@ -12,6 +12,8 @@ import prisma from "@lib/prisma";
 import crypto from "crypto";
 import { inferSSRProps } from "@lib/types/inferSSRProps";
 import { useRouter } from "next/router";
+import _orderBy from "lodash";
+import dayjs from "dayjs";
 
 // const eventType = ["all", "major", "skill", "career"];
 
@@ -93,7 +95,7 @@ export default function Events(props: inferSSRProps<typeof getServerSideProps>) 
             "mx-auto my-14 flex h-[600px] max-w-[1014px] flex-col items-center justify-start rounded-[20px] bg-[url('/assets/image%20HomeFooter.png')] bg-cover text-center font-[Raleway]"
           }>
           <span className={"font-700 mt-[34px] text-[20px]  font-bold text-[#272d67]"}>
-            {"Want to talk to college mentor 1:1?"}
+            {"Want to talk to a college mentor 1:1?"}
           </span>
           <span className={"font-700 text-[20px] font-bold text-[#272d67]"}>
             {"Meet the Northstarre Team."}
@@ -162,6 +164,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
   });
   if (goalsResp.ok) {
     events = await goalsResp.json();
+    events = events.sort((a: any, b: any) => dayjs(a.startTime) - dayjs(b.startTime));
   }
 
   return {
@@ -169,7 +172,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
       signedIn,
       user: {
         ...user,
-        emailMd5: user.email ? crypto.createHash("md5").update(user.email).digest("hex"):"",
+        emailMd5: user.email ? crypto.createHash("md5").update(user.email).digest("hex") : "",
       },
       events,
     },
