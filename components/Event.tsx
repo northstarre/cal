@@ -25,7 +25,7 @@ export default function Event({ event, user }) {
           "mx-auto mb-5 flex max-w-[400px] list-none flex-col items-center justify-center overflow-hidden rounded-lg bg-[#FFEFED]  font-[Raleway] shadow-lg sm:w-full "
         }>
         <img className={"h-[136px] w-full object-cover"} src={`/assets/${image}`} alt={name} />
-        <div className="h-[145px] w-full px-8 pt-4">
+        <div className="h-[155px] w-full px-8 pt-4">
           <h3 className="text-2xl font-extrabold  text-[#272d67]">{name}</h3>
 
           <p className="mt-1 font-bold tracking-wide text-[#379392]">
@@ -40,7 +40,7 @@ export default function Event({ event, user }) {
           <p className="mt-1 font-medium text-[#379392]">{speakerInfo}</p>
         </div>
         <div>
-          <Toaster />
+          <Toaster position={"top-right"} />
         </div>
         <Button
           kind={"primary"}
