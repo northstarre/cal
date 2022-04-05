@@ -36,7 +36,7 @@ export default function Pricing(props: inferSSRProps<typeof getServerSideProps>)
                   <span className={"mb-[40px] text-center text-5xl"}>$30.00</span>
                   <button
                     className={
-                      "mb-[24px] min-h-[40px] min-w-[240px] rounded-full bg-[#379392] text-2xl font-normal text-white shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
+                      "mb-[24px] min-h-[40px] min-w-[240px] rounded-full bg-[#379392] text-2xl font-bold text-white shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
                     }
                     onClick={() => router.push("/payment/CollectPayment/?subscriptionName=astra")}>
                     Buy Now
@@ -73,7 +73,7 @@ export default function Pricing(props: inferSSRProps<typeof getServerSideProps>)
                   <span className={"mb-[40px] text-center text-5xl"}>$85.00</span>
                   <button
                     className={
-                      "mb-[24px] min-h-[40px] min-w-[240px] rounded-full bg-[#379392] text-2xl font-normal text-white shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
+                      "mb-[24px] min-h-[40px] min-w-[240px] rounded-full bg-[#379392] text-2xl font-bold text-white shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
                     }
                     onClick={() => router.push("/payment/CollectPayment/?subscriptionName=sirius")}>
                     Buy Now
@@ -115,7 +115,7 @@ export default function Pricing(props: inferSSRProps<typeof getServerSideProps>)
                   <span className={"mb-[40px] text-center text-5xl"}>$140.00</span>
                   <button
                     className={
-                      "mb-[24px] min-h-[40px] min-w-[240px] rounded-full bg-[#379392] text-2xl font-normal text-white shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
+                      "mb-[24px] min-h-[40px] min-w-[240px] rounded-full bg-[#379392] text-2xl font-bold text-white shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
                     }
                     onClick={() => router.push("/payment/CollectPayment/?subscriptionName=polaris")}>
                     Buy Now

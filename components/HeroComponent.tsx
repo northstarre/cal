@@ -2,6 +2,7 @@
 //@ts-nocheck
 import React from "react";
 import Button from "./Button";
+import Image from "next/image";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 function Index({
@@ -44,7 +45,7 @@ function Index({
         <Button
           kind={kind}
           text={btnText}
-          className={`${btnclass} hero-btn mt-6 font-[Raleway] text-2xl text-[#EFE2BA] shadow-[0_4px_4px_rgba(0,0,0,0.25)]`}
+          className={`${btnclass} hero-btn mt-6 font-[Raleway] text-2xl text-[#FFFFFF] shadow-[0_4px_4px_rgba(0,0,0,0.25)]`}
           size={"md"}
           isLoading={false}
           onClick={btnClick}
@@ -69,5 +70,35 @@ function Index({
     </div>
   );
 }
+interface BannerProps {
+  className: string;
+  height: number;
+  width: number;
+  altText: string;
+  heading: string;
+  subText: string;
+  buttonText: string;
+  buttonClassName: string;
+  buttonClick: any;
+  imgSrc: string;
+}
+
+export const HeroBanner = (props: BannerProps) => (
+  <div
+    className={`relative flex h-[80vh] w-[100vw] flex-col items-center justify-center ${props.className} bg-cover text-center align-middle font-[Raleway] text-white`}>
+    <h3 role="heading" className="why-header text-4xl font-bold  md:leading-[60px] lg:text-[50px]">
+      {props.heading}
+    </h3>
+    <p className={"font-[22px] font-normal"}>{props.subText}</p>
+    <Button
+      kind={"primary"}
+      text={props.buttonText}
+      className={`${props.buttonClassName} hero-btn mt-10 font-[Raleway] text-2xl text-[#FFFFFF] shadow-[0_4px_4px_rgba(0,0,0,0.25)]`}
+      size={"md"}
+      isLoading={false}
+      onClick={props.buttonClick}
+    />
+  </div>
+);
 
 export default Index;

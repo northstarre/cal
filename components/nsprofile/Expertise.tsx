@@ -5,13 +5,16 @@ import Button from "../Button";
 
 import { useForm } from "react-hook-form";
 import { doGet, doPatch } from "../../makeAPICall";
+import Select from "react-select";
 
 export default function Expertise({ onIsEditComplete, profile, onEdit, expertise }) {
   const [isLoading, setIsLoading] = useState(false);
   const {
     register,
     handleSubmit,
-    reset
+    reset,
+    getValues,
+    setValue
   } = useForm();
 
   useEffect(() => {
@@ -67,122 +70,178 @@ export default function Expertise({ onIsEditComplete, profile, onEdit, expertise
               : "Your Goals"}
           </label>
           <div className="w-2/3 rounded border-gray-200 py-2.5 px-3">
-            <select
-              className={`flex h-10 w-full items-center rounded  border border-gray-300 pl-3 text-sm shadow focus:border focus:border-indigo-700 focus:outline-none dark:border-gray-700 dark:focus:border-indigo-700`}
-              {...register("expertise1")}>
-              <option selected disabled value={""}>
-                {profile.willGiveAdvice ? "Select an Expertise": "Select a Goal" }
-              </option>
-
-              {expertise.map((item, idx) => (
-                <option key={idx}>{profile.willGiveAdvice ? item.mentorText : item.menteeText}</option>
-              ))}
-            </select>
+            {console.log(profile.expertise[0])}
+            <Select
+              id={"expertise1"}
+              isClearable
+              options={expertise.map((itm: any) => ({ value: profile.willGiveAdvice ? itm.mentorText : itm.menteeText,
+                label:  profile.willGiveAdvice ? itm.mentorText : itm.menteeText }))}
+              defaultValue={{label:profile.expertise[0], value: profile.expertise[0]}}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500  sm:text-sm"
+              onChange={(e: any) => {
+                if (e) {
+                  setValue("expertise1",e.value);
+                }
+                else {
+                  setValue("expertise1",'');
+                }
+              }}
+              placeholder={profile.willGiveAdvice ? "Select an Expertise": "Select a Goal"}
+            />
           </div>
         </div>
         <div className="flex items-center space-x-9">
           <label htmlFor="email1" className="w-1/3 py-3   px-3 text-sm leading-none text-[#272d67]"></label>
           <div className="w-2/3 rounded border-gray-200 py-2.5 px-3">
-            <select
-              className={`flex h-10 w-full items-center rounded  border border-gray-300 pl-3 text-sm shadow focus:border focus:border-indigo-700 focus:outline-none dark:border-gray-700 dark:focus:border-indigo-700`}
-              {...register("expertise2")}>
-              <option selected disabled value={""}>
-                {profile.willGiveAdvice ? "Select an Expertise": "Select a Goal" }
-              </option>
-              {expertise.map((item, idx) => (
-                <option key={idx}>{profile.willGiveAdvice ? item.mentorText : item.menteeText}</option>
-              ))}
-            </select>
+            <Select
+              id={"expertise2"}
+              isClearable
+              options={expertise.map((itm: any) => ({ value: profile.willGiveAdvice ? itm.mentorText : itm.menteeText,
+                label:  profile.willGiveAdvice ? itm.mentorText : itm.menteeText }))}
+              defaultValue={{label:profile.expertise[1] ?? '', value: profile.expertise[1]?? ''}}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500  sm:text-sm"
+              onChange={(e: any) => {
+                if (e) {
+                  setValue("expertise2",e.value);
+                }
+                else {
+                  setValue("expertise2",'');
+                }
+              }}
+              placeholder={profile.willGiveAdvice ? "Select an Expertise": "Select a Goal"}
+            />
           </div>
         </div>
         <div className="flex items-center space-x-9">
           <label htmlFor="email1" className="w-1/3 py-3   px-3 text-sm leading-none text-[#272d67]"></label>
           <div className="w-2/3 rounded border-gray-200 py-2.5 px-3">
-            <select
-              className={`flex h-10 w-full items-center rounded  border border-gray-300 pl-3 text-sm shadow focus:border focus:border-indigo-700 focus:outline-none dark:border-gray-700 dark:focus:border-indigo-700`}
-              {...register("expertise3")}>
-              <option selected disabled  value={""}>
-                {profile.willGiveAdvice ? "Select an Expertise": "Select a Goal" }
-              </option>
-              {expertise.map((item, idx) => (
-                <option key={idx}>{profile.willGiveAdvice ? item.mentorText : item.menteeText}</option>
-              ))}
-            </select>
+            <Select
+              id={"expertise3"}
+              isClearable
+              options={expertise.map((itm: any) => ({ value: profile.willGiveAdvice ? itm.mentorText : itm.menteeText,
+                label:  profile.willGiveAdvice ? itm.mentorText : itm.menteeText }))}
+              defaultValue={{label:profile.expertise[2] ?? '', value: profile.expertise[2]?? ''}}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500  sm:text-sm"
+              onChange={(e: any) => {
+                if (e) {
+                  setValue("expertise3",e.value);
+                }
+                else {
+                  setValue("expertise3",'');
+                }
+              }}
+              placeholder={profile.willGiveAdvice ? "Select an Expertise": "Select a Goal"}
+            />
           </div>
         </div>
         <div className="flex items-center space-x-9">
           <label className="w-1/3 py-3   px-3 text-sm leading-none text-[#272d67]"></label>
           <div className="w-2/3 rounded border-gray-200 py-2.5 px-3">
-            <select
-              className={`flex h-10 w-full items-center rounded  border border-gray-300 pl-3 text-sm shadow focus:border focus:border-indigo-700 focus:outline-none dark:border-gray-700 dark:focus:border-indigo-700`}
-              {...register("expertise4")}>
-              <option selected disabled  value={""}>
-                {profile.willGiveAdvice ? "Select an Expertise": "Select a Goal" }
-              </option>
-              {expertise.map((item, idx) => (
-                <option key={idx}>{profile.willGiveAdvice ? item.mentorText : item.menteeText}</option>
-              ))}
-            </select>
+            <Select
+              id={"expertise4"}
+              isClearable
+              options={expertise.map((itm: any) => ({ value: profile.willGiveAdvice ? itm.mentorText : itm.menteeText,
+                label:  profile.willGiveAdvice ? itm.mentorText : itm.menteeText }))}
+              defaultValue={{label:profile.expertise[3] ?? '', value: profile.expertise[3]?? ''}}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500  sm:text-sm"
+              onChange={(e: any) => {
+                if (e) {
+                  setValue("expertise4",e.value);
+                }
+                else {
+                  setValue("expertise4",'');
+                }
+              }}
+              placeholder={profile.willGiveAdvice ? "Select an Expertise": "Select a Goal"}
+            />
           </div>
         </div>
         <div className="flex items-center space-x-9">
           <label className="w-1/3 py-3   px-3 text-sm leading-none text-[#272d67]"></label>
           <div className="w-2/3 rounded border-gray-200 py-2.5 px-3">
-            <select
-              className={`flex h-10 w-full items-center rounded  border border-gray-300 pl-3 text-sm shadow focus:border focus:border-indigo-700 focus:outline-none dark:border-gray-700 dark:focus:border-indigo-700`}
-              {...register("expertise5")}>
-              <option selected disabled  value={""}>
-                {profile.willGiveAdvice ? "Select an Expertise": "Select a Goal" }
-              </option>
-              {expertise.map((item, idx) => (
-                <option key={idx}>{profile.willGiveAdvice ? item.mentorText : item.menteeText}</option>
-              ))}
-            </select>
+            <Select
+              id={"expertise5"}
+              isClearable
+              options={expertise.map((itm: any) => ({ value: profile.willGiveAdvice ? itm.mentorText : itm.menteeText,
+                label:  profile.willGiveAdvice ? itm.mentorText : itm.menteeText }))}
+              defaultValue={{label:profile.expertise[4] ?? '', value: profile.expertise[4]?? ''}}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500  sm:text-sm"
+              onChange={(e: any) => {
+                if (e) {
+                  setValue("expertise5",e.value);
+                }
+                else {
+                  setValue("expertise5",'');
+                }
+              }}
+              placeholder={profile.willGiveAdvice ? "Select an Expertise": "Select a Goal"}
+            />
           </div>
         </div>
         <div className="flex items-center space-x-9">
           <label className="w-1/3 py-3   px-3 text-sm leading-none text-[#272d67]"></label>
           <div className="w-2/3 rounded border-gray-200 py-2.5 px-3">
-            <select
-              className={`flex h-10 w-full items-center rounded  border border-gray-300 pl-3 text-sm shadow focus:border focus:border-indigo-700 focus:outline-none dark:border-gray-700 dark:focus:border-indigo-700`}
-              {...register("expertise6")}>
-              <option selected disabled  value={""}>
-                {profile.willGiveAdvice ? "Select an Expertise": "Select a Goal" }
-              </option>
-              {expertise.map((item, idx) => (
-                <option key={idx}>{profile.willGiveAdvice ? item.mentorText : item.menteeText}</option>
-              ))}
-            </select>
+            <Select
+              id={"expertise6"}
+              isClearable
+              options={expertise.map((itm: any) => ({ value: profile.willGiveAdvice ? itm.mentorText : itm.menteeText,
+                label:  profile.willGiveAdvice ? itm.mentorText : itm.menteeText }))}
+              defaultValue={{label:profile.expertise[5] ?? '', value: profile.expertise[5]?? ''}}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500  sm:text-sm"
+              onChange={(e: any) => {
+                if (e) {
+                  setValue("expertise6",e.value);
+                }
+                else {
+                  setValue("expertise6",'');
+                }
+              }}
+              placeholder={profile.willGiveAdvice ? "Select an Expertise": "Select a Goal"}
+            />
           </div>
         </div>
         <div className="flex items-center space-x-9">
           <label className="w-1/3 py-3   px-3 text-sm leading-none text-[#272d67]"></label>
           <div className="w-2/3 rounded border-gray-200 py-2.5 px-3">
-            <select
-              className={`flex h-10 w-full items-center rounded  border border-gray-300 pl-3 text-sm shadow focus:border focus:border-indigo-700 focus:outline-none dark:border-gray-700 dark:focus:border-indigo-700`}
-              {...register("expertise7")}>
-              <option selected disabled  value={""}>
-                {profile.willGiveAdvice ? "Select an Expertise": "Select a Goal" }
-              </option>
-              {expertise.map((item, idx) => (
-                <option key={idx}>{profile.willGiveAdvice ? item.mentorText : item.menteeText}</option>
-              ))}
-            </select>
+            <Select
+              id={"expertise7"}
+              isClearable
+              options={expertise.map((itm: any) => ({ value: profile.willGiveAdvice ? itm.mentorText : itm.menteeText,
+                label:  profile.willGiveAdvice ? itm.mentorText : itm.menteeText }))}
+              defaultValue={{label:profile.expertise[6] ?? '', value: profile.expertise[6]?? ''}}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500  sm:text-sm"
+              onChange={(e: any) => {
+                if (e) {
+                  setValue("expertise7",e.value);
+                }
+                else {
+                  setValue("expertise7",'');
+                }
+              }}
+              placeholder={profile.willGiveAdvice ? "Select an Expertise": "Select a Goal"}
+            />
           </div>
         </div>
         <div className="flex items-center space-x-9">
           <label className="w-1/3 py-3   px-3 text-sm leading-none text-[#272d67]"></label>
           <div className="w-2/3 rounded border-gray-200 py-2.5 px-3">
-            <select
-              className={`flex h-10 w-full items-center rounded  border border-gray-300 pl-3 text-sm shadow focus:border focus:border-indigo-700 focus:outline-none dark:border-gray-700 dark:focus:border-indigo-700`}
-              {...register("expertise8")}>
-              <option selected disabled  value={""}>
-                {profile.willGiveAdvice ? "Select an Expertise": "Select a Goal" }
-              </option>
-              {expertise.map((item, idx) => (
-                <option key={idx}>{profile.willGiveAdvice ? item.mentorText : item.menteeText}</option>
-              ))}
-            </select>
+            <Select
+              id={"expertise8"}
+              isClearable
+              options={expertise.map((itm: any) => ({ value: profile.willGiveAdvice ? itm.mentorText : itm.menteeText,
+                label:  profile.willGiveAdvice ? itm.mentorText : itm.menteeText }))}
+              defaultValue={{label:profile.expertise[7] ?? '', value: profile.expertise[7]?? ''}}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500  sm:text-sm"
+              onChange={(e: any) => {
+                if (e) {
+                  setValue("expertise8",e.value);
+                }
+                else {
+                  setValue("expertise8",'');
+                }
+              }}
+              placeholder={profile.willGiveAdvice ? "Select an Expertise": "Select a Goal"}
+            />
           </div>
         </div>
       </form>

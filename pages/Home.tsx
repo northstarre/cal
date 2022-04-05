@@ -1,7 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-nocheck
 import React, { useEffect, useState } from "react";
-import Hero from "../components/HeroComponent";
+import Hero, { HeroBanner } from "../components/HeroComponent";
 import Button from "../components/Button";
 import PlainInfoBox from "../components/PlainInfoBox";
 import WhySection from "../components/WhySection";
@@ -66,15 +66,16 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
   return (
     <>
       <Navbar isBeta={false} signedIn={props.signedIn} profile={props.user} />
-      <Hero
+      <HeroBanner
+        className={"bg-[url('/assets/hero-home.jpg')]"}
+        imgSrc={"/assets/hero-home.jpg"}
+        height={100}
+        width={100}
+        altText={"home"}
         heading={"A Professional Network for Students, Finally."}
-        heroContent={"Find mentors across the country, and join a " + "community of students just like you."}
-        kind={"primary"}
-        src={"/assets/image%2052.png"}
-        imagePosition={"right"}
-        btnText={"Get Started"}
-        containerClassName={"h-[auto]"}
-        btnClick={() => {
+        subText={"Find mentors across the country, and join a community of students just like you."}
+        buttonText={"Get Started"}
+        buttonClick={() => {
           if (props.signedId) {
             props.user?.willGiveAdvice ? navigate.push("/Availability") : navigate.push("/QNA");
           } else {
@@ -82,7 +83,7 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
           }
         }}
       />
-      <div className={"w-full rounded-[20px] bg-[#FFEFED]"}>
+      <div className={"w-full rounded-[20px]"}>
         <div className={`2xl:container 2xl:mx-auto`}>
           <ImageWithCTA
             data={{
@@ -264,7 +265,7 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
             text={"Get Advice"}
             className={"my-2 mx-4 w-[180px] font-[Raleway] text-2xl text-[#F7ECE1]"}
             isLoading={false}
-            onClick={() => navigate.push("/QNA")}
+            onClick={() => navigate.push("/events")}
           />
         </div>
       </div>

@@ -14,6 +14,7 @@ import { inferSSRProps } from "@lib/types/inferSSRProps";
 import { useRouter } from "next/router";
 import _orderBy from "lodash";
 import dayjs from "dayjs";
+import { Toaster } from "react-hot-toast";
 
 // const eventType = ["all", "major", "skill", "career"];
 
@@ -46,6 +47,9 @@ export default function Events(props: inferSSRProps<typeof getServerSideProps>) 
 
   return (
     <>
+      <div>
+        <Toaster position="bottom-right" />
+      </div>
       <Navbar isBeta={false} signedIn={props.signedIn} profile={props.user} />
       <Hero
         heading={"Get to know our team." + " Join our Q&As."}

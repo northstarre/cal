@@ -1,7 +1,7 @@
 /* eslint-disable */
 //@ts-nocheck
 import React, { useEffect, useState } from "react";
-import Hero from "../components/HeroComponent";
+import Hero, { HeroBanner } from "../components/HeroComponent";
 import WhySection from "../components/WhySection";
 import Testimonial from "../components/Testimonial";
 import { doGet } from "../makeAPICall";
@@ -17,18 +17,17 @@ export default function GiveAdvice(props: inferSSRProps<typeof getServerSideProp
   return (
     <>
       <Navbar isBeta={false} signedIn={props.signedIn} profile={props.user} />
-      <Hero
+      <HeroBanner
+        className={"bg-[url('/assets/hero-home.jpg')]"}
+        imgSrc={"/assets/hero-home.jpg"}
+        height={100}
+        width={100}
+        altText={"home"}
+        buttonClassName={"hero-btn-alter"}
         heading={"We believe students are untapped experts."}
-        flexclass={"items-end"}
-        heroContent={
-          "With your expertise, we can democratize access to professional resources. "
-        }
-        kind={"primary"}
-        src={"/assets/mentor2.jpg"}
-        imagePosition={"right"}
-        btnText={"Submit an Application"}
-        btnclass={"hero-btn-alter text-[#ffffff]"}
-        btnClick={() => { props.signedIn ? console.log("No Action") :  navigate.push("https://forms.gle/1bXcraidJrvn32bg8"); }}
+        subText={" With your expertise, we can democratize access to professional resources. "}
+        buttonText={"Submit an Application"}
+        buttonClick={() => { navigate.push("https://forms.gle/1bXcraidJrvn32bg8"); }}
       />
       <WhySection
         heading={"How It Works"}

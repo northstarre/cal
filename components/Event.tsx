@@ -4,7 +4,7 @@
 import Button from "./Button";
 import { doPost } from "../makeAPICall";
 import showToast from "@lib/notification";
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import React from "react";
 import { useRouter } from "next/router";
 import dayjs from "dayjs";
@@ -39,9 +39,7 @@ export default function Event({ event, user }) {
 
           <p className="mt-1 font-medium text-[#379392]">{speakerInfo}</p>
         </div>
-        <div>
-          <Toaster position={"top-right"} />
-        </div>
+        <Toaster containerClassName={"abosolute top-[30px]"} />
         <Button
           kind={"primary"}
           size={"md"}
@@ -57,10 +55,26 @@ export default function Event({ event, user }) {
               {},
               {},
               () => {
-                showToast("Calendar invite sent successfully", "success");
+                toast.success("Calendar invite sent successfully", {
+                  duration: 6000,
+                  style: {
+                    borderRadius: "2px",
+                    background: "#333",
+                    color: "#fff",
+                    boxShadow: "none",
+                  },
+                });
               },
               () => {
-                showToast("Failed to add calendar", "error");
+                toast.error("Failed to add calendar", {
+                  duration: 6000,
+                  style: {
+                    borderRadius: "2px",
+                    background: "#FEE2E2",
+                    color: "#B91C1C",
+                    boxShadow: "none",
+                  },
+                });
               }
             );
           }}

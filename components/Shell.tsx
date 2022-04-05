@@ -5,11 +5,9 @@ import {
   ClockIcon,
   CogIcon,
   ExternalLinkIcon,
-  LinkIcon,
   LogoutIcon,
   PuzzleIcon,
   MoonIcon,
-  MapIcon,
   UserCircleIcon,
 } from "@heroicons/react/solid";
 import { signOut, useSession } from "next-auth/react";
@@ -18,8 +16,6 @@ import { useRouter } from "next/router";
 import React, { ReactNode, useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
 
-import LicenseBanner from "@ee/components/LicenseBanner";
-import TrialBanner from "@ee/components/TrialBanner";
 import HelpMenuItemDynamic from "@ee/lib/intercom/HelpMenuItemDynamic";
 
 import classNames from "@lib/classNames";
@@ -364,7 +360,6 @@ export default function Shell(props: {
               {/* add padding to content for mobile navigation*/}
               <div className="block pt-12 md:hidden" />
             </div>
-            <LicenseBanner />
           </main>
         </div>
       </div>

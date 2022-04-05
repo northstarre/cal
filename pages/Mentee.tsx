@@ -1,7 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-nocheck
 import React from "react";
-import Hero from "../components/HeroComponent";
+import Hero, { HeroBanner } from "../components/HeroComponent";
 import WhySection from "../components/WhySection";
 import MentorMarketplace from "../components/MentorMarketplace";
 import Button from "../components/Button";
@@ -19,17 +19,19 @@ export default function ExpertLandingPage(props: inferSSRProps<typeof getServerS
   return (
     <>
       <Navbar isBeta={false} signedIn={props.signedIn} profile={props.user} />
-      <Hero
+      <HeroBanner
+        className={"bg-[url('/assets/mentee.jpg')]"}
+        imgSrc={"/assets/mentee.jpg"}
+        height={100}
+        width={100}
+        altText={"home"}
         heading={"Meet Your Mentors."}
-        heroContent={
-          "At Northstarre, we're bringing the best college students from across the country directly to you, on your schedule."
+        subText={
+          " At Northstarre, we're bringing the best college students from across the country directly to you, on your schedule."
         }
-        kind={"primary"}
-        src={"./assets/image%2055.png"}
-        imagePosition={"left"}
-        btnText={"Help Me Choose"}
-        btnclass={"text-[#FFFFFF]"}
-        btnClick={() => {
+        buttonClassName={"hero-btn-alter"}
+        buttonText={"Help Me Choose"}
+        buttonClick={() => {
           navigate.push(
             "https://docs.google.com/forms/d/e/1FAIpQLSd0LBwlCOufKiHXnv3zdNxfYqTA90wBwVu51tN6EKuVJcNwgA/viewform"
           );
@@ -85,7 +87,7 @@ export default function ExpertLandingPage(props: inferSSRProps<typeof getServerS
               "my-2 w-[210px] font-[Raleway] text-2xl text-[#F7ECE1] shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
             }
             isLoading={false}
-            onClick={() => navigate.push("/auth/signupe")}
+            onClick={() => navigate.push("/auth/login")}
           />
         </div>
       )}
