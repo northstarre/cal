@@ -39,9 +39,9 @@ export default function ExpertLandingPage(props: inferSSRProps<typeof getServerS
       />
       <WhySection
         heading={"Why Northstarre Mentors?"}
-        className={"rounded-[20px] bg-[#FFEFED]"}
+        className={"rounded-[20px]"}
         btnClick={() => navigate.push("/payment/pricing")}
-        gapclass={"md:flex-row md:flex-wrap md:justify-center md:gap-x-36 lg:gap-x-8"}
+        gapclass={"flex-row md:justify-around"}
         butntext={"Pricing"}
         butnwrap={"justify-center mt-4"}
         isReverse={false}

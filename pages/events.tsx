@@ -96,20 +96,18 @@ export default function Events(props: inferSSRProps<typeof getServerSideProps>) 
 
         <div
           className={
-            "mx-auto my-14 flex h-[600px] max-w-[1014px] flex-col items-center justify-start rounded-[20px] bg-[url('/assets/image%20HomeFooter.png')] bg-cover text-center font-[Raleway]"
+            "mx-auto my-14 flex h-[350px] max-w-[1014px] flex-col items-center justify-end rounded-[20px] bg-[url('/assets/events-bottom.jpg')] bg-cover bg-center text-center font-[Raleway]"
           }>
-          <span className={"font-700 mt-[34px] text-[20px]  font-bold text-[#272d67]"}>
+          <span className={"font-700 mt-[34px] text-[20px]  font-bold text-white"}>
             {"Want to talk to a college mentor 1:1?"}
           </span>
-          <span className={"font-700 text-[20px] font-bold text-[#272d67]"}>
-            {"Meet the Northstarre Team."}
-          </span>
+          <span className={"font-700 text-[20px] font-bold text-white"}>{"Meet the Northstarre Team."}</span>
           <div className={"mt-4 flex w-full flex-row justify-center px-0 sm:mx-0 md:mx-24 md:px-48"}>
             <button
               onClick={() => {
                 navigate.push("/Mentee");
               }}
-              className="h-[40px] whitespace-nowrap rounded-full bg-[#379392] px-4 text-2xl font-bold text-[#FFFFFF] ">
+              className="mb-24 h-[40px] whitespace-nowrap rounded-full bg-[#379392] px-4 text-2xl font-bold text-[#FFFFFF] ">
               {"Meet Your Mentor"}
             </button>
           </div>

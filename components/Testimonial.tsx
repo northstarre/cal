@@ -32,15 +32,11 @@ export default function IndexPage() {
                           <div>
                             <p className=" rounded-[12px] bg-white p-6 text-center font-[Raleway] text-xl font-normal leading-6 text-[#272D67]">
                               “I knew I wanted to be a pre-med student in high school but was unsure of so
-                              many things. What should I major in: engineering or a traditional science? How
-                              do I prepare for the pre-med track as a freshman? What university should I
-                              attend? Do extra curricular activites matter? Do I set myself apart by minoring
-                              in something outside of traditional sciences? How should I spend my summers?
-                              <br></br>
-                              <br></br>I wish I had Northstarre in high school. I had to navigate these
-                              questions without a structured support system. I’m the first doctor in our
-                              family, and my parents tried their best to help me figure it all out. It would
-                              have been helpful to talk someone who had been in my shoes.”
+                              many things. What should I major in: engineering or a traditional science?
+                              <br />I wish I had Northstarre in high school. I had to navigate these questions
+                              without a structured support system. I’m the first doctor in our family, and my
+                              parents tried their best to help me figure it all out. It would have been
+                              helpful to talk someone who had been in my shoes.”
                             </p>
                             <span className="inline-block border-t-[50px] border-r-[30px] border-l-[30px] border-solid border-l-[transparent] border-r-[transparent] border-t-[#fff]"></span>
                             <div className="flex flex-col items-center">

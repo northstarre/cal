@@ -92,59 +92,61 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
               leftButtonText: "Get Advice",
               leftButtonKind: "primary",
               leftButtonClass: "w-[160px] text-[#F7ECE1] text-2xl font-[Raleway]",
-              leftImageClass: "w-full",
-              leftImage: "/assets/image%207.png",
+              leftImageClass: "w-full max-h-[380px] rounded-[20px]",
+              leftImage: "/assets/home-left.jpg",
               rightHeaderText: "We believe students are untapped experts.",
               rightText: "Get paid to mentor students, just like you.",
               rightButtonText: "Give Advice",
               rightButtonKind: "primary",
               rightButtonClass: "w-[160px] text-[#F7ECE1] text-2xl font-[Raleway]",
-              RightImageClass: "w-full",
-              rightImage: "/assets/image%208.png",
+              RightImageClass: "w-full max-h-[380px] rounded-[20px]",
+              rightImage: "/assets/home-right.jpg",
               rightOnClick: () => navigate.push("/Mentor"),
               leftOnClick: () => navigate.replace("/events"),
             }}
           />
         </div>
       </div>
-      <div className={`container mx-auto px-4 md:px-6 lg:px-4`}>
-        <div className={"my-20 flex w-full flex-col font-[Raleway] font-normal md:flex-row"}>
-          <div className={"flex w-3/5 flex-col text-left"}>
-            <img src="/assets/Group103.png" className={"mb-3 w-[61px]"} />
-            <h2 className="why-header text-left text-[34px] font-bold leading-10 text-[#272d67]">
-              Did you know...
-            </h2>
-            <p className={"mt-5 text-2xl text-[#272d67]"}>
-              <span className={"font-bold text-[#F13C20] "}>30%</span> of undergraduates change their major at
-              least once.
-            </p>
-            <p className={"mt-5 text-2xl text-[#272d67]"}>
-              <span className={"font-bold text-[#F13C20]"}>90%</span> of working professionals wish they could
-              change <br /> something about their high school, college or work experience.
-            </p>
-            <p className={"mt-5 text-2xl text-[#272d67]"}>
-              The average price of a four year public out of the state university education is{" "}
-              <span className={"font-bold text-[#F13C20]"}>$104,000</span>.
-            </p>
-            <h4 className={"mt-5 text-2xl font-bold text-[#272d67]"}>Be Informed. Earlier</h4>
-            <h4 className={"text-2xl font-bold text-[#272d67]"}>
-              And set the right trajectory for your future self.
-            </h4>
+      <div className={`mt-15 container mx-auto px-4 md:px-6 lg:px-4`}>
+        <h1 className="why-header mb-2 text-center text-4xl font-bold leading-loose text-[#272d67] lg:text-[50px]">
+          Did You Know?
+        </h1>
+        <div
+          className={
+            "align-center mx-auto mb-20 flex w-full flex-col items-center justify-center font-[Raleway] font-normal md:flex-row"
+          }>
+          <div
+            className={
+              "md:max-w-1/4 mx-auto my-2 flex min-h-[450px] flex-col items-center justify-center rounded-[20px] bg-[url('/assets/change-majors-stat.jpg')] bg-contain md:my-0 md:mx-2 md:w-1/4"
+            }>
+            <h1 className="why-header h-max-[80%] h-auto text-left text-[80px] font-bold leading-loose leading-10 text-white">
+              30%
+            </h1>
+            <span className={"align-end self-end px-[25px] pt-8 text-center text-[22px] font-bold text-white"}>
+              of undergraduates change their major at least once.
+            </span>
           </div>
           <div
             className={
-              "content-left mt-6 flex flex-wrap items-center justify-between gap-x-2 px-0 md:mt-0 md:w-2/5 md:flex-row md:justify-end md:px-5"
+              "md:max-w-1/4 md:y-0 mx-auto flex min-h-[450px] flex-col items-center justify-center rounded-[20px] bg-[url('/assets/professionals-stat.jpg')] bg-contain md:mx-2 md:w-1/4"
             }>
-            <img
-              src="/assets/Group%207.png"
-              className={"cursor-pointer rounded-[20px]"}
-              onClick={() => navigate.push("/Mentee")}
-            />
-            <img
-              src="/assets/Group%208.png"
-              className={"mt-4 cursor-pointer rounded-[20px] md:mt-0"}
-              onClick={() => navigate.push("/events")}
-            />
+            <h1 className="why-header h-max-[80%] h-auto text-left text-[80px] font-bold leading-loose leading-10 text-white">
+              95%
+            </h1>
+            <span className={"self-end px-[25px] pt-8 text-center text-[22px] font-bold text-white"}>
+              of young professionals wish they could change something about their education.
+            </span>
+          </div>
+          <div
+            className={
+              "md:max-w-1/4 mx-auto my-2 flex min-h-[450px] flex-col items-center justify-center rounded-[20px] bg-[url('/assets/average-price-stat.jpg')] bg-contain md:my-0 md:mx-2 md:w-1/4"
+            }>
+            <h1 className="why-header h-max-[80%] h-auto text-left text-[80px] font-bold leading-loose leading-10 text-white">
+              $104K
+            </h1>
+            <span className={"flex place-self-end pt-8 px-[25px] text-center text-[22px] font-bold text-white"}>
+              is the average price of a four-year public university education.
+            </span>
           </div>
         </div>
       </div>
@@ -203,59 +205,28 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
           </div>
         </div>
       </div>
-      <WhySection
-        heading={"Why Give Advice on Northstarre?"}
-        className={"rounded-[20px]"}
-        butntext={"How It Works"}
-        butnwrap={"justify-center mb-3 mt-3"}
-        btnClick={() => navigate.push("/Mentor")}
-        isReverse={true}
-        footerText={() => (
-          <p>
-            At Northstarre, we believe students are{" "}
-            <span className="font-bold text-[#F13C20]">untapped experts.</span> Give back and get paid.
-          </p>
-        )}
-        points={[
-          {
-            src: "/assets/Ellipse%2020.png",
-            description1: () => <span>Give back to students, just like you.</span>,
-            description2: () => "",
-          },
-          {
-            src: "/assets/Ellipse%2021.png",
-            description1: () => <span className="font-bold text-[#F13C20]"></span>,
-            description2: () => <span>Get paid for what you’re good at.</span>,
-          },
-          {
-            src: "/assets/Ellipse%2022.png",
-            description1: () => <span>a network of mentees.</span>,
-            description2: () => <span>Join a network of mentors and gain</span>,
-          },
-        ]}
-      />
 
       <div
         className={
-          "mx-auto mb-12 flex h-[600px] max-w-[1014px] flex-col items-center justify-start rounded-[20px] bg-[url('/assets/image%20HomeFooter.png')] bg-cover text-center font-[Raleway]"
+          "mx-32 mb-12 mt-8 flex h-[600px] flex-col items-start justify-start rounded-[20px] bg-[url('/assets/home-bottom.jpg')] bg-cover bg-center bg-no-repeat text-left font-[Raleway]"
         }>
-        <span className={"font-700 mt-[34px] text-[20px]  font-bold text-[#272d67]"}>
-          The average person spends{" "}
-          <span className={"text-red-600"}>90,000 hours at work over a lifetime.</span>
+        <span
+          className={
+            "font-700 mt-[34px] ml-5 max-w-[350px] text-center text-[30px] font-bold leading-tight text-white"
+          }>
+          The average person spends 90,000 hours at work over a lifetime. Feel empowered to make the right
+          career decisions for your life.
         </span>
-        <span className={"font-700 text-[20px] font-bold text-[#272d67]"}>
-          {" "}
-          Feel empowered to make the right career decisions for your life.
-        </span>
+
         <div
           className={
-            "mt-4 flex w-full flex-row flex-wrap justify-center px-0 sm:mx-0 md:mx-24 md:flex-row md:px-48"
+            "mt-4 flex w-1/2 flex-row flex-wrap items-start justify-start px-0 sm:mx-0  md:flex-row"
           }>
           <Button
             kind={"primary"}
             size={"md"}
             text={"Give Advice"}
-            className={"my-2 mx-4 w-[180px] font-[Raleway] text-2xl text-[#F7ECE1]"}
+            className={"my-2 mx-4 w-[180px] py-1 font-[Raleway] text-2xl text-[#F7ECE1]"}
             isLoading={false}
             onClick={() => navigate.push("/Mentor")}
           />
@@ -263,7 +234,7 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
             kind={"primary"}
             size={"md"}
             text={"Get Advice"}
-            className={"my-2 mx-4 w-[180px] font-[Raleway] text-2xl text-[#F7ECE1]"}
+            className={"my-2 mx-4 w-[180px] py-1 font-[Raleway] text-2xl text-[#F7ECE1] "}
             isLoading={false}
             onClick={() => navigate.push("/events")}
           />

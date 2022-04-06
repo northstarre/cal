@@ -3,20 +3,16 @@
 import React from "react";
 import Button from "../components/Button";
 
-function whyPoint({ src, description1, description2 }, isReverse, calculatedWidth) {
+function whyPoint({ src, description1, description2 }, isReverse) {
   const addlclass = isReverse ? "flex-col-reverse space-y-reverse" : "flex-col";
   return (
     <div className={`flex ${addlclass} items-center justify-center space-y-4`}>
-      <div className={`w-full ${calculatedWidth}`}>
+      <div className={`w-full w-[140px]`}>
         <img src={src} alt="avatar 1" className="w-full" role="img" />
       </div>
-      <div className={`flex ${addlclass} items-center justify-center space-y-2 font-[Raleway]`}>
-        <p className="text-center text-base text-2xl leading-none text-[#272d67]">{description1()}</p>
-        {description2() ? (
-          <p className="text-center text-2xl leading-none text-[#272d67]">{description2()}</p>
-        ) : (
-          ""
-        )}
+      <div className={`flex ${addlclass} flex-col items-center justify-center space-y-2 font-[Raleway]`}>
+        <p className="text-center text-base  leading-none text-[#272d67]">{description1()}</p>
+        {description2() ? <p className="text-center leading-none text-[#272d67]">{description2()}</p> : ""}
       </div>
     </div>
   );
@@ -51,7 +47,7 @@ export default function Index({
           )}
         </div>
         <div
-          className={`mt-6 flex flex-col gap-y-12 md:mt-10 lg:flex-row lg:gap-y-14 lg:gap-x-4 lg:px-4 xl:mt-14 xl:gap-y-0 xl:gap-x-24 ${gapclass}`}>
+          className={`mt-6 flex flex-col justify-around md:mt-10 lg:flex-row lg:px-4 xl:mt-14 xl:gap-y-0 xl:gap-x-24 ${gapclass}`}>
           {points.map((pt) => whyPoint(pt, isReverse, calculatedWidths))}
         </div>
         <div>

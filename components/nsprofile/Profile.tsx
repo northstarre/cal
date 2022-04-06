@@ -68,7 +68,7 @@ export default function Index({ loggedInUser, profile: user, isReadOnly, updateP
                   </div>
                 </div>
                 <div className="text-center mt-6">
-                  <h3 className="font-800 mb-2 mb-2 text-4xl font-semibold leading-normal text-[#272d67]">
+                  <h3 className="font-800 mb-2 mb-2 text-4xl pt-4 font-semibold leading-normal text-[#272d67]">
                     {user.name}
                   </h3>
                   <div>

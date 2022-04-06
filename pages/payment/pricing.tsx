@@ -13,10 +13,14 @@ export default function Pricing(props: inferSSRProps<typeof getServerSideProps>)
       <Navbar isBeta={false} signedIn={props.signedIn} profile={props.user} />
       <div className="mx-auto 2xl:container">
         <div
-          className={"font-[Fira Sans] flex flex-col items-center py-0 text-center text-[#272D67] md:pt-24 "}>
+          className={"font-[Fira Sans] flex flex-col items-center py-0 text-center text-[#272D67] md:pt-0"}>
           <div
-            className={"font-[Fira Sans] mx-auto max-w-[1200px] text-3xl font-bold md:text-4xl lg:text-5xl"}>
-            You’re one step away from finding your professional mentor...or a whole lot of them.
+            className={
+              "font-[Fira Sans] px-auto mx-0 flex min-h-[400px]  w-full items-center justify-center bg-[url('/assets/pricing-banner.jpg')] bg-cover bg-center text-3xl  font-bold text-white md:text-4xl lg:text-5xl"
+            }>
+            You’re one step away from finding your professional mentor...
+            <br />
+            or a whole lot of them
           </div>
           <div
             className={
@@ -27,10 +31,10 @@ export default function Pricing(props: inferSSRProps<typeof getServerSideProps>)
               <div className={"my-10 min-h-[440px] rounded-[20px] border-2 border-[#272d67] py-4 px-2"}>
                 <div
                   className={
-                    "flex flex-col items-center rounded-[20px] bg-[#FFEFED] p-4 text-center  font-[Raleway]"
+                    "flex flex-col items-center rounded-[20px] bg-[#DADADA] p-4 text-center  font-[Raleway]"
                   }>
-                  <span className={"text-4xl font-bold"}>1 Expert Call</span>
-                  <span className={"mt-5 mb-1 text-2xl"}>This Month</span>
+                  <span className={"text-4xl font-bold "}>1 Expert Call</span>
+                  <span className={"mt-5 mb-1 text-2xl "}>This Month</span>
                 </div>
                 <div className={"mt-[40px] mb-[60px] flex flex-col items-center  text-center"}>
                   <span className={"mb-[40px] text-center text-5xl"}>$30.00</span>
@@ -65,7 +69,7 @@ export default function Pricing(props: inferSSRProps<typeof getServerSideProps>)
               <span className={"text-4xl font-normal"}>Sirius</span>
               <div className={"my-10 min-h-[440px] rounded-[20px] border-2 border-[#272d67] py-4 px-2"}>
                 <div
-                  className={"flex flex-col items-center rounded-[20px] bg-[#7C4DFF]/[0.16] p-4 text-center"}>
+                  className={"flex flex-col items-center rounded-[20px] bg-[#DADADA] p-4 text-center"}>
                   <span className={"text-4xl font-bold"}>3 Expert Calls</span>
                   <span className={"mt-5 mb-1 text-2xl"}>This Month</span>
                 </div>
@@ -81,9 +85,7 @@ export default function Pricing(props: inferSSRProps<typeof getServerSideProps>)
                   <span className={"hidden text-2xl italic"}>Billed Monthly</span>
                 </div>
                 <div
-                  className={
-                    "flex flex-col items-center rounded-[20px] bg-[#7C4DFF]/[0.16] py-3 px-0 text-center"
-                  }>
+                  className={"flex flex-col items-center rounded-[20px] bg-[#DADADA] py-3 px-0 text-center"}>
                   <span className={"text-2xl"}>Best Value</span>
                 </div>
               </div>
@@ -107,7 +109,10 @@ export default function Pricing(props: inferSSRProps<typeof getServerSideProps>)
             <div className={"mb-10 flex w-full flex-col font-[Raleway] xl:w-1/3"}>
               <span className={"text-4xl font-normal"}>Polaris</span>
               <div className={"my-10 min-h-[440px] rounded-[20px] border-2 border-[#272d67] py-4 px-2"}>
-                <div className={"flex flex-col items-center rounded-[20px] bg-[#FFEFED] p-4 text-center"}>
+                <div
+                  className={
+                    "flex flex-col items-center rounded-[20px] bg-[#DADADA] p-4  text-center"
+                  }>
                   <span className={"text-4xl font-bold"}>5 Expert Calls</span>
                   <span className={"mt-5 mb-1 text-2xl"}>This Month</span>
                 </div>

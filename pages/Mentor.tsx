@@ -18,7 +18,7 @@ export default function GiveAdvice(props: inferSSRProps<typeof getServerSideProp
     <>
       <Navbar isBeta={false} signedIn={props.signedIn} profile={props.user} />
       <HeroBanner
-        className={"bg-[url('/assets/hero-home.jpg')]"}
+        className={"bg-[url('/assets/Mentor-Home.jpg')]"}
         imgSrc={"/assets/hero-home.jpg"}
         height={100}
         width={100}
@@ -36,28 +36,28 @@ export default function GiveAdvice(props: inferSSRProps<typeof getServerSideProp
         butntext={"Submit an Application"}
         butnwrap={"justify-center mb-3 mt-3"}
         btnClick={() => { props.signedIn ? console.log("No Action") :  navigate.push("/auth/signupe"); }}
-        isReverse={true}
+        isReverse={false}
         footerText={() => (
-          <p>
+          <p className={"text-[30px] font-bold"}>
             You’re an expert. Get paid to be one.
           </p>
         )}
         points={[
           {
             src: "./assets/Ellipse%2020.png",
-            description1: () => <span>Set up your profile and tell us what you’d like to coach.</span>,
+            description1: () => <span>Set up your profile and tell<br/> us what you’d like to coach.</span>,
             description2: () => "",
           },
           {
             src: "./assets/Ellipse%2021.png",
             description1: () => (
-              <span>Set your availability. As little or as much as you’d like to give back.</span>
+              <span>Set your availability. <br/>As little or as much as <br/>you’d like to give back.</span>
             ),
             description2: () => "",
           },
           {
             src: "./assets/Ellipse%2022.png",
-            description1: () => <span>Sit back and get paid for your time spent with a student.</span>,
+            description1: () => <span>Sit back and get paid for<br/> your time spent with a<br/> student.</span>,
             description2: () => "",
           },
         ]}
