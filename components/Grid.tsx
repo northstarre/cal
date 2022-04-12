@@ -18,6 +18,7 @@ export default function Grid({ rows, shouldDisplayMajor, shouldDisplaySchool }) 
               <ProfileSnapshot
                 key={prof.Id}
                 displayName={createDisplayName(prof.Name)}
+                userName={prof.UserName}
                 id={prof.Id}
                 major={prof.major}
                 schoolNickname={prof.university}

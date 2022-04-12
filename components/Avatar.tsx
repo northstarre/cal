@@ -8,7 +8,7 @@ export default function Avatar({ profilePhoto, displayName }) {
       <div className={"h-[136px] w-[140px] rounded-full"}>
         <img
           className={"h-[136px] w-[140px] rounded-full object-cover"}
-          src={`data:image/png;base64,${profilePhoto}`}
+          src={`${profilePhoto}`}
           alt={displayName}
         />
       </div>

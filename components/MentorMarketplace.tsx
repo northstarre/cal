@@ -25,6 +25,7 @@ export default function MentorMarketplace({ size, heading, subText }) {
     "major",
     "unishortcode",
     "preprofessionTrack",
+    "userName",
   ];
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-empty-function

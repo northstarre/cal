@@ -1,10 +1,9 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-nocheck
 import React, { useEffect, useState } from "react";
-import Hero, { HeroBanner } from "../components/HeroComponent";
+import { HeroBanner } from "../components/HeroComponent";
 import Button from "../components/Button";
 import PlainInfoBox from "../components/PlainInfoBox";
-import WhySection from "../components/WhySection";
 import { doGet } from "../makeAPICall";
 import ImageWithCTA from "../components/ImageWithCTA";
 import Grid from "../components/Grid";
@@ -36,7 +35,7 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
   const fetchData = () => {
     setLoading(true);
     doGet(
-      "WaitListView?$top=12&$select=id,name,email,university,major,majorshortcode,unishortcode,preprofessionTrack",
+      "WaitListView?$top=12&$select=id,username,name,email,university,major,majorshortcode,unishortcode,preprofessionTrack",
       setFetchedMentors,
       // eslint-disable-next-line @typescript-eslint/no-empty-function
       () => {}
@@ -122,7 +121,8 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
             <h1 className="why-header h-max-[80%] h-auto text-left text-[80px] font-bold leading-loose leading-10 text-white">
               30%
             </h1>
-            <span className={"align-end self-end px-[25px] pt-8 text-center text-[22px] font-bold text-white"}>
+            <span
+              className={"align-end self-end px-[25px] pt-8 text-center text-[22px] font-bold text-white"}>
               of undergraduates change their major at least once.
             </span>
           </div>
@@ -144,7 +144,8 @@ export default function Homepage(props: inferSSRProps<typeof getServerSideProps>
             <h1 className="why-header h-max-[80%] h-auto text-left text-[80px] font-bold leading-loose leading-10 text-white">
               $104K
             </h1>
-            <span className={"flex place-self-end pt-8 px-[25px] text-center text-[22px] font-bold text-white"}>
+            <span
+              className={"flex place-self-end px-[25px] pt-8 text-center text-[22px] font-bold text-white"}>
               is the average price of a four-year public university education.
             </span>
           </div>
