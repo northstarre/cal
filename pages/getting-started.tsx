@@ -43,6 +43,7 @@ import Avatar from "@components/ui/Avatar";
 import ImageUploader from "@components/ImageUploader";
 import crypto from "crypto";
 import Select from "react-select";
+import AsyncSelect from "react-select/async";
 import { LocationType } from "@lib/location";
 
 dayjs.extend(utc);
@@ -244,6 +245,18 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
 
   const goToStep = (step: number) => {
     setCurrentStep(step);
+  };
+
+  const getSchools = (inputvalue: string) => {
+    return fetch(
+      `https://northstarre-api.azurewebsites.net/api/schools?$select=name,id&filter=contains(tolower(Name),'${inputvalue}')`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    ).then((res) => res.json());
   };
 
   /**
@@ -533,25 +546,36 @@ export default function Onboarding(props: inferSSRProps<typeof getServerSideProp
               <label htmlFor="school" className="block text-sm font-medium text-brand">
                 What school do you go to?
               </label>
-              <Select
-                id={"school"}
-                isClearable
-                options={
-                  displayUniversity
-                    ? props.universities.map((itm: any) => {
-                        return { value: itm.instnm, label: itm.instnm };
-                      })
-                    : props.schools.map((itm: any) => {
-                        return { value: itm.Name, label: itm.Name };
-                      })
-                }
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 sm:text-sm"
-                onChange={(e: any) => {
-                  if (e) {
-                    setSchool(e.value);
-                  }
-                }}
-              />
+              {displayUniversity ? (
+                <Select
+                  id={"school"}
+                  isClearable
+                  options={props.universities.map((itm: any) => {
+                    return { value: itm.instnm, label: itm.instnm };
+                  })}
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 sm:text-sm"
+                  onChange={(e: any) => {
+                    if (e) {
+                      setSchool(e.value);
+                    }
+                  }}
+                />
+              ) : (
+                <AsyncSelect
+                  id={"school"}
+                  defaultOptions={[]}
+                  isClearable
+                  loadOptions={getSchools}
+                  getOptionLabel={(e: any) => e.Name}
+                  getOptionValue={(e: any) => e.Name}
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 sm:text-sm"
+                  onChange={(e: any) => {
+                    if (e) {
+                      setSchool(e.name);
+                    }
+                  }}
+                />
+              )}
             </section>
           </fieldset>
           <fieldset>
@@ -771,15 +795,12 @@ export async function getServerSideProps(context: NextPageContext) {
     throw new Error((await universitiesResp.json()).message);
   }
   const universities = await universitiesResp.json();
-  const schoolsResp = await fetch(
-    "https://northstarre-api.azurewebsites.net/api/schools?$select=name,id",
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
+  const schoolsResp = await fetch("https://northstarre-api.azurewebsites.net/api/schools?$select=name,id", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
   if (!schoolsResp.ok) {
     throw new Error((await schoolsResp.json()).message);
   }

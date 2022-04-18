@@ -21,7 +21,7 @@ export default function Navbar({ signedIn, isBeta, profile }) {
   return (
     <>
       <div className="h-full w-full">
-        <nav role="navigation" className="mx-auto hidden w-full bg-white md:block md:px-6 lg:px-4 pt-4">
+        <nav role="navigation" className="mx-auto hidden w-full bg-white md:block md:px-4 lg:px-4 pt-4">
           <div className="container  mx-auto flex h-20 items-center justify-between border-gray-200 bg-white md:items-stretch">
             <div className="flex h-full w-full items-center justify-between">
               <button
@@ -87,7 +87,15 @@ export default function Navbar({ signedIn, isBeta, profile }) {
                       Give Advice
                     </a>
                   </li>
+                  {/*<li>*/}
+                  {/*  <a*/}
+                  {/*    href="/About"*/}
+                  {/*    className="text-[#272D67] mr-6 flex h-full cursor-pointer items-center border-b-2 border-transparent py-3 pl-3 text-base font-medium tracking-normal hover:text-indigo-700 focus:outline-none">*/}
+                  {/*    About Us*/}
+                  {/*  </a>*/}
+                  {/*</li>*/}
                 </ul>
+
               ) : (
                 ""
               )}
@@ -176,9 +184,6 @@ export default function Navbar({ signedIn, isBeta, profile }) {
                                 className="h-10 w-10 rounded-full object-cover"
                                 src={profile.avatar ?? defaultAvatarSrc( {md5: crypto.createHash("md5").update("Northstarre is best for college grads").digest("hex")})}
                                 alt="profile pic"/>
-
-
-
                             </button>
                           </div>
                         </>
@@ -306,6 +311,14 @@ export default function Navbar({ signedIn, isBeta, profile }) {
                                 Give Advice
                               </p>
                             </div>
+                            {/*<div className="flex items-center">*/}
+                            {/*  <a*/}
+                            {/*    href={"/About"}*/}
+                            {/*    tabIndex={0}*/}
+                            {/*    className="text-[#272D67]-800 text-sm font-medium focus:outline-none">*/}
+                            {/*    About Us*/}
+                            {/*  </a>*/}
+                            {/*</div>*/}
                           </div>
                         </a>
                       </li>
