@@ -28,7 +28,7 @@ export default function Navbar({ signedIn, isBeta, profile }) {
                 onClick={() => navigate.push("/")}
                 role="img"
                 aria-label="logo"
-                className="mr-10 flex items-center focus:outline-none focus:ring-2 focus:ring-indigo-700 focus:ring-offset-2">
+                className="flex items-center focus:outline-none focus:ring-2 focus:ring-indigo-700 focus:ring-offset-2">
                 <svg
                   width="181"
                   height="45"
@@ -58,7 +58,7 @@ export default function Navbar({ signedIn, isBeta, profile }) {
                 </svg>
               </button>
               {!isBeta ? (
-                <ul className="hidden h-full w-full items-center justify-center lg:pr-12 md:flex font-[Raleway]">
+                <ul className="hidden h-full w-full items-center justify-center md:flex font-[Raleway]">
                   <li>
                     <MenuDropdown
                       text={"Get Advice"}
@@ -285,7 +285,7 @@ export default function Navbar({ signedIn, isBeta, profile }) {
                         </button>
                       </div>
                     </div>
-                    <ul className>
+                    <ul >
                       <li>
                         <a className="cursor-pointer">
                           <div className="text-[#272D67]-800 pt-8">
