@@ -101,7 +101,7 @@ export default function Navbar({ signedIn, isBeta, profile }) {
               )}
             </div>
             <div className="hidden items-center justify-end md:flex">
-              <div className="flex items-center">
+              <div className="flex items-center signup-btn">
                 {signedIn ? (
                   <>
                     <div className="flex h-full items-center">
@@ -128,7 +128,7 @@ export default function Navbar({ signedIn, isBeta, profile }) {
                         onClick={() => navigate.push("/auth/login")}
                         text={"Sign In/Sign Up"}
                         size="md"
-                        className={"signup-btn text-lg text-[#EFE2BA] px-2 font-[Raleway]"}
+                        className={"text-lg text-[#EFE2BA] px-2 font-[Raleway]"}
                       />
                     </div>
                   </>

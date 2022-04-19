@@ -42,7 +42,7 @@ const Index = ({ options, text }) => {
 export const ProfileDropDown = ({ options, img }) => {
   const [show, setShow] = useState(false);
   return (
-    <div className="mx-auto">
+    <div className="ml-auto">
       <div className="container mx-auto flex justify-center ">
         <div className="mb-0">
           <div className="relative">
