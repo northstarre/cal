@@ -29,7 +29,7 @@ export default function Event({ event, user }) {
           <h3 className="text-2xl font-extrabold  text-[#272d67]">{name}</h3>
 
           <p className="mt-1 font-bold tracking-wide text-[#379392]">
-            {day}
+            {day && time ? dayjs(startTime).utc(true).tz(dayjs.tz.guess()).format("MM/dd/yyyy") : ""}
             {day && time ? ` AT ${dayjs(startTime).utc(true).tz(dayjs.tz.guess()).format("hh:mm a")}` : ""}
           </p>
           <p className="mt-1 font-bold text-[#272d67]">
