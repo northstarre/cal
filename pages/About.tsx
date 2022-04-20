@@ -15,10 +15,21 @@ const About4 = (props: inferSSRProps<typeof getServerSideProps>) => {
             <div className="flex h-full w-full flex-col items-center justify-center rounded-md border bg-gray-800 bg-opacity-70 px-6 text-white sm:px-12">
               <h2 className="text-3xl font-bold leading-7 lg:text-4xl lg:leading-9">All About Us</h2>
               <p className="mx-auto mt-6 text-center text-base font-normal leading-6 text-gray-300 lg:w-8/12 xl:w-6/12">
-                It is a long established fact that a reader will be distracted by the readable content of a
-                page when looking at its layout. The point of using Lorem Ipsum.In the first place we have
-                grante d to God, and by this our present charter confirmed for us and our heirs forever that
-                the English Church shall be free, and shall have her rights entire,
+                Northstarre’s mission is to democratize access to professional resources for students. We were
+                founded with the the hope that any student around thd world with the passion to pursue a
+                certain career path has the resources to achieve it, regardless of geography, network, income,
+                or background.
+              </p>
+              <p className="mx-auto mt-3 text-center text-base font-normal leading-6 text-gray-300 lg:w-8/12 xl:w-6/12">
+                We were built for the first-timers of families. The first doctors. The first lawyers. The
+                first engineers. The first artists.
+              </p>
+              <p className="mx-auto mt-3 text-center text-base font-normal leading-6 text-gray-300 lg:w-8/12 xl:w-6/12">
+                Northstarre is directly addressing information inequity by tapping on college and graduate
+                students across the country to give back to students who were just like them a few years ago.
+              </p>
+              <p className="mx-auto mt-3 mb-6 text-center text-base font-bold leading-6 text-gray-300 lg:w-8/12 xl:w-6/12">
+                We hope you join us.
               </p>
             </div>
           </div>
@@ -47,21 +58,60 @@ const About4 = (props: inferSSRProps<typeof getServerSideProps>) => {
               <h2 className="text-3xl font-bold leading-7 text-gray-800 lg:text-4xl lg:leading-9">
                 Our Story
               </h2>
-              <p className="mt-6 w-full text-base font-normal leading-6 text-gray-600 xl:w-9/12">
-                It is a long established fact that a reader will be distracted by the readable content of a
-                page when looking at its layout. The point of using Lorem Ipsum.In the first place we have
-                granted to God, and by this our present charter confirmed for us and our heirs forever that
-                the English Church shall be free, and shall have her rights entire, and her liberties
-                inviolate; and we will that it be thus observed; which is apparent from
+              <p className="mt-6 w-full text-base font-normal leading-6 text-gray-600">
+                My sister and I were born in India and moved to the United States when we were less than five
+                years old. She’s only 18 months older me, and throughout our childhood, we did almost
+                everything together. We played the same sports, took the same classes, and even had the same
+                friends.{" "}
               </p>
-              <p className="mt-10 w-full text-base font-normal leading-6 text-gray-600 xl:w-9/12">
-                It is a long established fact that a reader will be distracted by the readable content of a
-                page when looking at its layout. The point of using Lorem Ipsum.In the first place we have
-                granted to God, and by this our present charter confirmed for us and our heirs forever that
-                the English Church shall be free, and shall have her rights entire, and her liberties
-                inviolate; and we will that it be thus observed; which is apparent from
+              <br />{" "}
+              <p className="mt-6 w-full text-base font-normal leading-6 text-gray-600">
+                Although I chose to pursue a professional path similar to my parents, my sister has sister has
+                been carving her own. And that path has led her to become the first doctor in our family{" "}
+              </p>{" "}
+              <br />
+              <p className="mt-6 w-full text-base font-normal leading-6 text-gray-600">
+                Rewind the clock to our years in high school, and you’d see our entire family in consistent
+                and intense panic -- how do we support her?{" "}
+              </p>{" "}
+              <br />{" "}
+              <p className="mt-6 w-full text-base font-normal leading-6 text-gray-600">
+                We put her in expensive summer science camps, we applied to 20+ undergraduate programs, we
+                applied to colleges with over five different declarations of majors, and we encouraged her to
+                take gap years to really figure out how to build her roadmap.
               </p>
-
+              <br />{" "}
+              <p className="mt-6 w-full text-base font-normal leading-6 text-gray-600">
+                {" "}
+                This story might seem familiar to you if you’re the first in your family. Without the right
+                resources and network, my sister was unable to avoid costly mistakes, grasp her financial
+                outlook, and understand how to best make some of the most critical decisions in her life.{" "}
+              </p>{" "}
+              <br />{" "}
+              <p className="mt-6 w-full text-base font-normal leading-6 text-gray-600">
+                We’re all faced with decisions like these in high school: the expensive, really important ones
+                that often have a reverberating impact in the years after college. But we often make these
+                decisions alone. We lean on family and friends that we know, even if those resources are
+                biased and limited and feel helpless trying to find a network that might help us with
+                frameworks for better decision making. So most of us default to comfortable decisions -- we
+                become what our parents are. We become what we’re exposed to because those decisions feel
+                safe.{" "}
+              </p>{" "}
+              <br />{" "}
+              <p className="mt-6 w-full text-base font-normal leading-6 text-gray-600">
+                {" "}
+                And I believe that this pattern of repeating behaviors unknowingly promotes inequality. Our
+                own decision making in these early years fuelled by information inequity eventually creates
+                income inequality..{" "}
+              </p>{" "}
+              <br />
+              <p>With Northstarre, I hope to change that. </p> <br />
+              Cheers,
+              <br /> Malavica Sridhar <br /> Founder of Northstarre. <br />
+              <p className="mt-6 w-full text-base font-normal leading-6 text-gray-600">
+                We are always looking for feedback. If you want to drop a note to our team, feel free to do so
+                at hello@mynorthstarre.com or give us a call at (630) 306-4136.
+              </p>
               <p className="mt-8 cursor-pointer text-xl font-normal leading-5 text-indigo-700 underline duration-100 hover:text-indigo-700 lg:mt-10">
                 Watch the video
               </p>

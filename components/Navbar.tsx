@@ -60,6 +60,13 @@ export default function Navbar({ signedIn, isBeta, profile }) {
               {!isBeta ? (
                 <ul className="hidden h-full w-full items-center justify-center md:flex font-[Raleway]">
                   <li>
+                    <a
+                      href="/About"
+                      className="text-[#272D67] mr-6 flex h-full cursor-pointer items-center border-b-2 border-transparent py-3 pl-3 text-base font-medium tracking-normal hover:text-indigo-700 focus:outline-none">
+                      About Us
+                    </a>
+                  </li>
+                  <li>
                     <MenuDropdown
                       text={"Get Advice"}
                       options={[
@@ -87,13 +94,6 @@ export default function Navbar({ signedIn, isBeta, profile }) {
                       Give Advice
                     </a>
                   </li>
-                  {/*<li>*/}
-                  {/*  <a*/}
-                  {/*    href="/About"*/}
-                  {/*    className="text-[#272D67] mr-6 flex h-full cursor-pointer items-center border-b-2 border-transparent py-3 pl-3 text-base font-medium tracking-normal hover:text-indigo-700 focus:outline-none">*/}
-                  {/*    About Us*/}
-                  {/*  </a>*/}
-                  {/*</li>*/}
                 </ul>
 
               ) : (
@@ -311,14 +311,14 @@ export default function Navbar({ signedIn, isBeta, profile }) {
                                 Give Advice
                               </p>
                             </div>
-                            {/*<div className="flex items-center">*/}
-                            {/*  <a*/}
-                            {/*    href={"/About"}*/}
-                            {/*    tabIndex={0}*/}
-                            {/*    className="text-[#272D67]-800 text-sm font-medium focus:outline-none">*/}
-                            {/*    About Us*/}
-                            {/*  </a>*/}
-                            {/*</div>*/}
+                            <div className="flex items-center">
+                              <a
+                                href={"/About"}
+                                tabIndex={0}
+                                className="text-[#272D67]-800 text-sm font-medium focus:outline-none">
+                                About Us
+                              </a>
+                            </div>
                           </div>
                         </a>
                       </li>
