@@ -14,33 +14,34 @@ const About4 = (props: inferSSRProps<typeof getServerSideProps>) => {
           <div className="absolute top-0 left-0 h-full w-full">
             <div className="flex h-full w-full flex-col items-center justify-center rounded-md border bg-gray-800 bg-opacity-70 px-6 text-white sm:px-12">
               <h2 className="text-3xl font-bold leading-7 lg:text-4xl lg:leading-9">All About Us</h2>
-              <p className="mx-auto mt-6 text-center text-base font-normal leading-6 text-gray-300 lg:w-8/12 xl:w-6/12">
+              <p className="mx-5 mt-6 w-full text-center text-base font-normal leading-6 text-gray-300 lg:w-10/12  xl:mt-3 xl:w-8/12">
                 Northstarre’s mission is to democratize access to professional resources for students. We were
                 founded with the the hope that any student around thd world with the passion to pursue a
                 certain career path has the resources to achieve it, regardless of geography, network, income,
                 or background.
               </p>
-              <p className="mx-auto mt-3 text-center text-base font-normal leading-6 text-gray-300 lg:w-8/12 xl:w-6/12">
+              <p className="mx-5 mt-3 text-center text-base font-normal leading-6 text-gray-300 lg:w-10/12 xl:w-8/12">
                 We were built for the first-timers of families. The first doctors. The first lawyers. The
                 first engineers. The first artists.
               </p>
-              <p className="mx-auto mt-3 text-center text-base font-normal leading-6 text-gray-300 lg:w-8/12 xl:w-6/12">
+              <p className="mx-5 mt-3 text-center text-base font-normal leading-6 text-gray-300 lg:w-10/12 xl:w-8/12">
                 Northstarre is directly addressing information inequity by tapping on college and graduate
                 students across the country to give back to students who were just like them a few years ago.
               </p>
-              <p className="mx-auto mt-3 mb-6 text-center text-base font-bold leading-6 text-gray-300 lg:w-8/12 xl:w-6/12">
+              <p className="mx-5 mt-3 mb-6 text-center text-base font-bold leading-6 text-gray-300 lg:w-10/12 xl:mt-3 xl:w-8/12">
                 We hope you join us.
               </p>
             </div>
           </div>
           <div>
             <img
-              className="hidden w-full rounded-md border lg:block"
+              className="hidden h-full w-full rounded-md border xl:block"
               src="https://i.ibb.co/VCGbH9S/12.png"
+              height="340px"
               alt="people discussing something"
             />
             <img
-              className="hidden w-full rounded-md border sm:block lg:hidden"
+              className="hidden w-full rounded-md border sm:block lg:block xl:hidden"
               src="https://i.ibb.co/2yvrWVN/Rectangle-122-1.png"
               alt="people discussing something"
             />
@@ -66,13 +67,13 @@ const About4 = (props: inferSSRProps<typeof getServerSideProps>) => {
               </p>
               <br />{" "}
               <p className="mt-6 w-full text-base font-normal leading-6 text-gray-600">
-                Although I chose to pursue a professional path similar to my parents, my sister has sister has
-                been carving her own. And that path has led her to become the first doctor in our family{" "}
+                Although I chose to pursue a professional path similar to my parents, my sister has been
+                carving her own path. And that path has led her to become the first doctor in our family.
               </p>{" "}
               <br />
               <p className="mt-6 w-full text-base font-normal leading-6 text-gray-600">
-                Rewind the clock to our years in high school, and you’d see our entire family in consistent
-                and intense panic -- how do we support her?{" "}
+                Rewind the clock to our years in high school, and you’d see our entire family was in
+                consistent and intense panic -- how do we support her?
               </p>{" "}
               <br />{" "}
               <p className="mt-6 w-full text-base font-normal leading-6 text-gray-600">
@@ -80,7 +81,7 @@ const About4 = (props: inferSSRProps<typeof getServerSideProps>) => {
                 applied to colleges with over five different declarations of majors, and we encouraged her to
                 take gap years to really figure out how to build her roadmap.
               </p>
-              <br />{" "}
+              <br />
               <p className="mt-6 w-full text-base font-normal leading-6 text-gray-600">
                 {" "}
                 This story might seem familiar to you if you’re the first in your family. Without the right
@@ -112,43 +113,9 @@ const About4 = (props: inferSSRProps<typeof getServerSideProps>) => {
                 We are always looking for feedback. If you want to drop a note to our team, feel free to do so
                 at hello@mynorthstarre.com or give us a call at (630) 306-4136.
               </p>
-              <p className="mt-8 cursor-pointer text-xl font-normal leading-5 text-indigo-700 underline duration-100 hover:text-indigo-700 lg:mt-10">
-                Watch the video
-              </p>
             </div>
             <div className=" relative mt-8 w-full cursor-pointer sm:mt-10 lg:mt-0 lg:w-5/12">
-              <img
-                className="hidden w-full lg:block"
-                src="https://i.ibb.co/NS8JynL/pexels-artem-podrez-8518616-1.png"
-                alt="A women"
-              />
-              <img
-                className="hidden w-full sm:block lg:hidden"
-                src="https://i.ibb.co/M7c9tFs/Group-807.png"
-                alt="A women"
-              />
-              <img
-                className="block w-full sm:hidden"
-                src="https://i.ibb.co/0rBHNLk/pexels-artem-podrez-8518616-1.png"
-                alt="A women"
-              />
-              <div className="absolute top-0 left-0 p-4">
-                <svg
-                  width="72"
-                  height="48"
-                  viewBox="0 0 72 48"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <rect width="72" height="48" rx="6" fill="#4338CA" />
-                  <path
-                    d="M31 16V32L44 24L31 16Z"
-                    fill="white"
-                    stroke="white"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </div>
+              <img className="w-full" src="/assets/image%20111.png" alt="A women" />
             </div>
           </div>
         </div>
